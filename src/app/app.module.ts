@@ -4,9 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { Erreur404Component } from './erreur404/erreur404.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
+    Erreur404Component,
   ],
   imports: [
     BrowserModule,
