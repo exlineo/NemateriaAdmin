@@ -33,6 +33,7 @@ export class SidenavComponent implements OnInit {
       updated: new Date('1/28/16'),
     }
   ];
+  
   pages: PageModel[] = [
     {
       name: 'traversing',
@@ -40,7 +41,7 @@ export class SidenavComponent implements OnInit {
       link: '',
     },
     {
-      name: 'media',
+      name: 'medias',
       updated: new Date('5/11/18'),
       link: '/media',
     }
