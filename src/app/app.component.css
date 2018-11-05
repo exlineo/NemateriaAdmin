@@ -29,7 +29,8 @@ header {
   height: calc(100vh - 128px);
   padding: 20px;
 
-  background: white;
+  background: grey;
+  overflow-y: scroll;
 }
 
 footer {
