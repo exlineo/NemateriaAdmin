@@ -2,26 +2,34 @@
 
 header {
     display: block;
-    position: relative;
     top: 0;
     left: 0;
     width: 100vw;
     height: 64px;
 
-    background-color: blue;
-    opacity: 0.5;
+    background-color: rgba(0, 0, 255, 0.5);
 }
 
 #sidenav {
-	display: block;
-	position: relative;
-	top: 0;
-	left: 0;
-	width: 200px;
-	height: calc(100vh - 128px);
+  display: block;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: calc(100vh - 128px);
 
-	background-color: red;
-	opacity: 0.5;
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+#screen {
+  display: block;
+  position: absolute;
+  top: 64px;
+  left: 200px;
+  width: calc(100vw - 200px);
+  height: calc(100vh - 128px);
+  padding: 20px;
+
+  background: white;
 }
 
 footer {
@@ -32,6 +40,5 @@ footer {
 	width: 100vw;
 	height: 64px;
 
-	background-color: green;
-	opacity: 0.5;
+	background-color: rgba(0, 128, 0, 0.5);
 }
