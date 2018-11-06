@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+.mat-tree {
+    background-color: #2d323e;
+}
+
+.mat-line,
+.mat-subheader,
+.mat-tree-node,
+.mat-list-item-content {
+    color: white;
+    font-family: 'Muli', sans-serif;
+    font-size: 14px;
+}
+
+.mat-list-item-content {
+    padding-left: 0px!important;
+}
+
+.mat-icon {
+    color: white;
+}
 
 .nav-link {
     display: block;
@@ -15,6 +37,7 @@
   margin-top: 0;
   margin-bottom: 0;
   list-style-type: none;
+  color: white;
 }
 
 .example-tree ul {

@@ -1,0 +1,19 @@
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.user-option {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 64px;
+}
+
+.searchbox {
+    display: block;
+    position: absolute;
+    top: 3px;
+    right: 128px;
+}
