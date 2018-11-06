@@ -14,7 +14,7 @@ header {
   display: block;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 250px;
   height: calc(100vh - 128px);
 
   background-color: rgba(255, 0, 0, 0.5);
@@ -24,8 +24,8 @@ header {
   display: block;
   position: absolute;
   top: 64px;
-  left: 200px;
-  width: calc(100vw - 200px);
+  left: 250px;
+  width: calc(100vw - 250px);
   height: calc(100vh - 128px);
   padding: 20px;
 
