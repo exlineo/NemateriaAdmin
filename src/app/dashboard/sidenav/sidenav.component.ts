@@ -42,6 +42,16 @@ export class SidenavComponent implements OnInit {
       name: 'medias',
       updated: new Date('5/11/18'),
       link: '/media',
+    },
+    {
+      name: 'connexion',
+      updated: new Date('5/11/18'),
+      link: '/connexion',
+    },
+    {
+      name: 'error404',
+      updated: new Date('5/11/18'),
+      link: '/error404',
     }
   ];
 

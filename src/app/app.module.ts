@@ -15,6 +15,9 @@ import { TraversingComponent } from './traversing/traversing.component';
 import { MediaComponent } from './media/media.component';
 import { SidenavComponent } from './dashboard/sidenav/sidenav.component';
 import { HeaderComponent } from './dashboard/header/header.component';
+import { ConnexionComponent } from './connexion/connexion.component';
+import { AuthService } from './services/auth.service';
+import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import { HeaderComponent } from './dashboard/header/header.component';
     MediaComponent,
     SidenavComponent,
     HeaderComponent,
+    ConnexionComponent,
+    ProfileEditorComponent,
 
   ],
   imports: [
@@ -33,7 +38,7 @@ import { HeaderComponent } from './dashboard/header/header.component';
     AppRoutingModule,
     DemoMaterialModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
