@@ -36,7 +36,7 @@ export class SidenavComponent implements OnInit {
     {
       name: 'traversing',
       updated: new Date('5/11/18'),
-      link: '',
+      link: '/traversing',
     },
     {
       name: 'medias',
