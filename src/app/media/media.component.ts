@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaService } from '../services/media.service';
 import { MediaModel } from '../modeles/media.modele';
+import { NOTFOUND } from 'dns';
 
 @Component({
   selector: 'app-media',
@@ -10,7 +11,7 @@ import { MediaModel } from '../modeles/media.modele';
 })
 export class MediaComponent implements OnInit {
 
-  media: MediaModel;
+  media: MediaModel = { id: -1, name: 'NOTFOUND', directory: 'NOTFOUND', img: 'assets/img/default.jpg', description: 'NOTFOUND'};
 
   constructor(private mediaService: MediaService) { }
 
