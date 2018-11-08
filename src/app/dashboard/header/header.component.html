@@ -1,14 +1,14 @@
-
-<button class="user-option" mat-icon-button [matMenuTriggerFor]="menu">
+<header>
+    <button class="user-option" mat-icon-button [matMenuTriggerFor]="menu">
   <div mat-card-avatar class="example-header-image"></div>
 </button>
 
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
     <mat-icon>close</mat-icon>
     <span>Deconnexion</span>
   </button>
-  <!--
+        <!--
 <button mat-menu-item disabled>
   <mat-icon>voicemail</mat-icon>
   <span>Check voicemail</span>
@@ -18,10 +18,11 @@
   <span>Disable alerts</span>
 </button>
   -->
-</mat-menu>
+    </mat-menu>
 
-<mat-form-field appearance="outline" class="searchbox">
-  <mat-label>Rechercher</mat-label>
-  <input matInput placeholder="Taper votre recherche">
-  <mat-icon matSuffix>search</mat-icon>
-</mat-form-field>
+    <mat-form-field appearance="outline" class="searchbox">
+        <mat-label>Rechercher</mat-label>
+        <input matInput placeholder="Taper votre recherche">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</header>

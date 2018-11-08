@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Muli');
+nav {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 64px);
+    background-color: #2d323e;
+}
 
 .mat-tree {
     background-color: #2d323e;
@@ -29,17 +37,17 @@
 }
 
 .example-tree-invisible {
-  display: none;
+    display: none;
 }
 
 .example-tree ul,
 .example-tree li {
-  margin-top: 0;
-  margin-bottom: 0;
-  list-style-type: none;
-  color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+    color: white;
 }
 
 .example-tree ul {
-  padding-left: 20px;
+    padding-left: 20px;
 }
