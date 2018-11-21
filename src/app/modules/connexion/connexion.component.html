@@ -1,0 +1,47 @@
+<section class="connexion-part">
+
+	<div class="snip1222">
+		<div class="square">
+			<div></div>
+		</div>
+		<h1>Nemateria</h1>
+		<h5>Quis autem vel eum</h5>
+	</div>
+
+	<mat-card class="connexion-card">
+		<mat-card-header>
+			<mat-card-title>
+				Connexion
+			</mat-card-title>
+			<mat-card-subtitle>
+				Quis autem vel eum
+			</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<form class="form-container" [formGroup]="connexionForm">
+				<mat-form-field>
+					<input matInput placeholder="Votre email" formControlName="email">
+					<mat-error *ngIf="true">
+						Un email valide est <strong>obligatoire</strong>
+					</mat-error>
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput placeholder="Votre mot de pass" formControlName="pass" type="password">
+					<mat-error *ngIf="true">
+						Un mot de passe valide est <strong>obligatoire</strong>
+					</mat-error>					
+				</mat-form-field>
+			</form>
+		</mat-card-content>
+		<mat-card-actions>
+			<button mat-raised-button color='primary' (click)="authentifier()">Go</button>
+		</mat-card-actions>
+	</mat-card>
+</section>
+<section class="actu-part">
+	<h2>Actualités de Nemateria</h2>
+	<p>
+		Lorem ipsum dolor sit amet, coectetuer adipiscing
+		elit sed diam nonummy et nibh euismod
+	</p>
+</section>

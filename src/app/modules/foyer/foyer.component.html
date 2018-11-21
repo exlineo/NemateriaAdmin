@@ -1,0 +1,28 @@
+<header>
+
+</header>
+<!--
+	<figure class="snip1543"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample101.jpg" alt="sample101" />
+		<figcaption>
+			<h3>Indigo Violet</h3>
+			<p>But Calvin is no kind and loving god! He's one of the old gods! He demands sacrifice! </p>
+		</figcaption>
+		<a href="#"></a>
+	</figure>
+<button mat-raised-button (click)="openBottomSheet()">Open file</button>
+--> 
+
+<section class="mediaListe">
+	<figure class="snip1543" *ngFor="let media of mediaListe">
+		<img src="{{media.img}}" alt="sample101" />
+		<figcaption>
+			<h3>{{media.name}}</h3>
+			<p>{{media.description}}</p>
+		</figcaption>
+		<a (click)="openBottomSheet(media.id)"></a>
+	</figure>
+</section>
+
+<footer>
+
+</footer>

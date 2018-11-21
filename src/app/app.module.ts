@@ -5,40 +5,38 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { DemoMaterialModule } from './material-module';
+import { MaterialModule } from './material-module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { Erreur404Component } from './erreur404/erreur404.component';
-import { TraversingComponent } from './traversing/traversing.component';
-import { MediaComponent } from './media/media.component';
-import { SidenavComponent } from './dashboard/sidenav/sidenav.component';
-import { HeaderComponent } from './dashboard/header/header.component';
-import { ConnexionComponent } from './connexion/connexion.component';
-import { AuthService } from './services/auth.service';
-import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
+import { Erreur404Component } from './modules/erreur/erreur404.component';
+import { ConnexionComponent } from './modules/connexion/connexion.component';
+import { FoyerComponent } from './modules/foyer/foyer.component';
+import { OptionPopInComponent } from './modules/option-pop-in/option-pop-in.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    TraversingComponent,
-    Erreur404Component,
-    MediaComponent,
-    SidenavComponent,
-    HeaderComponent,
     ConnexionComponent,
-    ProfileEditorComponent,
+    Erreur404Component,
+    FoyerComponent,
+    OptionPopInComponent,
 
   ],
+  entryComponents: [OptionPopInComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    DemoMaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

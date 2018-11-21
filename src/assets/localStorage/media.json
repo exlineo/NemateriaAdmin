@@ -1,0 +1,25 @@
+[{
+	"id": 0,
+	"name": "Inverness McKenzie",
+	"directory": "img",
+	"img": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample108.jpg",
+	"description": "The only skills I have the patience to learn are those that have no real application in life."
+}, {
+	"id": 1,
+	"name": "Alan Fresco",
+	"directory": "img",
+	"img": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample100.jpg",
+	"description": "The real fun of living wisely is that you get to be smug about it."
+}, {
+	"id": 2,
+	"name": "Indigo Violet",
+	"directory": "img",
+	"img": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample101.jpg",
+	"description": "But Calvin is no kind and loving god! He's one of the old gods! He demands sacrifice! "
+}, {
+	"id": 3,
+	"name": "Shiba Inu",
+	"directory": "img",
+	"img": "https://material.angular.io/assets/img/examples/shiba2.jpg",
+	"description": "The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting."
+}]
