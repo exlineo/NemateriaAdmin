@@ -15,6 +15,7 @@ import { Erreur404Component } from './modules/erreur/erreur404.component';
 import { ConnexionComponent } from './modules/connexion/connexion.component';
 import { FoyerComponent } from './modules/foyer/foyer.component';
 import { OptionPopInComponent } from './modules/option-pop-in/option-pop-in.component';
+import { FicheMediaComponent } from './modules/fiche-media/fiche-media.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { OptionPopInComponent } from './modules/option-pop-in/option-pop-in.comp
     Erreur404Component,
     FoyerComponent,
     OptionPopInComponent,
+    FicheMediaComponent,
 
   ],
   entryComponents: [OptionPopInComponent],
