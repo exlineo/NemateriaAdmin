@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { MediaService } from "../../systeme/services/media.service";
-import { MediaModel } from "../../systeme/modeles/media.modele";
+import { MediaService } from "../../../systeme/services/media.service";
+import { MediaModel } from "../../../systeme/modeles/media.modele";
 
 @Component({
 	selector: 'app-fiche-media',
 	templateUrl: './fiche-media.component.html',
-	styleUrls: ['./fiche-media.component.css'],
-	providers: [MediaService]
+	styleUrls: ['./fiche-media.component.css']
 })
 export class FicheMediaComponent implements OnInit {
 
@@ -18,6 +17,7 @@ export class FicheMediaComponent implements OnInit {
 
 	ngOnInit() {
 		this.getMediaSelected();
+		console.log(this.mediaService.initMedias);
 	}
 
 	getIdSelected(): number {
