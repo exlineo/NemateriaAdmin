@@ -2,20 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ConnexionComponent } from './modules/connexion/connexion.component';
-import { InterfaceComponent } from "./modules/interface/interface.component";
-import { ListeMediaComponent } from "./modules/liste-media/liste-media.component";
-import { FicheMediaComponent } from "./modules/fiche-media/fiche-media.component";
-import { AuthguardGuard } from './systeme/services/authguard.guard';
+import { Erreur404Component } from './modules/erreur/erreur404.component';
 
 const routes: Routes = [
 	{ path: '', component: ConnexionComponent },
 	{ path: 'connexion', component: ConnexionComponent },
-	{ path: 'home', component: InterfaceComponent, canActivate: [AuthguardGuard],
-		children: [
-			{ path: 'listeMedia', component: ListeMediaComponent },
-			{ path: 'ficheMedia/:id', component: FicheMediaComponent },
-		] },
-	{ path: '', redirectTo: '/', pathMatch: 'full' },
+	{ path: 'interface', loadChildren: "./modules/interface/interface.module#InterfaceModule" },
+	{ path: '**', component: Erreur404Component },
+	{ path: '', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
