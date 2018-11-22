@@ -18,12 +18,13 @@ export class ListeMediaComponent implements OnInit {
 	constructor(private mediaService: MediaService, private bottomSheet: MatBottomSheet) { }
 
 	ngOnInit() {
-		this.mediaListe = this.mediaService.mediaListe$.getValue(); // Si le tableau est déjà chargé
+		this.getMediaListe();
+	}
 
-		this.mediaService.mediaListe$.subscribe(
-		data => {
+	getMediaListe(): void {
+		this.mediaService.loadListe().subscribe(data => {
 			this.mediaListe = data;
-		});
+		})
 	}
 
 	openBottomSheet(idMedia: number): void {

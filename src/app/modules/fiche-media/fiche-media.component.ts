@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
 import { MediaService } from "../../systeme/services/media.service";
 import { MediaModel } from "../../systeme/modeles/media.modele";
 
@@ -14,7 +13,6 @@ import { MediaModel } from "../../systeme/modeles/media.modele";
 export class FicheMediaComponent implements OnInit {
 
 	mediaSelected: MediaModel = { id: -1, type: 'NOTFOUND', name: 'NOTFOUND', directory: 'NOTFOUND', img: 'assets/img/default.jpg', description: 'NOTFOUND' };
-	donnees$: Subscription;
 
 	constructor(private route: ActivatedRoute, private location: Location, private mediaService: MediaService) { }
 
@@ -22,17 +20,15 @@ export class FicheMediaComponent implements OnInit {
 		this.getMediaSelected();
 	}
 
-	getMediaSelected(): void {
-		// recuperer l'id du media dans la root
+	getIdSelected(): number {
 		const id = +this.route.snapshot.paramMap.get('id');
+		return id;
+	}
 
-		// recuperer le media en fct de son id
-		this.donnees$ = this.mediaService.mediaListe$.subscribe(
-			data => {
-				this.mediaSelected = data.find(media => media.id === id);
-			}
-		);
-		
+	getMediaSelected(): void {
+		this.mediaService.loadListe().subscribe(data => {
+			this.mediaSelected = data.find(media => media.id === this.getIdSelected());
+		})
 	}
 
 }
