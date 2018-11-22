@@ -19,7 +19,7 @@ export class OptionPopInComponent {
 		this.bottomSheetRef.dismiss();
 		event.preventDefault();
 
-		this.notificationService.openSnackBar('Le media n°' + this.data.idMediaSelected +' à été séléctionner', 'event'); 
+		//this.notificationService.openSnackBar('Le media n°' + this.data.idMediaSelected +' à été séléctionner', 'event'); 
 	}
 
 	openFiche(event: MouseEvent): void {

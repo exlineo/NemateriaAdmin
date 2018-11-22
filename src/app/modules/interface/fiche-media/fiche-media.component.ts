@@ -17,7 +17,6 @@ export class FicheMediaComponent implements OnInit {
 
 	ngOnInit() {
 		this.getMediaSelected();
-		console.log(this.mediaService.initMedias);
 	}
 
 	getIdSelected(): number {

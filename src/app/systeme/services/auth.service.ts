@@ -19,7 +19,6 @@ export class AuthService {
 	 * @return Boolean
 	 */
 	submit(userObject): void {
-		console.log('test');
 		this.userService.loadListe().subscribe(
 			data => {
 				
@@ -27,7 +26,7 @@ export class AuthService {
 
 				if (user.pass == userObject.pass) {
 					this.auth = true;
-					this.router.navigate(['home/listeMedia']);
+					this.router.navigate(['interface/medias']);
 				} else {
 					this.notService.openSnackBar('Mot de passe ou identifiant invalide', 'connexion');
 				}

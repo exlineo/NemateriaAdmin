@@ -17,7 +17,6 @@ export class ListeMediaComponent implements OnInit {
 
 	ngOnInit() {
 		// this.getMediaListe();
-		console.log(this.mediaService.initMedias);
 	}
 
 	getMediaListe(): void {
