@@ -1,0 +1,18 @@
+<header>
+	<button class="user-option" mat-icon-button [matMenuTriggerFor]="menu">
+		<div mat-card-avatar class="user-image"></div>
+	</button>
+
+	<mat-menu #menu="matMenu">
+		<button mat-menu-item routerLink="/connexion">
+			<mat-icon>close</mat-icon>
+			<span>Deconnexion</span>
+		</button>
+	</mat-menu>
+
+	<mat-form-field appearance="outline" class="searchbox">
+		<mat-label>Rechercher</mat-label>
+		<input matInput placeholder="Taper votre recherche">
+		<mat-icon matSuffix>search</mat-icon>
+	</mat-form-field>
+</header>

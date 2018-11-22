@@ -1,5 +1,6 @@
 .mediaListe {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .snip1543 {

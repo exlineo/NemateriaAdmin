@@ -1,0 +1,96 @@
+/** nav **/
+
+nav {
+	display: block;
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 10vw;
+	height: calc(100vh - 64px);
+}
+
+/** Logo **/
+
+.snip1222 {
+	display: block;
+	position: absolute;
+	top: 70px;
+	width: 100%;
+	text-align: center;
+	color: #c74469;
+	font-size: 16px;
+	font-family: 'Raleway',
+		Arial,
+		sans-serif;
+}
+
+.snip1222 * {
+	-webkit-box-sizing: padding-box;
+	box-sizing: padding-box;
+}
+
+.snip1222 h1,
+.snip1222 h5 {
+	margin: 0;
+	line-height: 1.1em;
+}
+
+.snip1222 h1 {
+	font-family: 'Lora', Arial, sans-serif;
+	font-size: 2.2em;
+}
+
+.snip1222 h5 {
+	line-height: 0.5em;
+	font-weight: 400;
+}
+
+.snip1222 .square {
+	height: 97.5px;
+	width: 97.5px;
+	overflow: hidden;
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	content: '';
+	-webkit-transform: rotate(45deg) translate(-50%, -50%);
+	transform: rotate(45deg) translate(-50%, -50%);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+}
+
+.snip1222 .square:before,
+.snip1222 .square:after,
+.snip1222 .square div:before,
+.snip1222 .square div:after {
+	background-color: #c74469;
+	position: absolute;
+	content: "";
+	display: block;
+	-webkit-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.snip1222 .square:before,
+.snip1222 .square:after {
+  height: 4px;
+  width: 40%;
+}
+
+.snip1222 .square div:before,
+.snip1222 .square div:after {
+  width: 4px;
+  height: 40%;
+}
+
+.snip1222 .square:before,
+.snip1222 .square div:before {
+  left: 0;
+  top: 0;
+}
+
+.snip1222 .square:after,
+.snip1222 .square div:after {
+  bottom: 0;
+  right: 0;
+}
