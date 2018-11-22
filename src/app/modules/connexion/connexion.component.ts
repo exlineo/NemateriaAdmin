@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AuthService } from "../../systeme/services/auth.service";
+import { NotificationService } from "../../systeme/services/notification.service";
 
 @Component({
 	templateUrl: './connexion.component.html',
 	styleUrls: ['./connexion.component.css'],
-	providers: [AuthService]
+	providers: [AuthService, NotificationService]
 })
 export class ConnexionComponent implements OnInit {
 
@@ -24,21 +25,18 @@ export class ConnexionComponent implements OnInit {
 		]),
 	});
 
-	constructor(private router: Router, private authService: AuthService) { }
+	constructor(private router: Router, private authService: AuthService, private notService: NotificationService) { }
 
 	ngOnInit() { 
 
 	}
 
 	/**
-	 * @method Route ou renvoi une erreur
+	 * @method Envois une requête de connexion via authService
 	 */
 	authentifier() {
-
-		if (this.connexionForm.valid) {
+		if (this.connexionForm.valid) 
 			this.authService.submit(this.connexionForm.value)
-		}
-					
 	}
 
 }
