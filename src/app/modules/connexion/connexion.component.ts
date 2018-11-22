@@ -6,8 +6,7 @@ import { NotificationService } from "../../systeme/services/notification.service
 
 @Component({
 	templateUrl: './connexion.component.html',
-	styleUrls: ['./connexion.component.css'],
-	providers: [AuthService, NotificationService]
+	styleUrls: ['./connexion.component.css']
 })
 export class ConnexionComponent implements OnInit {
 
@@ -25,7 +24,7 @@ export class ConnexionComponent implements OnInit {
 		]),
 	});
 
-	constructor(private router: Router, private authService: AuthService, private notService: NotificationService) { }
+	constructor(private router: Router, public authService: AuthService, private notService: NotificationService) { }
 
 	ngOnInit() { 
 

@@ -9,6 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { AuthService } from "./systeme/services/auth.service";
+import { NotificationService } from "./systeme/services/notification.service";
+
 import { ConnexionComponent } from './modules/connexion/connexion.component';
 import { InterfaceModule } from './modules/interface/interface.module';
 import { Erreur404Component } from './modules/erreur/erreur404.component';
@@ -28,7 +31,7 @@ import { Erreur404Component } from './modules/erreur/erreur404.component';
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [],
+	providers: [AuthService, NotificationService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
