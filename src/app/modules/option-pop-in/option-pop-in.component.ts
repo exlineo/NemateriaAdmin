@@ -31,7 +31,7 @@ export class OptionPopInComponent {
 		this.bottomSheetRef.dismiss();
 		event.preventDefault();
 
-		let root = 'ficheMedia/' + this.data.idMediaSelected;
+		let root = 'home/ficheMedia/' + this.data.idMediaSelected;
 		window.location.assign(root);
 	}
 

@@ -11,34 +11,30 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { Erreur404Component } from './modules/erreur/erreur404.component';
 import { ConnexionComponent } from './modules/connexion/connexion.component';
-import { FoyerComponent } from './modules/foyer/foyer.component';
-import { OptionPopInComponent } from './modules/option-pop-in/option-pop-in.component';
-import { FicheMediaComponent } from './modules/fiche-media/fiche-media.component';
+import { InterfaceModule } from './modules/interface/interface.module';
+import { InterfaceComponent } from './modules/interface/interface.component';
+import { ListeMediaComponent } from './modules/liste-media/liste-media.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ConnexionComponent,
-    Erreur404Component,
-    FoyerComponent,
-    OptionPopInComponent,
-    FicheMediaComponent,
-
-  ],
-  entryComponents: [OptionPopInComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		ConnexionComponent,
+		InterfaceComponent,
+		ListeMediaComponent
+	],
+	imports: [
+		BrowserModule,
+		HttpClientModule,
+		BrowserAnimationsModule,
+		AppRoutingModule,
+		MaterialModule,
+		FormsModule,
+		ReactiveFormsModule,
+		InterfaceModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

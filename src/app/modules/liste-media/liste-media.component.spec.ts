@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FoyerComponent } from './foyer.component';
+import { ListeMediaComponent } from './liste-media.component';
 
-describe('FoyerComponent', () => {
-  let component: FoyerComponent;
-  let fixture: ComponentFixture<FoyerComponent>;
+describe('ListeMediaComponent', () => {
+  let component: ListeMediaComponent;
+  let fixture: ComponentFixture<ListeMediaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FoyerComponent ]
+      declarations: [ ListeMediaComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FoyerComponent);
+    fixture = TestBed.createComponent(ListeMediaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
