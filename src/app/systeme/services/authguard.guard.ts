@@ -15,4 +15,10 @@ export class AuthguardGuard implements CanActivate {
 		state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 		return this.authService.auth;
 	}
+
+	canLoad(
+		next: ActivatedRouteSnapshot,
+		state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+		return this.authService.auth;
+	}
 }

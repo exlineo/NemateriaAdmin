@@ -8,6 +8,8 @@ import { InterfaceComponent } from './interface.component';
 import { ListeMediaComponent } from './liste-media/liste-media.component';
 import { FicheMediaComponent } from './fiche-media/fiche-media.component';
 import { OptionPopInComponent } from './option-pop-in/option-pop-in.component';
+import { HeaderComponent } from './header/header.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
 	imports: [
@@ -20,7 +22,9 @@ import { OptionPopInComponent } from './option-pop-in/option-pop-in.component';
 		InterfaceComponent,
 		ListeMediaComponent,
 		FicheMediaComponent,
-		OptionPopInComponent],
+		OptionPopInComponent,
+		HeaderComponent,
+		SidenavComponent],
 	entryComponents: [OptionPopInComponent]
 })
 export class InterfaceModule { }
