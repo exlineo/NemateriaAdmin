@@ -18,7 +18,7 @@ nav {
 	width: 100%;
 	text-align: center;
 	color: #c74469;
-	font-size: 16px;
+	font-size: 10px;
 	font-family: 'Raleway',
 		Arial,
 		sans-serif;
@@ -73,24 +73,28 @@ nav {
 
 .snip1222 .square:before,
 .snip1222 .square:after {
-  height: 4px;
-  width: 40%;
+	height: 4px;
+	width: 40%;
 }
 
 .snip1222 .square div:before,
 .snip1222 .square div:after {
-  width: 4px;
-  height: 40%;
+	width: 4px;
+	height: 40%;
 }
 
 .snip1222 .square:before,
 .snip1222 .square div:before {
-  left: 0;
-  top: 0;
+	left: 0;
+	top: 0;
 }
 
 .snip1222 .square:after,
 .snip1222 .square div:after {
-  bottom: 0;
-  right: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.nav-options {
+	padding-top: 200px;
 }
