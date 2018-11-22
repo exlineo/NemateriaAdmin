@@ -26,7 +26,7 @@ export class AuthService {
 				
 				if (user.pass == userObject.pass) {
 					this.auth = true;
-					this.router.navigate(['home']);
+					this.router.navigate(['home/listeMedia']);
 				}
 
 				else {
