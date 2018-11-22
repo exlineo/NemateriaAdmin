@@ -26,8 +26,7 @@ import { Erreur404Component } from './modules/erreur/erreur404.component';
 		AppRoutingModule,
 		MaterialModule,
 		FormsModule,
-		ReactiveFormsModule,
-		InterfaceModule
+		ReactiveFormsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

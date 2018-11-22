@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { InterfaceRootingModule } from "../interface/interface-routing.module";
 import { MaterialModule } from '../../material-module';
 import { MediaService } from 'src/app/systeme/services/media.service';
@@ -10,6 +11,7 @@ import { OptionPopInComponent } from './option-pop-in/option-pop-in.component';
 
 @NgModule({
 	imports: [
+		CommonModule,
 		InterfaceRootingModule,
 		MaterialModule
 	],
