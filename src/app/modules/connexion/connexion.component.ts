@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AuthService } from "../../systeme/services/auth.service";
 
 @Component({
 	templateUrl: './connexion.component.html',
-	styleUrls: ['./connexion.component.css']
+	styleUrls: ['./connexion.component.css'],
+	providers: [AuthService]
 })
 export class ConnexionComponent implements OnInit {
 
-	/** Intance du formulaire de connnexion */
+	/** 
+	 * Instance du formulaire de connnexion 
+	 */
 	connexionForm = new FormGroup({
 		email: new FormControl('', [
 			Validators.required,
@@ -20,9 +24,10 @@ export class ConnexionComponent implements OnInit {
 		]),
 	});
 
-	constructor(private router: Router) { }
+	constructor(private router: Router, private authService: AuthService) { }
 
-	ngOnInit() {
+	ngOnInit() { 
+
 	}
 
 	/**
@@ -31,31 +36,9 @@ export class ConnexionComponent implements OnInit {
 	authentifier() {
 
 		if (this.connexionForm.valid) {
-			if (this.submit(this.connexionForm.value)) 
-				this.router.navigate(['media']); 
-			else
-				alert('email ou mot de passe incorrect');
+			this.authService.submit(this.connexionForm.value)
 		}
 					
-	}
-
-	/**
-	 * @method Envois une requette de connexion et retourne un boolean
-	 * @param userObject objet contenant de infos de connexion
-	 * @return Boolean
-	 */
-	submit(userObject) {
-		var auth = false; 
-		
-		const req = {
-			login: userObject.email,
-			mdp: 'tttttttt'
-		};
-
-		if (userObject.pass == req.mdp)
-			auth = true;
-
-		return auth;
 	}
 
 }

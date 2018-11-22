@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { MediaModel } from "../modeles/media.modele";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class MediaService {
 
