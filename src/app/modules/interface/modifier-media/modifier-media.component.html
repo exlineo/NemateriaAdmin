@@ -1,0 +1,27 @@
+<div id="screen">
+	<mat-toolbar>
+		<mat-toolbar-row>
+			<h1>Nouveau Média</h1>
+		</mat-toolbar-row>
+	</mat-toolbar>
+
+	<section class="box">
+		<form class="formulaire" [formGroup]="mediaForm">
+			<mat-form-field>
+				<input matInput formControlName="nom" placeholder="Nom *">
+				<mat-error *ngIf="true"> Cette information est <strong>obligatoire</strong> </mat-error>
+			</mat-form-field>
+			<mat-form-field>
+				<input matInput formControlName="type" placeholder="Type *">
+			</mat-form-field>
+			<mat-form-field>
+				<textarea matInput formControlName="description" placeholder="Description *"></textarea>
+				<mat-error *ngIf="true"> Cette information est <strong>obligatoire</strong> </mat-error>
+			</mat-form-field>
+			<mat-form-field>
+				<input matInput formControlName="url" placeholder="Url (optionnel)">
+			</mat-form-field>
+		</form>
+		<button mat-raised-button color='primary' (click)="updateMedia()">Go</button>
+	</section>
+</div>

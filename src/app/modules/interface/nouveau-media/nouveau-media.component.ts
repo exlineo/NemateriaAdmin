@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { MediaService } from "../../../systeme/services/media.service";
 import { NotificationService } from "../../../systeme/services/notification.service";
 
@@ -43,7 +44,7 @@ export class NouveauMediaComponent implements OnInit {
 			);
 		}
 		else
-			console.log('Formulaire nom remplis');
+			this.notService.openSnackBar('Formulaire nom remplis', 'Formulaire');
 	}
 
 }

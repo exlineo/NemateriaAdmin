@@ -18,6 +18,7 @@ export class FicheMediaComponent implements OnInit {
 	ngOnInit() {
 		this.mediaSelected = { id: -1, type: 'NOTFOUND', name: 'NOTFOUND', directory: 'NOTFOUND', img: 'assets/img/default.jpg', description: 'NOTFOUND' };
 		this.getMediaSelected();
+		console.log(this.mediaSelected);
 	}
 
 	/**
@@ -33,12 +34,6 @@ export class FicheMediaComponent implements OnInit {
 	 * @method getMediaSelected() - Recupere les infos du media selectionne
 	 */
 	getMediaSelected(): void {
-		/*
-		this.mediaService.loadListe().subscribe(data => {
-			this.mediaSelected = data.find(media => media.id === this.getIdSelected());
-		})
-		*/
-
 		this.mediaSelected = this.mediaService.initMedias.find(media => media.id == this.getIdSelected());
 	}
 

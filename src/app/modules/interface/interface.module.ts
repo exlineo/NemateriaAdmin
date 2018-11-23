@@ -14,6 +14,7 @@ import { OptionPopInComponent } from './option-pop-in/option-pop-in.component';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { NouveauMediaComponent } from './nouveau-media/nouveau-media.component';
+import { ModifierMediaComponent } from './modifier-media/modifier-media.component';
 
 @NgModule({
 	imports: [
@@ -30,7 +31,8 @@ import { NouveauMediaComponent } from './nouveau-media/nouveau-media.component';
 		OptionPopInComponent,
 		HeaderComponent,
 		SidenavComponent,
-		NouveauMediaComponent],
+		NouveauMediaComponent,
+		ModifierMediaComponent],
 	entryComponents: [OptionPopInComponent]
 })
 export class InterfaceModule { }

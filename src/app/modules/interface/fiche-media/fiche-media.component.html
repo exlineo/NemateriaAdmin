@@ -16,7 +16,7 @@
 				<p>{{mediaSelected.description}}</p>
 			</mat-card-content>
 			<mat-card-actions>
-				<button mat-button>Modifier</button>
+				<button mat-button [routerLink]="['/interface/modification',mediaSelected.id]">Modifier</button>
 			</mat-card-actions>
 		</mat-card>
 	</section>
