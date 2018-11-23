@@ -1,0 +1,12 @@
+.box {
+	margin-top: 20px;
+}
+
+.formulaire {
+	display: flex;
+	flex-direction: column;
+}
+
+.formulaire>* {
+	width: 100%;
+}
