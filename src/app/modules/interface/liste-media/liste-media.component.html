@@ -1,12 +1,17 @@
-<section class="mediaListe">
-
-    <figure class="snip1543" *ngFor="let media of mediaService.initMedias">
-        <img src="{{media.img}}" alt="sample101" />
-        <figcaption>
-            <h3>{{media.name}}</h3>
-            <p>{{media.description}}</p>
-        </figcaption>
-        <a (click)="openBottomSheet(media.id)"></a>
-    </figure>
-
-</section>
+<div id="screen">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <h1>Liste des Médias</h1>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <section class="box mediaListe">
+        <figure class="snip1543" *ngFor="let media of mediaService.initMedias">
+            <img src="{{media.img}}" alt="sample101" />
+            <figcaption>
+                <h3>{{media.name}}</h3>
+                <p>{{media.description}}</p>
+            </figcaption>
+            <a (click)="openBottomSheet(media.id)"></a>
+        </figure>
+    </section>
+</div>
