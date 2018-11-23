@@ -15,6 +15,10 @@ export class OptionPopInComponent {
 
 	mediaSelected: MediaModel;
 
+	/**
+	 * @method openLink() - Desactive le pop in apres choix de l'utilisateur
+	 * @param {MouseEvent} event - event du lien à empecher
+	 */
 	openLink(event: MouseEvent): void {
 		this.bottomSheetRef.dismiss();
 		event.preventDefault();
@@ -22,6 +26,10 @@ export class OptionPopInComponent {
 		//this.notificationService.openSnackBar('Le media n°' + this.data.idMediaSelected +' à été séléctionner', 'event'); 
 	}
 
+	/**
+	 * @method openFiche() - Desactive le pop in apres choix de l'utilisateur
+	 * @param {MouseEvent} event event du lien à empecher
+	 */
 	openFiche(event: MouseEvent): void {
 		this.bottomSheetRef.dismiss();
 		event.preventDefault();

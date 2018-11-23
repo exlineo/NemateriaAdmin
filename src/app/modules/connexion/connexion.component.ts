@@ -31,9 +31,9 @@ export class ConnexionComponent implements OnInit {
 	}
 
 	/**
-	 * @method Envois une requête de connexion via authService
+	 * @method authentifier() - Envois une requête de connexion via authService
 	 */
-	authentifier() {
+	authentifier(): void {
 		if (this.connexionForm.valid) 
 			this.authService.submit(this.connexionForm.value)
 	}

@@ -14,9 +14,8 @@ export class AuthService {
 	constructor(private http: HttpClient, private userService: UserService, private router: Router, private notService: NotificationService) { }
 
 	/**
-	 * @method Envois une requette de connexion et retourne un boolean
-	 * @param userObject objet contenant de infos de connexion
-	 * @return Boolean
+	 * @method submit() - Envois une requette de connexion et retourne un boolean
+	 * @param {Object} userObject - objet contenant de infos de connexion
 	 */
 	submit(userObject): void {
 		this.userService.loadListe().subscribe(

@@ -16,11 +16,18 @@ export class MediaService {
 		this.loadIniMedias();
 	}
 
+	/**
+	 * @method loadListe() - Retourne un obs. d'une req. de la liste des medias
+	 * @returns {Observable}
+	 */
 	loadListe(): Observable<MediaModel[]> {
 		return this.http.get<MediaModel[]>('assets/localStorage/media.json');
 	}
 
-	loadIniMedias(){
+	/**
+	 * @method loadIniMedias() - Enregistre la liste des médias dans une variables
+	 */
+	loadIniMedias(): void {
 		this.http.get<MediaModel[]>('assets/localStorage/media.json').subscribe(data => {
 			this.initMedias = data;
 		})

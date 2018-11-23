@@ -10,6 +10,10 @@ export class UserService {
 
 	constructor(private http: HttpClient) { } 
 	
+	/**
+	 * @method UserService - Retourne un obs. d'une req. de la liste des users
+	 * @returns {Observable} - Obs d'une req. de la liste des users
+	 */
 	loadListe(): Observable<UserModel[]> {
 		return this.http.get<UserModel[]>('assets/localStorage/user.json');
 	}

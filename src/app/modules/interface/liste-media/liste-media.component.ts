@@ -19,12 +19,18 @@ export class ListeMediaComponent implements OnInit {
 		// this.getMediaListe();
 	}
 
+	/*
 	getMediaListe(): void {
 		this.mediaService.loadListe().subscribe(data => {
 			this.mediaListe = data;
 		})
 	}
+	*/
 
+	/**
+	 * @method openBottomSheet() - Ouvre les options du media selectione
+	 * @param {number} idMedia - id du media selectione
+	 */
 	openBottomSheet(idMedia: number): void {
 		this.bottomSheet.open(OptionPopInComponent, {
 		data: { idMediaSelected: idMedia },

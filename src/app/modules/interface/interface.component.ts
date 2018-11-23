@@ -11,7 +11,7 @@ export class InterfaceComponent implements OnInit {
 	constructor(public authService: AuthService) { }
 
 	ngOnInit() {
-		console.log(this.authService.auth);
+		
 	}
 
 }
