@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MediaService } from "../../../systeme/services/media.service";
 import { NotificationService } from "../../../systeme/services/notification.service";
+import { MediaModel } from 'src/app/systeme/modeles/media.modele';
 
 @Component({
 	selector: 'app-nouveau-media',
@@ -12,10 +13,19 @@ import { NotificationService } from "../../../systeme/services/notification.serv
 export class NouveauMediaComponent implements OnInit {
 
 	mediaForm: FormGroup;
+	newMedia: MediaModel;
 
 	constructor(public mediaService: MediaService, private notService: NotificationService) { }
 
 	ngOnInit() {
+		this.newMedia = {
+			id: -1,
+			type: 'undefined',
+			name: 'undefined',
+			directory: 'undefined',
+			img: 'assets/img/default.jpg',
+			description: 'undefined'
+		};
 		this.mediaForm = new FormGroup({
 			nom: new FormControl('', [
 				Validators.required
@@ -30,21 +40,43 @@ export class NouveauMediaComponent implements OnInit {
 		});
 	}
 
-	setMedia() {
+	/**
+	 * @method save() - Sauvegarde les informations en base de données
+	 */
+	save() {
 		if (this.mediaForm.valid) {
-			this.mediaService.PostMedia(this.mediaForm.value).subscribe(
-				newMedia => {
-					this.mediaService.initMedias.push(newMedia)
-					console.log(this.mediaService.initMedias);
-				},
-				error => {
-					console.warn(error);
-					this.notService.openSnackBar('Une erreur de connexion avec le serveur est survenu.', 'connexion')
+			this.newMedia.id = this.mediaService.initMedias.length;
+			this.newMedia.name = this.mediaForm.value.nom;
+			this.newMedia.type = this.mediaForm.value.type;
+			this.newMedia.description = this.mediaForm.value.description;
+			this.newMedia.img = this.mediaForm.value.url;
+
+			this.mediaService.createMedia(this.newMedia).subscribe(
+				() => {
+					this.mediaService.initMedias.push(this.newMedia);
+					this.notService.openSnackBar('Le média à été ajouter.', 'serveur');
 				}
-			);
+			)
 		}
 		else
 			this.notService.openSnackBar('Formulaire nom remplis', 'Formulaire');
 	}
 
+	/**
+	 * @method reset() - Reinitialise le formulaire
+	 */
+	reset() {
+		this.mediaForm = new FormGroup({
+			nom: new FormControl('', [
+				Validators.required
+			]),
+			type: new FormControl('', [
+				Validators.required
+			]),
+			description: new FormControl('', [
+				Validators.required
+			]),
+			url: new FormControl('')
+		});
+	}
 }

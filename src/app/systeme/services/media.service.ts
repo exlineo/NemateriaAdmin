@@ -11,49 +11,141 @@ export class MediaService {
 
 	initMedias: MediaModel[];
 
-	lastId: number;
+	dataStorage: string = 'http://localhost:8080/api/';
 
 	constructor(private http: HttpClient) {
 		this.initMedias = [];
-		this.lastId = -1;
-		this.loadIniMedias();
+		this.loadAllMedias();
 	}
 
 	/**
-	 * @method loadListe() - Retourne un obs. d'une req. de la liste des medias
+	 * @method createMedia() - Retourne un obs. d'un create de media
 	 * @returns {Observable}
 	 */
-	loadListe(): Observable<MediaModel[]> {
-		return this.http.get<MediaModel[]>('assets/localStorage/media.json');
+	createMedia(media: MediaModel): Observable<MediaModel[]> {
+		return this.http.post<MediaModel[]>(this.dataStorage + 'medias/', media);
 	}
 
 	/**
-	 * @method loadIniMedias() - Enregistre la liste des médias dans une variables
+	 * @method readMedia() - Retourne un obs. d'un read de media
+	 * @returns {Observable}
 	 */
-	loadIniMedias(): void {
-		this.http.get<MediaModel[]>('assets/localStorage/media.json').subscribe(data => {
+	readMedia(idMedia: number): Observable<MediaModel[]> {
+		return this.http.get<MediaModel[]>(this.dataStorage + 'medias/' + idMedia);
+	}
+
+	/**
+	 * @method createMedia() - Retourne un obs. d'un update de media
+	 * @returns {Observable}
+	 */
+	updateMedia(media: MediaModel): Observable<MediaModel[]> {
+		return this.http.put<MediaModel[]>(this.dataStorage + 'medias/' + media.id, media);
+	}
+
+	/**
+	 * @method createMedia() - Retourne un obs. d'un delete de media
+	 * @returns {Observable}
+	 */
+	deleteMedia(media: MediaModel): Observable<MediaModel[]> {
+		return this.http.delete<MediaModel[]>(this.dataStorage + 'medias/' + media.id);
+	}
+
+	/**
+	 * @method readAllMedia() - Retourne un obs. d'un read de tous les medias
+	 * @returns {Observable}
+	 */
+	readAllMedia(): Observable<MediaModel[]> {
+		return this.http.get<MediaModel[]>(this.dataStorage + 'medias/');
+	}
+
+
+
+	/**
+	 * @method loadAllMedias() - Enregistre la liste des médias dans une variables
+	 */
+	loadAllMedias(): void {
+		this.readAllMedia().subscribe(data => {
 			this.initMedias = data;
-			this.lastId = data.length;
 		})
 	}
 
-	PostMedia(infoMedia): Observable<MediaModel> {
-		let newMedia: MediaModel = { id: -1, type: 'NOTFOUND', name: 'NOTFOUND', directory: 'NOTFOUND', img: 'assets/img/default.jpg', description: 'NOTFOUND' };
-		newMedia.id = this.lastId;
-		newMedia.name = infoMedia.nom;
-		newMedia.description = infoMedia.description;
-		newMedia.type = infoMedia.type;
-		if (infoMedia.url == '') 
-			newMedia.img = 'http://localhost:4200/assets/img/default.jpg';
-		else
-			newMedia.img = infoMedia.url;
+	/**
+	 * @method testCrudMedia() - test du service
+	 * @returns {Observable}
+	 */
+	testCrudMedia() {
 
-		console.log(newMedia);
+		/*
+		//read
+		let testMedia: MediaModel;
+		this.readMedia(1).subscribe(
+			data => {
+				testMedia = data[0];
+				console.log(testMedia);
+			}
+		);
+		*/
 
-		return this.http.post<MediaModel>('http://localhost:4200/assets/localStorage/media.json', newMedia);
-	}
+		/*
+		//update
+		let testMedia: MediaModel;
+		this.readMedia(1).subscribe(
+			data => {
+				testMedia = data[0];
+				console.log(testMedia);
+				testMedia.name += ' test';
+				this.updateMedia(testMedia).subscribe(
+					() => {
+						this.readMedia(1).subscribe(
+							data => {
+								testMedia = data[0];
+								console.log(testMedia);
+							}
+						);
+					}
+				);
+			}
+		);
+		*/
 
-	PutMedia(media: MediaModel): Observable<MediaModel> {
-		return this.http.put<MediaModel>('assets/localStorage/media.json', media);
+		//create
+		/*
+		this.readAllMedia().subscribe(
+			data => {
+				console.log(data);
+				let mediaTest = data[0];
+				mediaTest.id = data.length;
+				this.createMedia(mediaTest).subscribe(
+					() => {
+						this.readAllMedia().subscribe(
+							data => {
+								console.log(data);
+							}
+						);
+					}
+				)
+			}
+		)
+		*/
+
+		//delete
+		/*
+		this.readAllMedia().subscribe(
+			data => {
+				console.log(data);
+				let idTest = data.length-1;
+				let mediaTest = data[idTest];
+				this.deleteMedia(mediaTest).subscribe(
+					() => {
+						this.readAllMedia().subscribe(
+							data => {
+								console.log(data);
+							}
+						)
+					}
+				);
+			}
+		)
+		*/
 	}
 }

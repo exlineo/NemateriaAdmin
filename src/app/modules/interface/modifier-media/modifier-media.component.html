@@ -1,7 +1,7 @@
 <div id="screen">
 	<mat-toolbar>
 		<mat-toolbar-row>
-			<h1>Nouveau Média</h1>
+			<h1>Formulaire de Modification Média</h1>
 		</mat-toolbar-row>
 	</mat-toolbar>
 
@@ -22,6 +22,7 @@
 				<input matInput formControlName="url" placeholder="Url (optionnel)">
 			</mat-form-field>
 		</form>
-		<button mat-raised-button color='primary' (click)="updateMedia()">Go</button>
+		<button mat-raised-button color='primary' (click)="save()">Sauvegarder</button>
+		<button mat-raised-button color='warn' (click)="reset()">Restaurer</button>
 	</section>
 </div>
