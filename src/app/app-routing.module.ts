@@ -13,7 +13,7 @@ import { Erreur404Component } from './extranet/erreur/erreur404.component';
 const routes: Routes = [
 	{ path: '', component: ConnexionComponent },
 	{ path: 'connexion', component: ConnexionComponent },
-	{ path: 'medias', loadChildren: "./intranet/media/media.module#MediaModule", canLoad: [AuthguardGuard] },
+	{ path: 'intranet', loadChildren: "./intranet/intranet.module#IntranetModule", canLoad: [AuthguardGuard] },
 	{ path: '**', component: Erreur404Component },
 	{ path: '', redirectTo: '/', pathMatch: 'full' }
 ];

@@ -6,11 +6,10 @@ import { MatSnackBar, MatBottomSheet, MatBottomSheetRef } from '@angular/materia
 
 // UI Component
 import { OptionPopInComponent } from 'src/app/intranet/partage/option-pop-in/option-pop-in.component';
-import { HeaderComponent } from 'src/app/intranet/partage/header/header.component';
-import { SidenavComponent } from 'src/app/intranet/partage/sidenav/sidenav.component';
 
 // Service
 import { MediaService } from 'src/app/intranet/systeme/services/media.service';
+import { AuthService } from 'src/app/extranet/systeme/services/auth.service';
 
 @Component({
 	selector: 'app-liste-media',
@@ -19,10 +18,10 @@ import { MediaService } from 'src/app/intranet/systeme/services/media.service';
 })
 export class ListeMediaComponent implements OnInit {
 
-	constructor(public mediaService: MediaService, private bottomSheet: MatBottomSheet) { }
+	constructor(public mediaService: MediaService, private bottomSheet: MatBottomSheet, public authService: AuthService) { }
 
 	ngOnInit() {
-		
+		console.log(this.authService.userAuth);
 	}
 
 	/**

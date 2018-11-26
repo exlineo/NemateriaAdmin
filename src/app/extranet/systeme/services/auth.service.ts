@@ -16,6 +16,7 @@ import { UserModel } from "src/app/extranet/systeme/modeles/user.modele";
 export class AuthService {
 
 	auth: boolean = false;
+	userAuth: UserModel;
 	dataStorage: string = 'http://localhost:8080/api/';
 
 	constructor(private http: HttpClient, private router: Router, private notService: NotificationService) { }
@@ -38,6 +39,7 @@ export class AuthService {
 				let userData = data[0];
 				if (userData.pass == userObject.pass) {
 					this.auth = true;
+					this.userAuth = userData;
 					this.router.navigate(['medias']);
 				} else {
 					this.notService.openSnackBar('Mot de passe ou identifiant invalide', 'connexion');
