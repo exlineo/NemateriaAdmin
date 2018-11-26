@@ -1,28 +1,27 @@
+// Angular Library
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// Extern Library
+import { MaterialModule } from './library/material-module';
+
+// Rooting
 import { AppRoutingModule } from './app-routing.module';
+
+// Component
 import { AppComponent } from './app.component';
+import { ConnexionComponent } from './extranet/connexion/connexion.component';
+import { Erreur404Component } from './extranet/erreur/erreur404.component';
 
-import { AuthService } from "./systeme/services/auth.service";
-import { NotificationService } from "./systeme/services/notification.service";
-import { IntercepteurService } from "./systeme/services/intercepteur.service";
-
-import { ConnexionComponent } from './modules/connexion/connexion.component';
-import { InterfaceModule } from './modules/interface/interface.module';
-import { Erreur404Component } from './modules/erreur/erreur404.component';
+// Service
+import { AuthService } from "./extranet/systeme/services/auth.service";
+import { NotificationService } from "./extranet/systeme/services/notification.service";
+import { IntercepteurService } from "./extranet/systeme/services/intercepteur.service";
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		ConnexionComponent,
-		Erreur404Component
-	],
 	imports: [
 		BrowserModule,
 		HttpClientModule,
@@ -31,6 +30,11 @@ import { Erreur404Component } from './modules/erreur/erreur404.component';
 		MaterialModule,
 		FormsModule,
 		ReactiveFormsModule
+	],
+	declarations: [
+		AppComponent,
+		ConnexionComponent,
+		Erreur404Component
 	],
 	providers: [AuthService, NotificationService, { provide: HTTP_INTERCEPTORS, useClass: IntercepteurService, multi: true }],
 	bootstrap: [AppComponent]
