@@ -4,6 +4,6 @@ export interface UserModel {
     nom: string;
     email: string;
     pass: string;
-    created?: string;
-    updated?: string;
+    created?: number;
+    updated?: number;
 } 

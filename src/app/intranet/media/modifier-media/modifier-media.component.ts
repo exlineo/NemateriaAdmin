@@ -99,6 +99,7 @@ export class ModifierMediaComponent implements OnInit {
 			this.mediaModif.nom = this.mediaForm.value.nom;
 			this.mediaModif.description = this.mediaForm.value.description;
 			this.mediaModif.fichier = this.mediaForm.value.url;
+			this.mediaModif.updated = Date.now();
 
 			this.mediaService.updateMedia(this.mediaModif).subscribe(
 				() => {

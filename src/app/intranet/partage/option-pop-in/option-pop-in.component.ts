@@ -33,9 +33,6 @@ export class OptionPopInComponent {
 	openFiche(event: MouseEvent): void {
 		this.bottomSheetRef.dismiss();
 		event.preventDefault();
-
-		let root = 'home/ficheMedia/' + this.data.idMediaSelected;
-		window.location.assign(root);
 	}
 
 }

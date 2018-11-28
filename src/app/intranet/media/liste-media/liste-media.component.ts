@@ -21,7 +21,7 @@ export class ListeMediaComponent implements OnInit {
 	constructor(public mediaService: MediaService, private bottomSheet: MatBottomSheet, public authService: AuthService) { }
 
 	ngOnInit() {
-		console.log(this.authService.userAuth);
+		//console.log(this.authService.userAuth);
 	}
 
 	/**

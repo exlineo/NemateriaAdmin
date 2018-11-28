@@ -6,12 +6,14 @@
     </mat-toolbar>
     <section class="box mediaListe">
         <figure class="snip1543" *ngFor="let media of mediaService.initMedias">
-            <img src="{{media.img}}" alt="sample101" />
+            <img src="{{media.fichier}}" alt="sample101" />
             <figcaption>
-                <h3>{{media.name}}</h3>
-                <p>{{media.description}}</p>
+                <h3>{{media.nom}}</h3>
+                <p>{{media.dossier}}</p>
+                <p>{{media.created}}</p>
+                <p>{{media.description | slice:0:10}}</p>
             </figcaption>
-            <a (click)="openBottomSheet(media.id)"></a>
+            <a (click)="openBottomSheet(media._id)"></a>
         </figure>
     </section>
 </div>

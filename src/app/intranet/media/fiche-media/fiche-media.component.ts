@@ -64,7 +64,7 @@ export class FicheMediaComponent implements OnInit {
 				() => {
 					this.notService.openSnackBar('Le média à été supprimer.', 'serveur');
 					this.mediaService.initMedias.splice(this.mediaSelected._id, 1);
-					this.router.navigate(['interface/medias']);
+					this.router.navigate(['intranet/medias']);
 				},
 				error => {
 					console.warn(error);

@@ -5,6 +5,6 @@ export interface MediaModel {
     description: string;
     dossier: string;
     fichier: string;
-    created?: Date;
-    updated?: Date;
+    created?: Number;
+    updated?: Number;
 }

@@ -10,7 +10,7 @@ header {
 }
 
 .user-image {
-	background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+	background-image: url('http://localhost:4200/assets/img/profile.jpg');
 	background-size: cover;
 }
 

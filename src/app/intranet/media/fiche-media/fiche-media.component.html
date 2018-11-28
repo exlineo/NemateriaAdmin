@@ -8,15 +8,15 @@
 		<mat-card class="media-card">
 			<mat-card-header>
 				<div mat-card-avatar class="media-image"></div>
-				<mat-card-title>{{mediaSelected.name}}</mat-card-title>
+				<mat-card-title>{{mediaSelected.nom}}</mat-card-title>
 				<mat-card-subtitle>{{mediaSelected.type}}</mat-card-subtitle>
 			</mat-card-header>
-			<img mat-card-image src="{{mediaSelected.img}}" alt="Photo of a media">
+			<img mat-card-image src="{{mediaSelected.fichier}}" alt="Photo of a media">
 			<mat-card-content>
 				<p>{{mediaSelected.description}}</p>
 			</mat-card-content>
 			<mat-card-actions>
-				<button mat-button [routerLink]="['/medias/modifier',mediaSelected.id]" color="primary">Modifier</button>
+				<button mat-button [routerLink]="['/intranet/medias/modifier',mediaSelected._id]" color="primary">Modifier</button>
 				<button mat-button (click)="delete()" color="warn">Supprimer</button>
 			</mat-card-actions>
 		</mat-card>
