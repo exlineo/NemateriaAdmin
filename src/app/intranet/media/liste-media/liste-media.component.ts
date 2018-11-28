@@ -10,6 +10,7 @@ import { OptionPopInComponent } from 'src/app/intranet/partage/option-pop-in/opt
 // Service
 import { MediaService } from 'src/app/intranet/systeme/services/media.service';
 import { AuthService } from 'src/app/extranet/systeme/services/auth.service';
+import { MediaModel } from '../../systeme/modeles/media.modele';
 
 @Component({
 	selector: 'app-liste-media',
@@ -18,10 +19,24 @@ import { AuthService } from 'src/app/extranet/systeme/services/auth.service';
 })
 export class ListeMediaComponent implements OnInit {
 
+	showGrille: boolean = false;
+	showListe: boolean = true;
+	//*ngIf="formatListe" {{medias.selectedOptions.selected.length}}
+
 	constructor(public mediaService: MediaService, private bottomSheet: MatBottomSheet, public authService: AuthService) { }
 
 	ngOnInit() {
-		//console.log(this.authService.userAuth);
+		
+	}
+
+	changeFormat(format) {
+		if (format == 'grille') {
+			this.showGrille = true;
+			this.showListe = false;
+		} else {
+			this.showGrille = false;
+			this.showListe = true;
+		} 
 	}
 
 	/**
@@ -34,4 +49,18 @@ export class ListeMediaComponent implements OnInit {
 		});
 	}
 
+	onKey(filtre) {
+		if (filtre.length > 2) {
+			let filtreArray: Array<MediaModel> = [];
+			let saveArray: Array<MediaModel> = this.mediaService.initMedias;
+			for (let index = 0; index < saveArray.length; index++) {
+				if (saveArray[index].nom.search(filtre) != -1) {
+					filtreArray.push(saveArray[index]);
+				}
+			} 
+			this.mediaService.initMedias = filtreArray;
+		} else {
+			this.mediaService.loadAllMedias();
+		}
+	}
 }

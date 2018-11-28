@@ -32,15 +32,44 @@
 	background: #555;
 }
 
-.box {
-	margin-top: 20px;
-}
-
 /** liste **/
 
 .mediaListe {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.box {
+	margin-top: 62px;
+}
+
+.searchbox {
+    display: block;
+    position: absolute;
+	top: 92px;
+	left: 30px;
+}
+
+.mediaListe_option {
+	display: block;
+	position: absolute;
+	top: 114px;
+	left: 290px;
+}
+
+.formatOption {
+	display: block;
+	position: absolute;
+	top: 114px;
+	right: 50px;
+}
+
+.grilleOption {
+    padding-right: 20px;
+}
+
+.mediaListe_liste {
+  width: 80%
 }
 
 .snip1543 {
@@ -49,7 +78,7 @@
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 16px;
 	margin: 10px;
-	max-width: 315px;
+	max-width: 230px;
 	min-width: 230px;
 	max-height: 230px;
 	overflow: hidden;

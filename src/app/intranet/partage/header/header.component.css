@@ -27,3 +27,56 @@ header {
 	top: 3px;
 	right: 128px;
 }
+
+/* Item */
+
+.snip1452 {
+  position: relative;
+  font-size: 40px;
+  color: #e6e6e6;
+  width: 75px;
+  margin: 40px;
+  height: 75px;
+  line-height: 75px;
+  display: inline-block;
+  text-align: center;
+  -webkit-perspective: 50em;
+  perspective: 50em;
+  text-decoration: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.snip1452:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 2px solid #e6e6e6;
+  content: '';
+  z-index: -1;
+  border-radius: 50%;
+  -webkit-transform: rotateY(360deg);
+  transform: rotateY(360deg);
+}
+
+.snip1452:before,
+.snip1452:after {
+  -webkit-transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;
+}
+
+.snip1452:hover,
+.snip1452:active,
+.snip1452.hover {
+  color: #c0392b;
+}
+
+.snip1452:hover:after,
+.snip1452:active:after,
+.snip1452.hover:after {
+  border-color: #c0392b;
+  -webkit-transform: rotateY(0);
+  transform: rotateY(0);
+}

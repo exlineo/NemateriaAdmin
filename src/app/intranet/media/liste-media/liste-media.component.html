@@ -4,14 +4,35 @@
             <h1>Liste des Médias</h1>
         </mat-toolbar-row>
     </mat-toolbar>
-    <section class="box mediaListe">
+    <mat-form-field appearance="outline" class="searchbox">
+        <mat-label>Rechercher</mat-label>
+            <input matInput placeholder="Taper votre recherche" #filtre (keyup)="onKey(filtre.value)">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-radio-group class="formatOption">
+        <mat-radio-button value="1" (click)="changeFormat('grille')" class="grilleOption">Grille</mat-radio-button>
+        <mat-radio-button value="2" (click)="changeFormat('liste')" checked>Liste </mat-radio-button>
+    </mat-radio-group>
+    <div class="mediaListe_option">
+        <p>
+            Options selected: 
+        </p>
+    </div>
+    <section class="box mediaListe" *ngIf="showListe">
+        <mat-selection-list #medias class="mediaListe_liste">
+            <mat-list-option *ngFor="let media of mediaService.initMedias">
+                {{media.nom}}
+            </mat-list-option>
+        </mat-selection-list>
+    </section>
+    <section class="box mediaListe" *ngIf="showGrille">
         <figure class="snip1543" *ngFor="let media of mediaService.initMedias">
             <img src="{{media.fichier}}" alt="sample101" />
             <figcaption>
                 <h3>{{media.nom}}</h3>
-                <p>{{media.dossier}}</p>
-                <p>{{media.created}}</p>
-                <p>{{media.description | slice:0:10}}</p>
+                <p>Dossier: {{media.dossier}}</p>
+                <p>Création: {{media.created | date:'dd/MM/yy hh:mm'}}</p>
+                <p>Description: {{media.description | slice:0:10}}</p>
             </figcaption>
             <a (click)="openBottomSheet(media._id)"></a>
         </figure>

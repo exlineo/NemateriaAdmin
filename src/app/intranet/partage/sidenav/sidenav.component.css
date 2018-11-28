@@ -96,5 +96,9 @@ nav {
 }
 
 .nav-options {
-	padding-top: 200px;
+  padding-top: 200px;
+}
+
+.list_item {
+	height: 100px!important;
 }
