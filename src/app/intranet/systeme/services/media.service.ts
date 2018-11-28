@@ -38,7 +38,7 @@ export class MediaService {
 	 * @returns {Observable}
 	 */
 	updateMedia(media: MediaModel): Observable<MediaModel[]> {
-		return this.http.put<MediaModel[]>(this.dataStorage + 'medias/' + media.id, media);
+		return this.http.put<MediaModel[]>(this.dataStorage + 'medias/' + media._id, media);
 	}
 
 	/**
@@ -46,7 +46,7 @@ export class MediaService {
 	 * @returns {Observable}
 	 */
 	deleteMedia(media: MediaModel): Observable<MediaModel[]> {
-		return this.http.delete<MediaModel[]>(this.dataStorage + 'medias/' + media.id);
+		return this.http.delete<MediaModel[]>(this.dataStorage + 'medias/' + media._id);
 	}
 
 	/**

@@ -1,10 +1,10 @@
 export interface MediaModel {
-    id: number;
+    _id: number;
     type: string;
-    name: string;
-    directory: string;
-    img: string;
+    nom: string;
     description: string;
-    //created: Date;
-    //updated: Date;
+    dossier: string;
+    fichier: string;
+    created?: Date;
+    updated?: Date;
 }

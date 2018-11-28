@@ -20,6 +20,7 @@ import { Erreur404Component } from './extranet/erreur/erreur404.component';
 import { AuthService } from "./extranet/systeme/services/auth.service";
 import { NotificationService } from "./extranet/systeme/services/notification.service";
 import { IntercepteurService } from "./extranet/systeme/services/intercepteur.service";
+import { InscriptionComponent } from './extranet/inscription/inscription.component';
 
 @NgModule({
 	imports: [
@@ -34,7 +35,8 @@ import { IntercepteurService } from "./extranet/systeme/services/intercepteur.se
 	declarations: [
 		AppComponent,
 		ConnexionComponent,
-		Erreur404Component
+		Erreur404Component,
+		InscriptionComponent
 	],
 	providers: [AuthService, NotificationService, { provide: HTTP_INTERCEPTORS, useClass: IntercepteurService, multi: true }],
 	bootstrap: [AppComponent]

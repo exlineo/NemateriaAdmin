@@ -8,11 +8,13 @@ import { AuthguardGuard } from 'src/app/extranet/systeme/services/authguard.guar
 // Component
 import { ConnexionComponent } from './extranet/connexion/connexion.component';
 import { Erreur404Component } from './extranet/erreur/erreur404.component';
+import { InscriptionComponent } from './extranet/inscription/inscription.component';
 
 // Rooting
 const routes: Routes = [
 	{ path: '', component: ConnexionComponent },
 	{ path: 'connexion', component: ConnexionComponent },
+	{ path: 'inscription', component: InscriptionComponent },
 	{ path: 'intranet', loadChildren: "./intranet/intranet.module#IntranetModule", canLoad: [AuthguardGuard] },
 	{ path: '**', component: Erreur404Component },
 	{ path: '', redirectTo: '/', pathMatch: 'full' }

@@ -23,7 +23,7 @@ export class FicheMediaComponent implements OnInit {
 	constructor(private route: ActivatedRoute, private location: Location, public mediaService: MediaService, private notService: NotificationService, private router: Router) { }
 
 	ngOnInit() {
-		this.mediaSelected = { id: -1, type: 'NOTFOUND', name: 'NOTFOUND', directory: 'NOTFOUND', img: 'assets/img/default.jpg', description: 'NOTFOUND' };
+		this.mediaSelected = { _id: -1, type: 'NOTFOUND', nom: 'NOTFOUND', description: 'NOTFOUND', dossier: 'NOTFOUND', fichier: 'assets/img/default.jpg'};
 		this.getMediaSelected();
 	}
 
@@ -44,11 +44,11 @@ export class FicheMediaComponent implements OnInit {
 			this.mediaService.readAllMedia().subscribe(
 				data => {
 					this.mediaService.initMedias = data;
-					this.mediaSelected = this.mediaService.initMedias.find(media => media.id == this.getIdSelected());
+					this.mediaSelected = this.mediaService.initMedias.find(media => media._id == this.getIdSelected());
 				}
 			)
 		} else {
-			this.mediaSelected = this.mediaService.initMedias.find(media => media.id == this.getIdSelected());
+			this.mediaSelected = this.mediaService.initMedias.find(media => media._id == this.getIdSelected());
 		}
 	}
 
@@ -63,7 +63,7 @@ export class FicheMediaComponent implements OnInit {
 			this.mediaService.deleteMedia(this.mediaSelected).subscribe(
 				() => {
 					this.notService.openSnackBar('Le média à été supprimer.', 'serveur');
-					this.mediaService.initMedias.splice(this.mediaSelected.id, 1);
+					this.mediaService.initMedias.splice(this.mediaSelected._id, 1);
 					this.router.navigate(['interface/medias']);
 				},
 				error => {

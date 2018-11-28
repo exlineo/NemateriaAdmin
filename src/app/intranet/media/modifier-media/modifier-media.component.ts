@@ -25,22 +25,22 @@ export class ModifierMediaComponent implements OnInit {
 
 	ngOnInit() {
 		this.mediaModif = { 
-			id: -1, 
+			_id: -1, 
 			type: 'undefined', 
-			name: 'undefined', 
-			directory: 'undefined', 
-			img: 'assets/img/default.jpg', 
-			description: 'undefined' 
+			nom: 'undefined',
+			description: 'undefined', 
+			dossier: 'undefined', 
+			fichier: 'assets/img/default.jpg'
 		};
 		this.mediaForm = new FormGroup({
-			nom: new FormControl(this.mediaModif.name, [
+			nom: new FormControl(this.mediaModif.nom, [
 				Validators.required
 			]),
 			type: new FormControl({ value: this.mediaModif.type, disabled: true }),
 			description: new FormControl(this.mediaModif.description, [
 				Validators.required
 			]),
-			url: new FormControl(this.mediaModif.img)
+			url: new FormControl(this.mediaModif.fichier)
 		});
 		this.getMediaModif();
 	}
@@ -62,30 +62,30 @@ export class ModifierMediaComponent implements OnInit {
 			this.mediaService.readAllMedia().subscribe(
 				data => {
 					this.mediaService.initMedias = data;
-					this.mediaModif = this.mediaService.initMedias.find(media => media.id == this.getIdSelected());
+					this.mediaModif = this.mediaService.initMedias.find(media => media._id == this.getIdSelected());
 					this.mediaForm = new FormGroup({
-						nom: new FormControl(this.mediaModif.name, [
+						nom: new FormControl(this.mediaModif.nom, [
 							Validators.required
 						]),
 						type: new FormControl({ value: this.mediaModif.type, disabled: true }),
 						description: new FormControl(this.mediaModif.description, [
 							Validators.required
 						]),
-						url: new FormControl(this.mediaModif.img)
+						url: new FormControl(this.mediaModif.fichier)
 					});
 				}
 			)
 		} else {
-			this.mediaModif = this.mediaService.initMedias.find(media => media.id == this.getIdSelected());
+			this.mediaModif = this.mediaService.initMedias.find(media => media._id == this.getIdSelected());
 			this.mediaForm = new FormGroup({
-				nom: new FormControl(this.mediaModif.name, [
+				nom: new FormControl(this.mediaModif.nom, [
 					Validators.required
 				]),
 				type: new FormControl({ value: this.mediaModif.type, disabled: true }),
 				description: new FormControl(this.mediaModif.description, [
 					Validators.required
 				]),
-				url: new FormControl(this.mediaModif.img)
+				url: new FormControl(this.mediaModif.fichier)
 			});
 		}
 			
@@ -96,9 +96,9 @@ export class ModifierMediaComponent implements OnInit {
 	 */
 	save() {
 		if (this.mediaForm.valid) {
-			this.mediaModif.name = this.mediaForm.value.nom;
+			this.mediaModif.nom = this.mediaForm.value.nom;
 			this.mediaModif.description = this.mediaForm.value.description;
-			this.mediaModif.img = this.mediaForm.value.url;
+			this.mediaModif.fichier = this.mediaForm.value.url;
 
 			this.mediaService.updateMedia(this.mediaModif).subscribe(
 				() => {
@@ -119,14 +119,14 @@ export class ModifierMediaComponent implements OnInit {
 	 */
 	reset() {
 		this.mediaForm = new FormGroup({
-			nom: new FormControl(this.mediaModif.name, [
+			nom: new FormControl(this.mediaModif.nom, [
 				Validators.required
 			]),
 			type: new FormControl({ value: this.mediaModif.type, disabled: true }),
 			description: new FormControl(this.mediaModif.description, [
 				Validators.required
 			]),
-			url: new FormControl(this.mediaModif.img)
+			url: new FormControl(this.mediaModif.fichier)
 		});
 	}
 

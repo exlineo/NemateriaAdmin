@@ -1,0 +1,12 @@
+/* formulaire */
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+
+      background: white;
+}
+
+.formulaire>* {
+  width: 100%;
+}

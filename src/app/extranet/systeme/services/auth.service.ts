@@ -19,7 +19,9 @@ export class AuthService {
 	userAuth: UserModel;
 	dataStorage: string = 'http://localhost:8080/api/';
 
-	constructor(private http: HttpClient, private router: Router, private notService: NotificationService) { }
+	constructor(private http: HttpClient, private router: Router, private notService: NotificationService) { 
+		this.test();
+	}
 
 	/**
 	 * @method readUser() - Retourne un obs. d'un read de user
@@ -30,24 +32,60 @@ export class AuthService {
 	}
 
 	/**
+	 * @method readUser() - Retourne un obs. d'un read de user
+	 * @returns {Observable}
+	 */
+	createUser(newUser: UserModel): Observable<UserModel[]> {
+		return this.http.post<UserModel[]>(this.dataStorage + 'users/', newUser);
+	}
+
+	/**
 	 * @method authUser() - Authentifie un user en fct. d'un email et d'un mdp
 	 * @returns {Observable}
 	 */
 	authUser(userObject): void {
 		this.readUser(userObject.email).subscribe(
 			data => {
-				let userData = data[0];
-				if (userData.pass == userObject.pass) {
-					this.auth = true;
-					this.userAuth = userData;
-					this.router.navigate(['medias']);
+				if(data.length == 0) {
+					this.notService.openSnackBar('Votre identifiant est invalide ou vous n\'êtes pas encore inscrit.', 'serveur');
 				} else {
-					this.notService.openSnackBar('Mot de passe ou identifiant invalide', 'connexion');
+					let userData = data[0];
+					if (userData.pass == userObject.pass) {
+						this.auth = true;
+						this.userAuth = userData;
+						this.router.navigate(['intranet/medias']);
+						this.notService.openSnackBar('Bienvenu ' + userData.nom, 'connexion');
+					} else {
+						this.notService.openSnackBar('Mot de passe ou identifiant invalide', 'connexion');
+					}
 				}
 			},
 			error => {
 				this.notService.openSnackBar('Connexion au serveur impossible', 'connexion');
 			}
 		)
+	}
+
+	addUser(newUser: UserModel) {
+		
+		newUser._id = -1;
+		newUser.type = 'user';
+		newUser.created = Date.now();
+		newUser.updated = Date.now();
+
+		console.log(newUser);
+		this.createUser(newUser).subscribe(
+			data => {
+				this.notService.openSnackBar('Vous pouvez maintenant vous connecter', 'connexion');
+			},
+			error => {
+				console.warn(error)
+				this.notService.openSnackBar('Connexion au serveur impossible', 'connexion');
+			}
+		)
+	}
+
+	test() {
+		
 	}
 }

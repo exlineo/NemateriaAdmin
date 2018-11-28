@@ -6,6 +6,9 @@ import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '
 // Service
 import { AuthService } from "src/app/extranet/systeme/services/auth.service";
 import { NotificationService } from "src/app/extranet/systeme/services/notification.service";
+import { MatDialog } from '@angular/material';
+
+import { InscriptionComponent } from "src/app/extranet/inscription/inscription.component";
 
 @Component({
 	templateUrl: './connexion.component.html',
@@ -27,7 +30,12 @@ export class ConnexionComponent implements OnInit {
 		]),
 	});
 
-	constructor(private router: Router, public authService: AuthService, private notService: NotificationService) { }
+	constructor(
+		private router: Router, 
+		public authService: AuthService, 
+		private notService: NotificationService,
+		public dialog: MatDialog
+	) { }
 
 	ngOnInit() { 
 
@@ -41,4 +49,19 @@ export class ConnexionComponent implements OnInit {
 			this.authService.authUser(this.connexionForm.value);
 	}
 
+	/**
+	 * @method openDialog() - ouvre une pop in d'inscription
+	 * @param event l'event du lien à prevent
+	 */
+	openDialog(event): void {
+		event.preventDefault();
+		const dialogRef = this.dialog.open(InscriptionComponent, {
+			width: '550px',
+			data: { }
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log('The dialog was closed');
+		});
+	}
 }

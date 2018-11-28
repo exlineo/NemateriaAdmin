@@ -1,7 +1,9 @@
 export interface UserModel {
-    id: number;
+    _id: number;
     type: string;
-    name: string;
+    nom: string;
     email: string;
     pass: string;
-}
+    created?: number;
+    updated?: number;
+} 

@@ -23,12 +23,12 @@ export class AjouterMediaComponent implements OnInit {
 
   ngOnInit() {
     this.newMedia = {
-      id: -1,
+      _id: -1,
       type: 'undefined',
-      name: 'undefined',
-      directory: 'undefined',
-      img: 'assets/img/default.jpg',
-      description: 'undefined'
+      nom: 'undefined',
+      description: 'undefined',
+      dossier: 'assets/img/',
+      fichier: 'default.jpg'
     };
     this.mediaForm = new FormGroup({
       nom: new FormControl('', [
@@ -49,11 +49,11 @@ export class AjouterMediaComponent implements OnInit {
 	 */
   save() {
     if (this.mediaForm.valid) {
-      this.newMedia.id = this.mediaService.initMedias.length;
-      this.newMedia.name = this.mediaForm.value.nom;
+      this.newMedia._id = this.mediaService.initMedias.length;
+      this.newMedia.nom = this.mediaForm.value.nom;
       this.newMedia.type = this.mediaForm.value.type;
       this.newMedia.description = this.mediaForm.value.description;
-      this.newMedia.img = this.mediaForm.value.url;
+      this.newMedia.dossier = this.mediaForm.value.url;
 
       this.mediaService.createMedia(this.newMedia).subscribe(
         () => {
