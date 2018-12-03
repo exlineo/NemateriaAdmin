@@ -20,11 +20,11 @@ export class ConnexionComponent implements OnInit {
 	 * Instance du formulaire de connnexion 
 	 */
 	connexionForm = new FormGroup({
-		email: new FormControl('itsadeki@gmail.com', [
+		email: new FormControl('', [
 			Validators.required,
 			Validators.email,
 		]),
-		pass: new FormControl('itsadeki', [
+		pass: new FormControl('', [
 			Validators.required,
 			Validators.minLength(8)
 		]),
