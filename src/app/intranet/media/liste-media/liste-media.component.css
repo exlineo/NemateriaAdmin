@@ -32,11 +32,24 @@
 	background: #555;
 }
 
+/** selection **/
+
+.selection {
+	display: block;
+	position: absolute;
+	top: 114px;
+	right: 0;
+	width: 20%;
+	height: 100%;
+	border-left: 1px solid black;
+}
+
 /** liste **/
 
 .mediaListe {
 	display: flex;
 	flex-wrap: wrap;
+	width: 80%;
 }
 
 .box {
@@ -50,18 +63,11 @@
 	left: 30px;
 }
 
-.mediaListe_option {
-	display: block;
-	position: absolute;
-	top: 114px;
-	left: 290px;
-}
-
 .formatOption {
 	display: block;
 	position: absolute;
 	top: 114px;
-	right: 50px;
+	right: 25%;
 }
 
 .grilleOption {
@@ -69,8 +75,10 @@
 }
 
 .mediaListe_liste {
-  width: 80%
+  width: 100%
 }
+
+/* item grille */
 
 .snip1543 {
 	background-color: #fff;

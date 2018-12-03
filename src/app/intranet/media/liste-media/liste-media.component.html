@@ -13,14 +13,9 @@
         <mat-radio-button value="1" (click)="changeFormat('grille')" class="grilleOption">Grille</mat-radio-button>
         <mat-radio-button value="2" (click)="changeFormat('liste')" checked>Liste </mat-radio-button>
     </mat-radio-group>
-    <div class="mediaListe_option">
-        <p>
-            Options selected: 
-        </p>
-    </div>
     <section class="box mediaListe" *ngIf="showListe">
-        <mat-selection-list #medias class="mediaListe_liste">
-            <mat-list-option *ngFor="let media of mediaService.initMedias">
+        <mat-selection-list class="mediaListe_liste">
+            <mat-list-option *ngFor="let media of mediaService.initMedias" (click)="addSelection(media)">
                 {{media.nom}}
             </mat-list-option>
         </mat-selection-list>
@@ -34,7 +29,22 @@
                 <p>Création: {{media.created | date:'dd/MM/yy hh:mm'}}</p>
                 <p>Description: {{media.description | slice:0:10}}</p>
             </figcaption>
-            <a (click)="openBottomSheet(media._id)"></a>
+            <a (click)="addSelection(media)"></a>
         </figure>
+    </section>
+    <section class="selection">
+        <h2>{{this.selection.length}} médias séléctionnés</h2>
+        <hr>
+        <mat-action-list>
+            <button mat-button (click)="addCollection()">Creer une collection</button>
+            <button mat-button (click)="resetSelection()">Vider la selection</button>
+        </mat-action-list>
+        <hr>
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let media of this.selection" [selectable]="selectable" [removable]="removable" (removed)="removeSelection(media)">
+                {{media.nom}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
     </section>
 </div>
