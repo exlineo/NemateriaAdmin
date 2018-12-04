@@ -4,7 +4,7 @@
 			Inscription
 		</mat-card-title>
 		<mat-card-subtitle>
-			Quis autem vel eum
+			Merci de renseigner les champs du formulaire pour solliciter la création d'un utilisateur
 		</mat-card-subtitle>
 	</mat-card-header>
 	<mat-card-content>
@@ -18,13 +18,13 @@
 			<mat-form-field>
 				<input matInput placeholder="Votre email" formControlName="email">
 				<mat-error *ngIf="true">
-					Un email valide est <strong>obligatoire</strong>
+					Votre e-mail n'est pas <strong>valider</strong>, merci de le vérifier
 				</mat-error>
 			</mat-form-field>
 			<mat-form-field>
 				<input matInput placeholder="Votre mot de pass" formControlName="pass" type="password">
 				<mat-error *ngIf="true">
-					Un mot de passe valide est <strong>obligatoire</strong>
+					Merci de saisir un mot de passe d'au <strong>minimum huit lettres</strong>
 				</mat-error>
 			</mat-form-field>
 		</form>

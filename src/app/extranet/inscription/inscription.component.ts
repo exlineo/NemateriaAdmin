@@ -16,8 +16,7 @@ import { MatDialogRef } from '@angular/material';
 export class InscriptionComponent implements OnInit {
 	userForm = new FormGroup({
 		nom: new FormControl('', [
-			Validators.required,
-			Validators.email,
+			Validators.required
 		]),
 		email: new FormControl('', [
 			Validators.required,
