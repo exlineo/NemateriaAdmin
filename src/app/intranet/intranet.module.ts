@@ -1,7 +1,7 @@
 // Angular Library
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Extern Library
 import { MaterialModule } from 'src/app/library/material-module';
@@ -10,7 +10,8 @@ import { MaterialModule } from 'src/app/library/material-module';
 import { IntranetRootingModule } from "./intranet-routing.module";
 
 // Service
-import { MediaService } from 'src/app/intranet/systeme/services/media.service';
+//import { MediaService } from 'src/app/intranet/systeme/services/media.service';
+import { NoticeService } from 'src/app/intranet/systeme/services/notice.service';
 
 // Component
 import { HeaderComponent } from 'src/app/intranet/partage/header/header.component';
@@ -22,6 +23,11 @@ import { FicheMediaComponent } from "./media/fiche-media/fiche-media.component";
 import { AjouterMediaComponent } from "./media/ajouter-media/ajouter-media.component";
 import { ModifierMediaComponent } from './media/modifier-media/modifier-media.component';
 import { FicheProfileComponent } from "./profile/fiche-profile/fiche-profile.component";
+import { FiltrePipe } from './systeme/pipes/filtre.pipe';
+import { NoticeComponent } from './notice/notice.component';
+import { CollectionComponent } from './collection/collection.component';
+import { ScannerComponent } from './scanner/scanner.component';
+import { FiltreComponent } from './filtre/filtre.component';
 
 
 @NgModule({
@@ -29,9 +35,10 @@ import { FicheProfileComponent } from "./profile/fiche-profile/fiche-profile.com
 		CommonModule,
 		IntranetRootingModule,
 		MaterialModule,
+		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [MediaService],
+	providers: [NoticeService],
 	declarations: [
 		HeaderComponent,
 		SidenavComponent,
@@ -41,7 +48,12 @@ import { FicheProfileComponent } from "./profile/fiche-profile/fiche-profile.com
 		FicheMediaComponent,
 		AjouterMediaComponent,
 		ModifierMediaComponent,
-		FicheProfileComponent
+		FicheProfileComponent,
+		FiltrePipe,
+		NoticeComponent,
+		CollectionComponent,
+		ScannerComponent,
+		FiltreComponent
 	],
 	entryComponents: [OptionPopInComponent]
 })

@@ -1,0 +1,30 @@
+[{
+    "_id": 0,
+    "type": "img",
+    "nom": "default",
+    "description": "default",
+    "dossier": "assets/img/",
+    "fichier": "default.jpg",
+    "created": 0,
+    "updated": 0
+},
+{
+  "_id": 1,
+  "type": "img",
+  "nom": "profile",
+  "description": "profile",
+  "dossier": "assets/img/",
+  "fichier": "profile.jpg",
+  "created": 0,
+  "updated": 0
+},
+{
+  "_id": 2,
+  "type": "img",
+  "nom": "bgg",
+  "description": "bg",
+  "dossier": "assets/img/",
+  "fichier": "bg.jpg",
+  "created": 0,
+  "updated": 0
+}]

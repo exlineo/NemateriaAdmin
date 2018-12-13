@@ -44,6 +44,7 @@ export class AuthService {
 	 * @returns {Observable}
 	 */
 	authUser(userObject): void {
+		/*
 		this.readUser(userObject.email).subscribe(
 			data => {
 				if(data.length == 0) {
@@ -64,6 +65,10 @@ export class AuthService {
 				this.notService.openSnackBar('Connexion au serveur impossible', 'connexion');
 			}
 		)
+		*/
+		this.auth = true;
+		this.router.navigate(['intranet/notice']);
+		this.notService.openSnackBar('Bienvenu ' + userObject.email, 'connexion');
 	}
 
 	addUser(newUser: UserModel) {

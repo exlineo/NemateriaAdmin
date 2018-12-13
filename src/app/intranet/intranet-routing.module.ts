@@ -8,6 +8,11 @@ import { AuthguardGuard } from 'src/app/extranet/systeme/services/authguard.guar
 // Page Component
 import { InterfaceComponent } from 'src/app/intranet/partage/interface/interface.component';
 
+import { NoticeComponent } from './notice/notice.component';
+import { CollectionComponent } from './collection/collection.component';
+import { ScannerComponent } from './scanner/scanner.component';
+import { FiltreComponent } from './filtre/filtre.component';
+
 import { ListeMediaComponent } from "./media/liste-media/liste-media.component";
 import { FicheMediaComponent } from "./media/fiche-media/fiche-media.component";
 import { AjouterMediaComponent } from "./media/ajouter-media/ajouter-media.component";
@@ -18,6 +23,19 @@ import { FicheProfileComponent } from "./profile/fiche-profile/fiche-profile.com
 const routes: Routes = [
 	{
 		path: '', component: InterfaceComponent, children: [
+			{
+				path: 'notice', component: NoticeComponent
+			},
+			{
+				path: 'collection', component: CollectionComponent
+			},
+			{
+				path: 'scanner', component: ScannerComponent
+			},
+			{
+				path: 'filtre', component: FiltreComponent
+			}
+			/*
 			{
 				path: 'medias', component: ListeMediaComponent, canLoad: [AuthguardGuard]
 			},
@@ -33,6 +51,7 @@ const routes: Routes = [
 			{ 
 				path: 'profile', component: FicheProfileComponent, canLoad: [AuthguardGuard] 
 			},
+			*/
 		]
 	},
 ];
