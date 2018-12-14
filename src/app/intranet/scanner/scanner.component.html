@@ -1,102 +1,74 @@
 <header class="wrap">
-	<section class="profil">
-		<div class="profil-img-cptn">
-			<img src="assets/img/profile.jpg" alt="" class="profil-img-picto">
-		</div>
-		<span class="profil-title">
+    <section class="profil">
+        <div class="profil-img-cptn">
+            <img src="assets/img/profile.jpg" alt="" class="profil-img-picto">
+        </div>
+        <span class="profil-title">
 			Profil
 		</span>
-	</section>
+    </section>
 </header>
 
-<nav class="sidenav">
-	<a href="#" class="nav-btn" (click)="toggleMenu($event)">
-		M
-	</a>
-	<ul class="nav-list">
-		<li class="nav-item">
-			C
-			<a href="/intranet/collection" class="nav-open"></a>
-		</li>
-		<li class="nav-item">
-			N
-			<a href="/intranet/notice" class="nav-open"></a>
-		</li>
-		<li class="nav-item active">
-			S
-			<a href="/intranet/scanner" class="nav-open"></a>
-		</li>
-		<li class="nav-item">
-			F
-			<a href="/intranet/filtre" class="nav-open"></a>
-		</li>
-	</ul>
-</nav>
-
 <aside class="left-panel" [@openCloseMenu]="menuIsOpen ? 'open' : 'closed'">
-	<mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
-		<mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-			<li class="mat-tree-node">
-				<button mat-icon-button disabled></button>
-				{{node.filename}}:  {{node.type}}
-			</li>
-		</mat-tree-node>
+    <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+            <li class="mat-tree-node">
+                <button mat-icon-button disabled></button> {{node.filename}}: {{node.type}}
+            </li>
+        </mat-tree-node>
 
-		<mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
-			<li>
-				<div class="mat-tree-node">
-					<button mat-icon-button matTreeNodeToggle
-							[attr.aria-label]="'toggle ' + node.filename">
+        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+            <li>
+                <div class="mat-tree-node">
+                    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
 						<mat-icon class="mat-icon-rtl-mirror">
 							{{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
 						</mat-icon>
-					</button>
-					{{node.filename}}
-				</div>
-				<ul [class.download-tree-invisible]="!nestedTreeControl.isExpanded(node)">
-					<ng-container matTreeNodeOutlet></ng-container>
-				</ul>
-			</li>
-		</mat-nested-tree-node>
-	</mat-tree>
+					</button> {{node.filename}}
+                </div>
+                <ul [class.download-tree-invisible]="!nestedTreeControl.isExpanded(node)">
+                    <ng-container matTreeNodeOutlet></ng-container>
+                </ul>
+            </li>
+        </mat-nested-tree-node>
+    </mat-tree>
 </aside>
 
 <aside class="right-panel">
-	<a href="#" class="right-btn" (click)="toggleRightPanel($event)">
+    <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
 		R
 	</a>
-	<section class="selection" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
-		<h2>Liste des notices sélectionnées</h2>
-		<ul>
-			<li *ngFor="let notice of this.noticeSelection">
-				<mat-chip-list>
-					<mat-chip (removed)="noticeSelectionRemove(notice._id)">
-						{{notice.nom}}
-						<mat-icon matChipRemove>cancel</mat-icon>
-					</mat-chip>
-				</mat-chip-list>
-			</li>
-		</ul>
-	</section>
-	<section class="metadata" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
-		<h2>Métadonnées d’une notice sélectionnée</h2>
-		<article *ngIf="this.noticeAffiche">
-			<h3>{{this.noticeElement.nom}}</h3>
-			<p>
-				{{this.noticeElement.description}}<br>
-				{{this.noticeElement.dossier}}{{this.noticeElement.fichier}}
-			</p>
-		</article>
-	</section>
+    <section class="selection" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
+        <h2>Liste des notices sélectionnées</h2>
+        <ul>
+            <li *ngFor="let notice of this.noticeSelection">
+                <mat-chip-list>
+                    <mat-chip (removed)="noticeSelectionRemove(notice._id)">
+                        {{notice.nom}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+            </li>
+        </ul>
+    </section>
+    <section class="metadata" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
+        <h2>Métadonnées d’une notice sélectionnée</h2>
+        <article *ngIf="this.noticeAffiche">
+            <h3>{{this.noticeElement.nom}}</h3>
+            <p>
+                {{this.noticeElement.description}}<br> {{this.noticeElement.dossier}}{{this.noticeElement.fichier}}
+            </p>
+        </article>
+    </section>
 </aside>
 
 <div class="screen wrap">
-	<ul class="notice-liste">
-		<li class="notice-cptn" *ngFor="let notice of this.noticeListe">
-			<a href (click)="noticeOnClick($event, notice._id)" class="notice" title="{{notice.description}}">
-				<img src="{{notice.dossier}}/{{notice.fichier}}" alt="{{notice.description}}" class="notice-img">
-				<h2 class="not-title">{{notice.nom}}</h2>
-			</a>
-		</li>
-	</ul>
+    <ul class="notice-liste">
+        <li class="notice-cptn" *ngFor="let notice of this.noticeListe">
+            <a href (click)="noticeOnClick($event, notice._id)" class="notice" title="{{notice.description}}">
+                <img src="{{notice.dossier}}/{{notice.fichier}}" alt="{{notice.description}}" class="notice-img">
+                <h2 class="not-title">{{notice.nom}}</h2>
+            </a>
+        </li>
+    </ul>
 </div>

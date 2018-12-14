@@ -24,16 +24,16 @@ const routes: Routes = [
 	{
 		path: '', component: InterfaceComponent, children: [
 			{
-				path: 'notice', component: NoticeComponent
+				path: 'notices', component: NoticeComponent
 			},
 			{
-				path: 'collection', component: CollectionComponent
+				path: 'collections', component: CollectionComponent
 			},
 			{
 				path: 'scanner', component: ScannerComponent
 			},
 			{
-				path: 'filtre', component: FiltreComponent
+				path: 'filtres', component: FiltreComponent
 			}
 			/*
 			{

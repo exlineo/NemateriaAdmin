@@ -11,5 +11,8 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit() {
   }
+  toggleMenu(e){
+
+  }
 
 }

@@ -5,110 +5,40 @@
 */
 
 header {
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 64px;
-	height: 64px;
-
-	background-color: lightgrey;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 64px;
+    height: 64px;
+    background-color: lightgrey;
 }
 
 .profil {
-	display: flex;
-	position: absolute;
-	top: 16px;
-	right: 32px;
-	width: 100px;
-	height: 32px;
+    display: flex;
+    position: absolute;
+    top: 16px;
+    right: 32px;
+    width: 100px;
+    height: 32px;
 }
 
 .profil-img-cptn {
-	width: 32px;
-	height: 32px;
-
-	background-color: white;
-	border-radius: 50%;
-	overflow: hidden;
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .profil-img-picto {
-	width: 100%;
+    width: 100%;
 }
 
 .profil-title {
-	padding-left: 16px;
-	line-height: 30px;
+    padding-left: 16px;
+    line-height: 30px;
 }
 
-/*
-////////////////
-	sidenav
-////////////////
-*/
-
-.sidenav {
-	display: block;
-	position: relative;
-	z-index: 20;
-	top: 0;
-	left: 0;
-}
-
-.nav-btn {
-	display: block;
-	position: absolute;
-	z-index: 10;
-	top: 16px;
-	left: 16px;
-	width: 32px;
-	height: 32px;
-
-	font-size: 24px;
-	text-align: center;
-	line-height: 30px;
-	background-color: white;
-}
-
-.nav-list {
-	display: flex;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 64px;
-	height: 100vh;
-	padding: 128px 0 0 8px;
-	flex-direction: column;
-
-	background-color: grey;
-}
-
-.nav-item {
-	display: block;
-	position: relative;
-	width: 48px;
-	height: 48px;
-	margin-bottom: 8px;
-
-	font-size: 32px;
-	text-align: center;
-	line-height: 48px;
-	background-color: white;
-}
-
-.active {
-	background-color: yellow;
-}
-
-.nav-open {
-	display: block;
-	position: absolute;
-	z-index: 10;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
 
 /*
 ////////////////
@@ -117,18 +47,18 @@ header {
 */
 
 .screen {
-	display: block;
-	position: absolute;
-	top: 64px;
-	height: calc(100vh - 64px);
-
-	overflow: auto;
+    display: block;
+    position: absolute;
+    top: 64px;
+    height: calc(100vh - 64px);
+    overflow: auto;
 }
 
 .wrap {
-	width: calc(100vw - 528px);
-	left: 264px;
+    width: calc(100vw - 528px);
+    left: 264px;
 }
+
 
 /*
 ////////////////
@@ -137,20 +67,19 @@ header {
 */
 
 .left-panel {
-	display: block;
-	position: relative;
-	top: 0px;
-	left: 64px;
-	width: 200px;
-	height: 100vh;
-
-	background-color: lightgrey;
+    display: block;
+    position: relative;
+    top: 0px;
+    left: 64px;
+    width: 200px;
+    height: 100vh;
+    background-color: lightgrey;
 }
 
 .search-form-field {
-	position: absolute;
-	top: 64px; 
-	left: 8px;
+    position: absolute;
+    top: 64px;
+    left: 8px;
 }
 
 .right-panel {
@@ -162,13 +91,12 @@ header {
 
 .right-btn {
     display: block;
-	position: absolute;
-	z-index: 20;
+    position: absolute;
+    z-index: 20;
     top: 16px;
     right: 32px;
     width: 32px;
     height: 32px;
-
     font-size: 24px;
     text-align: center;
     line-height: 30px;
@@ -179,11 +107,10 @@ header {
     display: block;
     position: absolute;
     top: 0;
-	right: 0;
-	width: 264px;
-	height: 50vh;
+    right: 0;
+    width: 264px;
+    height: 50vh;
     padding: 100px 16px 16px 16px;
-
     background-color: lightgray;
 }
 
@@ -195,9 +122,9 @@ header {
     width: 264px;
     height: 50vh;
     padding: 16px 16px 16px 16px;
-
     background-color: grey;
 }
+
 
 /* notices */
 
@@ -205,7 +132,6 @@ header {
     display: flex;
     width: 100%;
     height: auto;
-
     flex-flow: row wrap;
 }
 
@@ -213,7 +139,6 @@ header {
     display: block;
     width: 50%;
     height: 300px;
-
     overflow: hidden;
 }
 
@@ -222,7 +147,6 @@ header {
     position: relative;
     width: 100%;
     height: 100%;
-
     transition: 1s;
 }
 
@@ -236,7 +160,6 @@ header {
     position: absolute;
     bottom: 64px;
     right: 64px;
-
-	font-size: 16px;
+    font-size: 16px;
     color: grey;
 }

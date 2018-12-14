@@ -1,4 +1,38 @@
-<nav>
+<nav class="sidenav">
+    <a href="#" class="nav-btn" (click)="toggleMenu($event)">
+		M
+	</a>
+    <ul class="nav-list">
+        <li class="nav-item">
+            C
+            <a href routerLink="/intranet/collections" class="nav-open"></a>
+        </li>
+        <li class="nav-item active">
+            N
+            <a href routerLink="/intranet/notices" class="nav-open"></a>
+        </li>
+        <li class="nav-item">
+            S
+            <a href routerLink="/intranet/scanner" class="nav-open"></a>
+        </li>
+        <li class="nav-item">
+            F
+            <a href routerLink="/intranet/filtres" class="nav-open"></a>
+        </li>
+    </ul>
+</nav>
+
+<aside class="left-panel" [@openCloseMenu]="menuIsOpen ? 'open' : 'closed'">
+    <!--<input type="text" [(ngModel)]="this.noticeFiltre">-->
+    <mat-form-field class="search-form-field">
+        <input matInput type="text" placeholder="Rechercher" [(ngModel)]="this.noticeFiltre">
+        <button mat-button *ngIf="this.noticeFiltre" matSuffix mat-icon-button aria-label="Clear" (click)="this.noticeFiltre=''">
+    		<mat-icon>close</mat-icon>
+  		</button>
+    </mat-form-field>
+</aside>
+
+<!-- <nav>
 	<div class="snip1222">
 		<div class="square">
 			<div></div>
@@ -20,4 +54,4 @@
 			</mat-list-item>
 		</mat-list>
 	</div>
-</nav>
+</nav> -->
