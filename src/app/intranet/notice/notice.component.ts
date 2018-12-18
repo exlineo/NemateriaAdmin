@@ -11,12 +11,12 @@ import { useAnimation, transition, trigger, style, animate, state } from '@angul
 	templateUrl: './notice.component.html',
 	styleUrls: ['./notice.component.css'],
 	animations: [
-		trigger('openCloseMenu', [
+		trigger('openCloseLeftPanel', [
 			state('open', style({
-				left: '64px'
+				width: '200px'
 			})),
 			state('closed', style({
-				left: '-136px'
+				width: '0'
 			})),
 			transition('open => closed', [
 				animate('0.5s')
@@ -27,10 +27,10 @@ import { useAnimation, transition, trigger, style, animate, state } from '@angul
 		]),
 		trigger('openCloseRightPanel', [
 			state('open', style({
-				right: '0'
+				width: '264px'
 			})),
 			state('closed', style({
-				right: '-264px'
+				width: '0'
 			})),
 			transition('open => closed', [
 				animate('0.5s')
@@ -49,7 +49,7 @@ export class NoticeComponent implements OnInit {
 	noticeAffiche: boolean = false;
 	noticeFiltre: string = '';
 
-	menuIsOpen = true;
+	leftPanelIsOpen = true;
 	rightPanelIsOpen = true;
 
 	constructor(public noticeService: NoticeService) { }
@@ -85,9 +85,9 @@ export class NoticeComponent implements OnInit {
 		}
 	}
 
-	toggleMenu($event): void {
+	toggleLeftPanel($event): void {
 		$event.preventDefault();
-		this.menuIsOpen = !this.menuIsOpen;
+		this.leftPanelIsOpen = !this.leftPanelIsOpen;
 	}
 
 	toggleRightPanel($event): void {

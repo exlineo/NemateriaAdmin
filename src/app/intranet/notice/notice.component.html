@@ -1,33 +1,35 @@
-<section>
-    <header class="wrap">
-        <section class="profil">
-            <div class="profil-img-cptn">
-                <img src="assets/img/profile.jpg" alt="" class="profil-img-picto">
-            </div>
-            <span class="profil-title">
-			Profil
-		</span>
-        </section>
-    </header>
-
-    <aside class="right-panel">
-        <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
-		R
-	</a>
-        <section class="selection" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
+<section class="screen">
+    <a href="#" class="left-btn" (click)="toggleLeftPanel($event)">
+        L
+    </a>
+    <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
+        <input type="text">
+    </aside>
+    <section class="content-panel">
+        <ul class="notice-liste">
+            <li class="notice-cptn" *ngFor="let notice of (this.noticeListe | filtre:noticeFiltre)">
+                <a href (click)="noticeOnClick($event, notice._id)" class="notice" [title]="notice.description">
+                    <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description" class="notice-img">
+                    <h2 class="not-title">{{notice.nom}}</h2>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
+        <section class="selection">
             <h2>Liste des notices sélectionnées</h2>
             <ul>
                 <li *ngFor="let notice of this.noticeSelection">
                     <mat-chip-list>
-                        <mat-chip (removed)="noticeSelectionRemove(notice._id)">
-                            {{notice.nom}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
+                    <mat-chip (removed)="noticeSelectionRemove(notice._id)">
+                        {{notice.nom}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
                     </mat-chip-list>
                 </li>
             </ul>
         </section>
-        <section class="metadata" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
+        <section class="metadata">
             <h2>Métadonnées d’une notice sélectionnée</h2>
             <article *ngIf="this.noticeAffiche">
                 <h3>{{this.noticeElement.nom}}</h3>
@@ -38,14 +40,7 @@
         </section>
     </aside>
 
-    <section class="screen wrap">
-        <ul class="notice-liste">
-            <li class="notice-cptn" *ngFor="let notice of (this.noticeListe | filtre:noticeFiltre)">
-                <a href (click)="noticeOnClick($event, notice._id)" class="notice" [title]="notice.description">
-                    <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description" class="notice-img">
-                    <h2 class="not-title">{{notice.nom}}</h2>
-                </a>
-            </li>
-        </ul>
-    </section>
+    <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
+        R
+    </a>
 </section>

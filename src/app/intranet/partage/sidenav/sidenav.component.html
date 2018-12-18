@@ -1,7 +1,4 @@
 <nav class="sidenav">
-    <a href="#" class="nav-btn" (click)="toggleMenu($event)">
-		M
-	</a>
     <ul class="nav-list">
         <li class="nav-item">
             C
@@ -21,37 +18,3 @@
         </li>
     </ul>
 </nav>
-
-<aside class="left-panel" [@openCloseMenu]="menuIsOpen ? 'open' : 'closed'">
-    <!--<input type="text" [(ngModel)]="this.noticeFiltre">-->
-    <mat-form-field class="search-form-field">
-        <input matInput type="text" placeholder="Rechercher" [(ngModel)]="this.noticeFiltre">
-        <button mat-button *ngIf="this.noticeFiltre" matSuffix mat-icon-button aria-label="Clear" (click)="this.noticeFiltre=''">
-    		<mat-icon>close</mat-icon>
-  		</button>
-    </mat-form-field>
-</aside>
-
-<!-- <nav>
-	<div class="snip1222">
-		<div class="square">
-			<div></div>
-		</div>
-		<h1>Nemateria</h1>
-		<h5>Quis autem vel eum</h5>
-	</div>
-	<div class="nav-options">
-		<mat-list role="list">
-			<mat-list-item role="listitem" class="list_item">
-				<button mat-fab class="nav-option" routerLink="/intranet/medias">
-					<mat-icon>assignment</mat-icon>
-				</button>
-			</mat-list-item>
-			<mat-list-item role="listitem">
-				<button mat-fab class="nav-option" routerLink="/intranet/medias/ajouter">
-					<mat-icon>plus_one</mat-icon>
-				</button>
-			</mat-list-item>
-		</mat-list>
-	</div>
-</nav> -->

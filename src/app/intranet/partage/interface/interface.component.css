@@ -1,0 +1,12 @@
+/*
+////////////////
+    interface
+////////////////
+*/
+
+main {
+    display: block;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}

@@ -1,15 +1,10 @@
 <header>
-	<button mat-fab class="user-option" [matMenuTriggerFor]="menu">
-		<mat-icon>account_circle</mat-icon>
-	</button>
-
-	<mat-menu #menu="matMenu">
-		<button mat-menu-item routerLink="/connexion">
-			<span>Deconnexion</span>
-			<!--<mat-icon>close</mat-icon>-->
-		</button>
-		<button mat-menu-item routerLink="/intranet/profile">
-			<span>Profile</span>
-		</button>
-	</mat-menu>
+	<section class="profil">
+		<div class="profil-img-cptn">
+			<img src="assets/img/profile.jpg" alt="" class="profil-img-picto">
+		</div>
+		<span class="profil-title">
+			Profil
+		</span>
+	</section>
 </header>
