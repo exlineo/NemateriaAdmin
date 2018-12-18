@@ -1,15 +1,59 @@
 import { Component, OnInit } from '@angular/core';
+import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
 
 @Component({
-  selector: 'app-collection',
-  templateUrl: './collection.component.html',
-  styleUrls: ['./collection.component.css']
+	selector: 'app-collection',
+	templateUrl: './collection.component.html',
+	styleUrls: ['./collection.component.css'],
+	animations: [
+		trigger('openCloseLeftPanel', [
+			state('open', style({
+				width: '200px'
+			})),
+			state('closed', style({
+				width: '0'
+			})),
+			transition('open => closed', [
+				animate('0.5s')
+			]),
+			transition('closed => open', [
+				animate('0.5s')
+			]),
+		]),
+		trigger('openCloseRightPanel', [
+			state('open', style({
+				width: '564px'
+			})),
+			state('closed', style({
+				width: '0'
+			})),
+			transition('open => closed', [
+				animate('0.5s')
+			]),
+			transition('closed => open', [
+				animate('0.5s')
+			]),
+		]),
+	],
 })
 export class CollectionComponent implements OnInit {
 
-  constructor() { }
+	leftPanelIsOpen = true;
+	rightPanelIsOpen = true;
 
-  ngOnInit() {
-  }
+	constructor() { }
 
+	ngOnInit() {
+	}
+
+
+	toggleLeftPanel($event): void {
+		$event.preventDefault();
+		this.leftPanelIsOpen = !this.leftPanelIsOpen;
+	}
+
+	toggleRightPanel($event): void {
+		$event.preventDefault();
+		this.rightPanelIsOpen = !this.rightPanelIsOpen;
+	}
 }

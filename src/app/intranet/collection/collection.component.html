@@ -1,21 +1,21 @@
-<section>
-    <header class="wrap">
-        <section class="profil">
-            <div class="profil-img-cptn">
-                <img src="assets/img/profile.jpg" alt="" class="profil-img-picto">
-            </div>
-            <span class="profil-title">
-			Profil
-		</span>
-        </section>
-    </header>
-
-    <aside class="right-panel">
-        <a href="#" class="right-btn">
-		R
-	</a>
+<section class="screen">
+    <a href="#" class="left-btn" (click)="toggleLeftPanel($event)">
+        L
+    </a>
+    <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
+        Liste des collections
+    </aside>
+    <section class="content-panel">
+        Informations sur la collection
+        cliquer sur modier pour faire apparaître le formulaire de modification
+    </section>
+    <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
         <section class="selection">
             Liste des notices sélectionnées
         </section>
     </aside>
+
+    <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
+        R
+    </a>
 </section>
