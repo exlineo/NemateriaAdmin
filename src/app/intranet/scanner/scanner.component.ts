@@ -115,12 +115,12 @@ export class FileDatabase {
 	styleUrls: ['./scanner.component.css'],
 	providers: [FileDatabase],
 	animations: [
-		trigger('openCloseMenu', [
+		trigger('openCloseLeftPanel', [
 			state('open', style({
-				left: '64px'
+				width: '200px'
 			})),
 			state('closed', style({
-				left: '-136px'
+				width: '0'
 			})),
 			transition('open => closed', [
 				animate('0.5s')
@@ -131,10 +131,10 @@ export class FileDatabase {
 		]),
 		trigger('openCloseRightPanel', [
 			state('open', style({
-				right: '0'
+				width: '264px'
 			})),
 			state('closed', style({
-				right: '-264px'
+				width: '0'
 			})),
 			transition('open => closed', [
 				animate('0.5s')
@@ -153,7 +153,7 @@ export class ScannerComponent implements OnInit {
 	noticeAffiche: boolean = false;
 	noticeFiltre: string = '';
 
-	menuIsOpen = true;
+	leftPanelIsOpen = true;
 	rightPanelIsOpen = true;
 
 	nestedTreeControl: NestedTreeControl<FileNode>;
@@ -201,9 +201,9 @@ export class ScannerComponent implements OnInit {
 		}
 	}
 
-	toggleMenu($event): void {
+	toggleLeftPanel($event): void {
 		$event.preventDefault();
-		this.menuIsOpen = !this.menuIsOpen;
+		this.leftPanelIsOpen = !this.leftPanelIsOpen;
 	}
 
 	toggleRightPanel($event): void {
