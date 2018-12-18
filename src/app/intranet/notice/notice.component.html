@@ -3,7 +3,11 @@
         L
     </a>
     <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
-        <input type="text">
+        <form class="left-form">
+            <mat-form-field class="left-full-width">
+                <input matInput placeholder="Rechercher" [(ngModel)]="this.noticeFiltre" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+        </form>
     </aside>
     <section class="content-panel">
         <ul class="notice-liste">
