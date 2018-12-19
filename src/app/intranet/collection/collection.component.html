@@ -3,15 +3,39 @@
         L
     </a>
     <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
-        Liste des collections
+        <h2>Liste des collections</h2>
+        <ul>
+            <li *ngFor="let collection of this.collectionListe">
+                <mat-chip-list>
+                    <mat-chip (click)="collectionOnClick(collection._id)">
+                        {{collection.nom}}
+                    </mat-chip>
+                </mat-chip-list>
+            </li>
+        </ul>
     </aside>
     <section class="content-panel">
-        Informations sur la collection
-        cliquer sur modifier pour faire apparaître le formulaire de modification
+        <h2>Informations sur la collection</h2>
+        <p>
+            cliquer sur modifier pour faire apparaître le formulaire de modification
+        </p>
+        <article *ngIf="this.collectionAffiche">
+        <h3>{{this.collectionElement.nom}}</h3>
+            <p>
+                {{this.collectionElement.description}}
+            </p>
+        </article>
     </section>
     <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
         <section class="selection">
-            Liste des notices sélectionnées
+            <ul class="notice-liste">
+                <li class="notice-cptn" *ngFor="let notice of this.noticeSelection">
+                    <a href (click)="noticeOnClick($event, notice._id)" class="notice" [title]="notice.description">
+                        <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description" class="notice-img">
+                        <h2 class="not-title">{{notice.nom}}</h2>
+                    </a>
+                </li>
+            </ul>
         </section>
     </aside>
 

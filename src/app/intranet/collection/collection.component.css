@@ -38,7 +38,7 @@
 
 .right-panel {
     display: block;
-    width: 564px;
+    width: 50%;
     height: 100%;
     flex-shrink: 0;
 
@@ -87,3 +87,48 @@
 	Collection
 ////////////////
 */
+
+/*
+////////////////
+	Notices
+////////////////
+*/
+
+.notice-liste {
+    display: flex;
+    height: auto;
+    width: 100%;
+    flex-flow: row wrap;
+}
+
+.notice-cptn {
+    display: block;
+    width: 50%;
+    height: 300px;
+
+    overflow: hidden;
+}
+
+.notice {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    transition: 1s;
+}
+
+.notice:hover {
+    background-color: grey;
+    transform: scale(1.1, 1.1);
+}
+
+.not-title {
+    display: block;
+    position: absolute;
+    bottom: 64px;
+    right: 64px;
+
+    color: black;
+    text-align: center;
+}

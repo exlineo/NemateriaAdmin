@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
+import { CollectionModel } from '../systeme/modeles/collection.modele';
+import { NoticeModel } from '../systeme/modeles/notice.modele';
+import { CollectionService } from '../systeme/services/collection.service';
 
 @Component({
 	selector: 'app-collection',
@@ -22,7 +25,7 @@ import { useAnimation, transition, trigger, style, animate, state } from '@angul
 		]),
 		trigger('openCloseRightPanel', [
 			state('open', style({
-				width: '564px'
+				width: '50%'
 			})),
 			state('closed', style({
 				width: '0'
@@ -38,12 +41,35 @@ import { useAnimation, transition, trigger, style, animate, state } from '@angul
 })
 export class CollectionComponent implements OnInit {
 
+	collectionListe: CollectionModel[] = [];
+	noticeSelection: NoticeModel[] = [];
+	collectionElement: CollectionModel;
+	collectionAffiche: boolean = false;
+
 	leftPanelIsOpen = true;
 	rightPanelIsOpen = true;
 
-	constructor() { }
+	constructor(public collectionService: CollectionService) { }
 
 	ngOnInit() {
+		this.collectionService.readCollections().subscribe(
+			data => {
+				this.collectionListe = data;
+				this.collectionOnClick(0);
+			}
+		);
+	}
+
+	collectionOnClick(idCollection): void {
+		this.collectionElement = this.collectionListe[idCollection];
+		this.noticeSelection = this.collectionElement.notices;
+		this.collectionAffiche = true;
+	}
+
+	noticeOnClick($event, idNotice): void {
+		$event.preventDefault();
+		
+		alert('yolo');
 	}
 
 
