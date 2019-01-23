@@ -4,18 +4,22 @@
   </a>
     <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
         <form class="left-form">
-            <mat-form-field class="left-full-width">
+            <mat-form-field>
                 <input matInput placeholder="Rechercher" [(ngModel)]="this.noticeFiltre" [ngModelOptions]="{standalone: true}">
             </mat-form-field>
         </form>
     </aside>
     <section class="content-panel">
         <ul class="notice-liste">
-            <li class="notice-cptn" *ngFor="let notice of (this.noticeListe | filtre:noticeFiltre)">
-                <a href (click)="noticeOnClick($event, notice._id)" class="notice" [title]="notice.description">
-                    <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description" class="notice-img">
-                    <h2 class="not-title">{{notice.nom}}</h2>
-                </a>
+            <li *ngFor="let notice of (this.noticeListe | filtre:noticeFiltre)" (click)="noticeOnClick($event, notice._id)" class="notice">
+                <div [style.backgroundImage]="'url('+ notice.dossier + '/' + notice.fichier +')'">
+                    <!-- <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description"> -->
+                    <div>
+                        <h2>{{notice.nom}}</h2>
+                        <p>{{notice.description}}</p>
+                    </div>
+                </div>
+
             </li>
         </ul>
     </section>

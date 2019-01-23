@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CONST } from '../systeme/const';
 import { NoticeService } from "../systeme/services/notice.service";
 import { NoticeModel } from "../systeme/modeles/notice.modele";
 import { FiltrePipe } from "../systeme/pipes/filtre.pipe";
@@ -13,30 +14,30 @@ import { useAnimation, transition, trigger, style, animate, state } from '@angul
 	animations: [
 		trigger('openCloseLeftPanel', [
 			state('open', style({
-				width: '200px'
+				width: CONST.lg
 			})),
 			state('closed', style({
 				width: '0'
 			})),
 			transition('open => closed', [
-				animate('0.5s')
+				animate(CONST.delai)
 			]),
 			transition('closed => open', [
-				animate('0.5s')
+				animate(CONST.delai)
 			]),
 		]),
 		trigger('openCloseRightPanel', [
 			state('open', style({
-				width: '264px'
+				width: CONST.ld
 			})),
 			state('closed', style({
 				width: '0'
 			})),
 			transition('open => closed', [
-				animate('0.5s')
+				animate(CONST.delai)
 			]),
 			transition('closed => open', [
-				animate('0.5s')
+				animate(CONST.delai)
 			]),
 		]),
 	],

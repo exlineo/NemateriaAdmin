@@ -18,22 +18,6 @@
     overflow: auto;
 }
 
-.left-panel {
-    display: block;
-    width: 200px;
-    height: 100%;
-    padding: 128px 16px;
-    flex-shrink: 0;
-    background-color: lightgrey;
-    overflow: hidden;
-}
-
-.left-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-}
-
 .left-full-width {
     width: 100%;
 }
@@ -90,33 +74,40 @@
     flex-flow: row wrap;
 }
 
-.notice-cptn {
-    display: block;
-    width: 50%;
-    height: 300px;
-    overflow: hidden;
-}
-
 .notice {
-    display: block;
-    position: relative;
+    margin: 0;
+    display: flex;
+    overflow: hidden;
+    width: 33.33%;
+    min-height: 200px;
+}
+
+.notice>div {
+    transition: .4s ease;
     width: 100%;
-    height: 100%;
-    transition: 1s;
+    display: flex;
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.notice:hover {
-    background-color: grey;
-    transform: scale(1.1, 1.1);
+.notice:hover>div {
+    transform: scale(1.1);
 }
 
-.not-title {
-    display: block;
-    position: absolute;
-    bottom: 64px;
-    right: 64px;
-    color: black;
-    text-align: center;
+.notice>div>div {
+    margin: 30% auto;
+    background: rgba(0, 0, 0, .8);
+    color: #FFF;
+    transition: all .4s ease;
+    padding: 10px;
+    opacity: 0;
+    border-radius: 10px;
+    display: flex;
+}
+
+.notice:hover>div>div {
+    opacity: 1;
 }
 
 
@@ -134,4 +125,16 @@
     height: 50%;
     padding: 16px 16px 16px 16px;
     background-color: grey;
+}
+
+@media (max-width: 1240px) {
+    .notice {
+        width: 50%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .notice {
+        width: 100%;
+    }
 }
