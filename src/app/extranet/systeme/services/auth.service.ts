@@ -66,9 +66,10 @@ export class AuthService {
 			}
 		)
 		*/
+		console.log("connexion");
 		this.auth = true;
-		this.router.navigate(['intranet/notice']);
-		this.notService.openSnackBar('Bienvenu ' + userObject.email, 'connexion');
+		this.router.navigate(['intranet/notices']);
+		this.notService.openSnackBar('Bienvenue ' + userObject.email, 'connexion');
 	}
 
 	addUser(newUser: UserModel) {

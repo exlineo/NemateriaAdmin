@@ -28,6 +28,9 @@ import { NoticeComponent } from './notice/notice.component';
 import { CollectionComponent } from './collection/collection.component';
 import { ScannerComponent } from './scanner/scanner.component';
 import { FiltreComponent } from './filtre/filtre.component';
+import { NoticesComponent } from './notices/notices.component';
+import { CollectionsComponent } from './collections/collections.component';
+import { FiltresComponent } from './filtres/filtres.component';
 
 
 @NgModule({
@@ -53,7 +56,10 @@ import { FiltreComponent } from './filtre/filtre.component';
 		NoticeComponent,
 		CollectionComponent,
 		ScannerComponent,
-		FiltreComponent
+		FiltreComponent,
+		NoticesComponent,
+		CollectionsComponent,
+		FiltresComponent
 	],
 	entryComponents: [OptionPopInComponent]
 })

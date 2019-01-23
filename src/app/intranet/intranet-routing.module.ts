@@ -19,21 +19,24 @@ import { AjouterMediaComponent } from "./media/ajouter-media/ajouter-media.compo
 import { ModifierMediaComponent } from './media/modifier-media/modifier-media.component';
 
 import { FicheProfileComponent } from "./profile/fiche-profile/fiche-profile.component";
+import { NoticesComponent } from './notices/notices.component';
+import { CollectionsComponent } from './collections/collections.component';
+import { FiltresComponent } from './filtres/filtres.component';
 
 const routes: Routes = [
 	{
 		path: '', component: InterfaceComponent, children: [
 			{
-				path: 'notices', component: NoticeComponent
+				path: 'notices', component:NoticesComponent
 			},
 			{
-				path: 'collections', component: CollectionComponent
+				path: 'collections', component: CollectionsComponent
 			},
 			{
 				path: 'scanner', component: ScannerComponent
 			},
 			{
-				path: 'filtres', component: FiltreComponent
+				path: 'filtres', component:FiltresComponent
 			}
 			/*
 			{
