@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  EventEmitter, Output  } from '@angular/core';
 
 import { CONST } from '../systeme/const';
 import { NoticeService } from "../systeme/services/notice.service";
@@ -50,8 +50,11 @@ export class NoticesComponent implements OnInit {
 	noticeAffiche: boolean = false;
 	noticeFiltre: string = '';
 
-	leftPanelIsOpen = true;
-	rightPanelIsOpen = true;
+	leftPanelIsOpen:boolean = true;
+	rightPanelIsOpen:boolean = true;
+
+	afficheNotice:boolean = false;
+	noticeSelectionnee:NoticeModel;
 
 	constructor(public noticeService: NoticeService) { }
 
@@ -62,16 +65,22 @@ export class NoticesComponent implements OnInit {
 			}
 		);
 	}
-
-	noticeOnClick($event, idNotice): void {
+	// Choisir une notice et la mettre dans la liste
+	noticeOnChoisi($event, idNotice): void {
 		$event.preventDefault();
 		this.noticeElement = this.noticeListe[idNotice];
 		if (this.noticeSelection.indexOf(this.noticeElement) == -1) {
 			this.noticeSelection.push(this.noticeElement);
 		}
+	}
+	// Afficher les infos d'une notice
+	noticeOnInfo($event, idNotice): void {
+		$event.preventDefault();
+		this.noticeElement = this.noticeListe[idNotice];
+		
 		this.noticeAffiche = true;
 	}
-
+	// Initialiser les sélections
 	noticeSelectionDump(): void {
 		this.noticeAffiche = false;
 		this.noticeSelection = [];
@@ -94,5 +103,12 @@ export class NoticesComponent implements OnInit {
 	toggleRightPanel($event): void {
 		$event.preventDefault();
 		this.rightPanelIsOpen = !this.rightPanelIsOpen;
+	}
+	/**
+	 * Masque la notice lorsqu'on clique sur le bouton pour la fermer
+	 * @param bool Booléen pour fermer la fenêtre (false)
+	 */
+	masqueNotice(bool:boolean){
+		this.afficheNotice = bool;
 	}
 }

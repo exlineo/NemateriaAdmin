@@ -5,8 +5,9 @@ export interface NoticeModel {
     description: string;
     dossier: string;
     fichier: string;
-    created: Number;
-    updated: Number;
+    created: number;
+    updated: number;
+    media?:string;
 }
 /**
  * @type Interface

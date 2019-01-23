@@ -22,11 +22,11 @@
     width: 100%;
 }
 
-.content-panel {
+section {
     display: block;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .right-panel {
@@ -67,7 +67,7 @@
 
 /* notices */
 
-.notice-liste {
+section>ul {
     display: flex;
     height: auto;
     width: 100%;
@@ -77,37 +77,56 @@
 .notice {
     margin: 0;
     display: flex;
+    flex-flow: row wrap;
     overflow: hidden;
     width: 33.33%;
-    min-height: 200px;
+    min-height: 300px;
+    color: #FFF;
 }
 
-.notice>div {
+.notice div:nth-child(1) {
     transition: .4s ease;
     width: 100%;
+    height: 100%;
     display: flex;
     background-position: 50%;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-.notice:hover>div {
+.notice:hover div:nth-child(1) {
     transform: scale(1.1);
 }
 
-.notice>div>div {
-    margin: 30% auto;
+.notice div:nth-child(1)>div {
+    margin: auto;
+    width: auto;
+    height: auto;
     background: rgba(0, 0, 0, .8);
-    color: #FFF;
     transition: all .4s ease;
     padding: 10px;
     opacity: 0;
     border-radius: 10px;
     display: flex;
+    flex-flow: row nowrap;
 }
 
-.notice:hover>div>div {
+.notice:hover div:nth-child(1)>div {
     opacity: 1;
+}
+
+.notice div:nth-child(1)>div mat-icon {
+    color: #FFF;
+}
+
+.notice div:nth-child(1)>div mat-icon:hover {
+    color: rgba(255, 255, 255, .7);
+}
+
+.notice div:nth-child(2) {
+    width: 100%;
+    margin-top: -80px;
+    padding: 0 20px;
 }
 
 

@@ -1,7 +1,8 @@
 <section class="screen">
-    <a href="#" class="left-btn" (click)="toggleLeftPanel($event)">
+    <mat-icon (click)="toggleLeftPanel($event)" class="left-btn">settings_ethernet</mat-icon>
+    <!-- <a href="#" class="left-btn" (click)="toggleLeftPanel($event)">
       L
-  </a>
+  </a> -->
     <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
         <form class="left-form">
             <mat-form-field>
@@ -9,17 +10,21 @@
             </mat-form-field>
         </form>
     </aside>
-    <section class="content-panel">
+    <section>
         <ul class="notice-liste">
-            <li *ngFor="let notice of (this.noticeListe | filtre:noticeFiltre)" (click)="noticeOnClick($event, notice._id)" class="notice">
+            <li *ngFor="let notice of (this.noticeListe | filtre:noticeFiltre)" class="notice">
                 <div [style.backgroundImage]="'url('+ notice.dossier + '/' + notice.fichier +')'">
                     <!-- <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description"> -->
                     <div>
-                        <h2>{{notice.nom}}</h2>
-                        <p>{{notice.description}}</p>
+                        <mat-icon (click)="afficheNotice = !afficheNotice">visibility</mat-icon>
+                        <mat-icon (click)="noticeOnChoisi($event, notice._id)">playlist_add</mat-icon>
+                        <mat-icon (click)="noticeOnInfo($event, notice._id)">info</mat-icon>
                     </div>
                 </div>
-
+                <div>
+                    <h2>{{notice.nom}}</h2>
+                    <p>{{notice.description}}</p>
+                </div>
             </li>
         </ul>
     </section>
@@ -47,8 +52,9 @@
             </article>
         </section>
     </aside>
-
-    <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
+    <mat-icon (click)="toggleRightPanel($event)" class="right-btn">settings_ethernet</mat-icon>
+    <!-- <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
       R
-  </a>
+  </a> -->
 </section>
+<app-notice *ngIf="afficheNotice" [notice]="noticeSelectionnee" (fermer)="masqueNotice($event)" class="unique"></app-notice>

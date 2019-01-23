@@ -383,6 +383,35 @@ aside>* {
 }
 
 
+/* AFFICHAGE DE LA NOTICE SELECTIONNEE */
+
+.unique {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    background: rgba(0, 0, 0, .8);
+    display: flex;
+    z-index: 99;
+}
+
+.unique section {
+    width: 75%;
+    background: #FFF;
+    margin: auto;
+}
+
+
+/* MISE EN FORME DES OBJECTS MATERIAL */
+
+mat-icon {
+    transition: .3s ease;
+    margin: 5px;
+    cursor: pointer;
+}
+
+
 /*
 ////////////////
    RESPONSIVE

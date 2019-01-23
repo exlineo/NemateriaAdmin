@@ -30,6 +30,9 @@ const routes: Routes = [
 				path: 'notices', component:NoticesComponent
 			},
 			{
+				path: 'notice/:id', component:NoticeComponent
+			},
+			{
 				path: 'collections', component: CollectionsComponent
 			},
 			{
