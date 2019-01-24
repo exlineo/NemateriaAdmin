@@ -6,6 +6,6 @@ export interface CollectionModel {
     nom: string;
     description: string;
     notices: Array<NoticeModel>;
-    created: Number;
-    updated: Number;
+    created: Date;
+    updated: Date;
 }

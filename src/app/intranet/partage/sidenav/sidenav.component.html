@@ -1,20 +1,24 @@
-<nav class="sidenav">
-    <ul class="nav-list">
-        <li class="nav-item">
-            C
-            <a href routerLink="/intranet/collections" class="nav-open"></a>
+<nav>
+    <ul>
+        <li>
+            <a routerLinkActive="active" routerLink="/intranet/collections" matTooltip="Accéder aux collections">
+                <mat-icon>grain</mat-icon>
+            </a>
         </li>
-        <li class="nav-item active">
-            N
-            <a href routerLink="/intranet/notices" class="nav-open"></a>
+        <li>
+            <a routerLinkActive="active" routerLink="/intranet/notices" matTooltip="Accéder aux notices">
+                <mat-icon>burst_mode</mat-icon>
+            </a>
         </li>
-        <li class="nav-item">
-            S
-            <a href routerLink="/intranet/scanner" class="nav-open"></a>
+        <li>
+            <a routerLinkActive="active" routerLink="/intranet/scanner" matTooltip="Scanner les dossiers pour constituer des collections">
+                <mat-icon>scanner</mat-icon>
+            </a>
         </li>
-        <li class="nav-item">
-            F
-            <a href routerLink="/intranet/filtres" class="nav-open"></a>
+        <li>
+            <a routerLinkActive="active" routerLink="/intranet/filtres" matTooltip="Créer des filtres dans les données">
+                <mat-icon>photo_filter</mat-icon>
+            </a>
         </li>
     </ul>
 </nav>

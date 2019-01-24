@@ -41,7 +41,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 				animate(CONST.delai)
 			]),
 		]),
-	],
+	]
 })
 export class NoticesComponent implements OnInit {
 

@@ -1,8 +1,5 @@
 <section class="screen">
     <mat-icon (click)="toggleLeftPanel($event)" class="left-btn">settings_ethernet</mat-icon>
-    <!-- <a href="#" class="left-btn" (click)="toggleLeftPanel($event)">
-      L
-  </a> -->
     <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
         <form class="left-form">
             <mat-form-field>
@@ -11,10 +8,6 @@
         </form>
     </aside>
     <section>
-        <header>
-            <mat-icon matTooltip="Sélectionner toutes les notices" (click)="noticesToutesChoisies()">select_all</mat-icon>
-            <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">clear_all</mat-icon>
-        </header>
         <ul class="notice-liste">
 
             <li *ngFor="let notice of (this.noticeListe | filtre:noticeFiltre)" class="notice">
@@ -40,8 +33,15 @@
         </ul>
     </section>
     <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
-        <section class="selection">
+        <section class="demi">
+            <header>
+                <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleRightPanel($event)">settings_ethernet</mat-icon>
+                <mat-icon matTooltip="Sélectionner toutes les notices" (click)="noticesToutesChoisies()">select_all</mat-icon>
+                <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">clear_all</mat-icon>
+                <mat-icon matTooltip="Créer une collection à partir de la sélection">playlist_add_check</mat-icon>
+            </header>
             <h2>Liste des notices sélectionnées</h2>
+
             <ul>
                 <li *ngFor="let notice of this.noticeSelection">
                     <mat-chip-list>
@@ -53,7 +53,7 @@
                 </li>
             </ul>
         </section>
-        <section class="metadata">
+        <section class="demi">
             <h2>Métadonnées d’une notice sélectionnée</h2>
             <article *ngIf="this.noticeAffiche">
                 <h3>{{this.noticeElement.nom}}</h3>
@@ -63,9 +63,5 @@
             </article>
         </section>
     </aside>
-    <mat-icon (click)="toggleRightPanel($event)" class="right-btn">settings_ethernet</mat-icon>
-    <!-- <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
-      R
-  </a> -->
 </section>
 <app-notice *ngIf="afficheDetailNotice" [notice]="noticeElement" (fermer)="masqueNotice($event)" class="unique"></app-notice>

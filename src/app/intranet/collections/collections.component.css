@@ -1,0 +1,14 @@
+.left-panel {
+    flex-grow: 1;
+    min-width: 150px;
+}
+
+section.screen>section {
+    flex-grow: 3;
+    min-width: 30%;
+}
+
+.right-panel {
+    flex-grow: 4;
+    min-width: 40%;
+}

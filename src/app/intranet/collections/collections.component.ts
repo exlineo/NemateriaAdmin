@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
+
+import { CONST } from '../systeme/const';
 import { CollectionModel } from '../systeme/modeles/collection.modele';
 import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { CollectionService } from '../systeme/services/collection.service';
@@ -8,36 +10,36 @@ import { CollectionService } from '../systeme/services/collection.service';
 	selector: 'app-collections',
 	templateUrl: './collections.component.html',
 	styleUrls: ['./collections.component.css'],
-	animations: [
-		trigger('openCloseLeftPanel', [
-			state('open', style({
-				width: '200px'
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate('0.5s')
-			]),
-			transition('closed => open', [
-				animate('0.5s')
-			]),
-		]),
-		trigger('openCloseRightPanel', [
-			state('open', style({
-				width: '50%'
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate('0.5s')
-			]),
-			transition('closed => open', [
-				animate('0.5s')
-			]),
-		]),
-	],
+	// animations: [
+	// 	trigger('openCloseLeftPanel', [
+	// 		state('open', style({
+	// 			width: CONST.lg
+	// 		})),
+	// 		state('closed', style({
+	// 			width: '0'
+	// 		})),
+	// 		transition('open => closed', [
+	// 			animate(CONST.delai)
+	// 		]),
+	// 		transition('closed => open', [
+	// 			animate(CONST.delai)
+	// 		]),
+	// 	]),
+	// 	trigger('openCloseRightPanel', [
+	// 		state('open', style({
+	// 			width: CONST.ld
+	// 		})),
+	// 		state('closed', style({
+	// 			width: '0'
+	// 		})),
+	// 		transition('open => closed', [
+	// 			animate(CONST.delai)
+	// 		]),
+	// 		transition('closed => open', [
+	// 			animate(CONST.delai)
+	// 		]),
+	// 	]),
+	// ]
 })
 export class CollectionsComponent implements OnInit {
 

@@ -53,8 +53,103 @@ footer {
     display: flex;
 }
 
+
+/*
+////////////////
+    interface
+////////////////
+*/
+
+main {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+main>div {
+    height: 100vh;
+}
+
+main div:nth-child(1) {
+    width: 64px;
+}
+
+main div:nth-child(2) {
+    margin-left: 64px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+/*
+////////////////
+    écrans de l'appli
+////////////////
+*/
+
+section.screen {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 64px;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+section.screen>section,
+section.screen>aside {
+    flex-flow: row wrap;
+    overflow-y: auto;
+}
+
+header {
+    width: 100%;
+}
+
 aside {
     padding: 0;
+}
+
+aside header {
+    margin-bottom: 10px;
+}
+
+aside header.right-panel {
+    justify-content: flex-end;
+}
+
+aside header.left-panel {
+    justify-content: flex-start;
+}
+
+aside .leftOpenClose {
+    position: absolute;
+    left: 10px;
+    z-index: 50;
+}
+
+aside .rightOpenClose {
+    position: absolute;
+    right: 10px;
+    z-index: 50;
+}
+
+section.demi {
+    flex-flow: row wrap;
+    height: 50% !important;
+    padding: 16px;
+}
+
+section.demi:nth-child(1) {
+    background-color: lightgray;
+}
+
+section.demi:nth-child(2) {
+    background-color: grey;
 }
 
 ul {
@@ -86,8 +181,6 @@ video {
 */
 
 aside.left-panel {
-    width: 200px;
-    height: 100%;
     flex-shrink: 0;
     background-color: lightgrey;
     overflow: hidden;

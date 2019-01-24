@@ -4,29 +4,7 @@
 ////////////////
 */
 
-.sidenav {
-    display: block;
-    position: relative;
-    z-index: 20;
-    top: 0;
-    left: 0;
-}
-
-.nav-btn {
-    display: block;
-    position: absolute;
-    z-index: 10;
-    top: 16px;
-    left: 16px;
-    width: 32px;
-    height: 32px;
-    font-size: 24px;
-    text-align: center;
-    line-height: 30px;
-    background-color: white;
-}
-
-.nav-list {
+nav ul {
     display: flex;
     position: absolute;
     top: 0;
@@ -38,28 +16,29 @@
     background-color: grey;
 }
 
-.nav-item {
-    display: block;
-    position: relative;
+nav li {
     width: 48px;
     height: 48px;
     margin-bottom: 8px;
-    font-size: 32px;
-    text-align: center;
-    line-height: 48px;
     background-color: white;
+}
+
+nav li a {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    transition: all .3s ease;
+}
+
+nav li a:hover {
+    background-color: orangered;
+}
+
+nav li mat-icon {
+    margin: auto;
+    display: block;
 }
 
 .active {
     background-color: yellow;
-}
-
-.nav-open {
-    display: block;
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
 }
