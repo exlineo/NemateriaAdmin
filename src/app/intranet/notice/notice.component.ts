@@ -17,12 +17,14 @@ export class NoticeComponent implements OnInit {
 
 	@Input()
 	notice: NoticeModel;
+	
 	@Output()
 	fermer = new EventEmitter<boolean>();
 
 	constructor(public noticeService: NoticeService) { }
 
 	ngOnInit() {
+		console.log(this.notice);
 		
 	}
 	masqueNotice(){

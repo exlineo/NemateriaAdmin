@@ -5,6 +5,7 @@ import { NoticeService } from "../systeme/services/notice.service";
 import { NoticeModel } from "../systeme/modeles/notice.modele";
 import { FiltrePipe } from "../systeme/pipes/filtre.pipe";
 import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
+import { forEach } from '@angular/router/src/utils/collection';
 //import { toggleLeft } from '../systeme/library/animation';
 
 @Component({
@@ -44,17 +45,16 @@ import { useAnimation, transition, trigger, style, animate, state } from '@angul
 })
 export class NoticesComponent implements OnInit {
 
-	noticeListe: NoticeModel[] = [];
-	noticeSelection: NoticeModel[] = [];
-	noticeElement: NoticeModel;
-	noticeAffiche: boolean = false;
+	noticeListe: NoticeModel[] = []; // Liste générale des notices à afficher / filter
+	noticeSelection: NoticeModel[] = []; // La liste des notices sélectionnées
+	noticeElement: NoticeModel; // La notice dont les infos sont affichées
+	noticeAffiche: boolean = false; // Affichers les infos rapides d'une notice
 	noticeFiltre: string = '';
 
 	leftPanelIsOpen:boolean = true;
 	rightPanelIsOpen:boolean = true;
 
-	afficheNotice:boolean = false;
-	noticeSelectionnee:NoticeModel;
+	afficheDetailNotice:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
 
 	constructor(public noticeService: NoticeService) { }
 
@@ -65,10 +65,18 @@ export class NoticesComponent implements OnInit {
 			}
 		);
 	}
+	// Afficher le composant avec le détail des infos sur la notice
+	noticeAfficheDetail($event, idNotice): void {
+		// $event.preventDefault();
+		this.noticeElement = this.noticeListe[idNotice];
+		this.afficheDetailNotice = !this.afficheDetailNotice;
+	}
+	
 	// Choisir une notice et la mettre dans la liste
 	noticeOnChoisi($event, idNotice): void {
 		$event.preventDefault();
 		this.noticeElement = this.noticeListe[idNotice];
+		this.noticeListe[idNotice].selected = true;
 		if (this.noticeSelection.indexOf(this.noticeElement) == -1) {
 			this.noticeSelection.push(this.noticeElement);
 		}
@@ -85,7 +93,10 @@ export class NoticesComponent implements OnInit {
 		this.noticeAffiche = false;
 		this.noticeSelection = [];
 	}
-
+	/**
+	 * Enlever une notice de la sélection
+	 * @param idNotice id de la notice à supprimer
+	 */
 	noticeSelectionRemove(idNotice): void {
 		for (let index = 0; index < this.noticeSelection.length; index++) {
 			let element = this.noticeSelection[index];
@@ -94,7 +105,28 @@ export class NoticesComponent implements OnInit {
 			}
 		}
 	}
-
+	/**
+	 * Ajouter toutes les notices à la sélection
+	 */
+	noticesToutesChoisies(): void {
+		this.noticeListe.forEach(
+			n =>{
+				n.selected = true;
+			}
+		)
+		this.noticeSelection = this.noticeListe;
+	}
+	/**
+	 * Ne sélectionner aucune notice
+	 */
+	noticesAucuneChoisie(): void {
+		this.noticeListe.forEach(
+			n =>{
+				n.selected = false;
+			}
+		)
+		this.noticeSelection = [];
+	}
 	toggleLeftPanel($event): void {
 		$event.preventDefault();
 		this.leftPanelIsOpen = !this.leftPanelIsOpen;
@@ -109,6 +141,6 @@ export class NoticesComponent implements OnInit {
 	 * @param bool Booléen pour fermer la fenêtre (false)
 	 */
 	masqueNotice(bool:boolean){
-		this.afficheNotice = bool;
+		this.afficheDetailNotice = bool;
 	}
 }

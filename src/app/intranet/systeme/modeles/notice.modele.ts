@@ -8,6 +8,7 @@ export interface NoticeModel {
     created: number;
     updated: number;
     media?:string;
+    selected?:boolean;
 }
 /**
  * @type Interface

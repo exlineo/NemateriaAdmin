@@ -84,11 +84,15 @@ section>ul {
     color: #FFF;
 }
 
+
+/* LES DIV DANS UNE NOTICE */
+
 .notice div:nth-child(1) {
     transition: .4s ease;
     width: 100%;
     height: 100%;
     display: flex;
+    flex-flow: row wrap;
     background-position: 50%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -98,7 +102,7 @@ section>ul {
     transform: scale(1.1);
 }
 
-.notice div:nth-child(1)>div {
+.notice div:nth-child(1) div:nth-child(1) {
     margin: auto;
     width: auto;
     height: auto;
@@ -111,22 +115,36 @@ section>ul {
     flex-flow: row nowrap;
 }
 
-.notice:hover div:nth-child(1)>div {
+.notice:hover div:nth-child(1) div:nth-child(1) {
     opacity: 1;
 }
 
-.notice div:nth-child(1)>div mat-icon {
+.notice div:nth-child(1) div:nth-child(1) mat-icon {
     color: #FFF;
 }
 
-.notice div:nth-child(1)>div mat-icon:hover {
+.notice div:nth-child(1) div:nth-child(1) mat-icon:hover {
     color: rgba(255, 255, 255, .7);
 }
 
 .notice div:nth-child(2) {
     width: 100%;
     margin-top: -80px;
-    padding: 0 20px;
+    padding-left: 20px;
+}
+
+.notice div:nth-child(2)>div {
+    float: right;
+}
+
+.notice div:nth-child(3) {
+    width: auto;
+    height: auto;
+    margin-top: -50px;
+    padding: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-self: end;
 }
 
 

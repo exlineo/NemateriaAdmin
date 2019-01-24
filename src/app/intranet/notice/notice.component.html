@@ -1,9 +1,14 @@
 <section>
     <mat-icon (click)="fermer.emit(false)">close</mat-icon>
     <header>
-        <img [src]="notice.media" />
+        <!-- <img [src]="notice.media" /> -->
     </header>
-    <article>
 
+    <article>
+        <h2>Métadonnées d’une notice sélectionnée</h2>
+        <h3>{{notice.nom}}</h3>
+        <p>
+            {{notice.description}}<br> {{notice.dossier}}{{notice.fichier}}
+        </p>
     </article>
 </section>
