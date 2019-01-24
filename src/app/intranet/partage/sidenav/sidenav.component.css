@@ -26,6 +26,7 @@ nav li {
 nav li a {
     width: 48px;
     height: 48px;
+    color: #000;
     display: flex;
     transition: all .3s ease;
 }

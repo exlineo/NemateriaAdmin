@@ -1,42 +1,66 @@
 <section class="screen">
-    <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed' ">
+    <!-- <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed' "> -->
+    <aside class="left-panel">
         <header>
             <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleLeftPanel($event)">settings_ethernet</mat-icon>
+            <h2>Collections disponibles</h2>
         </header>
-        <h2>Liste des collections</h2>
         <ul>
-            <li *ngFor="let collection of this.collectionListe ">
-                <mat-chip-list>
-                    <mat-chip (click)="collectionOnClick(collection._id) ">
-                        {{collection.nom}}
-                    </mat-chip>
-                </mat-chip-list>
+            <li *ngFor="let collection of this.collectionListe" (click)="collectionOnClick(collection._id) ">
+                {{collection.nom}}
+                <!-- <mat-icon matTooltip="Afficher les séries" *ngIf="collection.series" (click)="toggleSeries('series_'+collection._id)">keyboard_arrow_down</mat-icon> -->
+
             </li>
         </ul>
     </aside>
     <section>
-        <h2>Informations sur la collection</h2>
-        <p>
-            cliquer sur modifier pour faire apparaître le formulaire de modification
-        </p>
+        <header>
+            <mat-icon matTooltip="Modifier la collection">edit</mat-icon>
+            <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
+            <h2>Informations sur la collection</h2>
+        </header>
         <article>
-            <h3>{{this.collectionElement.nom}}</h3>
+            <h3>{{collec.nom}}</h3>
+            <p>Type : {{collec.type}}</p>
             <p>
-                {{this.collectionElement.description}}
+                {{collec.description}}
             </p>
         </article>
+        <article>
+            <mat-icon matTooltip="Ajouter une série à la collection">playlist_add</mat-icon>
+            <h3>Séries de la collection</h3>
+            <ul *ngIf="collec.series">
+                <li *ngFor="let serie of collec.series">
+                    {{serie}}
+                </li>
+            </ul>
+        </article>
     </section>
-    <aside class="right-panel " [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed' ">
+    <!-- <aside class="right-panel " [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed' "> -->
+    <aside class="right-panel">
         <header>
             <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleRightPanel($event)">settings_ethernet</mat-icon>
         </header>
         <section class="selection ">
-            <ul class="notice-liste ">
-                <li class="notice-cptn " *ngFor="let notice of this.noticeSelection ">
-                    <a href (click)="noticeOnClick($event, notice._id) " class="notice " [title]="notice.description ">
-                        <img [src]="notice.dossier+ '/'+notice.fichier " [alt]="notice.description " class="notice-img ">
-                        <h2 class="not-title ">{{notice.nom}}</h2>
-                    </a>
+            <ul class="notice-liste">
+
+                <li *ngFor="let notice of (noticeListe | filtre:filtreSerie)" class="notice">
+                    <div [style.backgroundImage]="'url('+ notice.dossier + '/' + notice.fichier +')'">
+                        <div>
+                            <mat-icon (click)="noticeAfficheDetail($event, notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
+                            <mat-icon (click)="noticeOnChoisi($event, notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
+                            <mat-icon (click)="noticeOnInfo($event, notice._id)" matTooltip="Informations synthétiques sur la notice">info</mat-icon>
+                            <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>{{notice.nom}}</h3>
+                        <p>{{notice.description}}</p>
+                        <div>
+                            <mat-icon *ngIf="notice.selected">check_circle</mat-icon>
+                            <mat-icon *ngIf="!notice.selected">check_circle_outline</mat-icon>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </section>

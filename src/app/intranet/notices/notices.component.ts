@@ -12,36 +12,36 @@ import { forEach } from '@angular/router/src/utils/collection';
 	selector: 'app-notices',
 	templateUrl: './notices.component.html',
 	styleUrls: ['./notices.component.css'],
-	animations: [
-		trigger('openCloseLeftPanel', [
-			state('open', style({
-				width: CONST.lg
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate(CONST.delai)
-			]),
-			transition('closed => open', [
-				animate(CONST.delai)
-			]),
-		]),
-		trigger('openCloseRightPanel', [
-			state('open', style({
-				width: CONST.ld
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate(CONST.delai)
-			]),
-			transition('closed => open', [
-				animate(CONST.delai)
-			]),
-		]),
-	]
+	// animations: [
+	// 	trigger('openCloseLeftPanel', [
+	// 		state('open', style({
+	// 			width: CONST.lg
+	// 		})),
+	// 		state('closed', style({
+	// 			width: '0'
+	// 		})),
+	// 		transition('open => closed', [
+	// 			animate(CONST.delai)
+	// 		]),
+	// 		transition('closed => open', [
+	// 			animate(CONST.delai)
+	// 		]),
+	// 	]),
+	// 	trigger('openCloseRightPanel', [
+	// 		state('open', style({
+	// 			width: CONST.ld
+	// 		})),
+	// 		state('closed', style({
+	// 			width: '0'
+	// 		})),
+	// 		transition('open => closed', [
+	// 			animate(CONST.delai)
+	// 		]),
+	// 		transition('closed => open', [
+	// 			animate(CONST.delai)
+	// 		]),
+	// 	]),
+	// ]
 })
 export class NoticesComponent implements OnInit {
 
