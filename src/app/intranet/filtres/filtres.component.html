@@ -1,22 +1,58 @@
 <section class="screen">
-    <a href="#" class="left-btn" (click)="toggleLeftPanel($event)">
-      L
-  </a>
-    <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
-        Liste des filtres
+    <!-- <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed' "> -->
+    <aside class="left-panel">
+        <header>
+            <h2>Filtres disponibles</h2>
+            <mat-icon matTooltip="Ajouter un filtre">playlist_add</mat-icon>
+            <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleLeftPanel($event)">settings_ethernet</mat-icon>
+        </header>
+        <ul>
+
+            <li *ngFor="let filtre of this.filtresListe" (click)="collectionOnClick(filtre._id) ">
+                {{filtre.nom}}
+            </li>
+        </ul>
     </aside>
-
-    <section class="content-panel">
-        Informations sur le filtre cliquer sur modifier pour faire apparaître le formulaire de modification
+    <section>
+        <header>
+            <div>
+                <mat-icon matTooltip="Modifier la collection">edit</mat-icon>
+                <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
+            </div>
+            <h2>Détails sur le filtre</h2>
+        </header>
+        <article>
+            <h3>{{filtre.nom}}</h3>
+            <p>Type : {{filtre.type}}</p>
+            <p>{{filtre.description}}</p>
+        </article>
     </section>
+    <aside class="right-panel">
+        <header>
+            <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleRightPanel($event)">settings_ethernet</mat-icon>
+        </header>
+        <section class="selection ">
+            <ul class="notice-liste">
 
-    <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
-        <section class="selection">
-            Liste des notices sélectionnées
+                <li *ngFor="let notice of (noticeListe | filtre:filtreSerie)" class="notice">
+                    <div [style.backgroundImage]="'url('+ notice.dossier + '/' + notice.fichier +')'">
+                        <div>
+                            <mat-icon (click)="noticeAfficheDetail($event, notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
+                            <mat-icon (click)="noticeOnChoisi($event, notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
+                            <mat-icon (click)="noticeOnInfo($event, notice._id)" matTooltip="Informations synthétiques sur la notice">info</mat-icon>
+                            <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>{{notice.nom}}</h3>
+                        <p>{{notice.description}}</p>
+                        <div>
+                            <mat-icon *ngIf="notice.selected">check_circle</mat-icon>
+                            <mat-icon *ngIf="!notice.selected">check_circle_outline</mat-icon>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </section>
     </aside>
-
-    <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
-      R
-  </a>
 </section>

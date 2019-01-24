@@ -1,3 +1,11 @@
+section.screen section {
+    padding: 10px 15px;
+}
+
+section.screen section header>div {
+    float: right;
+}
+
 .left-panel {
     flex-grow: 1;
     min-width: 150px;

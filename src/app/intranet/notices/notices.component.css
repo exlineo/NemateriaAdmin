@@ -13,7 +13,6 @@
 
 .right-panel {
     display: block;
-    width: 264px;
     height: 100%;
     flex-shrink: 0;
     overflow: hidden;

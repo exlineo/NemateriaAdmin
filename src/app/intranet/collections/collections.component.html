@@ -2,10 +2,12 @@
     <!-- <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed' "> -->
     <aside class="left-panel">
         <header>
-            <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleLeftPanel($event)">settings_ethernet</mat-icon>
             <h2>Collections disponibles</h2>
+            <mat-icon matTooltip="Ajouter une collection">playlist_add</mat-icon>
+            <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleLeftPanel($event)">settings_ethernet</mat-icon>
         </header>
         <ul>
+
             <li *ngFor="let collection of this.collectionListe" (click)="collectionOnClick(collection._id) ">
                 {{collection.nom}}
                 <!-- <mat-icon matTooltip="Afficher les séries" *ngIf="collection.series" (click)="toggleSeries('series_'+collection._id)">keyboard_arrow_down</mat-icon> -->
@@ -15,8 +17,10 @@
     </aside>
     <section>
         <header>
-            <mat-icon matTooltip="Modifier la collection">edit</mat-icon>
-            <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
+            <div>
+                <mat-icon matTooltip="Modifier la collection">edit</mat-icon>
+                <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
+            </div>
             <h2>Informations sur la collection</h2>
         </header>
         <article>
