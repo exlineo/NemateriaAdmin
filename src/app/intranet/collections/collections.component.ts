@@ -46,7 +46,19 @@ export class CollectionsComponent implements OnInit {
 	collectionListe: CollectionModel[] = []; // Liste de toutes les collections
 	noticeListe: NoticeModel[] = []; // Liste des notices d'une sélection
 	notice:NoticeModel;
-	collec: CollectionModel; // La collection sélectionnée à afficher
+	collec: CollectionModel={
+		_id: '',
+		titre: '',
+		alias: '',
+		description: '',
+		type: '',
+		createur: '',
+		fond: '',
+		langue: '',
+		groupe:[],
+		notices:[],
+		series:[],
+	}; // La collection sélectionnée à afficher
 	collectionAffiche: boolean = false;
 
 	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série
@@ -54,22 +66,18 @@ export class CollectionsComponent implements OnInit {
 	leftPanelIsOpen = true; // Etat d'ouverture du panneau de gauche
 	rightPanelIsOpen = true; // Etat d'ouverture du panneau de droite
 
-	constructor(public collectionService: CollectionService, private rendu:Renderer2) { }
+	constructor(public colServ: CollectionService, private rendu:Renderer2) { }
 
 	ngOnInit() {
-		this.collectionService.readCollections().subscribe(
-			data => {
-				this.collectionListe = data;
-				this.collectionOnClick(0);
-			}
-		);
+		this.collec = this.colServ.collections[0];
 	}
 	/**
 	 * Afficher le détail d'une collection
 	 * @param idCollection Id de la collection à afficher
 	 */
-	collectionOnClick(idCollection): void {
-		this.collec = this.collectionListe[idCollection];
+	collectionOnClick(index, idCollection): void {
+		this.collec = this.colServ.collections[index];
+		console.log(this.collec);
 		this.noticeListe = this.collec.notices;
 		this.collectionAffiche = true;
 	}

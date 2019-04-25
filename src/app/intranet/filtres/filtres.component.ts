@@ -28,12 +28,7 @@ export class FiltresComponent implements OnInit {
 	constructor(public collectionService: CollectionService, private rendu:Renderer2) { }
 
 	ngOnInit() {
-		this.collectionService.readCollections().subscribe(
-			data => {
-				this.collectionListe = data;
-				this.collectionOnClick(0);
-			}
-		);
+		
 	}
 	/**
 	 * Afficher le détail d'une collection

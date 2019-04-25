@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthguardGuard } from 'src/app/extranet/systeme/services/authguard.guard';
 
 // Page Component
-import { InterfaceComponent } from 'src/app/intranet/partage/interface/interface.component';
+import { InterfaceComponent } from './partage/interface/interface.component';
 
 import { NoticeComponent } from './notice/notice.component';
 import { CollectionComponent } from './collection/collection.component';

@@ -6,42 +6,42 @@ import { NoticeModel } from "../systeme/modeles/notice.modele";
 import { FiltrePipe } from "../systeme/pipes/filtre.pipe";
 import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
 import { forEach } from '@angular/router/src/utils/collection';
-//import { toggleLeft } from '../systeme/library/animation';
+import { toggleLeft } from '../systeme/library/animation';
 
 @Component({
 	selector: 'app-notices',
 	templateUrl: './notices.component.html',
 	styleUrls: ['./notices.component.css'],
-	// animations: [
-	// 	trigger('openCloseLeftPanel', [
-	// 		state('open', style({
-	// 			width: CONST.lg
-	// 		})),
-	// 		state('closed', style({
-	// 			width: '0'
-	// 		})),
-	// 		transition('open => closed', [
-	// 			animate(CONST.delai)
-	// 		]),
-	// 		transition('closed => open', [
-	// 			animate(CONST.delai)
-	// 		]),
-	// 	]),
-	// 	trigger('openCloseRightPanel', [
-	// 		state('open', style({
-	// 			width: CONST.ld
-	// 		})),
-	// 		state('closed', style({
-	// 			width: '0'
-	// 		})),
-	// 		transition('open => closed', [
-	// 			animate(CONST.delai)
-	// 		]),
-	// 		transition('closed => open', [
-	// 			animate(CONST.delai)
-	// 		]),
-	// 	]),
-	// ]
+	animations: [
+		trigger('openCloseLeftPanel', [
+			state('open', style({
+				width: CONST.lg
+			})),
+			state('closed', style({
+				width: '0'
+			})),
+			transition('open => closed', [
+				animate(CONST.delai)
+			]),
+			transition('closed => open', [
+				animate(CONST.delai)
+			]),
+		]),
+		trigger('openCloseRightPanel', [
+			state('open', style({
+				width: CONST.ld
+			})),
+			state('closed', style({
+				width: '0'
+			})),
+			transition('open => closed', [
+				animate(CONST.delai)
+			]),
+			transition('closed => open', [
+				animate(CONST.delai)
+			]),
+		]),
+	]
 })
 export class NoticesComponent implements OnInit {
 

@@ -5,10 +5,10 @@
     <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
         <h2>Liste des collections</h2>
         <ul>
-            <li *ngFor="let collection of this.collectionListe">
+            <li *ngFor="let col of colServ.collections">
                 <mat-chip-list>
-                    <mat-chip (click)="collectionOnClick(collection._id)">
-                        {{collection.nom}}
+                    <mat-chip (click)="collectionOnClick(col._id)">
+                        {{col.nom}}
                     </mat-chip>
                 </mat-chip-list>
             </li>
@@ -20,7 +20,7 @@
             cliquer sur modifier pour faire apparaître le formulaire de modification
         </p>
         <article *ngIf="this.collectionAffiche">
-        <h3>{{this.collectionElement.nom}}</h3>
+            <h3>{{this.collectionElement.nom}}</h3>
             <p>
                 {{this.collectionElement.description}}
             </p>

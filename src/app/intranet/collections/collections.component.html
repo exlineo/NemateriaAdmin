@@ -8,10 +8,9 @@
         </header>
         <ul>
 
-            <li *ngFor="let collection of this.collectionListe" (click)="collectionOnClick(collection._id) ">
-                {{collection.nom}}
+            <li *ngFor="let collection of colServ.collections; let i=index" (click)="collectionOnClick(i, collection._id) ">
+                {{collection.titre}} ({{ collection.alias }})
                 <!-- <mat-icon matTooltip="Afficher les séries" *ngIf="collection.series" (click)="toggleSeries('series_'+collection._id)">keyboard_arrow_down</mat-icon> -->
-
             </li>
         </ul>
     </aside>
@@ -23,17 +22,17 @@
             </div>
             <h2>Informations sur la collection</h2>
         </header>
-        <article>
-            <h3>{{collec.nom}}</h3>
+        <article *ngIf="collec">
+            <h3>{{collec.titre}}</h3>
+            <p>Alias : {{ collec.alias }}</p>
             <p>Type : {{collec.type}}</p>
-            <p>
-                {{collec.description}}
-            </p>
+            <p>{{collec.description}}</p>
         </article>
         <article>
             <mat-icon matTooltip="Ajouter une série à la collection">playlist_add</mat-icon>
             <h3>Séries de la collection</h3>
-            <ul *ngIf="collec.series">
+            {{collec.series?.length}}
+            <ul *ngIf="collec.series.length > 0">
                 <li *ngFor="let serie of collec.series">
                     {{serie}}
                 </li>

@@ -49,15 +49,10 @@ export class CollectionComponent implements OnInit {
 	leftPanelIsOpen = true;
 	rightPanelIsOpen = true;
 
-	constructor(public collectionService: CollectionService) { }
+	constructor(public colServ: CollectionService) { }
 
 	ngOnInit() {
-		this.collectionService.readCollections().subscribe(
-			data => {
-				this.collectionListe = data;
-				this.collectionOnClick(0);
-			}
-		);
+		
 	}
 
 	collectionOnClick(idCollection): void {

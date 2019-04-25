@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CollectionService } from '../../systeme/services/collection.service';
 
 @Component({
 	selector: 'app-interface',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InterfaceComponent implements OnInit {
 
-	constructor() { }
+	constructor(public colServ:CollectionService) { }
 
 	ngOnInit() {
 		
