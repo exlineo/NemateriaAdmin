@@ -31,6 +31,9 @@ import { FiltreComponent } from './filtre/filtre.component';
 import { NoticesComponent } from './notices/notices.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { FiltresComponent } from './filtres/filtres.component';
+import { MappagesComponent } from './mappages/mappages.component';
+import { MappageComponent } from './mappage/mappage.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 
 @NgModule({
@@ -59,7 +62,10 @@ import { FiltresComponent } from './filtres/filtres.component';
 		FiltreComponent,
 		NoticesComponent,
 		CollectionsComponent,
-		FiltresComponent
+		FiltresComponent,
+		MappagesComponent,
+		MappageComponent,
+		AccueilComponent
 	],
 	entryComponents: [OptionPopInComponent]
 })

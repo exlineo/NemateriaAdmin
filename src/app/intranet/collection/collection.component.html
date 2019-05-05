@@ -1,45 +1,23 @@
-<section class="screen">
-    <a href="#" class="left-btn" (click)="toggleLeftPanel($event)">
-        L
-    </a>
-    <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
-        <h2>Liste des collections</h2>
-        <ul>
-            <li *ngFor="let col of colServ.collections">
-                <mat-chip-list>
-                    <mat-chip (click)="collectionOnClick(col._id)">
-                        {{col.nom}}
-                    </mat-chip>
-                </mat-chip-list>
-            </li>
-        </ul>
-    </aside>
+<section class="colonnes">
+    <header>
+        <h2>{{ collection.titre }}</h2>
+        <mat-icon matTooltip="Modifier la collection" (click)="afficheMaj()">edit</mat-icon>
+    </header>
     <section class="content-panel">
         <h2>Informations sur la collection</h2>
         <p>
             cliquer sur modifier pour faire apparaître le formulaire de modification
         </p>
-        <article *ngIf="this.collectionAffiche">
-            <h3>{{this.collectionElement.nom}}</h3>
+        <article>
+            <h3>{{this.collection.nom}}</h3>
             <p>
-                {{this.collectionElement.description}}
+                {{this.collection.description}}
             </p>
         </article>
     </section>
-    <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
-        <section class="selection">
-            <ul class="notice-liste">
-                <li class="notice-cptn" *ngFor="let notice of this.noticeSelection">
-                    <a href (click)="noticeOnClick($event, notice._id)" class="notice" [title]="notice.description">
-                        <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description" class="notice-img">
-                        <h2 class="not-title">{{notice.nom}}</h2>
-                    </a>
-                </li>
-            </ul>
-        </section>
-    </aside>
-
-    <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
-        R
-    </a>
+    <section>
+        <form (submit)='majCollection()'>
+            
+        </form>
+    </section>
 </section>

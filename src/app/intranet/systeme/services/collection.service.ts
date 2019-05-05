@@ -14,6 +14,7 @@ export class CollectionService {
 	// dataStorage: string = 'assets/dataStorage/';
 
 	collections: Array<CollectionModel>;
+	collection:CollectionModel;
 
 	constructor(private http: HttpClient) {
 		this.getCollections();
@@ -27,6 +28,26 @@ export class CollectionService {
 			data => {
 				console.log(data);
 				this.collections = data;
+			}
+		)
+	}
+	/**
+	 * Mise à jour d'une collection
+	 */
+	majCollection(id){
+		this.http.put(SERV+'collections', this.collection).subscribe(
+			retour => {
+				console.log(retour);
+			}
+		)
+	}
+	/**
+	 * Ajouter une collection
+	 */
+	ajouteCollection(){
+		this.http.post(SERV+'collections', this.collection).subscribe(
+			retour => {
+				console.log(retour);
 			}
 		)
 	}

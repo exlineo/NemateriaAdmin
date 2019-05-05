@@ -59,6 +59,7 @@ export class CollectionsComponent implements OnInit {
 		notices:[],
 		series:[],
 	}; // La collection sélectionnée à afficher
+	
 	collectionAffiche: boolean = false;
 
 	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série

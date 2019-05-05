@@ -22,42 +22,22 @@ import { FicheProfileComponent } from "./profile/fiche-profile/fiche-profile.com
 import { NoticesComponent } from './notices/notices.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { FiltresComponent } from './filtres/filtres.component';
+import { MappagesComponent } from './mappages/mappages.component';
+import { MappageComponent } from './mappage/mappage.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 const routes: Routes = [
 	{
 		path: '', component: InterfaceComponent, children: [
-			{
-				path: 'notices', component:NoticesComponent
-			},
-			{
-				path: 'notice/:id', component:NoticeComponent
-			},
-			{
-				path: 'collections', component: CollectionsComponent
-			},
-			{
-				path: 'scanner', component: ScannerComponent
-			},
-			{
-				path: 'filtres', component:FiltresComponent
-			}
-			/*
-			{
-				path: 'medias', component: ListeMediaComponent, canLoad: [AuthguardGuard]
-			},
-			{ 
-				path: 'medias/afficher/:id', component: FicheMediaComponent, canLoad: [AuthguardGuard] 
-			},
-			{ 
-				path: 'medias/modifier/:id', component: ModifierMediaComponent, canLoad: [AuthguardGuard] 
-			},
-			{ 
-				path: 'medias/ajouter', component: AjouterMediaComponent, canLoad: [AuthguardGuard] 
-			},
-			{ 
-				path: 'profile', component: FicheProfileComponent, canLoad: [AuthguardGuard] 
-			},
-			*/
+			{ path: '', component:AccueilComponent },
+			{ path: 'notices', component:NoticesComponent },
+			{ path: 'notice/:id', component:NoticeComponent},
+			{ path: 'collections', component: CollectionsComponent },
+			{ path: 'scanner', component: ScannerComponent },
+			{ path: 'mappages', component: MappagesComponent },
+			{ path: 'mappage/:id', component: MappageComponent },
+			{ path: 'filtres', component:FiltresComponent },
+			{ path: 'filtre/:id', component:FiltresComponent }
 		]
 	},
 ];
