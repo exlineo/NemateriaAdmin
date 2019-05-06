@@ -1,94 +1,120 @@
 export interface NoticeModel {
     _id: number;
-    type: string;
-    nom: string;
+    idUnique: string;
+    titre: string;
     description: string;
-    dossier: string;
-    fichier: string;
-    created: number;
-    updated: number;
-    media?:string;
-    selected?:boolean;
+    motsCles: Array<string>;
+    uri:string;
+    referenceOriginal: string;
+    auteurs?: Array<PersonneModele>;
+    informateur?: InformateurModele;
+    auteurDescription?:PersonneModele;
+    localisation?: LocalisationModele;
+    contenu?: ContenuModele;
+    relations?: RelationsModele;
+    originaux?: OriginauxModele;
+    droits?: DroitsModele;
+    gestionCollection?: GestionCollectionModele;
+    sequences?: SequencesModele;
 }
 /**
  * @type Interface
  * Modèle Informateur intégré dans les métadonnées des notices
  */
-export interface InformateurModel{
-    nom:string;
-    pseudonyme?:string;
-    dateNaissance?:Date;
-    competence?:string;
+export interface PersonneModele {
+    _id?: number;
+    nom: string;
+    prenom?:string;
+    role?: string;
+    genre?:"";
+    raisonSociale?: string;
 }
+export interface InformateurModele {
+    _id?: number;
+    nom: string;
+    prenom?:string;
+    pseudo?: string;
+    anneeNaissance?:string;
+    caracteristique?:string;
+} 
 /**
  * @type Interface
  * Modèle des localisations des notices
  */
-export interface LocalisationModel{
+export interface LocalisationModele{
     pays:string;
-    codepostal?:string;
+    codePostal?:string;
     departement?:string;
-    region?:string;
     commune?:string;
     lieudit?:string;
-    gpsll?:Array<number>;
+    gps?:GPSModele;
 }
-/**
- * @type Interface
- * Modèle des contenus des notices
- */
-export interface RelationsModel{
-    langues?:Array<string>;
+
+export interface GPSModele{
+    lattitude:number;
+    longitude:number
+}
+
+export interface ContenuModele{
+    langue?:string;
     lieu?:string;
     temps?:string;
     type?:string;
     notes?:string;
 }
-/**
- * @type Interface
- * Modèle de description des notices
- */
-export interface DocumentModel{
-    idunique:string;
-    reference:string;
-    dateCreation:Date;
-    nature:string;
-    caracteristique?:string;
-    formatMaster?:string;
-    dateNumerisation:Date;
-    accessibilite:Array<number>;
+
+export interface RelationsModele {
+    idCollection?:number;
+    idSerie?:number;
+    ordre?:number;
+    contient?:"",
+    requiert?:Array<number>;
+    liensInternes?:Array<string>;
+    liensExternes?:Array<string>;
+
+}
+
+export interface OriginauxModele {
+    dateCreation?: string,
+    dateNumerisation?: string,
+    nature?: string,
+    caracteristique?: string,
+    formatMaster?: string,
+    accessibilite?: 0
 }
 /**
  * @type Interface
  * Modèle définition des droits des notices
  */
-export interface DroitsModel{
-    participants:Array<string>;
-    proprietaireOriginaux?:string;
-    conservateurOriginaux:Date;
-    nature:string;
+export interface DroitsModele {
+    editeur: string;
+    licence: string;
+    copyright: string;
+    urlLicence: string;
+    participants: Array<PersonneModele>;
+    producteur: Array<PersonneModele>;
 }
 /**
  * @type Interface
  * Modèle de qui gère la collection physique des notices
  */
-export interface GestionCollectionModel{
-    numerise:Array<string>;
-    proprietaireOriginaux?:string;
-    conservateurOriginaux:Date;
-    conservateurFichiers?:string;
-    detenteurDroits?:string;
-    gestionnaireDroits?:string;
+export interface GestionCollectionModele {
+    numerise?: Array<PersonneModele>;
+    proprietaireOriginaux?: string;
+    conservateurOriginaux?: string;
+    conservateurFichiers?: string;
+    detenteurDroits?: string;
+    gestionnaireDroits?: string;
 }
 /**
  * @type Interface
  * Modèle de gestion des séquences des notices
  */
-export interface SequencesModel{
-    numero:Array<string>;
-    debut:number;
-    duree:number;
-    resume?:string;
-    motsCles?:string;
-    evenements?:Array<number>;
+export interface SequencesModele {
+    numero: number;
+    debut: number;
+    duree: number;
+    resume?: string;
+    motsCles?: string;
+    evenements?: Array<number>;
 }
