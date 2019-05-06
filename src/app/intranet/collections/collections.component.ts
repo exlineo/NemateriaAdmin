@@ -9,43 +9,15 @@ import { CollectionService } from '../systeme/services/collection.service';
 @Component({
 	selector: 'app-collections',
 	templateUrl: './collections.component.html',
-	styleUrls: ['./collections.component.css'],
-	// animations: [
-	// 	trigger('openCloseLeftPanel', [
-	// 		state('open', style({
-	// 			width: CONST.lg
-	// 		})),
-	// 		state('closed', style({
-	// 			width: '0'
-	// 		})),
-	// 		transition('open => closed', [
-	// 			animate(CONST.delai)
-	// 		]),
-	// 		transition('closed => open', [
-	// 			animate(CONST.delai)
-	// 		]),
-	// 	]),
-	// 	trigger('openCloseRightPanel', [
-	// 		state('open', style({
-	// 			width: CONST.ld
-	// 		})),
-	// 		state('closed', style({
-	// 			width: '0'
-	// 		})),
-	// 		transition('open => closed', [
-	// 			animate(CONST.delai)
-	// 		]),
-	// 		transition('closed => open', [
-	// 			animate(CONST.delai)
-	// 		]),
-	// 	]),
-	// ]
+	styleUrls: ['./collections.component.css']
 })
 export class CollectionsComponent implements OnInit {
 
 	collectionListe: CollectionModel[] = []; // Liste de toutes les collections
+	
 	noticeListe: NoticeModel[] = []; // Liste des notices d'une sélection
 	notice:NoticeModel;
+	
 	collec: CollectionModel={
 		_id: '',
 		titre: '',
@@ -60,12 +32,9 @@ export class CollectionsComponent implements OnInit {
 		series:[],
 	}; // La collection sélectionnée à afficher
 	
-	collectionAffiche: boolean = false;
+	afficheDetailCollec: boolean = false;
 
 	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série
-
-	leftPanelIsOpen = true; // Etat d'ouverture du panneau de gauche
-	rightPanelIsOpen = true; // Etat d'ouverture du panneau de droite
 
 	constructor(public colServ: CollectionService, private rendu:Renderer2) { }
 
@@ -80,37 +49,10 @@ export class CollectionsComponent implements OnInit {
 		this.collec = this.colServ.collections[index];
 		console.log(this.collec);
 		this.noticeListe = this.collec.notices;
-		this.collectionAffiche = true;
 	}
 	noticeOnClick($event, idNotice): void {
 		$event.preventDefault();
 		alert('yolo');
-	}
-
-	/**
-	 * Ouvrir ou fermer le panneau de gauche
-	 * @param $event Evénement du clic
-	 */
-	toggleLeftPanel($event): void {
-		$event.preventDefault();
-		this.leftPanelIsOpen = !this.leftPanelIsOpen;
-	}
-	/**
-	 * Ouvrir ou fermer le panneau de droite
-	 * @param $event Evénement du clic
-	 */
-	toggleRightPanel($event): void {
-		$event.preventDefault();
-		this.rightPanelIsOpen = !this.rightPanelIsOpen;
-	}
-	/**
-	 * Afficher ou fermer une élément HTML
-	 * @param id Id de l'élément HTML a afficher
-	 */
-	toggleSeries(id){
-		let series = document.querySelector('#'+id);
-		console.log(series);
-		series.classList.toggle('ferme');
 	}
 
 	/* INTERACTIONS AVEC LES NOTICES */
@@ -136,5 +78,9 @@ export class CollectionsComponent implements OnInit {
 		this.notice = this.noticeListe[idNotice];
 		
 		// this.noticeAffiche = true;
+	}
+
+	masque(e){
+		this.afficheDetailCollec = false;
 	}
 }

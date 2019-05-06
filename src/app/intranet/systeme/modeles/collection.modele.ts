@@ -7,8 +7,8 @@ export interface CollectionModel {
     readonly description: string;
     readonly type: string;
     readonly createur: string;
-    readonly fond:string;
-    readonly langue: string;
+    readonly fond?:string;
+    readonly langue?: string;
     readonly groupe?: Array<string>;
     readonly notices?:Array<NoticeModel>;
     readonly series?:Array<string>;

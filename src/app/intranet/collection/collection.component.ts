@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
 import { CollectionModel } from '../systeme/modeles/collection.modele';
 import { NoticeModel } from '../systeme/modeles/notice.modele';
@@ -12,8 +12,12 @@ import { CollectionService } from '../systeme/services/collection.service';
 export class CollectionComponent implements OnInit {
 
 	@Input() collection: CollectionModel; // Collection transmise à l'affichage
+	@Output()
+	fermer = new EventEmitter<boolean>();
+
 	affiche: boolean = false;
 	maj:boolean = false; // Mettre à jouer les données
+	
 	constructor(public colServ: CollectionService) { }
 
 	ngOnInit() {}

@@ -3,8 +3,7 @@
     <aside class="left-panel">
         <header>
             <h2>Collections disponibles</h2>
-            <mat-icon matTooltip="Ajouter une collection">playlist_add</mat-icon>
-            <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleLeftPanel($event)">settings_ethernet</mat-icon>
+            <mat-icon matTooltip="Ajouter une collection" (click)="afficheDetailCollec = true">playlist_add</mat-icon>
         </header>
         <ul>
 
@@ -17,33 +16,37 @@
     <section>
         <header>
             <div>
-                <mat-icon matTooltip="Modifier la collection">edit</mat-icon>
+                <mat-icon matTooltip="Modifier la collection" (click)="afficheDetailCollec = true">edit</mat-icon>
                 <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
             </div>
             <h2>Informations sur la collection</h2>
         </header>
         <article *ngIf="collec">
-            <h3>{{collec.titre}}</h3>
+
+            <h3>{{ collec.titre }}</h3>
+            <p>_id : {{ collec._id }}</p>
             <p>Alias : {{ collec.alias }}</p>
-            <p>Type : {{collec.type}}</p>
-            <p>{{collec.description}}</p>
+            <p>Type : {{ collec.type }}</p>
+            <p>Description : {{ collec.description }}</p>
+            <p>Type : {{ collec.type }}</p>
+            <p>Créateur : {{ collec.createur }}</p>
+            <p *ngIf="collec.fond">Fond : {{ collec.fond }}</p>
+            <p *ngIf="collec.langue">Fond : {{ collec.langue }}</p>
+            <p *ngIf="collec.groupe">Fond : {{ collec.groupe }}</p>
         </article>
-        <article>
+        <article *ngIf="collec.series && collec.series.length > 0">
             <mat-icon matTooltip="Ajouter une série à la collection">playlist_add</mat-icon>
             <h3>Séries de la collection</h3>
             {{collec.series?.length}}
             <ul *ngIf="collec.series.length > 0">
-                <li *ngFor="let serie of collec.series">
-                    {{serie}}
+                <li *ngFor="let serie of collec.series; let i=index">
+                    {{ i }} - {{ serie }}
                 </li>
             </ul>
         </article>
     </section>
     <!-- <aside class="right-panel " [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed' "> -->
     <aside class="right-panel">
-        <header>
-            <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleRightPanel($event)">settings_ethernet</mat-icon>
-        </header>
         <section class="selection ">
             <ul class="notice-liste">
 
@@ -69,4 +72,4 @@
         </section>
     </aside>
 </section>
-<app-collection *ngIf="afficheDetailCollec" [collection]="collec" (fermer)="masqueCollec($event)" class="unique"></app-collection>
+<app-collection *ngIf="afficheDetailCollec" [collection]="collec" (fermer)="masque($event)" class="unique"></app-collection>

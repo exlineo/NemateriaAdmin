@@ -1,23 +1,51 @@
-<section class="colonnes">
+<section>
+
     <header>
+        <h3>Informations sur la collection
+            <mat-icon (click)="fermer.emit(false)">close</mat-icon>
+        </h3>
         <h2>{{ collection.titre }}</h2>
-        <mat-icon matTooltip="Modifier la collection" (click)="afficheMaj()">edit</mat-icon>
+
     </header>
-    <section class="content-panel">
-        <h2>Informations sur la collection</h2>
-        <p>
-            cliquer sur modifier pour faire apparaître le formulaire de modification
-        </p>
-        <article>
-            <h3>{{this.collection.nom}}</h3>
+
+    <form>
+        <section>
+            <label for="titre">Titre</label>
+            <input name="titre" [(ngModel)]="collection.titre" required>
+
+            <label for="alias">Alias</label>
+            <input name="alias" [(ngModel)]="collection.alias" required>
+
+            <label for="description">Description</label>
+            <textarea mat-input name="description" [(ngModel)]="collection.description" required>
+            </textarea>
+
+            <label for="type">Type</label>
+            <select name="type" [(ngModel)]="collection.type" required>
+                <option value="image">Images</option>
+                <option value="multimedia">Multimédia</option>
+            </select>
+
+            <label for="createur">Créateur</label>
+            <input name="createur" [(ngModel)]="collection.createur" required>
+
+            <label for="fond">Fond</label>
+            <input name="fond" [(ngModel)]="collection.fond">
+
+            <label for="langue">Langue</label>
+            <input name="langue" [(ngModel)]="collection.langue">
+        </section>
+
+        <section>
+            <h3>Séries
+                <mat-icon>add</mat-icon>
+            </h3>
+            <hr>
             <p>
-                {{this.collection.description}}
+                <button class="invalid" (click)="fermer.emit(false)">Annuler</button>
+                <button class="valid">Valider</button>
             </p>
-        </article>
-    </section>
-    <section>
-        <form (submit)='majCollection()'>
-            
-        </form>
-    </section>
+        </section>
+
+    </form>
 </section>
