@@ -5,6 +5,7 @@ import { CONST } from '../systeme/const';
 import { CollectionModel } from '../systeme/modeles/collection.modele';
 import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { CollectionService } from '../systeme/services/collection.service';
+import { NoticeService } from '../systeme/services/notice.service';
 
 @Component({
 	selector: 'app-collections',
@@ -30,25 +31,29 @@ export class CollectionsComponent implements OnInit {
 		groupe:[],
 		notices:[],
 		series:[],
+		selected:false
 	}; // La collection sélectionnée à afficher
 	
 	afficheDetailCollec: boolean = false;
 
 	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série
 
-	constructor(public colServ: CollectionService, private rendu:Renderer2) { }
+	constructor(public colServ: CollectionService, public noticesServ:NoticeService) { }
 
 	ngOnInit() {
 		this.collec = this.colServ.collections[0];
 	}
 	/**
 	 * Afficher le détail d'une collection
+	 * @param index Index de la collection dans le tableau des collections
 	 * @param idCollection Id de la collection à afficher
 	 */
 	collectionOnClick(index, idCollection): void {
+		// Identifier la collection cliquée
 		this.collec = this.colServ.collections[index];
 		console.log(this.collec);
-		this.noticeListe = this.collec.notices;
+		// Récupérer les notices de la collection
+		this.noticesServ.getNoticesByCollec(this.collec._id);
 	}
 	noticeOnClick($event, idNotice): void {
 		$event.preventDefault();

@@ -59,11 +59,7 @@ export class NoticesComponent implements OnInit {
 	constructor(public noticeService: NoticeService) { }
 
 	ngOnInit() {
-		this.noticeService.readNotices().subscribe(
-			data => {
-				this.noticeListe = data;
-			}
-		);
+		
 	}
 	// Afficher le composant avec le détail des infos sur la notice
 	noticeAfficheDetail($event, idNotice): void {

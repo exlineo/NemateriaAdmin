@@ -34,6 +34,7 @@ import { FiltresComponent } from './filtres/filtres.component';
 import { MappagesComponent } from './mappages/mappages.component';
 import { MappageComponent } from './mappage/mappage.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { CollectionService } from './systeme/services/collection.service';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [NoticeService],
+	providers: [NoticeService, CollectionService],
 	declarations: [
 		HeaderComponent,
 		SidenavComponent,

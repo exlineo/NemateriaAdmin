@@ -6,6 +6,7 @@ export interface NoticeModel {
     motsCles: Array<string>;
     uri:string;
     referenceOriginal: string;
+    fichier:FichierModele;
     auteurs?: Array<PersonneModele>;
     informateur?: InformateurModele;
     auteurDescription?:PersonneModele;
@@ -16,6 +17,16 @@ export interface NoticeModel {
     droits?: DroitsModele;
     gestionCollection?: GestionCollectionModele;
     sequences?: SequencesModele;
+    selected?:boolean;
+}
+
+export interface FichierModele{
+    nom:string;
+    type:string;
+    url:string;
+    taille:string | number;
+    largeur:number | string;
+    hauteur:number | string;
 }
 /**
  * @type Interface

@@ -31,8 +31,8 @@
             <p>Type : {{ collec.type }}</p>
             <p>Créateur : {{ collec.createur }}</p>
             <p *ngIf="collec.fond">Fond : {{ collec.fond }}</p>
-            <p *ngIf="collec.langue">Fond : {{ collec.langue }}</p>
-            <p *ngIf="collec.groupe">Fond : {{ collec.groupe }}</p>
+            <p *ngIf="collec.langue">Langue : {{ collec.langue }}</p>
+            <p *ngIf="collec.groupe">Groupe : {{ collec.groupe }}</p>
         </article>
         <article *ngIf="collec.series && collec.series.length > 0">
             <mat-icon matTooltip="Ajouter une série à la collection">playlist_add</mat-icon>
@@ -50,8 +50,8 @@
         <section class="selection ">
             <ul class="notice-liste">
 
-                <li *ngFor="let notice of (noticeListe | filtre:filtreSerie)" class="notice">
-                    <div [style.backgroundImage]="'url('+ notice.dossier + '/' + notice.fichier +')'">
+                <li *ngFor="let notice of noticesServ.noticesCollec" class="notice">
+                    <div [style.backgroundImage]="'url('+ notice.fichier.url +')'">
                         <div>
                             <mat-icon (click)="noticeAfficheDetail($event, notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
                             <mat-icon (click)="noticeOnChoisi($event, notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div>
-                        <h3>{{notice.nom}}</h3>
+                        <h3>{{notice.titre}}</h3>
                         <p>{{notice.description}}</p>
                         <div>
                             <mat-icon *ngIf="notice.selected">check_circle</mat-icon>

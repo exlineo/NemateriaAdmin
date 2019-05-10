@@ -46,7 +46,7 @@ export class InscriptionComponent implements OnInit {
 	 */
 	save(): void {
 		if (this.userForm.valid) {
-			this.authService.addUser(this.userForm.value);
+			this.authService.authUser(this.userForm.value);
 			//this.dialogRef.close();
 		} else {
 			this.notService.openSnackBar('formulaire non valide', 'inscription');

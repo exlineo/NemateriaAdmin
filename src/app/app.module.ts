@@ -15,12 +15,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConnexionComponent } from './extranet/connexion/connexion.component';
 import { Erreur404Component } from './extranet/erreur/erreur404.component';
+import { InscriptionComponent } from './extranet/inscription/inscription.component';
 
 // Service
 import { AuthService } from "./extranet/systeme/services/auth.service";
+import { TokenService } from './extranet/systeme/services/token.service';
 import { NotificationService } from "./extranet/systeme/services/notification.service";
-import { IntercepteurService } from "./extranet/systeme/services/intercepteur.service";
-import { InscriptionComponent } from './extranet/inscription/inscription.component';
+
+import { AuthIntercepteur } from "./extranet/systeme/services/auth.intercepteur";
+import { SecuriteIntercepteur } from './extranet/systeme/services/securite.intercepteur';
 
 @NgModule({
 	imports: [
@@ -38,7 +41,7 @@ import { InscriptionComponent } from './extranet/inscription/inscription.compone
 		Erreur404Component,
 		InscriptionComponent
 	],
-	providers: [AuthService, NotificationService, { provide: HTTP_INTERCEPTORS, useClass: IntercepteurService, multi: true }],
+	providers: [AuthService, TokenService, NotificationService, { provide: HTTP_INTERCEPTORS, useClass: AuthIntercepteur, multi: true }, , { provide: HTTP_INTERCEPTORS, useClass:SecuriteIntercepteur, multi:true}],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,4 +12,5 @@ export interface CollectionModel {
     readonly groupe?: Array<string>;
     readonly notices?:Array<NoticeModel>;
     readonly series?:Array<string>;
+    selected?:boolean;
 }

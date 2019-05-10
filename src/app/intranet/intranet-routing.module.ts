@@ -2,9 +2,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// Auth Guarg
-import { AuthguardGuard } from 'src/app/extranet/systeme/services/authguard.guard';
-
 // Page Component
 import { InterfaceComponent } from './partage/interface/interface.component';
 

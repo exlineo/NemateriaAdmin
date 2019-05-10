@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Authentication Guard
-import { AuthguardGuard } from 'src/app/extranet/systeme/services/authguard.guard';
+import { AuthGuard } from './extranet/systeme/services/auth.guard';
 
 // Component
 import { ConnexionComponent } from './extranet/connexion/connexion.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
 	{ path: '', component: ConnexionComponent },
 	{ path: 'connexion', component: ConnexionComponent },
 	{ path: 'inscription', component: InscriptionComponent },
-	{ path: 'intranet', loadChildren: "./intranet/intranet.module#IntranetModule", canLoad: [AuthguardGuard] },
+	{ path: 'intranet', loadChildren: () => import('./intranet/intranet.module').then(m => m.IntranetModule), canLoad: [AuthGuard] },
 	{ path: '**', component: Erreur404Component },
 	{ path: '', redirectTo: '/', pathMatch: 'full' }
 ];
