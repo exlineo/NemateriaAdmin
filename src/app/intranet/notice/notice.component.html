@@ -6,9 +6,9 @@
 
     <article>
         <h2>Métadonnées d’une notice sélectionnée</h2>
-        <h3>{{notice.nom}}</h3>
+        <h3>{{ noticeService[idNotice].titre }}</h3>
         <p>
-            {{notice.description}}<br> {{notice.dossier}}{{notice.fichier}}
+            {{noticeService[idNotice].description}}<br> {{noticeService[idNotice].dossier}}{{noticeService[idNotice].fichier}}
         </p>
     </article>
 </section>

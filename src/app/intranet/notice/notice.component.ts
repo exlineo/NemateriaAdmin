@@ -17,6 +17,9 @@ export class NoticeComponent implements OnInit {
 
 	@Input()
 	notice: NoticeModel;
+
+	@Input()
+	idNotice: number | string;
 	
 	@Output()
 	fermer = new EventEmitter<boolean>();

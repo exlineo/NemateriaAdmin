@@ -7,6 +7,7 @@
             </mat-form-field>
         </form>
     </aside>
+    <!-- AFFICHER LA LSITE DES NOTICES SELECTIONNEES -->
     <section>
         <ul class="notice-liste">
 
@@ -32,6 +33,7 @@
             </li>
         </ul>
     </section>
+    <!-- OPTIONS LIEES AUX NOTICES : CREER UNE LISTE, AFFICHER LES METADONNEES D'UNE NOTICE -->
     <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
         <section class="demi">
             <header>
@@ -46,22 +48,23 @@
                 <li *ngFor="let notice of this.noticeSelection">
                     <mat-chip-list>
                         <mat-chip (removed)="noticeSelectionRemove(notice._id)">
-                            {{notice.nom}}
+                            {{notice.titre}}
                             <mat-icon matChipRemove>cancel</mat-icon>
                         </mat-chip>
                     </mat-chip-list>
                 </li>
             </ul>
         </section>
+        <!-- AFFICHAGE RAPIDE DES META D'UNE NOTICE -->
         <section class="demi">
             <h2>Métadonnées d’une notice sélectionnée</h2>
             <article *ngIf="this.noticeAffiche">
-                <h3>{{this.noticeElement.nom}}</h3>
+                <h3>{{ noticeService[idNotice].nom}}</h3>
                 <p>
-                    {{this.noticeElement.description}}<br> {{this.noticeElement.dossier}}{{this.noticeElement.fichier}}
+                    {{noticeService[idNotice].description}}<br> {{noticeService[idNotice].dossier}}{{noticeService[idNotice].fichier}}
                 </p>
             </article>
         </section>
     </aside>
 </section>
-<app-notice *ngIf="afficheDetailNotice" [notice]="noticeElement" (fermer)="masqueNotice($event)" class="unique"></app-notice>
+<app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masqueNotice($event)" class="unique"></app-notice>

@@ -24,15 +24,15 @@
         <article *ngIf="collec">
 
             <h3>{{ collec.titre }}</h3>
-            <p>_id : {{ collec._id }}</p>
-            <p>Alias : {{ collec.alias }}</p>
-            <p>Type : {{ collec.type }}</p>
-            <p>Description : {{ collec.description }}</p>
-            <p>Type : {{ collec.type }}</p>
-            <p>Créateur : {{ collec.createur }}</p>
-            <p *ngIf="collec.fond">Fond : {{ collec.fond }}</p>
-            <p *ngIf="collec.langue">Langue : {{ collec.langue }}</p>
-            <p *ngIf="collec.groupe">Groupe : {{ collec.groupe }}</p>
+            <p>- _id : {{ collec._id }}</p>
+            <p>- Alias : {{ collec.alias }}</p>
+            <p>- Type : {{ collec.type }}</p>
+            <p>- Description : {{ collec.description }}</p>
+            <p>- Type : {{ collec.type }}</p>
+            <p>- Créateur : {{ collec.createur }}</p>
+            <p *ngIf="collec.fond">- Fond : {{ collec.fond }}</p>
+            <p *ngIf="collec.langue">- Langue : {{ collec.langue }}</p>
+            <p *ngIf="collec.groupe">- Groupe : {{ collec.groupe }}</p>
         </article>
         <article *ngIf="collec.series && collec.series.length > 0">
             <mat-icon matTooltip="Ajouter une série à la collection">playlist_add</mat-icon>
@@ -50,12 +50,12 @@
         <section class="selection ">
             <ul class="notice-liste">
 
-                <li *ngFor="let notice of noticesServ.noticesCollec" class="notice">
+                <li *ngFor="let notice of noticesServ.noticesCollec; let i=index" class="notice">
                     <div [style.backgroundImage]="'url('+ notice.fichier.url +')'">
                         <div>
-                            <mat-icon (click)="noticeAfficheDetail($event, notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
-                            <mat-icon (click)="noticeOnChoisi($event, notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
-                            <mat-icon (click)="noticeOnInfo($event, notice._id)" matTooltip="Informations synthétiques sur la notice">info</mat-icon>
+                            <mat-icon (click)="noticeOnClick(i, notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
+                            <mat-icon matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
+                            <mat-icon matTooltip="Informations synthétiques sur la notice">info</mat-icon>
                             <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
                         </div>
                     </div>
@@ -72,4 +72,15 @@
         </section>
     </aside>
 </section>
+
+<!-- Valider une suppression de notice ou de collection -->
+<section *ngIf="afficheSuppression" class="unique">
+    <article>
+        <button>Annuler</button>
+        <button>Valider la suppression</button>
+    </article>
+</section>
+<!-- Afficher la collection choisie -->
 <app-collection *ngIf="afficheDetailCollec" [collection]="collec" (fermer)="masque($event)" class="unique"></app-collection>
+<!-- Afficher la notice choisie -->
+<app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masque($event)" class="unique"></app-notice>

@@ -47,7 +47,9 @@ export class NoticesComponent implements OnInit {
 
 	noticeListe: NoticeModel[] = []; // Liste générale des notices à afficher / filter
 	noticeSelection: NoticeModel[] = []; // La liste des notices sélectionnées
-	noticeElement: NoticeModel; // La notice dont les infos sont affichées
+
+	idNotice:number | string;
+
 	noticeAffiche: boolean = false; // Affichers les infos rapides d'une notice
 	noticeFiltre: string = '';
 
@@ -64,24 +66,22 @@ export class NoticesComponent implements OnInit {
 	// Afficher le composant avec le détail des infos sur la notice
 	noticeAfficheDetail($event, idNotice): void {
 		// $event.preventDefault();
-		this.noticeElement = this.noticeListe[idNotice];
+		this.idNotice = idNotice;
 		this.afficheDetailNotice = !this.afficheDetailNotice;
 	}
 	
 	// Choisir une notice et la mettre dans la liste
 	noticeOnChoisi($event, idNotice): void {
 		$event.preventDefault();
-		this.noticeElement = this.noticeListe[idNotice];
+		this.idNotice = idNotice;
 		this.noticeListe[idNotice].selected = true;
-		if (this.noticeSelection.indexOf(this.noticeElement) == -1) {
-			this.noticeSelection.push(this.noticeElement);
+		if (this.noticeSelection.indexOf(this.noticeService[this.idNotice]) == -1) {
+			this.noticeSelection.push(this.noticeService[this.idNotice]);
 		}
 	}
 	// Afficher les infos d'une notice
 	noticeOnInfo($event, idNotice): void {
-		$event.preventDefault();
-		this.noticeElement = this.noticeListe[idNotice];
-		
+		this.idNotice = idNotice;		
 		this.noticeAffiche = true;
 	}
 	// Initialiser les sélections
@@ -106,7 +106,7 @@ export class NoticesComponent implements OnInit {
 	 */
 	noticesToutesChoisies(): void {
 		this.noticeListe.forEach(
-			n =>{
+			n => {
 				n.selected = true;
 			}
 		)
