@@ -13,8 +13,9 @@ export class CollectionService {
 
 	// dataStorage: string = 'assets/dataStorage/';
 
-	collections: Array<CollectionModel>;
-	collection:CollectionModel;
+	collections: Array<CollectionModel>; // La liste des collections
+	collection:CollectionModel; // Une collection sélectionnée
+	series:Array<any>; // Tableau des séries d'une collection donnée
 
 	constructor(private http: HttpClient) {
 		this.getCollections();
@@ -46,6 +47,17 @@ export class CollectionService {
 	 */
 	ajouteCollection(){
 		this.http.post(SERV+'collections', this.collection).subscribe(
+			retour => {
+				console.log(retour);
+			}
+		)
+	}
+	/**
+	 * Les séries d'une collection
+	 * @param id ID de la collection dont nous recherchons les séries
+	 */
+	getSeries(id){
+		this.http.get(SERV+'collections/'+id+'/series').subscribe(
 			retour => {
 				console.log(retour);
 			}

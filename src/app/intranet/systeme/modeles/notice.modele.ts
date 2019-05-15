@@ -80,9 +80,9 @@ export interface RelationsModele {
     ordre?:number;
     contient?:"",
     requiert?:Array<number>;
+    serie?:string;
     liensInternes?:Array<string>;
     liensExternes?:Array<string>;
-
 }
 
 export interface OriginauxModele {

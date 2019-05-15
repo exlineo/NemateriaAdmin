@@ -37,6 +37,7 @@ h1 {
 
 h2 {
     font-size: 26px;
+    margin-bottom:5px;
 }
 
 h3 {
@@ -104,8 +105,8 @@ section.screen {
     width: 100vw;
     height: 100vh;
     padding-top: 64px;
-    flex-flow: row nowrap;
     align-items: stretch;
+    flex-flow: row nowrap;
     overflow: hidden;
 }
 
@@ -116,16 +117,41 @@ section.screen>aside {
     display: block;
 }
 
-section.screen>section {}
+section.double > section {
+    width:70vw;
+}
+section.double > aside {
+    width:30vw;
+}
 
+section.triple > section{
+    width:30vw;
+}
+section.triple> aside:nth-child(1) {
+    width:20vw;
+}
+section.triple > aside:nth-child(3) {
+    width:50vw;
+}
 section.screen article {
     width: 100%;
 }
 
-header {
+header, header form {
     width: 100%;
 }
-
+header.filtre{
+    min-height: 200px;
+    flex-flow:column wrap;
+}
+header.filtre form .mat-form-field-infix{
+    width: 100%;
+    display:flex;
+    flex-flow:row wrap;
+}
+header.filtre form .mat-form-field-infix > *{
+    /* width: auto; */
+}
 aside {
     padding: 0;
 }
@@ -158,25 +184,18 @@ section.demi {
     flex-flow: row wrap;
     height: 50% !important;
     padding: 16px;
-    display: block;
+    width:auto;
 }
 
 section.demi:nth-child(1) {
     background-color: lightgray;
+    overflow-y: auto;
+
 }
 
 section.demi:nth-child(2) {
     background-color: grey;
-}
-
-ul {
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    display: block;
-    list-style: none;
+    overflow-y: auto;
 }
 
 video {
@@ -220,12 +239,12 @@ form {
     display: flex;
 }
 
-input,
+input, input.mat-input-element,
 textarea,
 select,
 button {
     padding: 8px 14px;
-    border: 1px solid #E0E0E0;
+    border: 1px solid #CCC;
     margin: 8px;
     transition: border .3s ease;
 }
@@ -238,7 +257,6 @@ button {
     color: #FFF;
     text-shadow: 0px 0px 1px rgba(0, 0, 0, .6);
     max-width: 200px;
-    float: right;
 }
 
 button.valid {
@@ -660,7 +678,7 @@ select:hover {
 
 /* AFFICHAGE DE LA NOTICE SELECTIONNEE */
 
-.unique {
+.unique, .pop-up {
     position: absolute;
     right: 0;
     left: 0;
@@ -672,17 +690,18 @@ select:hover {
 }
 
 .unique section {
-    width: 75%;
+    width: 75vw;
+    height:75vh;
     background: #FFF;
     margin: auto;
     overflow-y: auto;
 }
 
-.unique section article {
-    width: 75%;
+.pop-up article{
+    margin:auto;
+    color:#FFF;
+    text-align:center;
 }
-
-
 /* MISE EN FORME DES OBJECTS MATERIAL */
 
 mat-icon {

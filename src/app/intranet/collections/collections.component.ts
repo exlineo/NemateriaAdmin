@@ -6,6 +6,7 @@ import { CollectionModel } from '../systeme/modeles/collection.modele';
 import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { CollectionService } from '../systeme/services/collection.service';
 import { NoticeService } from '../systeme/services/notice.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
 	selector: 'app-collections',
@@ -35,14 +36,14 @@ export class CollectionsComponent implements OnInit {
 	
 	afficheDetailCollec: boolean = false;
 	afficheDetailNotice: boolean = false;
-	afficheSuppression: boolean = false;
+	afficheEnlever: boolean = false;
 
 	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série
 
 	constructor(public colServ: CollectionService, public noticesServ:NoticeService) { }
 
 	ngOnInit() {
-		this.collec = this.colServ.collections[0];
+		// this.collec = this.colServ.collections[0];
 	}
 	/**
 	 * Afficher le détail d'une collection
@@ -55,15 +56,31 @@ export class CollectionsComponent implements OnInit {
 		console.log(this.collec);
 		// Récupérer les notices de la collection
 		this.noticesServ.getNoticesByCollec(this.collec._id);
+		this.colServ.getSeries(idCollection);
 	}
-	noticeOnClick(index, idNotice): void {
-		this.idNotice = idNotice;
+	/**
+	 * 
+	 * @param id Afficher la fenêtre de validation pour l'enlèvement d'une notice dans une collection
+	 */
+	noticeOnEnlever(id){
+		console.log("Notice à enlever", id);
+		this.idNotice = id;
+		this.afficheEnlever = true;
 	}
-
-	masque(e){
+	enleverNotice(){
+		
+	}
+	noticeOnClick(id){
+		this.noticesServ.getNotice(id);
+		this.afficheDetailNotice = true;
+	}
+	/**
+	 * Enlever toutes les fenêtres pop-up et initialiser la collection et les notices
+	 */
+	masque(){
 		this.afficheDetailCollec = false;
 		this.afficheDetailNotice = false;
-		this.afficheSuppression = false;
+		this.afficheEnlever = false;
 		this.idNotice = null;
 		this.idCollection = null;
 	}

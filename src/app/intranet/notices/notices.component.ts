@@ -11,78 +11,55 @@ import { toggleLeft } from '../systeme/library/animation';
 @Component({
 	selector: 'app-notices',
 	templateUrl: './notices.component.html',
-	styleUrls: ['./notices.component.css'],
-	animations: [
-		trigger('openCloseLeftPanel', [
-			state('open', style({
-				width: CONST.lg
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate(CONST.delai)
-			]),
-			transition('closed => open', [
-				animate(CONST.delai)
-			]),
-		]),
-		trigger('openCloseRightPanel', [
-			state('open', style({
-				width: CONST.ld
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate(CONST.delai)
-			]),
-			transition('closed => open', [
-				animate(CONST.delai)
-			]),
-		]),
-	]
+	styleUrls: ['./notices.component.css']
 })
 export class NoticesComponent implements OnInit {
 
 	noticeListe: NoticeModel[] = []; // Liste générale des notices à afficher / filter
 	noticeSelection: NoticeModel[] = []; // La liste des notices sélectionnées
+	noticeChoisie:NoticeModel; // Notice dont on affiche les informations lorsque sollicitée
 
 	idNotice:number | string;
 
 	noticeAffiche: boolean = false; // Affichers les infos rapides d'une notice
-	noticeFiltre: string = '';
-
-	leftPanelIsOpen:boolean = true;
-	rightPanelIsOpen:boolean = true;
+	filtre: any = {libre:'', dateDebut:'', dateFin:'', type:''};
 
 	afficheDetailNotice:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
 
-	constructor(public noticeService: NoticeService) { }
+	constructor(public noticesServ: NoticeService) { }
 
 	ngOnInit() {
 		
 	}
-	// Afficher le composant avec le détail des infos sur la notice
-	noticeAfficheDetail($event, idNotice): void {
+	/**
+	 * Afficher le composant avec le détail des infos sur la notice
+	 * 
+	*/ 
+	afficherNotice(idNotice): void {
 		// $event.preventDefault();
 		this.idNotice = idNotice;
 		this.afficheDetailNotice = !this.afficheDetailNotice;
 	}
-	
-	// Choisir une notice et la mettre dans la liste
-	noticeOnChoisi($event, idNotice): void {
-		$event.preventDefault();
+	/**
+	 * Choisir une notice et la mettre dans la liste
+	 * 
+	*/
+	noticeSelectionnee(idNotice): void {
 		this.idNotice = idNotice;
-		this.noticeListe[idNotice].selected = true;
-		if (this.noticeSelection.indexOf(this.noticeService[this.idNotice]) == -1) {
-			this.noticeSelection.push(this.noticeService[this.idNotice]);
-		}
+		this.noticeSelection.push(this.noticesServ.getNotice(idNotice, true));
 	}
-	// Afficher les infos d'une notice
-	noticeOnInfo($event, idNotice): void {
-		this.idNotice = idNotice;		
-		this.noticeAffiche = true;
+	/**
+	 * Afficher les infos d'une notice
+	 * @param idNotice id de la notice dnt on veut les infos
+	*/
+	noticeOnInfo(idNotice): void {
+		if(this.noticeChoisie == this.noticesServ.getNotice(idNotice)){
+			this.noticeAffiche = false;
+			this.noticeChoisie = null;
+		}else{
+			this.noticeChoisie = this.noticesServ.getNotice(idNotice);
+			this.noticeAffiche = true;
+		}
 	}
 	// Initialiser les sélections
 	noticeSelectionDump(): void {
@@ -102,35 +79,26 @@ export class NoticesComponent implements OnInit {
 		}
 	}
 	/**
-	 * Ajouter toutes les notices à la sélection
+	 * Ajouter toutes les notices à la sélection pour constituer une collection en fonction des tris
 	 */
 	noticesToutesChoisies(): void {
-		this.noticeListe.forEach(
+		this.noticesServ.noticesAll.forEach(
 			n => {
 				n.selected = true;
 			}
 		)
-		this.noticeSelection = this.noticeListe;
+		this.noticeSelection = this.noticesServ.noticesAll;
 	}
 	/**
 	 * Ne sélectionner aucune notice
 	 */
 	noticesAucuneChoisie(): void {
-		this.noticeListe.forEach(
+		this.noticesServ.noticesAll.forEach(
 			n =>{
 				n.selected = false;
 			}
 		)
 		this.noticeSelection = [];
-	}
-	toggleLeftPanel($event): void {
-		$event.preventDefault();
-		this.leftPanelIsOpen = !this.leftPanelIsOpen;
-	}
-
-	toggleRightPanel($event): void {
-		$event.preventDefault();
-		this.rightPanelIsOpen = !this.rightPanelIsOpen;
 	}
 	/**
 	 * Masque la notice lorsqu'on clique sur le bouton pour la fermer

@@ -1,23 +1,40 @@
-<section class="screen">
-    <mat-icon (click)="toggleLeftPanel($event)" class="left-btn">settings_ethernet</mat-icon>
-    <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
-        <form class="left-form">
-            <mat-form-field>
-                <input matInput placeholder="Rechercher" [(ngModel)]="this.noticeFiltre" [ngModelOptions]="{standalone: true}">
-            </mat-form-field>
-        </form>
-    </aside>
+<section class="screen double">
+
     <!-- AFFICHER LA LSITE DES NOTICES SELECTIONNEES -->
     <section>
+        <header class="filtre">
+            <h2>Filtrer les notices</h2>
+            <form>
+                <label for="libre">Filtre libre
+                <input name="libre" placeholder="Filtre libre" [(ngModel)]="this.filtre.libre"></label>
+
+                <label for="dateDebut">Date de création (début)   
+                <input name="dateDebut" type="date" placeholder="A partir de..." [(ngModel)]="this.filtre.dateDebut"></label>
+
+                <label for="dateFin">Date de création (fin)
+                <input name="dateFin" type="date" placeholder="... jusqu'à" [(ngModel)]="this.filtre.dateFin"></label>
+
+                <label for="type">Types de fichiers   
+                <select name="type" [(ngModel)]="this.filtre.type" placeholder="Type de fichiers">
+                        <option value="image"> Images</option>
+                        <option value="mpg">Vidéos</option>
+                        <option value="mp3">Audio</option>
+                        <option value="pdf">Textes</option>
+                    </select></label> 
+            </form>
+        </header>
         <ul class="notice-liste">
 
-            <li *ngFor="let notice of (this.noticeListe | filtre:noticeFiltre)" class="notice">
-                <div [style.backgroundImage]="'url('+ notice.dossier + '/' + notice.fichier +')'">
+            <li *ngFor="let notice of (this.noticesServ.noticesAll | filtre:noticeFiltre)" class="notice">
+                <div [style.backgroundImage]="'url('+ notice.fichier.url +')'">
                     <!-- <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description"> -->
                     <div>
-                        <mat-icon (click)="noticeAfficheDetail($event, notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
-                        <mat-icon (click)="noticeOnChoisi($event, notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
-                        <mat-icon (click)="noticeOnInfo($event, notice._id)" matTooltip="Informations synthétiques sur la notice">info</mat-icon>
+                        <mat-icon (click)="afficherNotice(notice._id)" matTooltip="Voir la fiche de la notice">
+                            visibility</mat-icon>
+                        <mat-icon (click)="noticeSelectionnee(notice._id)"
+                            matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
+                        <mat-icon (click)="noticeOnInfo(notice._id)"
+                            matTooltip="Informations rapides sur la notice">info</mat-icon>
                         <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
                     </div>
                 </div>
@@ -29,17 +46,17 @@
                         <mat-icon *ngIf="!notice.selected">check_circle_outline</mat-icon>
                     </div>
                 </div>
-
             </li>
         </ul>
     </section>
     <!-- OPTIONS LIEES AUX NOTICES : CREER UNE LISTE, AFFICHER LES METADONNEES D'UNE NOTICE -->
-    <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
+    <aside class="right-panel">
         <section class="demi">
             <header>
-                <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleRightPanel($event)">settings_ethernet</mat-icon>
-                <mat-icon matTooltip="Sélectionner toutes les notices" (click)="noticesToutesChoisies()">select_all</mat-icon>
-                <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">clear_all</mat-icon>
+                <mat-icon matTooltip="Sélectionner toutes les notices" (click)="noticesToutesChoisies()">select_all
+                </mat-icon>
+                <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">clear_all
+                </mat-icon>
                 <mat-icon matTooltip="Créer une collection à partir de la sélection">playlist_add_check</mat-icon>
             </header>
             <h2>Liste des notices sélectionnées</h2>
@@ -59,12 +76,14 @@
         <section class="demi">
             <h2>Métadonnées d’une notice sélectionnée</h2>
             <article *ngIf="this.noticeAffiche">
-                <h3>{{ noticeService[idNotice].nom}}</h3>
+                <h3>{{ noticeChoisie.titre}}</h3>
                 <p>
-                    {{noticeService[idNotice].description}}<br> {{noticeService[idNotice].dossier}}{{noticeService[idNotice].fichier}}
+                    {{ noticeChoisie.description }}<br>
+                    {{ noticeChoisie.fichier }}
                 </p>
             </article>
         </section>
     </aside>
 </section>
-<app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masqueNotice($event)" class="unique"></app-notice>
+<app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masqueNotice($event)" class="unique">
+</app-notice>

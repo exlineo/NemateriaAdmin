@@ -1,4 +1,4 @@
-<section class="screen">
+<section class="screen triple">
     <!-- <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed' "> -->
     <aside class="left-panel">
         <header>
@@ -7,7 +7,8 @@
         </header>
         <ul>
 
-            <li *ngFor="let collection of colServ.collections; let i=index" (click)="collectionOnClick(i, collection._id) ">
+            <li *ngFor="let collection of colServ.collections; let i=index"
+                (click)="collectionOnClick(i, collection._id) ">
                 {{collection.titre}} ({{ collection.alias }})
                 <!-- <mat-icon matTooltip="Afficher les séries" *ngIf="collection.series" (click)="toggleSeries('series_'+collection._id)">keyboard_arrow_down</mat-icon> -->
             </li>
@@ -34,38 +35,32 @@
             <p *ngIf="collec.langue">- Langue : {{ collec.langue }}</p>
             <p *ngIf="collec.groupe">- Groupe : {{ collec.groupe }}</p>
         </article>
-        <article *ngIf="collec.series && collec.series.length > 0">
-            <mat-icon matTooltip="Ajouter une série à la collection">playlist_add</mat-icon>
+        <article *ngIf="noticesServ.seriesCollec.length > 0">
+            <!-- <mat-icon matTooltip="Ajouter une série à la collection">playlist_add</mat-icon> -->
             <h3>Séries de la collection</h3>
-            {{collec.series?.length}}
-            <ul *ngIf="collec.series.length > 0">
-                <li *ngFor="let serie of collec.series; let i=index">
-                    {{ i }} - {{ serie }}
+            <ul>
+                <li *ngFor="let serie of noticesServ.seriesCollec; let i=index">
+                    {{ serie }}
                 </li>
             </ul>
         </article>
     </section>
     <!-- <aside class="right-panel " [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed' "> -->
-    <aside class="right-panel">
+    <aside>
         <section class="selection ">
             <ul class="notice-liste">
-
                 <li *ngFor="let notice of noticesServ.noticesCollec; let i=index" class="notice">
                     <div [style.backgroundImage]="'url('+ notice.fichier.url +')'">
                         <div>
-                            <mat-icon (click)="noticeOnClick(i, notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
-                            <mat-icon matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
-                            <mat-icon matTooltip="Informations synthétiques sur la notice">info</mat-icon>
-                            <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
+                            <mat-icon (click)="noticeOnAffiche(notice._id)" matTooltip="Voir la fiche de la notice">
+                                visibility</mat-icon>
+                            <mat-icon (click)="noticeOnEnlever(notice._id)"
+                                matTooltip="Enlever cette notice de la collection">remove_circle</mat-icon>
                         </div>
                     </div>
                     <div>
                         <h3>{{notice.titre}}</h3>
                         <p>{{notice.description}}</p>
-                        <div>
-                            <mat-icon *ngIf="notice.selected">check_circle</mat-icon>
-                            <mat-icon *ngIf="!notice.selected">check_circle_outline</mat-icon>
-                        </div>
                     </div>
                 </li>
             </ul>
@@ -74,13 +69,16 @@
 </section>
 
 <!-- Valider une suppression de notice ou de collection -->
-<section *ngIf="afficheSuppression" class="unique">
-    <article>
-        <button>Annuler</button>
-        <button>Valider la suppression</button>
-    </article>
+<section *ngIf="afficheEnlever" class="pop-up">
+        <article>
+            <h3>Supprimer une notice</h3>
+            <p>En cliquant sur valider la suppression vous enleverez supprimerez la notice de cette collection.</p>
+            <p>Elle restera néanmoins disponible dans les autres collections ou pourra être intégrée dans une autre sélection.</p>
+            <button>Valider la suppression</button>
+            <button (click)="masque()">Annuler</button>
+        </article>
 </section>
 <!-- Afficher la collection choisie -->
-<app-collection *ngIf="afficheDetailCollec" [collection]="collec" (fermer)="masque($event)" class="unique"></app-collection>
+<app-collection *ngIf="afficheDetailCollec" [collection]="collec" (fermer)="masque()" class="unique"></app-collection>
 <!-- Afficher la notice choisie -->
-<app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masque($event)" class="unique"></app-notice>
+<app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masque()" class="unique"></app-notice>
