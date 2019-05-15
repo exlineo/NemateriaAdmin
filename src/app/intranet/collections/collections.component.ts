@@ -70,8 +70,13 @@ export class CollectionsComponent implements OnInit {
 	enleverNotice(){
 		
 	}
-	noticeOnClick(id){
-		this.noticesServ.getNotice(id);
+	/**
+	 * Afficher une pop-up d'une notice
+	 * @param id ID de la notice à afficher pour consultation
+	 */
+	noticeOnAffiche(id){
+		this.idNotice = id;
+		// this.noticesServ.getNotice(id);
 		this.afficheDetailNotice = true;
 	}
 	/**

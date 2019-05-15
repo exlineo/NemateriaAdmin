@@ -1,14 +1,33 @@
 <section>
     <mat-icon (click)="fermer.emit(false)">close</mat-icon>
     <header>
-        <!-- <img [src]="notice.media" /> -->
+        <!-- Afficher une image -->
+        <p *ngIf="notice.fichier.type.indexOf('image') > -1">
+            <img [src]="notice.fichier.url">
+        </p>
+        <!-- Afficher une vidéo MP4 -->
+        <p *ngIf="notice.fichier.type.indexOf('mpg4') > -1">
+            <video controls>
+                <source [src]="notice.fichier.url" type="video/mp4">
+            </video>
+        </p>
+        <!-- Afficher une vidéo WEBM -->
+        <p *ngIf="notice.fichier.type.indexOf('webm') > -1">
+            <video controls>
+                <source [src]="notice.fichier.url" type="video/webm">
+            </video>
+        </p>
+        <!-- Afficher un audio MP3 -->
+        <p *ngIf="notice.fichier.type.indexOf('mp3') > -1">
+            <audio controls>
+                <source [src]="notice.fichier.url" type="audio/mpeg">
+            </audio>
+        </p>
     </header>
-
     <article>
-        <h2>Métadonnées d’une notice sélectionnée</h2>
-        <h3>{{ noticeService[idNotice].titre }}</h3>
+        <h3>{{ notice.titre }}</h3>
         <p>
-            {{noticeService[idNotice].description}}<br> {{noticeService[idNotice].dossier}}{{noticeService[idNotice].fichier}}
+            {{ notice.description }}<br> {{ notice.fichier.url }}
         </p>
     </article>
 </section>

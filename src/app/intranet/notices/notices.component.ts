@@ -19,6 +19,8 @@ export class NoticesComponent implements OnInit {
 	noticeSelection: NoticeModel[] = []; // La liste des notices sélectionnées
 	noticeChoisie:NoticeModel; // Notice dont on affiche les informations lorsque sollicitée
 
+	noticeFiltre;
+
 	idNotice:number | string;
 
 	noticeAffiche: boolean = false; // Affichers les infos rapides d'une notice

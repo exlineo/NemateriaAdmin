@@ -1,0 +1,9 @@
+section {
+    padding: 10px 20px;
+    flex-flow: row wrap;
+}
+
+section header,
+section article {
+    width: 100%;
+}

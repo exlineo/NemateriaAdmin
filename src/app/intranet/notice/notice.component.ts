@@ -28,7 +28,8 @@ export class NoticeComponent implements OnInit {
 
 	ngOnInit() {
 		console.log(this.notice);
-		
+		// Récupérer la notice à afficher
+		this.notice = this.noticeService.getNotice(this.idNotice);
 	}
 	masqueNotice(){
 
