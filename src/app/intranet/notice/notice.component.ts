@@ -3,9 +3,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { CONST } from '../systeme/const';
 import { NoticeService } from "../systeme/services/notice.service";
 import { NoticeModel } from "../systeme/modeles/notice.modele";
-import { FiltrePipe } from "../systeme/pipes/filtre.pipe";
-import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
-//import { toggleLeft } from '../systeme/library/animation';
+import { ClesJsonPipe } from "../systeme/pipes/clesJson.pipe";
 
 @Component({
 	selector: 'app-notice',
@@ -31,7 +29,8 @@ export class NoticeComponent implements OnInit {
 		// Récupérer la notice à afficher
 		this.notice = this.noticeService.getNotice(this.idNotice);
 	}
-	masqueNotice(){
-
+	
+	typeOf(value) {
+		return typeof value;
 	}
 }

@@ -23,7 +23,7 @@ import { FicheMediaComponent } from "./media/fiche-media/fiche-media.component";
 import { AjouterMediaComponent } from "./media/ajouter-media/ajouter-media.component";
 import { ModifierMediaComponent } from './media/modifier-media/modifier-media.component';
 import { FicheProfileComponent } from "./profile/fiche-profile/fiche-profile.component";
-import { FiltrePipe } from './systeme/pipes/filtre.pipe';
+
 import { NoticeComponent } from './notice/notice.component';
 import { CollectionComponent } from './collection/collection.component';
 import { ScannerComponent } from './scanner/scanner.component';
@@ -36,6 +36,8 @@ import { MappageComponent } from './mappage/mappage.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { CollectionService } from './systeme/services/collection.service';
 
+import { FiltrePipe } from './systeme/pipes/filtre.pipe';
+import { ClesJsonPipe } from "./systeme/pipes/clesJson.pipe";
 
 @NgModule({
 	imports: [
@@ -56,7 +58,6 @@ import { CollectionService } from './systeme/services/collection.service';
 		AjouterMediaComponent,
 		ModifierMediaComponent,
 		FicheProfileComponent,
-		FiltrePipe,
 		NoticeComponent,
 		CollectionComponent,
 		ScannerComponent,
@@ -66,7 +67,9 @@ import { CollectionService } from './systeme/services/collection.service';
 		FiltresComponent,
 		MappagesComponent,
 		MappageComponent,
-		AccueilComponent
+		AccueilComponent,
+		FiltrePipe,
+		ClesJsonPipe
 	],
 	entryComponents: [OptionPopInComponent]
 })

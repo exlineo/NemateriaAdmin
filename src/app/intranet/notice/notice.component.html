@@ -26,8 +26,19 @@
     </header>
     <article>
         <h3>{{ notice.titre }}</h3>
-        <p>
-            {{ notice.description }}<br> {{ notice.fichier.url }}
-        </p>
+        <ul>
+            <li *ngFor="let n of notice | clesJson">
+                <span *ngIf="typeOf(n.value) !== 'object'; else elseBlock">
+                    {{n.key}} : {{n.value}}
+                </span>
+                <ng-template #elseBlock>
+                    <ul>
+                        <li *ngFor="let o of n.value | clesJson">
+                            {{ o.key }} : {{ o.value }}
+                        </li>
+                    </ul>
+                </ng-template>
+            </li>
+        </ul>
     </article>
 </section>
