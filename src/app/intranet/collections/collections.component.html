@@ -23,17 +23,11 @@
             <h2>Informations sur la collection</h2>
         </header>
         <article *ngIf="collec">
-
-            <h3>{{ collec.titre }}</h3>
-            <p>- _id : {{ collec._id }}</p>
-            <p>- Alias : {{ collec.alias }}</p>
-            <p>- Type : {{ collec.type }}</p>
-            <p>- Description : {{ collec.description }}</p>
-            <p>- Type : {{ collec.type }}</p>
-            <p>- Créateur : {{ collec.createur }}</p>
-            <p *ngIf="collec.fond">- Fond : {{ collec.fond }}</p>
-            <p *ngIf="collec.langue">- Langue : {{ collec.langue }}</p>
-            <p *ngIf="collec.groupe">- Groupe : {{ collec.groupe }}</p>
+            <ul>
+                <li *ngFor="let n of collec | clesJson">
+                    <strong>{{ n.key }}</strong> : {{ n.value }}
+                </li>
+            </ul>
         </article>
         <article *ngIf="noticesServ.seriesCollec.length > 0">
             <!-- <mat-icon matTooltip="Ajouter une série à la collection">playlist_add</mat-icon> -->
@@ -70,13 +64,14 @@
 
 <!-- Valider une suppression de notice ou de collection -->
 <section *ngIf="afficheEnlever" class="pop-up">
-        <article>
-            <h3>Supprimer une notice</h3>
-            <p>En cliquant sur valider la suppression vous enleverez supprimerez la notice de cette collection.</p>
-            <p>Elle restera néanmoins disponible dans les autres collections ou pourra être intégrée dans une autre sélection.</p>
-            <button>Valider la suppression</button>
-            <button (click)="masque()">Annuler</button>
-        </article>
+    <article>
+        <h3>Supprimer une notice</h3>
+        <p>En cliquant sur valider la suppression vous enleverez supprimerez la notice de cette collection.</p>
+        <p>Elle restera néanmoins disponible dans les autres collections ou pourra être intégrée dans une autre
+            sélection.</p>
+        <button>Valider la suppression</button>
+        <button (click)="masque()">Annuler</button>
+    </article>
 </section>
 <!-- Afficher la collection choisie -->
 <app-collection *ngIf="afficheDetailCollec" [collection]="collec" (fermer)="masque()" class="unique"></app-collection>

@@ -13,13 +13,14 @@ export class UtilsService {
   constructor() {
     this.limite = 30;
   }
-
   /**
-   * 
-   * @param json Document JSON à traduire en HTML
+   * Connaître le type d'un objet
+   * @param value Valeur dont on veut connaître le type
    */
-  setJsonListe(json:JSON){
-    let html:string = '';
-    
-  }
+  typeOf(value) {
+		if(typeof value === 'object' && value.length){
+			return 'array';
+		}
+		return typeof value;
+	}
 }

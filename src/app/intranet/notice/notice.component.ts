@@ -4,6 +4,7 @@ import { CONST } from '../systeme/const';
 import { NoticeService } from "../systeme/services/notice.service";
 import { NoticeModel } from "../systeme/modeles/notice.modele";
 import { ClesJsonPipe } from "../systeme/pipes/clesJson.pipe";
+import { UtilsService } from '../systeme/library/utils.service';
 
 @Component({
 	selector: 'app-notice',
@@ -22,15 +23,11 @@ export class NoticeComponent implements OnInit {
 	@Output()
 	fermer = new EventEmitter<boolean>();
 
-	constructor(public noticeService: NoticeService) { }
+	constructor(public noticeService: NoticeService, public utils:UtilsService) { }
 
 	ngOnInit() {
 		console.log(this.notice);
 		// Récupérer la notice à afficher
 		this.notice = this.noticeService.getNotice(this.idNotice);
-	}
-	
-	typeOf(value) {
-		return typeof value;
 	}
 }

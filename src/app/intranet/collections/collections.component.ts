@@ -7,6 +7,7 @@ import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { CollectionService } from '../systeme/services/collection.service';
 import { NoticeService } from '../systeme/services/notice.service';
 import { ThrowStmt } from '@angular/compiler';
+import { UtilsService } from '../systeme/library/utils.service';
 
 @Component({
 	selector: 'app-collections',
@@ -40,7 +41,7 @@ export class CollectionsComponent implements OnInit {
 
 	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série
 
-	constructor(public colServ: CollectionService, public noticesServ:NoticeService) { }
+	constructor(public colServ: CollectionService, public noticesServ:NoticeService, public utils:UtilsService) { }
 
 	ngOnInit() {
 		// this.collec = this.colServ.collections[0];

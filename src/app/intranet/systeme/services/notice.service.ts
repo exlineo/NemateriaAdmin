@@ -47,6 +47,8 @@ export class NoticeService {
 	/**
 	 * Renvoyer une notice du tableau en fonction de son _id
 	 * @param id _id de la notice à récupérer
+	 * @param select Ajouter select à la notice pour noter qu'elle a été sélectionnée
+	 * @return NoticeModel (une notice)
 	 */
 	getNotice(id: number | string, select:boolean=false):NoticeModel {
 		for(let n of this.noticesAll){

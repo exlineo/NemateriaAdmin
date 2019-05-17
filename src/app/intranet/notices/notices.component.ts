@@ -48,7 +48,9 @@ export class NoticesComponent implements OnInit {
 	*/
 	noticeSelectionnee(idNotice): void {
 		this.idNotice = idNotice;
-		this.noticeSelection.push(this.noticesServ.getNotice(idNotice, true));
+		if(this.noticeSelection.indexOf(this.noticesServ.getNotice(idNotice)) == -1){
+			this.noticeSelection.push(this.noticesServ.getNotice(idNotice, true));
+		}
 	}
 	/**
 	 * Afficher les infos d'une notice

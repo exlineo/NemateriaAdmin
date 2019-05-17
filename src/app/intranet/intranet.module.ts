@@ -38,6 +38,7 @@ import { CollectionService } from './systeme/services/collection.service';
 
 import { FiltrePipe } from './systeme/pipes/filtre.pipe';
 import { ClesJsonPipe } from "./systeme/pipes/clesJson.pipe";
+import { UtilsService } from './systeme/library/utils.service';
 
 @NgModule({
 	imports: [
@@ -47,7 +48,7 @@ import { ClesJsonPipe } from "./systeme/pipes/clesJson.pipe";
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [NoticeService, CollectionService],
+	providers: [NoticeService, CollectionService, UtilsService],
 	declarations: [
 		HeaderComponent,
 		SidenavComponent,

@@ -24,7 +24,6 @@
             </form>
         </header>
         <ul class="notice-liste">
-
             <li *ngFor="let notice of (this.noticesServ.noticesAll | filtre:noticeFiltre)" class="notice">
                 <div [style.backgroundImage]="'url('+ notice.fichier.url +')'">
                     <!-- <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description"> -->
@@ -59,8 +58,8 @@
                 </mat-icon>
                 <mat-icon matTooltip="Créer une collection à partir de la sélection">playlist_add_check</mat-icon>
             </header>
+            
             <h2>Liste des notices sélectionnées</h2>
-
             <ul>
                 <li *ngFor="let notice of this.noticeSelection">
                     <mat-chip-list>

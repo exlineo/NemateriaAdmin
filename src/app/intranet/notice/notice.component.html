@@ -27,14 +27,39 @@
     <article>
         <h3>{{ notice.titre }}</h3>
         <ul>
+            <!-- tri dans le premier niveau de données -->
             <li *ngFor="let n of notice | clesJson">
-                <span *ngIf="typeOf(n.value) !== 'object'; else elseBlock">
-                    {{n.key}} : {{n.value}}
+                <span *ngIf="utils.typeOf(n.value) !== 'object'; else elseBlockN">
+                    <strong>{{ n.key }}</strong> : {{ n.value }}
                 </span>
-                <ng-template #elseBlock>
+                <ng-template #elseBlockN>
+                    <strong>{{ n.key }}</strong>
                     <ul>
-                        <li *ngFor="let o of n.value | clesJson">
-                            {{ o.key }} : {{ o.value }}
+                        <!-- Tri dans le deuxième niveau de données -->
+                        <li *ngFor="let m of n.value | clesJson">
+                            <span *ngIf="utils.typeOf(m.value) !== 'object'; else elseObjM">
+                                <strong>{{ m.key }}</strong> : {{ m.value }}
+                            </span>
+                            <ng-template #elseObjM>
+                                <strong>{{ m.key }}</strong>
+                                <ul>
+                                    <!-- Tri dans le deuxième niveau de données -->
+                                    <li *ngFor="let l of m.value | clesJson">
+                                        <span *ngIf="utils.typeOf(l.value) !== 'object'; else elseBlockL">
+                                            <strong>{{ l.key }}</strong> : {{ l.value }}
+                                        </span>
+                                        <ng-template #elseBlockL>
+                                            <strong>{{ l.key }}</strong>
+                                            <ul>
+                                                <!-- Tri dans le troisième niveau de données -->
+                                                <li *ngFor="let k of l.value | clesJson">
+                                                    <strong>{{ k.key }}</strong> : {{ k.value }}
+                                                </li>
+                                            </ul>
+                                        </ng-template>
+                                    </li>
+                                </ul>
+                            </ng-template>
                         </li>
                     </ul>
                 </ng-template>
