@@ -37,8 +37,8 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { CollectionService } from './systeme/services/collection.service';
 
 import { FiltrePipe } from './systeme/pipes/filtre.pipe';
-import { ClesJsonPipe } from "./systeme/pipes/clesJson.pipe";
 import { UtilsService } from './systeme/library/utils.service';
+import { FiltreNoticesPipe } from './systeme/pipes/filtre-notices.pipe';
 
 @NgModule({
 	imports: [
@@ -70,7 +70,7 @@ import { UtilsService } from './systeme/library/utils.service';
 		MappageComponent,
 		AccueilComponent,
 		FiltrePipe,
-		ClesJsonPipe
+		FiltreNoticesPipe
 	],
 	entryComponents: [OptionPopInComponent]
 })

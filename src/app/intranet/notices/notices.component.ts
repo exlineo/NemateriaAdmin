@@ -3,7 +3,7 @@ import { Component, OnInit,  EventEmitter, Output  } from '@angular/core';
 import { CONST } from '../systeme/const';
 import { NoticeService } from "../systeme/services/notice.service";
 import { NoticeModel } from "../systeme/modeles/notice.modele";
-import { FiltrePipe } from "../systeme/pipes/filtre.pipe";
+import { FiltreNoticesPipe } from "../systeme/pipes/filtre-notices.pipe";
 import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
 import { forEach } from '@angular/router/src/utils/collection';
 import { toggleLeft } from '../systeme/library/animation';
@@ -22,22 +22,24 @@ export class NoticesComponent implements OnInit {
 	noticeFiltre;
 
 	idNotice:number | string;
+	idCollection:number | string;
 
 	noticeAffiche: boolean = false; // Affichers les infos rapides d'une notice
 	filtre: any = {libre:'', dateDebut:'', dateFin:'', type:''};
 
 	afficheDetailNotice:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
+	afficheDetailCollec:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
 
 	constructor(public noticesServ: NoticeService) { }
 
 	ngOnInit() {
-		
+		this.idNotice = -1;
 	}
 	/**
 	 * Afficher le composant avec le détail des infos sur la notice
 	 * 
 	*/ 
-	afficherNotice(idNotice): void {
+	noticeOnAffiche(idNotice): void {
 		// $event.preventDefault();
 		this.idNotice = idNotice;
 		this.afficheDetailNotice = !this.afficheDetailNotice;
@@ -108,7 +110,18 @@ export class NoticesComponent implements OnInit {
 	 * Masque la notice lorsqu'on clique sur le bouton pour la fermer
 	 * @param bool Booléen pour fermer la fenêtre (false)
 	 */
-	masqueNotice(bool:boolean){
+	masque(bool:boolean){
 		this.afficheDetailNotice = bool;
+		this.afficheDetailCollec = bool;
+		this.idNotice = -1;
+		this.idCollection = -1;
+	}
+	/**
+	 * Créer ou visualiser une collection
+	 * @param id ID de la collection à afficher. -1 veut dire qu'on en crée une nouvelle
+	 */
+	collectionOnAffiche(id=-1){
+		this.idCollection = id;
+		this.afficheDetailCollec = true;
 	}
 }

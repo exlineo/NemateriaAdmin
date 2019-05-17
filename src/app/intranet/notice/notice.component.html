@@ -24,11 +24,12 @@
             </audio>
         </p>
     </header>
-    <article>
+    <article *ngIf="!update">
         <h3>{{ notice.titre }}</h3>
         <ul>
             <!-- tri dans le premier niveau de données -->
-            <li *ngFor="let n of notice | clesJson">
+            <li *ngFor="let n of notice | keyvalue">
+                
                 <span *ngIf="utils.typeOf(n.value) !== 'object'; else elseBlockN">
                     <strong>{{ n.key }}</strong> : {{ n.value }}
                 </span>
@@ -36,7 +37,7 @@
                     <strong>{{ n.key }}</strong>
                     <ul>
                         <!-- Tri dans le deuxième niveau de données -->
-                        <li *ngFor="let m of n.value | clesJson">
+                        <li *ngFor="let m of n.value | keyvalue">
                             <span *ngIf="utils.typeOf(m.value) !== 'object'; else elseObjM">
                                 <strong>{{ m.key }}</strong> : {{ m.value }}
                             </span>
@@ -44,7 +45,7 @@
                                 <strong>{{ m.key }}</strong>
                                 <ul>
                                     <!-- Tri dans le deuxième niveau de données -->
-                                    <li *ngFor="let l of m.value | clesJson">
+                                    <li *ngFor="let l of m.value | keyvalue">
                                         <span *ngIf="utils.typeOf(l.value) !== 'object'; else elseBlockL">
                                             <strong>{{ l.key }}</strong> : {{ l.value }}
                                         </span>
@@ -52,7 +53,7 @@
                                             <strong>{{ l.key }}</strong>
                                             <ul>
                                                 <!-- Tri dans le troisième niveau de données -->
-                                                <li *ngFor="let k of l.value | clesJson">
+                                                <li *ngFor="let k of l.value | keyvalue">
                                                     <strong>{{ k.key }}</strong> : {{ k.value }}
                                                 </li>
                                             </ul>

@@ -33,6 +33,18 @@ export class CollectionService {
 		)
 	}
 	/**
+	 * Renvoyer une collection du tableau en fonction de son _id
+	 * @param id _id de la notice à récupérer
+	 * @return NoticeModel (une notice)
+	 */
+	getCollection(id: number | string):CollectionModel {
+		for(let c of this.collections){
+			if(c._id == id){
+				return c;
+			}
+		}
+	}
+	/**
 	 * Mise à jour d'une collection
 	 */
 	majCollection(id){

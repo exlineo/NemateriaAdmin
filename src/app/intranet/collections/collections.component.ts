@@ -44,7 +44,7 @@ export class CollectionsComponent implements OnInit {
 	constructor(public colServ: CollectionService, public noticesServ:NoticeService, public utils:UtilsService) { }
 
 	ngOnInit() {
-		// this.collec = this.colServ.collections[0];
+		this.idCollection = -1;
 	}
 	/**
 	 * Afficher le détail d'une collection

@@ -7,3 +7,10 @@ section header,
 section article {
     width: 100%;
 }
+
+section header{
+    display:flex;
+}
+section header > * {
+    margin:auto;
+}

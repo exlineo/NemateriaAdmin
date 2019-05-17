@@ -24,7 +24,7 @@
         </header>
         <article *ngIf="collec">
             <ul>
-                <li *ngFor="let n of collec | clesJson">
+                <li *ngFor="let n of collec | keyvalue">
                     <strong>{{ n.key }}</strong> : {{ n.value }}
                 </li>
             </ul>
@@ -66,7 +66,7 @@
 <section *ngIf="afficheEnlever" class="pop-up">
     <article>
         <h3>Supprimer une notice</h3>
-        <p>En cliquant sur valider la suppression vous enleverez supprimerez la notice de cette collection.</p>
+        <p>En cliquant sur valider la suppression vous enleverez la notice de cette collection.</p>
         <p>Elle restera néanmoins disponible dans les autres collections ou pourra être intégrée dans une autre
             sélection.</p>
         <button>Valider la suppression</button>

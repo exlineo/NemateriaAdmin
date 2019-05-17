@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
+/**
+ * Fitre des objets. Permet de lister l'ensemble des clés/valeurs d'un objet/tableau
+ */
 @Pipe({
 	name: 'clesJson'
 })

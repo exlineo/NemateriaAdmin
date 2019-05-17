@@ -19,7 +19,7 @@ export class UtilsService {
    */
   typeOf(value) {
 		if(typeof value === 'object' && value.length){
-			return 'array';
+			// return 'array';
 		}
 		return typeof value;
 	}

@@ -11,7 +11,12 @@ import { CollectionService } from '../systeme/services/collection.service';
 })
 export class CollectionComponent implements OnInit {
 
-	@Input() collection: CollectionModel; // Collection transmise à l'affichage
+	@Input()
+	collection: CollectionModel; // Collection transmise à l'affichage
+
+	@Input()
+	idCollection:number | string; // ID de la collection à afficher
+
 	@Output()
 	fermer = new EventEmitter<boolean>();
 
@@ -20,7 +25,13 @@ export class CollectionComponent implements OnInit {
 	
 	constructor(public colServ: CollectionService) { }
 
-	ngOnInit() {}
+	ngOnInit() {
+		if(this.idCollection != -1){
+			this.collection = this.colServ.getCollection(this.idCollection); // Récupérer la collection à visualiser / updater
+		}else{
+			this.collection = <CollectionModel>{}; // Créer une collection vide
+		}
+	}
 
 	collectionOnClick(): void {
 		this.affiche = true;

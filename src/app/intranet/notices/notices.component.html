@@ -24,11 +24,11 @@
             </form>
         </header>
         <ul class="notice-liste">
-            <li *ngFor="let notice of (this.noticesServ.noticesAll | filtre:noticeFiltre)" class="notice">
+            <li *ngFor="let notice of (this.noticesServ.noticesAll | filtreNotices:filtre)" class="notice">
                 <div [style.backgroundImage]="'url('+ notice.fichier.url +')'">
                     <!-- <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description"> -->
                     <div>
-                        <mat-icon (click)="afficherNotice(notice._id)" matTooltip="Voir la fiche de la notice">
+                        <mat-icon (click)="noticeOnAffiche(notice._id)" matTooltip="Voir la fiche de la notice">
                             visibility</mat-icon>
                         <mat-icon (click)="noticeSelectionnee(notice._id)"
                             matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
@@ -38,8 +38,8 @@
                     </div>
                 </div>
                 <div>
-                    <h3>{{notice.nom}}</h3>
-                    <p>{{notice.description}}</p>
+                    <h3>{{ notice.nom }}</h3>
+                    <p>{{ notice.description }}</p>
                     <div>
                         <mat-icon *ngIf="notice.selected">check_circle</mat-icon>
                         <mat-icon *ngIf="!notice.selected">check_circle_outline</mat-icon>
@@ -56,7 +56,7 @@
                 </mat-icon>
                 <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">clear_all
                 </mat-icon>
-                <mat-icon matTooltip="Créer une collection à partir de la sélection">playlist_add_check</mat-icon>
+                <mat-icon matTooltip="Créer une collection à partir de la sélection" (click)="collectionOnAffiche()">playlist_add_check</mat-icon>
             </header>
             
             <h2>Liste des notices sélectionnées</h2>
@@ -84,5 +84,5 @@
         </section>
     </aside>
 </section>
-<app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masqueNotice($event)" class="unique">
-</app-notice>
+<app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masque()" class="unique"></app-notice>
+<app-collection *ngIf="afficheDetailCollec" [idCollection]="idCollection" (fermer)="masque()" class="unique"></app-collection>
