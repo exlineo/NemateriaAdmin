@@ -5,13 +5,13 @@ section.screen section {
 section.screen section header>div {
     float: right;
 }
-
-.left-panel {
+aside:nth-child(1){
+    background-color:#FFD600;
     flex-grow: 1;
     min-width: 150px;
-}
+}*
 
-.left-panel ul li {
+aside:nth-child(1) ul li {
     cursor: pointer;
     padding: 10px;
     margin-bottom: 5px;
@@ -19,16 +19,16 @@ section.screen section header>div {
     transition: all .3s ease;
 }
 
-.left-panel ul li mat-icon {
+aside:nth-child(1) ul li mat-icon {
     margin-top: -5px;
     float: right;
 }
 
-.left-panel ul li:hover {
+aside:nth-child(1) ul li:hover {
     background: grey;
 }
 
-.left-panel>* {
+aside:nth-child(1)>* {
     width: 100%;
 }
 
@@ -37,11 +37,17 @@ section.screen>section {
     min-width: 30%;
 }
 
-.right-panel {
+aside:nth-child(3) {
     flex-grow: 4;
     min-width: 40%;
+    background-color: rgba(255, 213, 0, 0.5);
+    padding:0;
 }
 
-.right-panel .notice {
+aside:nth-child(3) .notice {
     width: 50%;
+}
+aside:nth-child(3) ul, aside:nth-child(3) section {
+    padding:0;
+    margin:0;
 }

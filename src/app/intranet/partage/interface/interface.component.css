@@ -7,5 +7,6 @@ section:nth-child(1){
 }
 section:nth-child(2){
     width:calc(100% - 80px);
-    flex-flow: column wrap;
+    height:100vh;
+    flex-flow: column nowrap;
 }

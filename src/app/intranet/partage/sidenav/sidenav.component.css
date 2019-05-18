@@ -3,23 +3,22 @@
 	sidenav
 ////////////////
 */
-
+nav{
+    margin:auto 0;
+}
 nav ul {
     display: flex;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 64px;
-    height: 100vh;
-    padding: 128px 0 0 8px;
     flex-direction: column;
+    margin:0;
+    padding:0;
 }
 
 nav li {
     width: 48px;
     height: 48px;
-    margin-bottom: 8px;
+    margin:0 auto 8px;
     background-color: white;
+    list-style: none;
 }
 
 nav li a {
@@ -31,7 +30,7 @@ nav li a {
 }
 
 nav li a:hover {
-    background-color: orangered;
+    background-color: #FFD600;
 }
 
 nav li mat-icon {
@@ -40,5 +39,106 @@ nav li mat-icon {
 }
 
 .active {
-    background-color: yellow;
+    background-color:#eb974e;
+}
+
+/* LOGO */
+/** Logo **/
+
+header.logo {
+    width:80px;
+    margin:15px 0 70px -3px;
+}
+
+header.logo:hover {
+	text-shadow: 0 0px 5px rgba(0, 0, 0, 1);
+}
+.logo {
+	display: flex;
+	width: 100%;
+	text-align: center;
+	font-size: 8px;
+	font-family: 'Raleway',	Arial,sans-serif;
+	color:#FFD600;
+	text-shadow: 0 0px 3px rgba(0, 0, 0, .5);
+	transition:text-shadow .3s ease;
+	height:75px;
+}
+
+.logo * {
+  -webkit-box-sizing: padding-box;
+  box-sizing: padding-box;
+}
+.logo > div:nth-child(2){
+	margin:auto;
+	line-height:75px;
+}
+.logo h1{
+	margin: 0;
+	line-height: 0.8em;
+}
+
+.logo h1 {
+	font-family: 'Lora', Arial, sans-serif;
+	font-size: 14px;
+}
+
+.logo h5 {
+	line-height: 0.5em;
+	font-weight: 400;
+}
+
+.logo .square {
+	height: 40px;
+	width: 40px;
+	overflow: hidden;
+	content: '';
+	position:absolute;
+    margin-left:42px;
+    margin-top:9px;
+	transform: rotate(45deg);
+	transform-origin: 0 0;
+}
+
+.logo .square:before,
+.logo .square:after,
+.logo .square div:before,
+.logo .square div:after {
+	background-color: #FFD600;
+	position: absolute;
+	content: "";
+	display: block;
+	-webkit-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.logo .square:before,
+.logo .square:after {
+	height: 2px;
+	width: 40%;
+}
+
+.logo .square div:before,
+.logo .square div:after {
+	width: 2px;
+	height: 40%;
+}
+
+.logo .square:before,
+.logo .square div:before {
+	left: 0;
+	top: 0;
+}
+
+.logo .square:after,
+.logo .square div:after {
+	bottom: 0;
+	right: 0;
+}
+
+a.settings{
+    position:absolute;
+    left:20px;
+    bottom:20px;
+    color:#FFF;
 }

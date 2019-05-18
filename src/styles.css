@@ -24,6 +24,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow:hidden;
 }
 
 body {}
@@ -115,7 +116,6 @@ main>div:nth-child(2) {
 section.screen {
     width: 100vw;
     height: 100vh;
-    padding-top: 64px;
     align-items: stretch;
     flex-flow: row nowrap;
     overflow: hidden;
@@ -152,7 +152,7 @@ header, header form {
     width: 100%;
 }
 header.filtre{
-    min-height: 200px;
+    min-height: 150px;
     flex-flow:column wrap;
 }
 header.filtre form .mat-form-field-infix{
