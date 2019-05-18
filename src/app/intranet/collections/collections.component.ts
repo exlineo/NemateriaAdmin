@@ -2,7 +2,7 @@ import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
 
 import { CONST } from '../systeme/const';
-import { CollectionModel } from '../systeme/modeles/collection.modele';
+import { CollectionModel, Collection } from '../systeme/modeles/collection.modele';
 import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { CollectionService } from '../systeme/services/collection.service';
 import { NoticeService } from '../systeme/services/notice.service';
@@ -20,20 +20,7 @@ export class CollectionsComponent implements OnInit {
 	idCollection:number | string;
 	idNotice:number | string;
 	
-	collec: CollectionModel={
-		_id: '',
-		titre: '',
-		alias: '',
-		description: '',
-		type: '',
-		createur: '',
-		fond: '',
-		langue: '',
-		groupe:[],
-		notices:[],
-		series:[],
-		selected:false
-	}; // La collection sélectionnée à afficher
+	collec: CollectionModel= new Collection(); // La collection sélectionnée à afficher
 	
 	afficheDetailCollec: boolean = false;
 	afficheDetailNotice: boolean = false;
@@ -44,20 +31,20 @@ export class CollectionsComponent implements OnInit {
 	constructor(public colServ: CollectionService, public noticesServ:NoticeService, public utils:UtilsService) { }
 
 	ngOnInit() {
-		this.idCollection = -1;
 	}
 	/**
 	 * Afficher le détail d'une collection
 	 * @param index Index de la collection dans le tableau des collections
 	 * @param idCollection Id de la collection à afficher
 	 */
-	collectionOnClick(index, idCollection): void {
+	collectionOnClick(id): void {
+		this.idCollection = id;
 		// Identifier la collection cliquée
-		this.collec = this.colServ.collections[index];
+		this.collec = this.colServ.getCollection(id);
 		console.log(this.collec);
 		// Récupérer les notices de la collection
 		this.noticesServ.getNoticesByCollec(this.collec._id);
-		this.colServ.getSeries(idCollection);
+		// this.colServ.getSeries(idCollection);
 	}
 	/**
 	 * 

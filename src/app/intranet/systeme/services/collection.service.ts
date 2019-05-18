@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CollectionModel } from '../modeles/collection.modele';
 
@@ -47,18 +47,20 @@ export class CollectionService {
 	/**
 	 * Mise à jour d'une collection
 	 */
-	majCollection(id){
-		this.http.put(SERV+'collections', this.collection).subscribe(
+	majCollection(collec:CollectionModel){
+		this.http.put(SERV+'collections/', collec).subscribe(
 			retour => {
 				console.log(retour);
-			}
+			},
+			erreur => console.log(erreur)
 		)
 	}
 	/**
 	 * Ajouter une collection
 	 */
-	ajouteCollection(){
-		this.http.post(SERV+'collections', this.collection).subscribe(
+	ajouteCollection(collec:CollectionModel){
+		console.log(this.collection);
+		this.http.post(SERV+'collections', collec).subscribe(
 			retour => {
 				console.log(retour);
 			}

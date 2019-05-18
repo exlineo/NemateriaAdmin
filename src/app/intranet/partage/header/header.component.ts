@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {  DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  profil;
+
+  constructor(private sain:DomSanitizer) { }
 
   ngOnInit() {
+    this.profil = {nom:'Lambda', img:'assets/img/profile.jpg'};
   }
 
 }

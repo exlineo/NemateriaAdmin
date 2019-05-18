@@ -1,0 +1,14 @@
+main{
+    display:flex;
+    flex-flow:row nowrap;
+    background-color:#FFD600;
+}
+
+a{
+	color:#FFF;
+}
+
+a:hover{
+	text-decoration-style: double;
+	text-decoration-color: #FFD600;
+}

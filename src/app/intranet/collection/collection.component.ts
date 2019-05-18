@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
-import { CollectionModel } from '../systeme/modeles/collection.modele';
+import { CollectionModel, Collection } from '../systeme/modeles/collection.modele';
 import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { CollectionService } from '../systeme/services/collection.service';
 
@@ -26,10 +26,11 @@ export class CollectionComponent implements OnInit {
 	constructor(public colServ: CollectionService) { }
 
 	ngOnInit() {
-		if(this.idCollection != -1){
+		console.log(this.idCollection);
+		if(this.idCollection){
 			this.collection = this.colServ.getCollection(this.idCollection); // Récupérer la collection à visualiser / updater
 		}else{
-			this.collection = <CollectionModel>{}; // Créer une collection vide
+			this.collection = new Collection(); // Créer une collection vide
 		}
 	}
 
@@ -41,5 +42,17 @@ export class CollectionComponent implements OnInit {
 	 */
 	afficheMaj(){
 		this.maj = !this.maj;
+	}
+
+	/**
+	 * Méthode utilisée pour la mise à jour ou l'écriture d'une nouvelle collection
+	 */
+	ecrire(){
+		console.log(this.collection);
+		if(this.collection._id){
+			this.colServ.majCollection(this.collection);
+		}else{
+			this.colServ.ajouteCollection(this.collection);
+		}
 	}
 }

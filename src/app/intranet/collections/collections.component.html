@@ -3,12 +3,12 @@
     <aside class="left-panel">
         <header>
             <h2>Collections disponibles</h2>
-            <mat-icon matTooltip="Ajouter une collection" (click)="afficheDetailCollec = true">playlist_add</mat-icon>
+            <mat-icon matTooltip="Ajouter une collection" (click)="afficheDetailCollec = true; idCollection = null">playlist_add</mat-icon>
         </header>
         <ul>
 
             <li *ngFor="let collection of colServ.collections; let i=index"
-                (click)="collectionOnClick(i, collection._id) ">
+                (click)="collectionOnClick(collection._id) ">
                 {{collection.titre}} ({{ collection.alias }})
                 <!-- <mat-icon matTooltip="Afficher les séries" *ngIf="collection.series" (click)="toggleSeries('series_'+collection._id)">keyboard_arrow_down</mat-icon> -->
             </li>
@@ -74,6 +74,6 @@
     </article>
 </section>
 <!-- Afficher la collection choisie -->
-<app-collection *ngIf="afficheDetailCollec" [collection]="collec" (fermer)="masque()" class="unique"></app-collection>
+<app-collection *ngIf="afficheDetailCollec" [idCollection]="idCollection" (fermer)="masque()" class="unique"></app-collection>
 <!-- Afficher la notice choisie -->
 <app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masque()" class="unique"></app-notice>

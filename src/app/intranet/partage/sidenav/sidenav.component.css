@@ -13,7 +13,6 @@ nav ul {
     height: 100vh;
     padding: 128px 0 0 8px;
     flex-direction: column;
-    background-color: grey;
 }
 
 nav li {

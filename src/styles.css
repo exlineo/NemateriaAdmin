@@ -1,4 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files
+Design : http://quanticalabs.com/Node/Template/#!/home
+#656973 : base bleu sombre
+
+#41ab6b : vert
+#FFD600 : jaune
+#f06060 : rouge
+#a3c6c2 : bleu vert gris
+#eb974e : orange
+#13c7af : bleu vert vif
+#96a94b : caca d'oie
+*/
 
 
 /*
@@ -152,6 +163,7 @@ header.filtre form .mat-form-field-infix{
 header.filtre form .mat-form-field-infix > *{
     /* width: auto; */
 }
+
 aside {
     padding: 0;
 }

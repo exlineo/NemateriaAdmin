@@ -1,10 +1,7 @@
 <header>
-	<section class="profil">
-		<div class="profil-img-cptn">
-			<img src="assets/img/profile.jpg" alt="" class="profil-img-picto">
-		</div>
-		<span class="profil-title">
+	<div [style.background-image]="this.sain.bypassSecurityTrustStyle('url('+ profil.img +')')" class="img">
+	</div>
+	<span class="profil-title">
 			Profil
-		</span>
-	</section>
+	</span>
 </header>

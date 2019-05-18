@@ -24,6 +24,8 @@ import { NotificationService } from "./extranet/systeme/services/notification.se
 
 import { AuthIntercepteur } from "./extranet/systeme/services/auth.intercepteur";
 import { SecuriteIntercepteur } from './extranet/systeme/services/securite.intercepteur';
+import { ExtranetComponent } from './extranet/extranet.component';
+import { ActualitesComponent } from './extranet/actualites/actualites.component';
 
 @NgModule({
 	imports: [
@@ -39,7 +41,9 @@ import { SecuriteIntercepteur } from './extranet/systeme/services/securite.inter
 		AppComponent,
 		ConnexionComponent,
 		Erreur404Component,
-		InscriptionComponent
+		InscriptionComponent,
+		ExtranetComponent,
+		ActualitesComponent
 	],
 	providers: [AuthService, TokenService, NotificationService, { provide: HTTP_INTERCEPTORS, useClass: AuthIntercepteur, multi: true }, , { provide: HTTP_INTERCEPTORS, useClass:SecuriteIntercepteur, multi:true}],
 	bootstrap: [AppComponent]

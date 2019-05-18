@@ -1,0 +1,53 @@
+section {
+	height: 100vh;
+    padding-left:50px;
+    flex-direction:row;
+}
+
+section a{
+    color:#FFF;
+}
+
+section > * {
+    color: white;
+    width:50%;
+}
+
+section header{
+    
+    flex-direction:column;
+	margin-top: 20vh;
+    margin-bottom: 2rem;
+    text-align:right;
+    padding-right:8%;
+}
+h1{
+    font-size: 3.5rem;
+}
+h1, h2{
+    margin:5px 0;
+    font-weight: bold;
+}
+h3{
+    margin-top:5px;
+}
+p {
+    font-size: 1.4rem;
+    font-weight: 200;
+}
+hr {
+	display: block;
+	clear: both;
+	height: 0;
+	margin: 10px 0;
+	padding: 0;
+	border: 1px dashed rgba(255,255,255,.5);
+    line-height: 1;
+    width:50%;
+}
+hr:nth-child(1){
+    margin-left:50%;
+}
+hr:nth-child(2){
+    width:50%;
+}
