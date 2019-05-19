@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CollectionService } from '../systeme/services/collection.service';
+import { NoticeService } from '../systeme/services/notice.service';
 
 @Component({
   selector: 'app-accueil',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccueilComponent implements OnInit {
 
-  constructor() { }
+  constructor(public colServ:CollectionService, public noticesServ:NoticeService) { }
 
   ngOnInit() {
   }

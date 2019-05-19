@@ -7,69 +7,29 @@ import { useAnimation, transition, trigger, style, animate, state } from '@angul
 import { forEach } from '@angular/router/src/utils/collection';
 import { toggleLeft } from '../systeme/library/animation';
 import { ScanService } from '../systeme/services/scan.service';
+import { UtilsService } from '../systeme/library/utils.service';
 
 @Component({
 	selector: 'app-scanner',
 	templateUrl: './scanner.component.html',
-	styleUrls: ['./scanner.component.css'],
-	animations: [
-		trigger('openCloseLeftPanel', [
-			state('open', style({
-				width: CONST.lg
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate(CONST.delai)
-			]),
-			transition('closed => open', [
-				animate(CONST.delai)
-			]),
-		]),
-		trigger('openCloseRightPanel', [
-			state('open', style({
-				width: CONST.ld
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate(CONST.delai)
-			]),
-			transition('closed => open', [
-				animate(CONST.delai)
-			]),
-		]),
-	]
+	styleUrls: ['./scanner.component.css']
 })
 export class ScannerComponent implements OnInit {
+	
 	scanListe:Array<string>;
 
-	leftPanelIsOpen:boolean = true;
-	rightPanelIsOpen:boolean = true;
+	panelOpenState = false;
 
-	constructor(public scanServ:ScanService) { }
+	constructor(public scanServ:ScanService, public utils:UtilsService) { }
 
 	ngOnInit() {
-		this.scanServ.getDir();
+		// this.scanServ.getDir();
 	}
 	/**
 	 * Accéder aux notices d'une scan
 	 * @param dossier Dossier scanné pour afficher la liste des notices
 	 */
 	scanOnClick(dossier){
-
+		this.scanServ.getDir(dossier);
 	}
-	
-	toggleLeftPanel($event): void {
-		$event.preventDefault();
-		this.leftPanelIsOpen = !this.leftPanelIsOpen;
-	}
-
-	toggleRightPanel($event): void {
-		$event.preventDefault();
-		this.rightPanelIsOpen = !this.rightPanelIsOpen;
-	}
-	
 }

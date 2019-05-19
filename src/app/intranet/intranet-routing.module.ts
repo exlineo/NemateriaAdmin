@@ -6,22 +6,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { InterfaceComponent } from './partage/interface/interface.component';
 
 import { NoticeComponent } from './notice/notice.component';
-import { CollectionComponent } from './collection/collection.component';
 import { ScannerComponent } from './scanner/scanner.component';
-import { FiltreComponent } from './filtre/filtre.component';
 
-import { ListeMediaComponent } from "./media/liste-media/liste-media.component";
-import { FicheMediaComponent } from "./media/fiche-media/fiche-media.component";
-import { AjouterMediaComponent } from "./media/ajouter-media/ajouter-media.component";
-import { ModifierMediaComponent } from './media/modifier-media/modifier-media.component';
-
-import { FicheProfileComponent } from "./profile/fiche-profile/fiche-profile.component";
 import { NoticesComponent } from './notices/notices.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { FiltresComponent } from './filtres/filtres.component';
 import { MappagesComponent } from './mappages/mappages.component';
 import { MappageComponent } from './mappage/mappage.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { ParametresComponent } from './partage/parametres/parametres.component';
 
 const routes: Routes = [
 	{
@@ -34,7 +27,8 @@ const routes: Routes = [
 			{ path: 'mappages', component: MappagesComponent },
 			{ path: 'mappage/:id', component: MappageComponent },
 			{ path: 'filtres', component:FiltresComponent },
-			{ path: 'filtre/:id', component:FiltresComponent }
+			{ path: 'filtre/:id', component:FiltresComponent },
+			{ path: 'parametres', component:ParametresComponent}
 		]
 	},
 ];

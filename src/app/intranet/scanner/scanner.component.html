@@ -1,70 +1,62 @@
-<section class="screen">
-    <mat-icon (click)="toggleLeftPanel($event)" class="left-btn">settings_ethernet</mat-icon>
-    <aside class="left-panel">
+<section class="screen triple">
+    <aside>
         <header>
-            <h2>Liste des dossiers médias</h2>
+            <h2>Liste des dossiers de votre serveur</h2>
+            <hr>
+            <p>En cliquant sur un dossier vous pourrez afficher les métadonnées des fichiers qu'il contient pour en
+                vérifier la qualité</p>
         </header>
         <ul>
-            <li *ngFor="let scan of this.scanListe" (click)="scanOnClick()">
-                {{scan}}
-            </li>
+            <li *ngFor="let d of scanServ.listeDossiers" (click)="scanOnClick(d)"> {{d}} </li>
         </ul>
     </aside>
     <section>
-        <ul class="notice-liste">
-
-            <li *ngFor="let notice of (this.noticeListe | filtre:noticeFiltre)" class="notice">
-                <div [style.backgroundImage]="'url('+ notice.dossier + '/' + notice.fichier +')'">
-                    <!-- <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description"> -->
-                    <div>
-                        <mat-icon (click)="noticeAfficheDetail($event, notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
-                        <mat-icon (click)="noticeOnChoisi($event, notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
-                        <mat-icon (click)="noticeOnInfo($event, notice._id)" matTooltip="Informations synthétiques sur la notice">info</mat-icon>
-                        <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
-                    </div>
-                </div>
-                <div>
-                    <h3>{{notice.nom}}</h3>
-                    <p>{{notice.description}}</p>
-                    <div>
-                        <mat-icon *ngIf="notice.selected">check_circle</mat-icon>
-                        <mat-icon *ngIf="!notice.selected">check_circle_outline</mat-icon>
-                    </div>
-                </div>
-
-            </li>
-        </ul>
+        <header>
+            <h2>Métadonnées</h2>
+            <hr>
+            <p>Liste des métadonnées scannées dans le dossier sélectionné</p>
+        </header>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let s of scanServ.scans">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{ s['Title'] }} ({{ s['Identifiant_unique'] }})
+                    </mat-panel-title>
+                    <!-- <mat-panel-description>
+                        {{ s['Identifiant_unique'] }}
+                    </mat-panel-description> -->
+                </mat-expansion-panel-header>
+                <ul>
+                    <li *ngFor="let m of s | keyvalue">
+                            <span *ngIf="utils.typeOf(m.value) !== 'object'; else elseObjM">
+                                <strong>{{ m.key }}</strong> : {{ m.value }}
+                            </span>
+                            <ng-template #elseObjM>
+                                <strong>{{ m.key }}</strong>
+                                <ul>
+                                    <!-- Tri dans le deuxième niveau de données -->
+                                    <li *ngFor="let l of m.value | keyvalue">
+                                        <span *ngIf="utils.typeOf(l.value) !== 'object'; else elseBlockL">
+                                            <strong>{{ l.key }}</strong> : {{ l.value }}
+                                        </span>
+                                        <ng-template #elseBlockL>
+                                            <strong>{{ l.key }}</strong>
+                                            <ul>
+                                                <!-- Tri dans le troisième niveau de données -->
+                                                <li *ngFor="let k of l.value | keyvalue">
+                                                    <strong>{{ k.key }}</strong> : {{ k.value }}
+                                                </li>
+                                            </ul>
+                                        </ng-template>
+                                    </li>
+                                </ul>
+                            </ng-template>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+        </mat-accordion>
     </section>
-    <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
-        <section class="demi">
-            <header>
-                <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleRightPanel($event)">settings_ethernet</mat-icon>
-                <mat-icon matTooltip="Sélectionner toutes les notices" (click)="noticesToutesChoisies()">select_all</mat-icon>
-                <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">clear_all</mat-icon>
-                <mat-icon matTooltip="Créer une collection à partir de la sélection">playlist_add_check</mat-icon>
-            </header>
-            <h2>Liste des notices sélectionnées</h2>
+    <aside>
 
-            <ul>
-                <li *ngFor="let notice of this.noticeSelection">
-                    <mat-chip-list>
-                        <mat-chip (removed)="noticeSelectionRemove(notice._id)">
-                            {{notice.nom}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                    </mat-chip-list>
-                </li>
-            </ul>
-        </section>
-        <section class="demi">
-            <h2>Métadonnées d’une notice sélectionnée</h2>
-            <article *ngIf="this.noticeAffiche">
-                <h3>{{this.noticeElement.nom}}</h3>
-                <p>
-                    {{this.noticeElement.description}}<br> {{this.noticeElement.dossier}}{{this.noticeElement.fichier}}
-                </p>
-            </article>
-        </section>
     </aside>
 </section>
-<app-notice *ngIf="afficheDetailNotice" [notice]="noticeElement" (fermer)="masqueNotice($event)" class="unique"></app-notice>

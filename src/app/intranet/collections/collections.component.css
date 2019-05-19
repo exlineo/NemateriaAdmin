@@ -5,32 +5,7 @@ section.screen section {
 section.screen section header>div {
     float: right;
 }
-aside:nth-child(1){
-    background-color:#FFD600;
-    flex-grow: 1;
-    min-width: 150px;
-}*
 
-aside:nth-child(1) ul li {
-    cursor: pointer;
-    padding: 10px;
-    margin-bottom: 5px;
-    background: #FFF;
-    transition: all .3s ease;
-}
-
-aside:nth-child(1) ul li mat-icon {
-    margin-top: -5px;
-    float: right;
-}
-
-aside:nth-child(1) ul li:hover {
-    background: grey;
-}
-
-aside:nth-child(1)>* {
-    width: 100%;
-}
 
 section.screen>section {
     flex-grow: 3;

@@ -4,35 +4,58 @@ import { SERV } from '../config';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class ScanService {
 
-  scans;
+	scans: any;
+	listeDossiers: any; // La liste des dossiers disponibles
 
-  constructor(private http:HttpClient) { }
+	constructor(private http: HttpClient) {
+		this.getListeDossiers();
+	}
 
-  /**
-	 * Récupérer l'ensemble des collections disponibles dans le depôt
+	/**
+	 * Liste les dossiers scannables
 	 */
-	getMetaFiles(dir:string, f:string): void {
-		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
-		this.http.get(SERV+'scans/'+dir, {params:{'f':f}}).subscribe(
+	getListeDossiers() {
+		this.http.get(SERV + 'scans').subscribe(
 			data => {
 				console.log(data);
-				this.scans = data;
+				this.listeDossiers = data;
 			}
 		)
-  }
+	}
+	/**
+	   * Récupérer les métadonnées d'un fichier donné
+	   */
+	getMetaFiles(dir: string, f: string): void {
+		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
+		this.http.get(SERV + 'scans/' + dir, { params: { 'f': f } }).subscribe(
+			fichier => {
+				console.log(fichier['data']);
+				this.scans = fichier['data'];
+			}
+		)
+	}
+	/**
+	 * Récupérer la liste des métadonnées d'un dossier en particulier
+	 */
+	getDir(dir:string): void {
+		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
+		this.http.get(SERV + 'scans/'+dir).subscribe(
+			fichiers => {
+				fichiers['data'].forEach(f => {
+					for(let i in f){
+						if(i.indexOf('Ingredient') !== -1 || i.indexOf('Pantry') !== -1){
+							delete f[i];
+						}
+					}
+										
+				});
+				this.scans = fichiers['data'];
+			}
+		)
+	}
 
-  getDir(): void {
-		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
-		this.http.get(SERV+'scans/courtav/').subscribe(
-			data => {
-				console.log(data);
-				this.scans = data;
-			}
-		)
-  }
-  
 }

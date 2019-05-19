@@ -1,15 +1,15 @@
 section.screen section {
     padding: 10px 15px;
-    background-color: #96a94b8a;
 }
 
 section.screen section header>div {
     float: right;
 }
 aside:nth-child(1){
-    background-color:#96a94b;
+    background-color:#f06060;
     flex-grow: 1;
     min-width: 150px;
+    color:#FFF;
 }*
 
 aside:nth-child(1) ul li {
@@ -34,20 +34,15 @@ aside:nth-child(1)>* {
 }
 
 section.screen>section {
-    flex-grow: 3;
-    min-width: 30%;
+    flex-grow: 1;
 }
 
 aside:nth-child(3) {
-    flex-grow: 4;
-    min-width: 40%;
-    background-color:#96a94b2c;
+    flex-grow: 1;
+    background-color: #f060607a;
     padding:0;
 }
 
-aside:nth-child(3) .notice {
-    width: 50%;
-}
 aside:nth-child(3) ul, aside:nth-child(3) section {
     padding:0;
     margin:0;

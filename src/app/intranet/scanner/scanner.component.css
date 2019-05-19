@@ -1,56 +1,16 @@
-/*
-////////////////
-    Notice
-////////////////
-*/
-
-
-/* screen */
-
-.left-full-width {
-    width: 100%;
+section > aside:nth-child(1){
+    flex:1;
+    background-color: #6EBADA;
 }
 
-.right-panel {
-    display: block;
-    height: 100%;
-    flex-shrink: 0;
-    overflow: hidden;
+section header{
+    flex-direction:column;
+    padding:0 10px;
 }
-
-.left-btn {
-    display: block;
-    position: absolute;
-    z-index: 10;
-    top: 16px;
-    left: 16px;
-    width: 32px;
-    height: 32px;
-    font-size: 24px;
-    text-align: center;
-    line-height: 30px;
-    background-color: white;
+section > section{
+    flex:2;
+    background-color: rgba(110, 186, 218, 0.5);
 }
-
-.right-btn {
-    display: block;
-    position: absolute;
-    top: 16px;
-    right: 64px;
-    width: 32px;
-    height: 32px;
-    font-size: 24px;
-    text-align: center;
-    line-height: 30px;
-    background-color: white;
-}
-
-
-/* notices */
-
-section>ul {
-    display: flex;
-    height: auto;
-    width: 100%;
-    flex-flow: row wrap;
+section > aside:nth-child(3){
+    flex:2;
 }

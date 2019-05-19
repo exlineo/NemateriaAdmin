@@ -18,11 +18,6 @@ import { HeaderComponent } from 'src/app/intranet/partage/header/header.componen
 import { SidenavComponent } from 'src/app/intranet/partage/sidenav/sidenav.component';
 import { InterfaceComponent } from 'src/app/intranet/partage/interface/interface.component';
 import { OptionPopInComponent } from 'src/app/intranet/partage/option-pop-in/option-pop-in.component';
-import { ListeMediaComponent } from "./media/liste-media/liste-media.component";
-import { FicheMediaComponent } from "./media/fiche-media/fiche-media.component";
-import { AjouterMediaComponent } from "./media/ajouter-media/ajouter-media.component";
-import { ModifierMediaComponent } from './media/modifier-media/modifier-media.component';
-import { FicheProfileComponent } from "./profile/fiche-profile/fiche-profile.component";
 
 import { NoticeComponent } from './notice/notice.component';
 import { CollectionComponent } from './collection/collection.component';
@@ -39,6 +34,7 @@ import { CollectionService } from './systeme/services/collection.service';
 import { FiltrePipe } from './systeme/pipes/filtre.pipe';
 import { UtilsService } from './systeme/library/utils.service';
 import { FiltreNoticesPipe } from './systeme/pipes/filtre-notices.pipe';
+import { ParametresComponent } from './partage/parametres/parametres.component';
 
 @NgModule({
 	imports: [
@@ -54,11 +50,6 @@ import { FiltreNoticesPipe } from './systeme/pipes/filtre-notices.pipe';
 		SidenavComponent,
 		InterfaceComponent,
 		OptionPopInComponent,
-		ListeMediaComponent,
-		FicheMediaComponent,
-		AjouterMediaComponent,
-		ModifierMediaComponent,
-		FicheProfileComponent,
 		NoticeComponent,
 		CollectionComponent,
 		ScannerComponent,
@@ -70,7 +61,8 @@ import { FiltreNoticesPipe } from './systeme/pipes/filtre-notices.pipe';
 		MappageComponent,
 		AccueilComponent,
 		FiltrePipe,
-		FiltreNoticesPipe
+		FiltreNoticesPipe,
+		ParametresComponent
 	],
 	entryComponents: [OptionPopInComponent]
 })

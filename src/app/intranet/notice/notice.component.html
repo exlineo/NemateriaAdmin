@@ -32,6 +32,7 @@
                 
                 <span *ngIf="utils.typeOf(n.value) !== 'object'; else elseBlockN">
                     <strong>{{ n.key }}</strong> : {{ n.value }}
+                    <!-- <strong>{{ n.key }} </strong> : <input [(ngModel)]="n.value" [name]="n.key" [disabled]="active === 1 ? false : true"> -->
                 </span>
                 <ng-template #elseBlockN>
                     <strong>{{ n.key }}</strong>

@@ -30,7 +30,7 @@ body {
 body {}
 
 * {
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Noto Serif SC', serif;
     box-sizing: border-box;
 }
@@ -65,6 +65,17 @@ p {}
 a {
     color: orangered;
     text-decoration: none;
+}
+
+hr {
+	display: block;
+	clear: both;
+	height: 0;
+	margin: 10px 0;
+	padding: 0;
+	border: 1px dashed rgba(255,255,255,.5);
+    line-height: 1;
+    width:50%;
 }
 
 main,
@@ -238,7 +249,32 @@ aside>* {
     padding: 10px;
 }
 
-aside ul li {}
+aside:nth-child(1){
+    background-color:#FFD600;
+    flex-grow: 1;
+    min-width: 150px;
+}
+
+aside:nth-child(1) ul li {
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 5px;
+    background: #FFF;
+    transition: all .3s ease;
+}
+
+aside:nth-child(1) ul li mat-icon {
+    margin-top: -5px;
+    float: right;
+}
+
+aside:nth-child(1) ul li:hover {
+    background: grey;
+}
+
+aside:nth-child(1)>* {
+    width: 100%;
+}
 
 
 /*
