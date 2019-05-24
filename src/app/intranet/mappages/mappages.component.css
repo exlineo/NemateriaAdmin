@@ -1,0 +1,22 @@
+section>aside:nth-child(1) {
+    flex: 1;
+    background-color: #6EBADA;
+}
+
+section header {
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+section>section {
+    flex: 1;
+    background-color: rgba(110, 186, 218, 0.5);
+}
+
+section>aside:nth-child(3) {
+    flex: 1;
+}
+
+section>aside:nth-child(3) hr {
+    border-color: #CCC;
+}

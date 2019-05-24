@@ -3,8 +3,7 @@
         <header>
             <h2>Liste des dossiers de votre serveur</h2>
             <hr>
-            <p>En cliquant sur un dossier vous pourrez afficher les métadonnées des fichiers qu'il contient pour en
-                vérifier la qualité</p>
+            <p>En cliquant sur un dossier vous pourrez afficher les métadonnées des fichiers qu'il contient pour en vérifier la qualité</p>
         </header>
         <ul>
             <li *ngFor="let d of scanServ.listeDossiers" (click)="scanOnClick(d)"> {{d}} </li>
@@ -15,6 +14,8 @@
             <h2>Métadonnées</h2>
             <hr>
             <p>Liste des métadonnées scannées dans le dossier sélectionné</p>
+            <button>Extraire le schéma des données pour un mappage</button>
+
         </header>
         <mat-accordion>
             <mat-expansion-panel *ngFor="let s of scanServ.scans">
@@ -28,35 +29,52 @@
                 </mat-expansion-panel-header>
                 <ul>
                     <li *ngFor="let m of s | keyvalue">
-                            <span *ngIf="utils.typeOf(m.value) !== 'object'; else elseObjM">
+                        <span *ngIf="utils.typeOf(m.value) !== 'object'; else elseObjM">
                                 <strong>{{ m.key }}</strong> : {{ m.value }}
                             </span>
-                            <ng-template #elseObjM>
-                                <strong>{{ m.key }}</strong>
-                                <ul>
-                                    <!-- Tri dans le deuxième niveau de données -->
-                                    <li *ngFor="let l of m.value | keyvalue">
-                                        <span *ngIf="utils.typeOf(l.value) !== 'object'; else elseBlockL">
+                        <ng-template #elseObjM>
+                            <strong>{{ m.key }}</strong>
+                            <ul>
+                                <!-- Tri dans le deuxième niveau de données -->
+                                <li *ngFor="let l of m.value | keyvalue">
+                                    <span *ngIf="utils.typeOf(l.value) !== 'object'; else elseBlockL">
                                             <strong>{{ l.key }}</strong> : {{ l.value }}
                                         </span>
-                                        <ng-template #elseBlockL>
-                                            <strong>{{ l.key }}</strong>
-                                            <ul>
-                                                <!-- Tri dans le troisième niveau de données -->
-                                                <li *ngFor="let k of l.value | keyvalue">
-                                                    <strong>{{ k.key }}</strong> : {{ k.value }}
-                                                </li>
-                                            </ul>
-                                        </ng-template>
-                                    </li>
-                                </ul>
-                            </ng-template>
+                                    <ng-template #elseBlockL>
+                                        <strong>{{ l.key }}</strong>
+                                        <ul>
+                                            <!-- Tri dans le troisième niveau de données -->
+                                            <li *ngFor="let k of l.value | keyvalue">
+                                                <strong>{{ k.key }}</strong> : {{ k.value }}
+                                            </li>
+                                        </ul>
+                                    </ng-template>
+                                </li>
+                            </ul>
+                        </ng-template>
                     </li>
                 </ul>
             </mat-expansion-panel>
         </mat-accordion>
     </section>
     <aside>
-
+        <header>
+            <h2>Appliquer un filtre aux données</h2>
+            <hr>
+            <p>Choisissez une filtre dans la liste ci-dessous, vérifiez le résulat et cliquez sur 'enregistrer les données filtrées' pour les stocker formattées dans la base.</p>
+        </header>
+        <article>
+            <form>
+                <label for="filtres">Choissez un filtre pour les données *</label>
+                <select name="filtre" required>
+                    <option>Filtre 1</option>
+                    <option>Filtre 2</option>
+                    <option>Filtre 3</option>
+                </select>
+                <label for="set">Donnez ou modifiez le nom du set données à enregistrer *</label>
+                <input name="set" placeholder="Donnez ou modifiez le nom du set de données" required [(ngModel)]="set" minlength="4">
+                <button>Enregistrer les données filtrées</button>
+            </form>
+        </article>
     </aside>
 </section>

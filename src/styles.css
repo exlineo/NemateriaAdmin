@@ -24,7 +24,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 body {}
@@ -49,7 +49,7 @@ h1 {
 
 h2 {
     font-size: 26px;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
 
 h3 {
@@ -68,14 +68,14 @@ a {
 }
 
 hr {
-	display: block;
-	clear: both;
-	height: 0;
-	margin: 10px 0;
-	padding: 0;
-	border: 1px dashed rgba(255,255,255,.5);
+    display: block;
+    clear: both;
+    height: 0;
+    margin: 10px 0;
+    padding: 0;
+    border: 1px dashed rgba(255, 255, 255, .5);
     line-height: 1;
-    width:50%;
+    width: 50%;
 }
 
 main,
@@ -139,39 +139,52 @@ section.screen>aside {
     display: block;
 }
 
-section.double > section {
-    width:70vw;
-}
-section.double > aside {
-    width:30vw;
+section.double>section {
+    width: 70vw;
 }
 
-section.triple > section{
-    width:30vw;
+section.double>aside {
+    width: 30vw;
 }
-section.triple> aside:nth-child(1) {
-    width:20vw;
+
+section.triple>section {
+    width: 30vw;
 }
-section.triple > aside:nth-child(3) {
-    width:50vw;
+
+section.triple>aside:nth-child(1) {
+    width: 20vw;
 }
+
+section.triple>aside:nth-child(3) {
+    width: 50vw;
+}
+
 section.screen article {
     width: 100%;
 }
 
-header, header form {
+header,
+header form {
     width: 100%;
 }
-header.filtre{
+
+header.filtre {
     min-height: 150px;
-    flex-flow:column wrap;
+    flex-flow: column wrap;
 }
-header.filtre form .mat-form-field-infix{
+
+header.filtre form .mat-form-field-infix {
     width: 100%;
-    display:flex;
-    flex-flow:row wrap;
+    display: flex;
+    flex-flow: row wrap;
 }
-header.filtre form .mat-form-field-infix > *{
+
+section header {
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+header.filtre form .mat-form-field-infix>* {
     /* width: auto; */
 }
 
@@ -207,13 +220,12 @@ section.demi {
     flex-flow: row wrap;
     height: 50% !important;
     padding: 16px;
-    width:auto;
+    width: auto;
 }
 
 section.demi:nth-child(1) {
     background-color: lightgray;
     overflow-y: auto;
-
 }
 
 section.demi:nth-child(2) {
@@ -249,8 +261,8 @@ aside>* {
     padding: 10px;
 }
 
-aside:nth-child(1){
-    background-color:#FFD600;
+aside:nth-child(1) {
+    background-color: #FFD600;
     flex-grow: 1;
     min-width: 150px;
 }
@@ -287,7 +299,8 @@ form {
     display: flex;
 }
 
-input, input.mat-input-element,
+input,
+input.mat-input-element,
 textarea,
 select,
 button {
@@ -726,7 +739,8 @@ select:hover {
 
 /* AFFICHAGE DE LA NOTICE SELECTIONNEE */
 
-.unique, .pop-up {
+.unique,
+.pop-up {
     position: absolute;
     right: 0;
     left: 0;
@@ -739,17 +753,19 @@ select:hover {
 
 .unique section {
     width: 75vw;
-    height:75vh;
+    height: 75vh;
     background: #FFF;
     margin: auto;
     overflow-y: auto;
 }
 
-.pop-up article{
-    margin:auto;
-    color:#FFF;
-    text-align:center;
+.pop-up article {
+    margin: auto;
+    color: #FFF;
+    text-align: center;
 }
+
+
 /* MISE EN FORME DES OBJECTS MATERIAL */
 
 mat-icon {

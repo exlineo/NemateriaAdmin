@@ -28,7 +28,9 @@ const routes: Routes = [
 			{ path: 'mappage/:id', component: MappageComponent },
 			{ path: 'filtres', component:FiltresComponent },
 			{ path: 'filtre/:id', component:FiltresComponent },
-			{ path: 'parametres', component:ParametresComponent}
+			{ path: 'parametres', component:ParametresComponent},
+			{ path: 'aide', loadChildren: () => import('./aide/aide.module').then(m => m.AideModule)},
+
 		]
 	},
 ];
@@ -37,4 +39,4 @@ const routes: Routes = [
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class IntranetRootingModule { }
+export class IntranetRoutingModule { }

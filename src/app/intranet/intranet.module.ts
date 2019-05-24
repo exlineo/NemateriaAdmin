@@ -7,7 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/library/material-module';
 
 // Rooting
-import { IntranetRootingModule } from "./intranet-routing.module";
+import { IntranetRoutingModule } from "./intranet-routing.module";
 
 // Service
 //import { MediaService } from 'src/app/intranet/systeme/services/media.service';
@@ -39,7 +39,7 @@ import { ParametresComponent } from './partage/parametres/parametres.component';
 @NgModule({
 	imports: [
 		CommonModule,
-		IntranetRootingModule,
+		IntranetRoutingModule,
 		MaterialModule,
 		FormsModule,
 		ReactiveFormsModule

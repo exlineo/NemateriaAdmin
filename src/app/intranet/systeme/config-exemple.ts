@@ -1,1 +1,1 @@
-export const SERV:string = 'urlToServer';
+export const SERV:string = 'urlToServer'; // Change file name to config.ts et the address of your's server on 'urlToServer'

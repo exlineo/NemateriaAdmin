@@ -8,6 +8,7 @@
 </header>
 <nav>
     <ul>
+        <hr>
         <li>
             <a routerLinkActive="active" routerLink="/intranet" matTooltip="Retourner à l'accueil">
                 <mat-icon>dashboard</mat-icon>
@@ -23,6 +24,7 @@
                 <mat-icon>burst_mode</mat-icon>
             </a>
         </li>
+        <hr>
         <li>
             <a routerLinkActive="active" routerLink="/intranet/scanner" matTooltip="Scanner les dossiers pour constituer des collections">
                 <mat-icon>scanner</mat-icon>
@@ -38,8 +40,12 @@
                 <mat-icon>explore_off</mat-icon>
             </a>
         </li>
+        <hr>
     </ul>
 </nav>
+<a routerLinkActive="active" routerLink="/intranet/aide" matTooltip="Un peu d'aide ?" class="aide">
+    <mat-icon>help_outline</mat-icon>
+</a>
 <a routerLinkActive="active" routerLink="/intranet/parametres" matTooltip="Votre profil et vos paramètres" class="settings">
     <mat-icon>settings</mat-icon>
 </a>

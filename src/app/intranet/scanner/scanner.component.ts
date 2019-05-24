@@ -1,11 +1,7 @@
 import { Component, OnInit,  EventEmitter, Output  } from '@angular/core';
 
-import { CONST } from '../systeme/const';
-import { NoticeModel } from "../systeme/modeles/notice.modele";
-import { FiltrePipe } from "../systeme/pipes/filtre.pipe";
-import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
-import { forEach } from '@angular/router/src/utils/collection';
-import { toggleLeft } from '../systeme/library/animation';
+import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+
 import { ScanService } from '../systeme/services/scan.service';
 import { UtilsService } from '../systeme/library/utils.service';
 
@@ -17,6 +13,7 @@ import { UtilsService } from '../systeme/library/utils.service';
 export class ScannerComponent implements OnInit {
 	
 	scanListe:Array<string>;
+	set:string;
 
 	panelOpenState = false;
 
@@ -30,6 +27,7 @@ export class ScannerComponent implements OnInit {
 	 * @param dossier Dossier scanné pour afficher la liste des notices
 	 */
 	scanOnClick(dossier){
+		this.set = dossier;
 		this.scanServ.getDir(dossier);
 	}
 }

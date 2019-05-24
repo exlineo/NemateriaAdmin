@@ -5,7 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class UtilsService {
 
-    limite:number; // nombre de notices à charger à chaque état de pagination
+  limite:number; // nombre de notices à charger à chaque état de pagination
+  params = {
+    limite:20,
+    langue:'fr_FR'
+  }
 
   /**
    * Partage de méthodes dans les composants
