@@ -1,6 +1,7 @@
 <section class="screen triple">
     <aside>
         <header>
+            <h1>Sets de données</h1>
             <h2>Liste des dossiers de votre serveur</h2>
             <hr>
             <p>En cliquant sur un dossier vous pourrez afficher les métadonnées des fichiers qu'il contient pour en vérifier la qualité</p>
@@ -14,8 +15,9 @@
             <h2>Métadonnées</h2>
             <hr>
             <p>Liste des métadonnées scannées dans le dossier sélectionné</p>
-            <button>Extraire le schéma des données pour un mappage</button>
-
+            <p *ngIf="scanServ.scans">
+                <button (click)="extraitSet()">Extraire le schéma des données pour un mappage</button>
+            </p>
         </header>
         <mat-accordion>
             <mat-expansion-panel *ngFor="let s of scanServ.scans">

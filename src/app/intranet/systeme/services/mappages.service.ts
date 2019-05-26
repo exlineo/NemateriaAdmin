@@ -5,5 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class MappagesService {
 
+  map:any;
+  set:any;
+
   constructor() { }
 }

@@ -42,6 +42,7 @@ export class ScanService {
 	 * Récupérer la liste des métadonnées d'un dossier en particulier
 	 */
 	getDir(dir:string): void {
+		this.scans = null;
 		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
 		this.http.get(SERV + 'scans/'+dir).subscribe(
 			fichiers => {

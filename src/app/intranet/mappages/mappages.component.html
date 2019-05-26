@@ -5,7 +5,17 @@
             <hr>
             <p>Set de métadonnées scanné</p>
         </header>
-
+        <article>
+            <ul cdkDropList
+                        #todoList="cdkDropList"
+                        [cdkDropListData]="mapServ.set"
+                        [cdkDropListConnectedTo]="[doneList]"
+                        (cdkDropListDropped)="drop($event)">
+                <li *ngFor="let s of mapServ.set" cdkDrag>
+                            {{ s }}
+                </li>
+            </ul>
+        </article>
     </aside>
     <section>
         <header>
@@ -13,6 +23,17 @@
             <hr>
             <p>Faites glisser les métadonnées de gauche vers les champs ci-dessous pour faire correspondre une métadonnée à une autre.</p>
         </header>
+        <article>
+            <ul cdkDropList
+                        #doneList="cdkDropList"
+                        [cdkDropListData]="filtres"
+                        [cdkDropListConnectedTo]="[todoList]"
+                        class="example-list"
+                        (cdkDropListDropped)="drop($event)">
+                <li *ngFor="let item of filtres" cdkDrag>{{item}}
+                </li>
+            </ul>
+        </article>
     </section>
     <aside>
         <header>
