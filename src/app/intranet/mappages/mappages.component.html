@@ -1,18 +1,14 @@
-<section class="screen triple">
+<section class="screen">
     <aside>
         <header>
             <h2>Set de données</h2>
             <hr>
-            <p>Set de métadonnées scanné</p>
+            <p>Set de métadonnées scanné/ Cliquez sur celles que vous souhaitez ajouter à votre mappage.</p>
         </header>
         <article>
-            <ul cdkDropList
-                        #todoList="cdkDropList"
-                        [cdkDropListData]="mapServ.set"
-                        [cdkDropListConnectedTo]="[doneList]"
-                        (cdkDropListDropped)="drop($event)">
-                <li *ngFor="let s of mapServ.set" cdkDrag>
-                            {{ s }}
+            <ul>
+                <li *ngFor="let s of mapServ.set | keyvalue" (click)="selectItem(s.key)">
+                    {{ s.key }} (ex. : {{ s.value }})
                 </li>
             </ul>
         </article>
@@ -21,16 +17,13 @@
         <header>
             <h2>Mappage</h2>
             <hr>
-            <p>Faites glisser les métadonnées de gauche vers les champs ci-dessous pour faire correspondre une métadonnée à une autre.</p>
+            <p>Modifiez les valeurs des champs sélectionnés. Vous pouvez les trier en les faisant glisser.</p>
         </header>
         <article>
-            <ul cdkDropList
-                        #doneList="cdkDropList"
-                        [cdkDropListData]="filtres"
-                        [cdkDropListConnectedTo]="[todoList]"
-                        class="example-list"
-                        (cdkDropListDropped)="drop($event)">
-                <li *ngFor="let item of filtres" cdkDrag>{{item}}
+            <ul cdkDropList (cdkDropListDropped)="drop($event)">
+                <li *ngFor="let m of maps; let i=index" cdkDrag>
+                    {{ m[0] }} : <input name="m[0]" [(ngModel)]="m[1]">
+                    <mat-icon class="icone ferme" (click)="supprime(i)">delete</mat-icon>
                 </li>
             </ul>
         </article>
@@ -39,10 +32,15 @@
         <header>
             <h2>Filtre généré</h2>
             <hr>
-            <p>Les données affichées ici représente le résultat du filtre que vous allez créer</p>
+            <p>Ce filtre, si vous le validez, pourra servir de tri dans les données brutes scannées sur votre serveur.</p>
         </header>
         <article>
-
+            <button *ngIf="maps.length > 0">Valider ce filtre</button>
+            <ul>
+                <li *ngFor="let f of maps">
+                    {{ f[1] }}
+                </li>
+            </ul>
         </article>
     </aside>
 </section>

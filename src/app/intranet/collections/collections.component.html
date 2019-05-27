@@ -2,7 +2,7 @@
     <!-- <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed' "> -->
     <aside class="left-panel">
         <header>
-            <h2>Collections disponibles</h2>
+            <h1>Collections disponibles</h1>
             <mat-icon matTooltip="Ajouter une collection" (click)="afficheDetailCollec = true; idCollection = null">playlist_add</mat-icon>
         </header>
         <ul>
@@ -20,7 +20,7 @@
                 <mat-icon matTooltip="Modifier la collection" (click)="afficheDetailCollec = true">edit</mat-icon>
                 <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
             </div>
-            <h2>Informations sur la collection</h2>
+            <h2>Informations sur la collection choisie</h2>
         </header>
         <article *ngIf="collec">
             <ul>

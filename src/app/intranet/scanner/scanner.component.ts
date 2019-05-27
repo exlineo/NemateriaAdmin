@@ -37,8 +37,7 @@ export class ScannerComponent implements OnInit {
 	 * @param s Clés du set scanné dans le dossier
 	 */
 	extraitSet(){
-		console.log(Object.keys(this.scanServ.scans[0]));
-		this.mapServ.set = Object.keys(this.scanServ.scans[0]);
+		this.mapServ.set = this.scanServ.scans[0];
 		this.router.navigateByUrl('/intranet/mappages');
 	}
 }

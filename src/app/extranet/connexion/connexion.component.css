@@ -9,7 +9,7 @@ section{
 section:nth-child(1) {
 	width: 300px;
 	height: 100vh;
-	background-color: #656973;
+	background-color: #304753;
 	padding:20px;
 	margin-left:20%;
 }
@@ -20,14 +20,16 @@ section:nth-child(1) section{
 	background:none;
 }
 
-section > section *{
+section > section{
 	color:#FFF !important;
 }
 
 section > section button {
 	background: #FFD600;
 }
-
+.mat-raised-button{
+	color : #304753 !important;
+}
 section > section form {
 	display: flex;
 	flex-direction: column;
@@ -88,7 +90,7 @@ header.logo:hover {
 	overflow: hidden;
 	content: '';
 	position:absolute;
-	margin-left:110px;
+	margin-left:100px;
 	transform: rotate(45deg);
 	transform-origin: 0 0;
 }
