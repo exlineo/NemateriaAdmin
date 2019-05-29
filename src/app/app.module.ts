@@ -26,6 +26,8 @@ import { AuthIntercepteur } from "./extranet/systeme/services/auth.intercepteur"
 import { SecuriteIntercepteur } from './extranet/systeme/services/securite.intercepteur';
 import { ExtranetComponent } from './extranet/extranet.component';
 import { ActualitesComponent } from './extranet/actualites/actualites.component';
+import { FiltresService } from './intranet/systeme/services/filtres.service';
+import { CollectionService } from './intranet/systeme/services/collection.service';
 
 @NgModule({
 	imports: [
@@ -45,7 +47,14 @@ import { ActualitesComponent } from './extranet/actualites/actualites.component'
 		ExtranetComponent,
 		ActualitesComponent
 	],
-	providers: [AuthService, TokenService, NotificationService, { provide: HTTP_INTERCEPTORS, useClass: AuthIntercepteur, multi: true }, , { provide: HTTP_INTERCEPTORS, useClass:SecuriteIntercepteur, multi:true}],
+	providers: [
+		AuthService,
+		TokenService,
+		NotificationService,
+		FiltresService,
+		CollectionService,
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthIntercepteur, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass:SecuriteIntercepteur, multi:true}],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

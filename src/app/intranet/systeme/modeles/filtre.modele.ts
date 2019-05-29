@@ -1,10 +1,17 @@
 export interface FiltreModel {
-    _id: number;
-    type: string;
-    nom: string;
+    readonly _id?: string;
+    readonly titre: string;
+    readonly alias: string;
+    readonly description: string;
+    readonly createur?: string;
+    readonly donnees:Array<string>;
+}
+
+export class Filtre implements FiltreModel {
+    _id?: string;
+    titre: string;
+    alias: string;
     description: string;
-    dossier: string;
-    fichier: string;
-    created?: Number;
-    updated?: Number;
+    createur?: string;
+    donnees:Array<string>;
 }

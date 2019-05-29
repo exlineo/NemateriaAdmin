@@ -26,5 +26,5 @@ export class UtilsService {
 			// return 'array';
 		}
 		return typeof value;
-	}
+  }
 }

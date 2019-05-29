@@ -14,7 +14,7 @@
             <input name="titre" [(ngModel)]="collection.titre" required>
 
             <label for="alias">Alias</label>
-            <input name="alias" [(ngModel)]="collection.alias" required>
+            <input name="alias" [(ngModel)]="collection.alias" required pattern="[a-z0-9-]+">
 
             <label for="description">Description</label>
             <textarea mat-input name="description" [(ngModel)]="collection.description" required>

@@ -5,6 +5,10 @@ import { UtilsService } from '../systeme/library/utils.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { MappagesService } from '../systeme/services/mappages.service';
 
+import { Filtre } from '../systeme/modeles/filtre.modele';
+import { FiltresService } from '../systeme/services/filtres.service';
+import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-mappages',
   templateUrl: './mappages.component.html',
@@ -13,10 +17,12 @@ import { MappagesService } from '../systeme/services/mappages.service';
 export class MappagesComponent implements OnInit {
 
   maps:Array<object>=[];
+  filtre:Filtre;
 
-  constructor(public mapServ:MappagesService, public utils:UtilsService) { }
+  constructor(public mapServ:MappagesService, public utils:UtilsService, public filtreServ:FiltresService) { }
 
   ngOnInit() {
+    this.filtre = new Filtre(); // Création d'un filtre vide
   }
   /**
    * Glisser / Déposer pour réorganiser la liste du mappage
@@ -39,5 +45,22 @@ export class MappagesComponent implements OnInit {
    */
   supprime(i){
     this.maps.splice(i, 1);
+  }
+  /**
+   * Envoyer le nouveau filtre pour l'enregistrer dans la base du serveur
+   */
+  valideFiltre(f?:NgForm){
+    this.filtre.donnees = this.triMaps();
+    this.filtreServ.ajouteFiltre(this.filtre);
+  }
+  /**
+   * Filtrer les données du mappage pour en extraire les données de traitement
+   */
+  triMaps():Array<string>{
+    let tmp:Array<string> = [];
+    for(let m of this.maps){
+      tmp.push(m[1]);
+    }
+    return tmp;
   }
 }

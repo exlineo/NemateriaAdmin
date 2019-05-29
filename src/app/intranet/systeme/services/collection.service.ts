@@ -35,7 +35,7 @@ export class CollectionService {
 	/**
 	 * Renvoyer une collection du tableau en fonction de son _id
 	 * @param id _id de la notice à récupérer
-	 * @return NoticeModel (une notice)
+	 * @return CollectionModel (une collection)
 	 */
 	getCollection(id: number | string):CollectionModel {
 		for(let c of this.collections){
