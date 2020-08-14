@@ -1,22 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FiltreModel } from '../modeles/filtre.modele';
+import { FiltreModel, Filtre } from '../modeles/filtre.modele';
 
-import { SERV } from '../config';
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FiltresService {
 
-  filtres:Array<FiltreModel>
+  filtres:Array<FiltreModel>;
 
-  constructor(private http:HttpClient) { }
-
+  constructor(private http:HttpClient) {
+		this.filtres = [new Filtre()];
+		this.getFiltres();
+  }
+  /**
+   * Récupérer la liste des filtres générés
+   */
   getFiltres(){
     // return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
-		this.http.get<Array<FiltreModel>>(SERV+'filtres').subscribe(
+		this.http.get<Array<FiltreModel>>(environment.SERV+'filtres').subscribe(
 			data => {
 				console.log(data);
 				this.filtres = data;
@@ -41,7 +45,7 @@ export class FiltresService {
 	 * Mise à jour d'une collection
 	 */
 	majFiltre(filtre:FiltreModel){
-		this.http.put(SERV+'filtres', filtre).subscribe(
+		this.http.put(environment.SERV+'filtres', filtre).subscribe(
 			retour => {
 				console.log(retour);
 			},
@@ -53,7 +57,7 @@ export class FiltresService {
 	 */
 	ajouteFiltre(filtre:FiltreModel){
     console.log(filtre);
-		this.http.post(SERV+'filtres', filtre).subscribe(
+		this.http.post(environment.SERV+'filtres', filtre).subscribe(
 			retour => {
 				console.log(retour);
 			},

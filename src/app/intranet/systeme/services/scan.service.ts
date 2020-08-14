@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { SERV } from '../config';
+import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class ScanService {
 	 * Liste les dossiers scannables
 	 */
 	getListeDossiers() {
-		this.http.get(SERV + 'scans').subscribe(
+		this.http.get(environment.SERV + 'scans').subscribe(
 			data => {
 				console.log(data);
 				this.listeDossiers = data;
@@ -31,7 +31,7 @@ export class ScanService {
 	   */
 	getMetaFiles(dir: string, f: string): void {
 		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
-		this.http.get(SERV + 'scans/' + dir, { params: { 'f': f } }).subscribe(
+		this.http.get(environment.SERV + 'scans/' + dir, { params: { 'f': f } }).subscribe(
 			fichier => {
 				console.log(fichier['data']);
 				this.scans = fichier['data'];
@@ -44,7 +44,7 @@ export class ScanService {
 	getDir(dir:string): void {
 		this.scans = null;
 		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
-		this.http.get(SERV + 'scans/'+dir).subscribe(
+		this.http.get(environment.SERV + 'scans/'+dir).subscribe(
 			fichiers => {
 				fichiers['data'].forEach(f => {
 					for(let i in f){

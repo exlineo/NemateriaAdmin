@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CollectionModel } from '../modeles/collection.modele';
 
-import { SERV } from '../config';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -25,7 +25,7 @@ export class CollectionService {
 	 */
 	getCollections(): void {
 		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
-		this.http.get<Array<CollectionModel>>(SERV+'collections').subscribe(
+		this.http.get<Array<CollectionModel>>(environment.SERV+'collections').subscribe(
 			data => {
 				console.log(data);
 				this.collections = data;
@@ -48,7 +48,7 @@ export class CollectionService {
 	 * Mise à jour d'une collection
 	 */
 	majCollection(collec:CollectionModel){
-		this.http.put(SERV+'collections/', collec).subscribe(
+		this.http.put(environment.SERV+'collections/', collec).subscribe(
 			retour => {
 				console.log(retour);
 			},
@@ -60,7 +60,7 @@ export class CollectionService {
 	 */
 	ajouteCollection(collec:CollectionModel){
 		console.log(this.collection);
-		this.http.post(SERV+'collections', collec).subscribe(
+		this.http.post(environment.SERV+'collections', collec).subscribe(
 			retour => {
 				console.log(retour);
 			}
@@ -71,7 +71,7 @@ export class CollectionService {
 	 * @param id ID de la collection dont nous recherchons les séries
 	 */
 	getSeries(id){
-		this.http.get(SERV+'collections/'+id+'/series').subscribe(
+		this.http.get(environment.SERV+'collections/'+id+'/series').subscribe(
 			retour => {
 				console.log(retour);
 			}

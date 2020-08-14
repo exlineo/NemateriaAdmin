@@ -79,7 +79,7 @@
             <article *ngIf="this.noticeAffiche">
                 <h3>{{ noticeChoisie.titre}}</h3>
                 <p>
-                    {{ noticeChoisie.description }}<br> {{ noticeChoisie.fichier }}
+                    {{ noticeChoisie.description }}<br> {{ noticeChoisie.fichier.nom }} <br> ({{ noticeChoisie.fichier.url }})
                 </p>
             </article>
         </section>

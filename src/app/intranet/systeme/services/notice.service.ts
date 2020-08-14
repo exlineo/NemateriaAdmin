@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { SERV } from '../config';
+import { environment } from 'src/environments/environment';
 import { NoticeModel } from "../modeles/notice.modele";
 
 @Injectable({
@@ -23,7 +23,7 @@ export class NoticeService {
 	 * Récupérer l'ensemble des notices disponibles
 	 */
 	getNotices(): void {
-		this.http.get<Array<NoticeModel>>(SERV+'notices').subscribe(
+		this.http.get<Array<NoticeModel>>(environment.SERV+'notices').subscribe(
 			data => {
 				console.log(data);
 				this.noticesAll = data;
@@ -36,7 +36,7 @@ export class NoticeService {
 	 */
 	getNoticesByCollec(id){
 		this.noticesCollec = [];
-		this.http.get<Array<NoticeModel>>(SERV+'notices/collection/'+id, {params:{'idCollection':id}}).subscribe(
+		this.http.get<Array<NoticeModel>>(environment.SERV+'notices/collection/'+id, {params:{'idCollection':id}}).subscribe(
 			data => {
 				console.log(data);
 				this.noticesCollec = data;
@@ -65,7 +65,7 @@ export class NoticeService {
 	 * @param notice ID de la notice à enlever de la collection
 	 */
 	updateNotice(id:string, notice:NoticeModel){
-		this.http.post(SERV+'notices/'+id, notice).subscribe(
+		this.http.post(environment.SERV+'notices/'+id, notice).subscribe(
 			retour => {
 				console.log(retour);
 			}

@@ -4,11 +4,11 @@
         <header>
             <h2>Filtres disponibles</h2>
             <mat-icon matTooltip="Ajouter un filtre">playlist_add</mat-icon>
-            <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleLeftPanel($event)">settings_ethernet</mat-icon>
+            <mat-icon matTooltip="Ouvrir / fermer le panneau">settings_ethernet</mat-icon>
         </header>
         <ul>
 
-            <li *ngFor="let filtre of this.filtresListe" (click)="collectionOnClick(filtre._id) ">
+            <li *ngFor="let filtre of this.filtresServ.filtres" (click)="filtreOnClick(filtre._id) ">
                 {{filtre.titre}}
             </li>
         </ul>
@@ -22,37 +22,33 @@
             <h2>Détails sur le filtre</h2>
         </header>
         <article>
-            <h3>{{filtre.titre}}</h3>
-            <p>Auteur : {{filtre.createur}}</p>
-            <p>{{filtre.description}}</p>
+            <h3>{{filtre.titre}}
+                <mat-icon matTooltip="Modifier le nom du filtre" *ngIf="edition">edit</mat-icon>
+            </h3>
+            <p>Auteur : {{filtre.createur}}
+                <mat-icon matTooltip="Modifier l'auteur" *ngIf="edition">edit</mat-icon>
+            </p>
+            <p>{{filtre.description}}
+                <mat-icon matTooltip="Modifier la description du filtre" *ngIf="edition">edit</mat-icon>
+            </p>
+            <h5>Métadonnées traitées par le filtre</h5>
+            <ul>
+                <li *ngFor="let d of filtre.donnees; let i=index">
+                    {{ d }}
+                    <mat-icon matTooltip="Supprimer la métadonnée" *ngIf="edition" (click)="supprMeta(i)">delete</mat-icon>
+                </li>
+            </ul>
         </article>
     </section>
     <aside class="right-panel">
         <header>
-            <mat-icon matTooltip="Ouvrir / fermer le panneau" (click)="toggleRightPanel($event)">settings_ethernet</mat-icon>
+            <!-- <mat-icon matTooltip="Ouvrir / fermer le panneau">settings_ethernet</mat-icon> -->
         </header>
         <section class="selection ">
-            <ul class="notice-liste">
 
-                <li *ngFor="let notice of (noticeListe | filtre:filtreSerie)" class="notice">
-                    <div [style.backgroundImage]="'url('+ notice.dossier + '/' + notice.fichier +')'">
-                        <div>
-                            <mat-icon (click)="noticeAfficheDetail($event, notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
-                            <mat-icon (click)="noticeOnChoisi($event, notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
-                            <mat-icon (click)="noticeOnInfo($event, notice._id)" matTooltip="Informations synthétiques sur la notice">info</mat-icon>
-                            <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>{{notice.nom}}</h3>
-                        <p>{{notice.description}}</p>
-                        <div>
-                            <mat-icon *ngIf="notice.selected">check_circle</mat-icon>
-                            <mat-icon *ngIf="!notice.selected">check_circle_outline</mat-icon>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+            <article>
+
+            </article>
         </section>
     </aside>
 </section>

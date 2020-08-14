@@ -1,1 +1,0 @@
-export const SERV:string = 'http://vps550598.ovh.net:8080/';

@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files
 Design : http://quanticalabs.com/Node/Template/#!/home
 #656973 : base bleu sombre
-
 #41ab6b : vert
 #FFD600 : jaune
 #f06060 : rouge
@@ -26,8 +25,6 @@ body {
     padding: 0;
     overflow: hidden;
 }
-
-body {}
 
 * {
     font-size: 15px;
@@ -429,8 +426,8 @@ textarea {
 
 .notice>div:nth-child(1)>div:nth-child(2) {
     position: absolute;
-    width: inherit;
-    height: inherit;
+    /* width: inherit;
+    height: inherit; */
 }
 
 .notice>div:nth-child(1)>div:nth-child(1) {
