@@ -5,7 +5,6 @@ import { NoticeService } from "../systeme/services/notice.service";
 import { NoticeModel } from "../systeme/modeles/notice.modele";
 import { FiltreNoticesPipe } from "../systeme/pipes/filtre-notices.pipe";
 import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
-import { forEach } from '@angular/router/src/utils/collection';
 import { toggleLeft } from '../systeme/library/animation';
 
 @Component({
