@@ -52,6 +52,8 @@ export class NoticesComponent implements OnInit {
 		this.idNotice = idNotice;
 		if(this.noticeSelection.indexOf(this.noticesServ.getNotice(idNotice)) == -1){
 			this.noticeSelection.push(this.noticesServ.getNotice(idNotice, true));
+		}else{
+			this.noticeSelectionRemove(idNotice);
 		}
 	}
 	/**
@@ -79,6 +81,7 @@ export class NoticesComponent implements OnInit {
 	noticeSelectionRemove(idNotice): void {
 		for (let index = 0; index < this.noticeSelection.length; index++) {
 			let element = this.noticeSelection[index];
+			element.selected = false;
 			if (element._id == idNotice) {
 				this.noticeSelection.splice(index, 1);
 			}
@@ -123,5 +126,8 @@ export class NoticesComponent implements OnInit {
 	collectionOnAffiche(id=-1){
 		this.idCollection = id;
 		this.afficheDetailCollec = true;
+	}
+	fake(){
+		
 	}
 }

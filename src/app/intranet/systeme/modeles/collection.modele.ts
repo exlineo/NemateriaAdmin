@@ -1,17 +1,17 @@
 import { NoticeModel } from "./notice.modele";
 
 export interface CollectionModel {
-    readonly _id: string;
-    readonly titre: string;
-    readonly alias: string;
-    readonly description: string;
-    readonly type: string;
-    readonly createur: string;
-    readonly fond?:string;
-    readonly langue?: string;
-    readonly groupe?: Array<string>;
-    readonly notices?:Array<string>;
-    readonly series?:Array<string>;
+    _id: string;
+    titre: string;
+    alias: string;
+    description: string;
+    type: string;
+    createur: string;
+    fond?:string;
+    langue?: string;
+    groupe?: Array<string>;
+    notices?:Array<string>;
+    series?:Array<string>;
     selected?:boolean;
 }
 

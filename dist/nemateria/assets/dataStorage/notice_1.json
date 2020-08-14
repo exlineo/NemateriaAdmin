@@ -1,0 +1,106 @@
+{
+    "idUnique": "CBJ-I-0234_A06",
+    "titre": "Corvée d'eau",
+    "description": "Peut-être en forêt d'Apremont, été 1915 ? Corvée d'eau ?",
+    "motcles": ["photographie", "Grande Guerre", "1914-1918", "conflit", "Allemagne", "France", "armée", "Gustave CHEVALIER : Louis AUGU"],
+    "fichier": {
+        "nom": "CBJ-I-0233_A05.jpg",
+        "type": "image/jpeg",
+        "taille": "111 ko",
+        "largeur": 900,
+        "hauteur": 583
+    },
+    "auteurs": [{
+        "nom": "AUGU",
+        "prenom": "Louis",
+        "role": "Photographe"
+    }],
+    "informateurs": [{
+        "nom": "",
+        "prenom": "",
+        "genre": "",
+        "alias": "",
+        "anneeNaissance": "",
+        "caracteristique": ""
+    }],
+    "auteursDescription": [{
+        "nom": "Scherer",
+        "prenom": "Rémy",
+        "role": "Commentateur"
+    }, {
+        "nom": "Chevalier",
+        "prenom": "Gustave",
+        "role": "Commentateur"
+    }],
+    "localisation": {
+        "pays": "",
+        "codePostal": "",
+        "departement": "",
+        "commune": "",
+        "lieuDit": "",
+        "gps": {
+            "lattitude": 0,
+            "longitude": 0
+        }
+    },
+    "contenu": {
+        "langue": "",
+        "lieu": "",
+        "temps": "",
+        "type": "Photographie documentaire",
+        "notes": ""
+    },
+    "relations": {
+        "idCollection": 0,
+        "collection": "Louis Augu",
+        "idSerie": 0,
+        "serie": "01 Les Hauts de Meuse",
+        "ordre": 0,
+        "contient": "",
+        "requiert": [],
+        "liensInternes": [],
+        "liensExternes": []
+    },
+    "originaux": {
+        "referenceOriginal": "",
+        "dateCreation": "",
+        "dateNumerisation": "Septembre",
+        "nature": "Album photographique",
+        "caracteristique": "",
+        "formatMaster": "Fichier TIFF 5 Méga-pixels",
+        "accessibilite": 0
+    },
+    "droits": {
+        "editeur": "",
+        "licence": "Contacter l'éditeur ou le propriétaire",
+        "copyright": "",
+        "urlLicence": "",
+        "participants": [{
+            "nom": "",
+            "prenom": "",
+            "role": ""
+        }],
+        "producteurs": [{
+            "nom": "",
+            "prenom": "",
+            "role": "",
+            "raisonSociale": ""
+        }]
+    },
+    "gestionCollection": {
+        "numerise": { "nom": "Perrier", "prenom": "Gérard" },
+        "proprietaireOriginaux": "",
+        "conservateurOriginaux": "",
+        "conservateurFichiers": "",
+        "detenteurDroits": "Jacques Chevalier",
+        "gestionnaireDroits": ""
+    },
+    "sequences": [{
+        "numero": 0,
+        "timeCode": 0,
+        "duree": 0,
+        "resume": "",
+        "motsCles": [],
+        "lien": ""
+    }]
+}

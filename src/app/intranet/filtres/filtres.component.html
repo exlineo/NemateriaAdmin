@@ -9,7 +9,7 @@
         <ul>
 
             <li *ngFor="let filtre of this.filtresListe" (click)="collectionOnClick(filtre._id) ">
-                {{filtre.nom}}
+                {{filtre.titre}}
             </li>
         </ul>
     </aside>
@@ -22,8 +22,8 @@
             <h2>Détails sur le filtre</h2>
         </header>
         <article>
-            <h3>{{filtre.nom}}</h3>
-            <p>Type : {{filtre.type}}</p>
+            <h3>{{filtre.titre}}</h3>
+            <p>Auteur : {{filtre.createur}}</p>
             <p>{{filtre.description}}</p>
         </article>
     </section>

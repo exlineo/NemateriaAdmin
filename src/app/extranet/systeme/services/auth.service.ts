@@ -18,7 +18,6 @@ export class AuthService {
 
 	auth: boolean = false;
 	userAuth: UserModel;
-	dataStorage: string = 'http://localhost:8080/api/';
 
 	constructor(private http: HttpClient, private router: Router, private notService: NotificationService, public securite:TokenService) {
 		if(eval(sessionStorage.getItem('auth'))){
@@ -34,7 +33,8 @@ export class AuthService {
 	authUser(userObject): void {
 		// this.securite.token = 'connecté';
 		this.connexion(null);
-		this.router.navigateByUrl('intranet');
+		console.log("Connexion");
+		this.router.navigateByUrl('/intranet');
 		this.notService.openSnackBar('Bienvenue ' + userObject.email, 'connexion');
 	}
 	/**
@@ -51,6 +51,7 @@ export class AuthService {
 	connexion(token){
 		sessionStorage.setItem('auth', 'true');
 		this.auth = true;
+		console.log("Auth", this.auth);
 		if(token){
 			this.securite.token = token;
 		}

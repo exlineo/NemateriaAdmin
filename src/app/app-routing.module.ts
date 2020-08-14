@@ -19,6 +19,7 @@ const routes: Routes = [
 		{ path: 'connexion', component: ConnexionComponent },
 		{ path: 'inscription', component: InscriptionComponent }
 	]},
+	// { path: 'intranet', loadChildren: () => import('./intranet/intranet.module').then(m => m.IntranetModule), canLoad: [AuthGuard] },
 	{ path: 'intranet', loadChildren: () => import('./intranet/intranet.module').then(m => m.IntranetModule), canLoad: [AuthGuard] },
 	{ path: '**', component: Erreur404Component },
 	{ path: '', redirectTo: '/', pathMatch: 'full' }

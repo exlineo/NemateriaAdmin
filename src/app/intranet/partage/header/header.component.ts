@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
 
   profil;
 
-  constructor(private sain:DomSanitizer) { }
+  constructor(public sain:DomSanitizer) { }
 
   ngOnInit() {
     this.profil = {nom:'Lambda', img:'assets/img/profile.jpg'};

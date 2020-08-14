@@ -45,9 +45,10 @@ export class ConnexionComponent implements OnInit {
 	 * @method authentifier() - Envois une requête de connexion via authService
 	 */
 	authentifier(): void {
-		if (this.connexionForm.valid) 
+		if (this.connexionForm.valid){
+			console.log(this.connexionForm.value);
 			this.authService.authUser(this.connexionForm.value);
-	}
+	}}
 
 	/**
 	 * @method openDialog() - ouvre une pop in d'inscription

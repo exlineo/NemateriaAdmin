@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UtilsService } from '../systeme/library/utils.service';
 
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MappagesService } from '../systeme/services/mappages.service';
 
 import { Filtre } from '../systeme/modeles/filtre.modele';

@@ -16,26 +16,27 @@
 
                 <label for="type">Types de fichiers   
                 <select name="type" [(ngModel)]="this.filtre.type" placeholder="Type de fichiers">
-                        <option value="image"> Images</option>
+                        <option value="image">Images</option>
                         <option value="mpg">Vidéos</option>
                         <option value="mp3">Audio</option>
                         <option value="pdf">Textes</option>
-                    </select></label> 
+                    </select></label>
             </form>
         </header>
         <ul class="notice-liste">
             <li *ngFor="let notice of (this.noticesServ.noticesAll | filtreNotices:filtre)" class="notice">
-                <div [style.backgroundImage]="'url('+ notice.fichier.url +')'">
+                <!-- <a (click)="noticeSelectionnee(notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée"></a> -->
+
+                <div [style.backgroundImage]="'url('+ notice.fichier.url +')'" [class.choix]="notice.selected">
                     <!-- <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description"> -->
-                    <div>
-                        <mat-icon (click)="noticeOnAffiche(notice._id)" matTooltip="Voir la fiche de la notice">
-                            visibility</mat-icon>
-                        <mat-icon (click)="noticeSelectionnee(notice._id)"
-                            matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
-                        <mat-icon (click)="noticeOnInfo(notice._id)"
-                            matTooltip="Informations rapides sur la notice">info</mat-icon>
+                    <div (click)="fake()">
+                        <mat-icon (click)="noticeOnAffiche(notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
+                        <mat-icon (click)="noticeSelectionnee(notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
+                        <mat-icon (click)="noticeOnInfo(notice._id)" matTooltip="Informations rapides sur la notice">info</mat-icon>
                         <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
                     </div>
+                    <div (click)="noticeSelectionnee(notice._id)"></div>
+
                 </div>
                 <div>
                     <h3>{{ notice.nom }}</h3>
@@ -52,13 +53,14 @@
     <aside class="right-panel">
         <section class="demi">
             <header>
-                <mat-icon matTooltip="Sélectionner toutes les notices" (click)="noticesToutesChoisies()">select_all
+                <h4>Actions groupées : </h4>
+                <mat-icon matTooltip="Sélectionner toutes les notices" (click)="noticesToutesChoisies()">filter
                 </mat-icon>
-                <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">clear_all
+                <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">filter_none
                 </mat-icon>
-                <mat-icon matTooltip="Créer une collection à partir de la sélection" (click)="collectionOnAffiche()">playlist_add_check</mat-icon>
+                <mat-icon matTooltip="Créer une collection à partir de la sélection" (click)="collectionOnAffiche()">collections</mat-icon>
             </header>
-            
+
             <h2>Liste des notices sélectionnées</h2>
             <ul>
                 <li *ngFor="let notice of this.noticeSelection">
@@ -77,8 +79,7 @@
             <article *ngIf="this.noticeAffiche">
                 <h3>{{ noticeChoisie.titre}}</h3>
                 <p>
-                    {{ noticeChoisie.description }}<br>
-                    {{ noticeChoisie.fichier }}
+                    {{ noticeChoisie.description }}<br> {{ noticeChoisie.fichier }}
                 </p>
             </article>
         </section>

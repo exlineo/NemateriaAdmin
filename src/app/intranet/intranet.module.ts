@@ -35,6 +35,7 @@ import { FiltrePipe } from './systeme/pipes/filtre.pipe';
 import { UtilsService } from './systeme/library/utils.service';
 import { FiltreNoticesPipe } from './systeme/pipes/filtre-notices.pipe';
 import { ParametresComponent } from './partage/parametres/parametres.component';
+import { ClesJsonPipe } from './systeme/pipes/clesJson.pipe';
 
 @NgModule({
 	imports: [
@@ -62,7 +63,8 @@ import { ParametresComponent } from './partage/parametres/parametres.component';
 		AccueilComponent,
 		FiltrePipe,
 		FiltreNoticesPipe,
-		ParametresComponent
+		ParametresComponent,
+		ClesJsonPipe
 	],
 	entryComponents: [OptionPopInComponent]
 })
