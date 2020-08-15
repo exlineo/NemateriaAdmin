@@ -16,16 +16,15 @@ import { FiltresService } from '../systeme/services/filtres.service';
 export class FiltresComponent implements OnInit {
 	filtre:FiltreModel;
 	edition:boolean;
+	afficheFiltre:boolean; // Afficher la fiche de modification du filtre
 	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série
-
-	leftPanelIsOpen = true; // Etat d'ouverture du panneau de gauche
-	rightPanelIsOpen = true; // Etat d'ouverture du panneau de droite
 
 	constructor(public filtresServ: FiltresService, private rendu:Renderer2) { }
 
 	ngOnInit() {
 		this.filtre = new Filtre();
 		this.edition = false;
+		this.afficheFiltre = false;
 	}
 	/**
 	 * Afficher le détail d'une collection
@@ -54,5 +53,15 @@ export class FiltresComponent implements OnInit {
 	 */
 	supprMeta(id:number){
 		this.filtre.donnees.splice(id,1);
+	}
+	/**
+	 * Enlever toutes les fenêtres pop-up et initialiser la collection et les notices
+	 */
+	masque(){
+		this.edition = false;
+	}
+	ajouteFiltre(){
+		this.filtre = new Filtre();
+		this.edition = true;
 	}
 }

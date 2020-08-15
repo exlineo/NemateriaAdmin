@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FiltreModel, Filtre } from '../modeles/filtre.modele';
 
 import { environment } from 'src/environments/environment';
+import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class FiltresService {
 
   filtres:Array<FiltreModel>;
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private notifServ:NotificationService) {
 		this.filtres = [new Filtre()];
 		this.getFiltres();
   }
@@ -24,8 +25,12 @@ export class FiltresService {
 			data => {
 				console.log(data);
 				this.filtres = data;
+				this.notifServ.notif("Filtres chargés");
 			},
-			erreur => console.log(erreur)
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Erreur dans le chargement du filtre");
+			}
 		)
   }
 
@@ -48,8 +53,12 @@ export class FiltresService {
 		this.http.put(environment.SERV+'filtres', filtre).subscribe(
 			retour => {
 				console.log(retour);
+				this.notifServ.notif("Filtre mis à jour");
 			},
-			erreur => console.log(erreur)
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Erreur dans la mise à jour du filtre");
+			}
 		)
 	}
 	/**
@@ -60,8 +69,12 @@ export class FiltresService {
 		this.http.post(environment.SERV+'filtres', filtre).subscribe(
 			retour => {
 				console.log(retour);
+				this.notifServ.notif("Filtre enregistré");
 			},
-			erreur => console.log(erreur)
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Erreur dans l'ajout du filtre");
+			}
 		)
 	}
 }

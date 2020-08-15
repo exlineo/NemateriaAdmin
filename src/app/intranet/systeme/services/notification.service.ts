@@ -13,4 +13,10 @@ export class NotificationService {
 		duration: 2000,
 		});
 	}
+
+	notif(message: string, action: string="Notification") {
+		this.snackBar.open(message, action, {
+			duration: 2000,
+		});
+	}
 }

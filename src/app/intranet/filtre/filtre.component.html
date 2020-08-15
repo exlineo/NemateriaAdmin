@@ -1,21 +1,50 @@
-<section class="screen">
-    <a href="#" class="left-btn" (click)="toggleLeftPanel($event)">
-        L
-    </a>
-    <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed'">
-        Liste des filtres
-    </aside>
-    <section class="content-panel">
-        Informations sur le filtre
-        cliquer sur modifier pour faire apparaître le formulaire de modification
-    </section>
-    <aside class="right-panel" [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed'">
-        <section class="selection">
-            Liste des notices sélectionnées
-        </section>
-    </aside>
+<section class="unique">
 
-    <a href="#" class="right-btn" (click)="toggleRightPanel($event)">
-        R
-    </a>
-</section> 
+    <header>
+        <h3>Informations sur la filtre
+            <mat-icon (click)="fermer.emit(false)">close</mat-icon>
+        </h3>
+        <h2>{{ filtre.titre }}</h2>
+
+    </header>
+
+    <form>
+        <section>
+            <form>
+                <label for="titre">Titre
+                <input name="titre" [(ngModel)]="filtre.titre" required></label>
+
+                <label for="alias">Alias
+                <input name="alias" [(ngModel)]="filtre.alias" required pattern="[a-z0-9-]+"></label>
+
+                <label for="createur">Créateur
+                    <input name="createur" [(ngModel)]="filtre.createur" required></label>
+
+                <label for="description">Description</label>
+                <textarea mat-input name="description" [(ngModel)]="filtre.description" required>
+                </textarea>
+
+            </form>
+
+        </section>
+
+        <section>
+            <h3>Métadonnées filtrées</h3>
+            <p>
+                <input name="meta" [(ngModel)]="meta">
+                <mat-icon (click)="ajouteMeta()">add</mat-icon>
+            </p>
+            <ul>
+                <li *ngFor="let m of filtre.donnees; let i=index">{{ m }}
+                    <mat-icon (click)="filtre.donnees.splice(i, 1)">delete</mat-icon>
+                </li>
+            </ul>
+            <hr>
+            <p>
+                <button class="invalid" (click)="fermer.emit(false)">Annuler</button>
+                <button class="valid" (click)="ecrire()">Valider</button>
+            </p>
+        </section>
+
+    </form>
+</section>

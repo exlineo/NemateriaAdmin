@@ -1,60 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FiltreModel } from '../systeme/modeles/filtre.modele';
+import { FiltresService } from '../systeme/services/filtres.service';
 
 @Component({
 	selector: 'app-filtre',
 	templateUrl: './filtre.component.html',
-	styleUrls: ['./filtre.component.css'],
-	animations: [
-		trigger('openCloseLeftPanel', [
-			state('open', style({
-				width: '200px'
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate('0.5s')
-			]),
-			transition('closed => open', [
-				animate('0.5s')
-			]),
-		]),
-		trigger('openCloseRightPanel', [
-			state('open', style({
-				width: '564px'
-			})),
-			state('closed', style({
-				width: '0'
-			})),
-			transition('open => closed', [
-				animate('0.5s')
-			]),
-			transition('closed => open', [
-				animate('0.5s')
-			]),
-		]),
-	],
+	styleUrls: ['./filtre.component.css']
 })
 export class FiltreComponent implements OnInit {
 
-	leftPanelIsOpen = true;
-	rightPanelIsOpen = true;
+	@Input()
+	filtre:FiltreModel;
 
-	constructor() { }
+	@Output()
+	fermer = new EventEmitter<boolean>();
+
+	meta:string;
+
+	constructor(private filtreServ:FiltresService) { }
 
 	ngOnInit() {
+		this.meta="";
 	}
 
-
-	toggleLeftPanel($event): void {
-		$event.preventDefault();
-		this.leftPanelIsOpen = !this.leftPanelIsOpen;
+	/**
+	 * Méthode utilisée pour la mise à jour ou l'écriture d'une nouvelle collection
+	 */
+	ecrire(){
+		console.log(this.filtre);
+		if(this.filtre._id){
+			this.filtreServ.majFiltre(this.filtre);
+		}else{
+			this.filtreServ.ajouteFiltre(this.filtre);
+		}
 	}
-
-	toggleRightPanel($event): void {
-		$event.preventDefault();
-		this.rightPanelIsOpen = !this.rightPanelIsOpen;
+	/**
+	 * Ajouter une méta à un filtre existant pour le modifier
+	 */
+	ajouteMeta(){
+		console.log("ajoute meta", this.meta);
+		this.filtre.donnees.push(this.meta);
 	}
-
 }

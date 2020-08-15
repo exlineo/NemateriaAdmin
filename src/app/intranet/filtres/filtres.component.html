@@ -16,8 +16,9 @@
     <section>
         <header>
             <div>
-                <mat-icon matTooltip="Modifier la collection">edit</mat-icon>
-                <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
+                <mat-icon matTooltip="Modifier le filtre" (click)="edition = !edition">edit</mat-icon>
+                <mat-icon matTooltip="Ajouter un filtre" (click)="ajouteFiltre()">add</mat-icon>
+                <!-- <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon> -->
             </div>
             <h2>Détails sur le filtre</h2>
         </header>
@@ -52,3 +53,5 @@
         </section>
     </aside>
 </section>
+<!-- Afficher la collection choisie -->
+<app-filtre *ngIf="edition" [filtre]="filtre" (fermer)="masque()" class="unique"></app-filtre>

@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
 import { CollectionModel, Collection } from '../systeme/modeles/collection.modele';
 import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { CollectionService } from '../systeme/services/collection.service';
