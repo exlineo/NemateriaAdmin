@@ -1,12 +1,14 @@
-main{
-    display:inline-flex;
+main {
+    display: inline-flex;
 }
-section:nth-child(1){
-    width:80px;
-	background-color: #304753;
+
+section:nth-child(1) {
+    width: 90px;
+    background-color: #304753;
 }
-section:nth-child(2){
-    width:calc(100% - 80px);
-    height:100vh;
+
+section:nth-child(2) {
+    width: calc(100% - 90px);
+    height: 100vh;
     flex-flow: column nowrap;
 }

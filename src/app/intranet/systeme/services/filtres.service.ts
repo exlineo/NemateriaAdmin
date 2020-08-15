@@ -70,6 +70,7 @@ export class FiltresService {
 			retour => {
 				console.log(retour);
 				this.notifServ.notif("Filtre enregistré");
+				this.getFiltres();
 			},
 			erreur => {
 				console.log(erreur);

@@ -9,7 +9,6 @@ export interface FiltreModel {
 }
 
 export class Filtre implements FiltreModel {
-    _id = 0;
     titre = "";
     alias = "";
     description = "";

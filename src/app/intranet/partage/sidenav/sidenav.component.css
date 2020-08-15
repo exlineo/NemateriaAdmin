@@ -47,12 +47,9 @@ nav li mat-icon {
 
 /* LOGO */
 
-
-/** Logo **/
-
 header.logo {
-    width: 80px;
-    margin: 15px 0 70px -12px;
+    width: 100%;
+    margin: 15px 0 70px;
 }
 
 header.logo:hover {
@@ -62,6 +59,7 @@ header.logo:hover {
 .logo {
     display: flex;
     width: 100%;
+    min-width: 100px;
     text-align: center;
     font-size: 8px;
     font-family: 'Raleway', Arial, sans-serif;
@@ -82,15 +80,15 @@ header.logo:hover {
 
 .logo>div:nth-child(2) {
     margin: auto;
+    width: 100%;
     line-height: 75px;
 }
 
 .logo h1 {
-    margin: 0;
+    margin: auto;
+    width: 100%;
+    text-align: center;
     line-height: 0.8em;
-}
-
-.logo h1 {
     font-family: 'Lora', Arial, sans-serif;
     font-size: 14px;
 }
@@ -106,7 +104,7 @@ header.logo:hover {
     overflow: hidden;
     content: '';
     position: absolute;
-    margin-left: 42px;
+    margin-left: 40px;
     margin-top: 9px;
     transform: rotate(45deg);
     transform-origin: 0 0;

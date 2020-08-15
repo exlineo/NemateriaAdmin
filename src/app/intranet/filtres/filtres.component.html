@@ -1,5 +1,4 @@
 <section class="screen">
-    <!-- <aside class="left-panel" [@openCloseLeftPanel]="leftPanelIsOpen ? 'open' : 'closed' "> -->
     <aside class="left-panel">
         <header>
             <h2>Filtres disponibles</h2>
@@ -7,7 +6,6 @@
             <mat-icon matTooltip="Ouvrir / fermer le panneau">settings_ethernet</mat-icon>
         </header>
         <ul>
-
             <li *ngFor="let filtre of this.filtresServ.filtres" (click)="filtreOnClick(filtre._id) ">
                 {{filtre.titre}}
             </li>
@@ -18,7 +16,6 @@
             <div>
                 <mat-icon matTooltip="Modifier le filtre" (click)="edition = !edition">edit</mat-icon>
                 <mat-icon matTooltip="Ajouter un filtre" (click)="ajouteFiltre()">add</mat-icon>
-                <!-- <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon> -->
             </div>
             <h2>Détails sur le filtre</h2>
         </header>
@@ -41,17 +38,6 @@
             </ul>
         </article>
     </section>
-    <aside class="right-panel">
-        <header>
-            <!-- <mat-icon matTooltip="Ouvrir / fermer le panneau">settings_ethernet</mat-icon> -->
-        </header>
-        <section class="selection ">
-
-            <article>
-
-            </article>
-        </section>
-    </aside>
 </section>
 <!-- Afficher la collection choisie -->
 <app-filtre *ngIf="edition" [filtre]="filtre" (fermer)="masque()" class="unique"></app-filtre>
