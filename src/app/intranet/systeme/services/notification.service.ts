@@ -13,7 +13,11 @@ export class NotificationService {
 		duration: 2000,
 		});
 	}
-
+	/**
+	 * Notifier les usagers
+	 * @param message Message à afficher
+	 * @param action Type d'action engagée pour l'afficher dans la barre
+	 */
 	notif(message: string, action: string="Notification") {
 		this.snackBar.open(message, action, {
 			duration: 2000,

@@ -72,6 +72,17 @@ export class NoticeService {
 		)
 	}
 	/**
+	 * Supprimer une notice
+	 * @param id ID de la notice à supprimer
+	 */
+	supprNotice(id){
+		this.http.delete(environment.SERV+'notices/'+id).subscribe(
+			retour => {
+				console.log(retour);
+			}
+		)
+	}
+	/**
 	 * Récupérer la liste des séries depuis les notices chargées
 	 */
 	getSeries(){

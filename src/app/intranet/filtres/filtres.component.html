@@ -14,6 +14,7 @@
     <section>
         <header>
             <div>
+                <mat-icon matTooltip="Supprimer le filtre" (click)="supprime=!supprime">delete</mat-icon>
                 <mat-icon matTooltip="Modifier le filtre" (click)="edition = !edition">edit</mat-icon>
                 <mat-icon matTooltip="Ajouter un filtre" (click)="ajouteFiltre()">add</mat-icon>
             </div>
@@ -41,3 +42,11 @@
 </section>
 <!-- Afficher la collection choisie -->
 <app-filtre *ngIf="edition" [filtre]="filtre" (fermer)="masque()" class="unique"></app-filtre>
+<section *ngIf="supprime" (fermer)="masque()" class="pop-up">
+    <article>
+        <h3>Souhaitez-vous supprimer ce filte ?</h3>
+        <p>Cette suppression sera définitive</p>
+        <button class="invalid" (click)="masque()">Annuler</button>
+        <button class="valid" (click)="supprimeFiltre()">Valider</button>
+    </article>
+</section>

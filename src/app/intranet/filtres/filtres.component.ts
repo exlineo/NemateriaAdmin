@@ -14,12 +14,13 @@ import { FiltresService } from '../systeme/services/filtres.service';
 	styleUrls: ['./filtres.component.css']
 })
 export class FiltresComponent implements OnInit {
-	filtre:FiltreModel;
-	edition:boolean;
-	afficheFiltre:boolean; // Afficher la fiche de modification du filtre
-	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série
+	filtre: FiltreModel;
+	edition: boolean; // Afficher la fenêtre d'édition d'un filtre
+	supprime: boolean; // Afficher la fenêtre de confirmation pour la suppression d'un filtre
+	afficheFiltre: boolean; // Afficher la fiche de modification du filtre
+	filtreSerie: string = ''; // Filtrer les notices d'une collection en fonction de sa série
 
-	constructor(public filtresServ: FiltresService, private rendu:Renderer2) { }
+	constructor(public filtresServ: FiltresService, private rendu: Renderer2) { }
 
 	ngOnInit() {
 		this.filtre = new Filtre();
@@ -32,36 +33,49 @@ export class FiltresComponent implements OnInit {
 	 */
 	filtreOnClick(id): void {
 		this.filtresServ.filtres.forEach(
-			f=>{
-				if(f._id == id){
+			f => {
+				if (f._id == id) {
 					this.filtre = f;
 				}
 			}
-			
+
 		);
 		console.log(this.filtre);
 	}
 	/**
 	 * Activer ou désactiver l'édition du filtre
 	 */
-	setEdit(){
+	setEdit() {
 		this.edition = !this.edition;
 	}
 	/**
 	 * Supprimer une métadonnée traitée par le filtre
 	 * @param id ID de la métadonnées à supprimer
 	 */
-	supprMeta(id:number){
-		this.filtre.donnees.splice(id,1);
+	supprMeta(id: number) {
+		this.filtre.donnees.splice(id, 1);
 	}
 	/**
 	 * Enlever toutes les fenêtres pop-up et initialiser la collection et les notices
 	 */
-	masque(){
+	masque() {
 		this.edition = false;
+		this.supprime = false;
 	}
-	ajouteFiltre(){
+	ajouteFiltre() {
 		this.filtre = new Filtre();
 		this.edition = true;
+	}
+	/**
+	 * Faire apparaitre une pop-up pour valider la suppression d'un filtre
+	 */
+	supprimeFiltre() {
+		console.log(this.filtre);
+		if (this.filtre._id) {
+			this.filtresServ.supprimeFiltre(this.filtre._id);
+		}else{
+			this.filtresServ.notif("Merci de sélectionner un filtre à supprimer...");
+
+		}
 	}
 }

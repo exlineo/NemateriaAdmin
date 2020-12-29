@@ -77,4 +77,15 @@ export class CollectionService {
 			}
 		)
 	}
+	/**
+	 * Supprimer la collection
+	 * @param id ID de la collection à supprimer
+	 */
+	supprCollection(id){
+		this.http.delete(environment.SERV+'collections/'+id).subscribe(
+			retour => {
+				console.log(retour);
+			}
+		)
+	}
 }

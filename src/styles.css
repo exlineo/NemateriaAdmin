@@ -804,6 +804,7 @@ textarea {
     margin: auto;
     color: #FFF;
     text-align: center;
+    display: flex;
 }
 
 .unique section header {
