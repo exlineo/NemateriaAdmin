@@ -5,7 +5,6 @@ import { CollectionModel } from '../modeles/collection.modele';
 
 import { environment } from 'src/environments/environment';
 
-
 @Injectable({
 	providedIn: 'root'
 })

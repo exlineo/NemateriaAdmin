@@ -10,6 +10,7 @@ export class ScanService {
 
 	scans: any;
 	listeDossiers: any; // La liste des dossiers disponibles
+	load:boolean = false; // Déclencher un loader sur la page de scan
 
 	constructor(private http: HttpClient) {
 		this.getListeDossiers();
@@ -41,10 +42,11 @@ export class ScanService {
 	/**
 	 * Récupérer la liste des métadonnées d'un dossier en particulier
 	 */
-	getDir(dir:string): void {
+	getDir(dir:string) {
 		this.scans = null;
+		this.load = true;
 		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
-		this.http.get(environment.SERV + 'scans/'+dir).subscribe(
+		this.http.get<boolean>(environment.SERV + 'scans/'+dir).subscribe(
 			fichiers => {
 				fichiers['data'].forEach(f => {
 					for(let i in f){
@@ -52,9 +54,9 @@ export class ScanService {
 							delete f[i];
 						}
 					}
-										
 				});
 				this.scans = fichiers['data'];
+				this.load = false;
 			}
 		)
 	}

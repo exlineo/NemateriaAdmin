@@ -8,18 +8,18 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-	constructor(public auth: AuthService) { }
+	constructor(public authServ: AuthService) { }
 
 	canActivate(
 		next: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-		return this.auth.auth;
+		return this.authServ.auth;
 	}
 
 	canLoad(
 		next: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-			console.log("Route activée (canLoad)", this.auth.auth);
-			return this.auth.auth;
+			console.log("Route activée (canLoad)", this.authServ.auth);
+			return this.authServ.auth;
 	}
 }

@@ -20,13 +20,13 @@ export class ConnexionComponent implements OnInit {
 	 * Instance du formulaire de connnexion 
 	 */
 	connexionForm = new FormGroup({
-		email: new FormControl('', [
+		id: new FormControl('', [
 			Validators.required,
-			Validators.email,
+			Validators.minLength(6),
 		]),
 		pass: new FormControl('', [
 			Validators.required,
-			Validators.minLength(8)
+			Validators.minLength(6)
 		]),
 	});
 
@@ -37,10 +37,8 @@ export class ConnexionComponent implements OnInit {
 		public dialog: MatDialog
 	) { }
 
-	ngOnInit() { 
-
-	}
-
+	ngOnInit() {}
+	
 	/**
 	 * @method authentifier() - Envois une requête de connexion via authService
 	 */

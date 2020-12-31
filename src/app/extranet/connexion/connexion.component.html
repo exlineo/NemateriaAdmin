@@ -1,37 +1,37 @@
 <section>
-	<section>
-		<header class="logo">
-			<div class="square">
-				<div></div>
-			</div>
-			<div>
-				<h1>Nemateria</h1>
-				<h5>Quis autem vel eum</h5>
-			</div>
-		</header>
-		<h2>
-			Connexion
-		</h2>
-		<p>
-			Connectez-vous pour accéder à l'administration de Nemateria
-		</p>
-		<article>
-			<form [formGroup]="connexionForm">
-				<mat-form-field>
-					<input matInput placeholder="Votre email" formControlName="email">
-					<mat-error *ngIf="true">
-						Un email valide est <strong>obligatoire</strong>
-					</mat-error>
-				</mat-form-field>
-				<mat-form-field>
-					<input matInput placeholder="Votre mot de pass" formControlName="pass" type="password">
-					<mat-error *ngIf="true">
-						Un mot de passe valide est <strong>obligatoire</strong>
-					</mat-error>
-				</mat-form-field>
-			</form>
-			<button mat-raised-button (click)="authentifier()">Go</button>
-		</article>
-		<a href (click)="openDialog($event)">Pas encore inscrit? Il suffit de remplir ce formulaire</a>
-	</section>
+    <section>
+        <header class="logo">
+            <div class="square">
+                <div></div>
+            </div>
+            <div>
+                <h1>Nemateria</h1>
+                <h5>Quis autem vel eum</h5>
+            </div>
+        </header>
+        <h2>
+            Connexion
+        </h2>
+        <p>
+            Connectez-vous pour accéder à l'administration de Nemateria
+        </p>
+        <article>
+            <form [formGroup]="connexionForm">
+                <mat-form-field>
+                    <input matInput placeholder="Votre identifiant" formControlName="id" minlength=6>
+                    <mat-error *ngIf="true">
+                        Un identifiant est <strong>obligatoire</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Votre mot de pass" formControlName="pass" type="password">
+                    <mat-error *ngIf="true">
+                        Un mot de passe valide est <strong>obligatoire</strong>
+                    </mat-error>
+                </mat-form-field>
+            </form>
+            <button mat-raised-button (click)="authentifier()">Go</button>
+        </article>
+        <a href (click)="openDialog($event)">Pas encore inscrit? Il suffit de remplir ce formulaire</a>
+    </section>
 </section>
