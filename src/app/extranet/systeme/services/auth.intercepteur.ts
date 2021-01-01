@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, pipe } from 'rxjs';
-import { catchError } from "rxjs/internal/operators";
+import { catchError } from "rxjs/operators";
 import { TokenService } from './token.service';
 
 @Injectable()

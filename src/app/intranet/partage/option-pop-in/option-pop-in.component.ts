@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
-import { MAT_BOTTOM_SHEET_DATA } from '@angular/material';
+import { MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { NotificationService } from "src/app/intranet/systeme/services/notification.service";
 import { MediaService } from "src/app/intranet/systeme/services/media.service";
 import { MediaModel } from "src/app/intranet/systeme/modeles/media.modele";
