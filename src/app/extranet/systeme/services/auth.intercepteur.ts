@@ -19,9 +19,7 @@ export class AuthIntercepteur implements HttpInterceptor {
    */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Réécriture des entêtes si un token existe
-    console.log("Interception d'une requête ... ", req);
     if (this.tokenServ.token) {
-      console.log("Ajout du token", this.tokenServ.token);
       this.entetes = {
         headers: req.headers
           .set('Content-Type', 'application/json')
@@ -29,8 +27,6 @@ export class AuthIntercepteur implements HttpInterceptor {
       }
     }
     else {
-      console.log("JSON sans token");
-
       this.entetes = {
         headers: req.headers.set('Content-Type', 'application/json')
       }
