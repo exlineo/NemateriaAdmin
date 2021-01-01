@@ -1,11 +1,13 @@
 import { Component, OnInit,  EventEmitter, Output  } from '@angular/core';
 
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators, NgModel } from '@angular/forms';
 
 import { ScanService } from '../systeme/services/scan.service';
 import { UtilsService } from '../systeme/library/utils.service';
 import { MappagesService } from '../systeme/services/mappages.service';
 import { Router } from '@angular/router';
+import { FiltresService } from '../systeme/services/filtres.service';
+import { FiltreModel, Filtre } from '../systeme/modeles/filtre.modele';
 
 @Component({
 	selector: 'app-scanner',
@@ -16,10 +18,11 @@ export class ScannerComponent implements OnInit {
 	
 	scanListe:Array<string>;
 	set:string;
+	filtre:FiltreModel = new Filtre();
 
 	panelOpenState = false;
 
-	constructor(public scanServ:ScanService, public mapServ:MappagesService, public utils:UtilsService, private router:Router) { }
+	constructor(public scanServ:ScanService, public filtresServ:FiltresService, public mapServ:MappagesService, public utils:UtilsService, private router:Router) { }
 
 	ngOnInit() {
 		// this.scanServ.getDir();
@@ -39,5 +42,16 @@ export class ScannerComponent implements OnInit {
 	extraitSet(){
 		this.mapServ.set = this.scanServ.scans[0];
 		this.router.navigateByUrl('/intranet/mappages');
+	}
+
+	choixFiltre(f:NgModel){
+		for(let fo in f){
+			console.log(fo);
+		}
+		console.log(f, this.filtre);
+	}
+
+	creeFiltre(f:NgForm){
+
 	}
 }

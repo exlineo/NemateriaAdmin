@@ -66,18 +66,22 @@
             <p>Choisissez une filtre dans la liste ci-dessous, vérifiez le résulat et cliquez sur 'enregistrer les données filtrées' pour les stocker formattées dans la base.</p>
         </header>
         <article>
-            <form>
-                <label for="filtres">Choissez un filtre pour les données *</label>
-                <select name="filtre" required>
-                    <option>Filtre 1</option>
-                    <option>Filtre 2</option>
-                    <option>Filtre 3</option>
+            <form (ngSubmit)="creeFiltre(setfiltre)" #setfiltre="ngForm">
+                <label for="fil">Choissez un filtre pour les données *</label>
+                <select name="fil" required [(ngModel)]="filtre">
+                    <option value="null">--------------</option>
+                    <option *ngFor="let f of filtresServ.filtres" [value]="f">{{ f.titre }} ({{ f.createur }})</option>
                 </select>
                 <label for="set">Donnez ou modifiez le nom du set données à enregistrer *</label>
-                <input name="set" placeholder="Donnez ou modifiez le nom du set de données" required [(ngModel)]="set" minlength="4">
+                <input name="set" placeholder="Donnez ou modifiez le nom du set de données" required [(ngModel)]="set">
                 <button>Enregistrer les données filtrées</button>
             </form>
         </article>
+        <blockquote *ngIf="filtre.titre">
+            <h4>{{ filtre.titre }} <span *ngIf="filtre.createur">({{ filtre.createur }})</span></h4>
+            <p>{{ filtre.description }}</p>
+            <p>[{{ filtre.donnees }}]</p>
+        </blockquote>
     </aside>
 </section>
 <section class="pop-up" *ngIf="scanServ.load">
