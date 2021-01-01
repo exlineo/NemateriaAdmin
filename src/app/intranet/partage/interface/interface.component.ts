@@ -12,7 +12,7 @@ export class InterfaceComponent implements OnInit {
 	constructor(public colServ:CollectionService, public scanServ:ScanService) { }
 
 	ngOnInit() {
-		console.log(this.scanServ.listeDossiers);
+		// console.log(this.scanServ.listeDossiers);
 	}
 
 }

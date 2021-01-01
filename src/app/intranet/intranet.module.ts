@@ -36,6 +36,10 @@ import { UtilsService } from './systeme/library/utils.service';
 import { FiltreNoticesPipe } from './systeme/pipes/filtre-notices.pipe';
 import { ParametresComponent } from './partage/parametres/parametres.component';
 import { ClesJsonPipe } from './systeme/pipes/clesJson.pipe';
+import { FiltresService } from './systeme/services/filtres.service';
+import { MappagesService } from './systeme/services/mappages.service';
+import { NotificationService } from '../extranet/systeme/services/notification.service';
+import { ScanService } from './systeme/services/scan.service';
 
 @NgModule({
 	imports: [
@@ -45,7 +49,7 @@ import { ClesJsonPipe } from './systeme/pipes/clesJson.pipe';
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [NoticeService, CollectionService, UtilsService],
+	providers: [NoticeService, CollectionService, UtilsService, FiltresService, MappagesService, NotificationService, ScanService],
 	declarations: [
 		HeaderComponent,
 		SidenavComponent,

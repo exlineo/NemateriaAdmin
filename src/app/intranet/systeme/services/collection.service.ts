@@ -17,13 +17,13 @@ export class CollectionService {
 	series:Array<any>; // Tableau des séries d'une collection donnée
 
 	constructor(private http: HttpClient) {
+		console.log("Service des connexions");
 		this.getCollections();
 	}
 	/**
 	 * Récupérer l'ensemble des collections disponibles dans le depôt
 	 */
 	getCollections(): void {
-		// return this.http.get<Array<CollectionModel>>(this.dataStorage + 'collections.json');
 		this.http.get<Array<CollectionModel>>(environment.SERV+'collections').subscribe(
 			data => {
 				console.log(data);

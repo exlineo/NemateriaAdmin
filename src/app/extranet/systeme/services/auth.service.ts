@@ -39,7 +39,8 @@ export class AuthService {
 					this.tokenServ.token = null;
 					console.log("Echec de la connexion");
 				} else {
-					this.tokenServ.token = 'connecté';
+					console.log(this.tokenServ.token, retour['token']);
+					this.tokenServ.token = retour['token'];
 					this.connexion(null);
 					console.log("Connexion");
 					this.router.navigateByUrl('/intranet');
@@ -59,6 +60,7 @@ export class AuthService {
 	deconnexion() {
 		this.auth = false;
 		this.tokenServ.token = null;
+		this.router.navigateByUrl('/');
 		sessionStorage.setItem('auth', null);
 	}
 	/**
