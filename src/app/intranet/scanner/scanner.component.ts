@@ -53,6 +53,7 @@ export class ScannerComponent implements OnInit {
 	}
 
 	creeFiltre(f:NgForm){
-
+		console.log(f.value);
+		
 	}
 }

@@ -340,6 +340,15 @@ button:hover {
     background-color: yellowgreen;
 }
 
+button:disabled {
+    opacity: .5;
+    background-color: grey;
+}
+
+button:hover:disabled {
+    background-color: grey;
+}
+
 input:hover,
 textarea:hover,
 select:hover {

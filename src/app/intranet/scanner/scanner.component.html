@@ -74,7 +74,7 @@
                 </select>
                 <label for="set">Donnez ou modifiez le nom du set données à enregistrer *</label>
                 <input name="set" placeholder="Evitez les caractères spéciaux et les espaces" required [(ngModel)]="set">
-                <button>Enregistrer les données filtrées</button>
+                <button [disabled]="setfiltre.invalid">Enregistrer les données filtrées</button>
             </form>
         </article>
         <blockquote>
