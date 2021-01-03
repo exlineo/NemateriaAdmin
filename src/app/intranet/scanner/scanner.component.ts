@@ -18,14 +18,15 @@ export class ScannerComponent implements OnInit {
 	
 	scanListe:Array<string>;
 	set:string;
-	filtre:FiltreModel = new Filtre();
+	filtreChoisi:FiltreModel;
+	_idFiltre:string;
 
 	panelOpenState = false;
 
 	constructor(public scanServ:ScanService, public filtresServ:FiltresService, public mapServ:MappagesService, public utils:UtilsService, private router:Router) { }
 
 	ngOnInit() {
-		// this.scanServ.getDir();
+		this.filtreChoisi = new Filtre();
 	}
 	/**
 	 * Accéder aux notices d'une scan
@@ -43,12 +44,12 @@ export class ScannerComponent implements OnInit {
 		this.mapServ.set = this.scanServ.scans[0];
 		this.router.navigateByUrl('/intranet/mappages');
 	}
-
-	choixFiltre(f:NgModel){
-		for(let fo in f){
-			console.log(fo);
-		}
-		console.log(f, this.filtre);
+	/**
+	 * FIltre choisi depuis la liste déroulante
+	 */
+	choixFiltre(){
+		this.filtreChoisi = this.filtresServ.filtres.find(f=>f._id == this._idFiltre);
+		console.log(this.filtreChoisi);
 	}
 
 	creeFiltre(f:NgForm){

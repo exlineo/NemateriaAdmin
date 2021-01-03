@@ -50,7 +50,7 @@ export class MappagesComponent implements OnInit {
    * Envoyer le nouveau filtre pour l'enregistrer dans la base du serveur
    */
   valideFiltre(f?:NgForm){
-    this.filtre.donnees = this.triMaps();
+    this.filtre.metadonnees = this.triMaps();
     this.filtreServ.ajouteFiltre(this.filtre);
   }
   /**

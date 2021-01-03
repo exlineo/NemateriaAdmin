@@ -68,19 +68,34 @@
         <article>
             <form (ngSubmit)="creeFiltre(setfiltre)" #setfiltre="ngForm">
                 <label for="fil">Choissez un filtre pour les données *</label>
-                <select name="fil" required [(ngModel)]="filtre">
+                <select name="fil" required [(ngModel)]="_idFiltre" (change)="choixFiltre()" #ctlfil="ngModel">
                     <option value="null">--------------</option>
-                    <option *ngFor="let f of filtresServ.filtres" [value]="f">{{ f.titre }} ({{ f.createur }})</option>
+                    <option *ngFor="let f of filtresServ.filtres" [value]="f._id">{{ f.titre }} ({{ f.createur }})</option>
                 </select>
                 <label for="set">Donnez ou modifiez le nom du set données à enregistrer *</label>
-                <input name="set" placeholder="Donnez ou modifiez le nom du set de données" required [(ngModel)]="set">
+                <input name="set" placeholder="Evitez les caractères spéciaux et les espaces" required [(ngModel)]="set">
                 <button>Enregistrer les données filtrées</button>
             </form>
         </article>
-        <blockquote *ngIf="filtre.titre">
-            <h4>{{ filtre.titre }} <span *ngIf="filtre.createur">({{ filtre.createur }})</span></h4>
-            <p>{{ filtre.description }}</p>
-            <p>[{{ filtre.donnees }}]</p>
+        <blockquote>
+            <h4 *ngIf="filtreChoisi.titre">Filtre sélectionné : {{ filtreChoisi.titre }}</h4>
+            <p *ngIf="filtreChoisi.createur">Créateur : {{ filtreChoisi.createur }}</p>
+            <p>{{ filtreChoisi.description }}</p>
+            <p>Les données des documents sauvegardées seront celles inclues ci-dessous si elles sont présentes dans les métadonnées. Les autres ne seront pas dans la base moissonnable mais resteront accessibles dans les documents avec un autre filtre.</p>
+            <ul>
+                <li *ngFor="let meta of filtreChoisi.metadonnees | keyvalue">
+                    {{ meta.key }} :
+                    <ul *ngIf="!meta['value'].length">
+                        <li *ngFor="let m of meta.value | keyvalue">{{ m.key }}
+                            <ul *ngIf="!m['value'].length">
+                                <li *ngFor="let n of m.value | keyvalue">{{ n.key }} ({{ n.value }})</li>
+                            </ul>
+                            <span *ngIf="m['value'].length">({{ m.value }})</span>
+                        </li>
+                    </ul>
+                    <span *ngIf="meta['value'].length">{{ meta.value }}</span>
+                </li>
+            </ul>
         </blockquote>
     </aside>
 </section>

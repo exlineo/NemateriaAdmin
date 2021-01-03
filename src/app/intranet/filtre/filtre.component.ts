@@ -39,6 +39,6 @@ export class FiltreComponent implements OnInit {
 	 */
 	ajouteMeta(){
 		console.log("ajoute meta", this.meta);
-		this.filtre.donnees.push(this.meta);
+		this.filtre.metadonnees.push(this.meta);
 	}
 }

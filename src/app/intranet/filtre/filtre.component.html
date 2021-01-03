@@ -35,8 +35,8 @@
                 <mat-icon (click)="ajouteMeta()">add</mat-icon>
             </p>
             <ul>
-                <li *ngFor="let m of filtre.donnees; let i=index">{{ m }}
-                    <mat-icon (click)="filtre.donnees.splice(i, 1)">delete</mat-icon>
+                <li *ngFor="let m of filtre.metadonnees; let i=index">{{ m }}
+                    <mat-icon (click)="filtre.metadonnees.splice(i, 1)">delete</mat-icon>
                 </li>
             </ul>
             <hr>

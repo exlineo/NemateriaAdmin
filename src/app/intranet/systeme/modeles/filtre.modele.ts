@@ -5,7 +5,7 @@ export interface FiltreModel {
     description: string;
     createur?: string;
     date?: string;
-    donnees?:Array<string>;
+    metadonnees?:Array<string>;
 }
 
 export class Filtre implements FiltreModel {
@@ -14,5 +14,5 @@ export class Filtre implements FiltreModel {
     description = "";
     createur = "";
     date = "";
-    donnees = [];
+    metadonnees = [];
 }

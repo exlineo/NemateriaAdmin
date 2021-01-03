@@ -38,7 +38,6 @@ export class FiltresComponent implements OnInit {
 					this.filtre = f;
 				}
 			}
-
 		);
 		console.log(this.filtre);
 	}
@@ -53,7 +52,7 @@ export class FiltresComponent implements OnInit {
 	 * @param id ID de la métadonnées à supprimer
 	 */
 	supprMeta(id: number) {
-		this.filtre.donnees.splice(id, 1);
+		this.filtre.metadonnees.splice(id, 1);
 	}
 	/**
 	 * Enlever toutes les fenêtres pop-up et initialiser la collection et les notices
