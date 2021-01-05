@@ -1,4 +1,4 @@
-import { Component, OnInit,  EventEmitter, Output  } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators, NgModel } from '@angular/forms';
 
@@ -15,15 +15,16 @@ import { FiltreModel, Filtre } from '../systeme/modeles/filtre.modele';
 	styleUrls: ['./scanner.component.css']
 })
 export class ScannerComponent implements OnInit {
-	
-	scanListe:Array<string>;
-	set:string;
-	filtreChoisi:FiltreModel;
-	_idFiltre:string;
+
+	scanListe: Array<string>;
+	set: string;
+	filtreChoisi: FiltreModel;
+	_idFiltre: string;
+
 
 	panelOpenState = false;
 
-	constructor(public scanServ:ScanService, public filtresServ:FiltresService, public mapServ:MappagesService, public utils:UtilsService, private router:Router) { }
+	constructor(public scanServ: ScanService, public filtresServ: FiltresService, public mapServ: MappagesService, public utils: UtilsService, private router: Router) { }
 
 	ngOnInit() {
 		this.filtreChoisi = new Filtre();
@@ -32,7 +33,7 @@ export class ScannerComponent implements OnInit {
 	 * Accéder aux notices d'une scan
 	 * @param dossier Dossier scanné pour afficher la liste des notices
 	 */
-	scanOnClick(dossier){
+	scanOnClick(dossier) {
 		this.set = dossier;
 		this.scanServ.getDir(dossier);
 	}
@@ -40,20 +41,23 @@ export class ScannerComponent implements OnInit {
 	 * Envoyer les clés au service de mappage
 	 * @param s Clés du set scanné dans le dossier
 	 */
-	extraitSet(){
+	extraitSet() {
 		this.mapServ.set = this.scanServ.scans[0];
 		this.router.navigateByUrl('/intranet/mappages');
 	}
 	/**
 	 * FIltre choisi depuis la liste déroulante
 	 */
-	choixFiltre(){
-		this.filtreChoisi = this.filtresServ.filtres.find(f=>f._id == this._idFiltre);
+	choixFiltre() {
+		this.filtreChoisi = this.filtresServ.filtres.find(f => f._id == this._idFiltre);
 		console.log(this.filtreChoisi);
 	}
-
-	creeFiltre(f:NgForm){
+	/**
+	 * Lancer la copie des données scannée vers un tableau de données filtrées
+	 * @param f Données du formulaire
+	 */
+	creeFiltre(f: NgForm) {
 		console.log(f.value);
-		
+		this.scanServ.setMetas(this.filtreChoisi, this.set);
 	}
 }

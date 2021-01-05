@@ -3,20 +3,33 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http';
 import { FiltresService } from './filtres.service';
+import { forEachChild } from 'typescript';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ScanService {
 
-	scans: any;
+	scans: any; // Les données reçues depuis le scan sur le serveur
 	listeDossiers: any; // La liste des dossiers disponibles
 	load:boolean = false; // Déclencher un loader sur la page de scan
+	
+	metaFiltrees:Array<any>; // Le tableau des données du scan filtrées
+	filtre:any; // Filtre utilisé pour filtrer les données à enregistrer dans la base
+	set:string; // Nom du set à enregistrer dans la base de données
 
 	constructor(private http: HttpClient) {
+		this.init();
 		this.getListeDossiers();
 	}
-
+	/**
+	 * Initialiser les données initiales
+	 */
+	init(){
+		this.filtre = '';
+		this.set = '';
+		this.metaFiltrees = [];
+	}
 	/**
 	 * Liste les dossiers scannables
 	 */
@@ -37,6 +50,7 @@ export class ScanService {
 			fichier => {
 				console.log(fichier['data']);
 				this.scans = fichier['data'];
+				console.log(this.scans);
 			}
 		)
 	}
@@ -61,5 +75,54 @@ export class ScanService {
 			}
 		)
 	}
-
+	/**
+	 * Filtrer l'ensemble des données et les transmettre à la base
+	 * @param filtre Filtre de référence pour traitr les données
+	 */
+	async setMetas(filtre, set){
+		this.filtre = filtre; // Récupérer le filtre sélectionné
+		this.set = set; // Paramétrer le nom du set de données
+		await this.scans.forEach( m => {
+			this.filtreAPlat(m);
+		});
+		console.log(this.metaFiltrees);
+		
+	}
+	/**
+	 * Mettre à plat le filtre pour ne récupérer que les clés
+	 */
+	filtreAPlat(scanner) {
+		let f = this.filtre;
+		// Boucle dans les métadonnées du filtre
+		for (let un in f) {
+			// Récupérer le premier niveau d'objet
+			if (typeof f[un] == "object") {
+				for (let deux in f[un] as Object) {
+					if (typeof f[un][deux] == "object") {
+						for (let trois in f[un][deux] as Object) {
+							// Adapter les données de troisième niveau
+							if(scanner.hasOwnProperty(trois)) f[un][deux][trois] = scanner[trois];
+						}
+					} else {
+						// Adapter les données de deuxième niveau
+						if(scanner.hasOwnProperty(deux)) f[un][deux] = scanner[deux];
+					}
+				}
+			} else {
+				// Adapter les données de premier niveau
+				if(scanner.hasOwnProperty(un)) f[un] = scanner[un];
+			}
+		}
+		this.metaFiltrees.push(f);
+	}
+	/**
+	 * Enregistrer les données dans la base mongo dans les sets de données
+	 */
+	enregistreSet(){
+		this.http.post(environment.SERV+'notices/', this.metaFiltrees).subscribe(
+			retour => {
+				console.log(retour);
+			}
+		)
+	}
 }
