@@ -86,31 +86,36 @@ export class ScanService {
 			this.filtreAPlat(m);
 		});
 		console.log(this.metaFiltrees);
-		
 	}
 	/**
 	 * Mettre à plat le filtre pour ne récupérer que les clés
 	 */
 	filtreAPlat(scanner) {
-		let f = this.filtre;
+		let f = this.filtre.metadonnees;
 		// Boucle dans les métadonnées du filtre
 		for (let un in f) {
 			// Récupérer le premier niveau d'objet
 			if (typeof f[un] == "object") {
+				// console.log("Niveau 1", un, f[un], scanner.hasOwnProperty(un));
 				for (let deux in f[un] as Object) {
 					if (typeof f[un][deux] == "object") {
+						// console.log("Niveau deux", deux, f[un][deux], scanner.hasOwnProperty(deux));
 						for (let trois in f[un][deux] as Object) {
+							let ct = this.cap(trois);
 							// Adapter les données de troisième niveau
-							if(scanner.hasOwnProperty(trois)) f[un][deux][trois] = scanner[trois];
+							if(scanner.hasOwnProperty(ct)) f[un][deux][trois] = scanner[ct];
 						}
 					} else {
+						let cd = this.cap(deux);
 						// Adapter les données de deuxième niveau
-						if(scanner.hasOwnProperty(deux)) f[un][deux] = scanner[deux];
+						if(scanner.hasOwnProperty(cd)) f[un][deux] = scanner[cd];
 					}
 				}
 			} else {
 				// Adapter les données de premier niveau
-				if(scanner.hasOwnProperty(un)) f[un] = scanner[un];
+				let cu = this.cap(un);
+				if(scanner.hasOwnProperty(cu)) f[un] = scanner[cu];
+				// console.log(un, f[un], scanner.hasOwnProperty(un));
 			}
 		}
 		this.metaFiltrees.push(f);
@@ -124,5 +129,12 @@ export class ScanService {
 				console.log(retour);
 			}
 		)
+	}
+	/**
+	 * Mettre la première lettre en capitales
+	 * @param str Châine de caractère
+	 */
+	cap(str){
+		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
 }
