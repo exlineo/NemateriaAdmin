@@ -8,6 +8,7 @@ import { MappagesService } from '../systeme/services/mappages.service';
 import { Router } from '@angular/router';
 import { FiltresService } from '../systeme/services/filtres.service';
 import { FiltreModel, Filtre } from '../systeme/modeles/filtre.modele';
+import { SetModel, Set } from '../systeme/modeles/set';
 
 @Component({
 	selector: 'app-scanner',
@@ -17,16 +18,17 @@ import { FiltreModel, Filtre } from '../systeme/modeles/filtre.modele';
 export class ScannerComponent implements OnInit {
 
 	scanListe: Array<string>;
-	set: string;
+	set: SetModel;
 	filtreChoisi: FiltreModel;
 	_idFiltre: string;
-
 
 	panelOpenState = false;
 
 	constructor(public scanServ: ScanService, public filtresServ: FiltresService, public mapServ: MappagesService, public utils: UtilsService, private router: Router) { }
 
 	ngOnInit() {
+		this.set = new Set();
+		this.set.date =  Date.now();
 		this.filtreChoisi = new Filtre();
 	}
 	/**
@@ -34,7 +36,7 @@ export class ScannerComponent implements OnInit {
 	 * @param dossier Dossier scanné pour afficher la liste des notices
 	 */
 	scanOnClick(dossier) {
-		this.set = dossier;
+		this.set.titre = dossier;
 		this.scanServ.getDir(dossier);
 	}
 	/**
@@ -42,7 +44,7 @@ export class ScannerComponent implements OnInit {
 	 * @param s Clés du set scanné dans le dossier
 	 */
 	extraitSet() {
-		this.mapServ.set = this.scanServ.scans[0];
+		this.mapServ.set.metadonnees = this.scanServ.scans[0];
 		this.router.navigateByUrl('/intranet/mappages');
 	}
 	/**

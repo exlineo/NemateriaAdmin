@@ -72,8 +72,14 @@
                     <option value="null">--------------</option>
                     <option *ngFor="let f of filtresServ.filtres" [value]="f._id">{{ f.titre }} ({{ f.createur }})</option>
                 </select>
-                <label for="set">Donnez ou modifiez le nom du set données à enregistrer *</label>
-                <input name="set" placeholder="Evitez les caractères spéciaux et les espaces" required [(ngModel)]="set">
+                <label for="titre">Donnez ou modifiez le nom du set de données à enregistrer *</label>
+                <input name="titre" placeholder="Evitez les caractères spéciaux et les espaces" required [(ngModel)]="set.titre">
+                <label for="desc">Inidiquez des informations complémentaires sur le SET scanné</label>
+                <input name="desc" placeholder="Donnez des renseignements sur le SET" required [(ngModel)]="set.description">
+                <label for="createur">Qui a créé le SET ?</label>
+                <input name="createur" placeholder="Nom de la ou des personne(s)" required [(ngModel)]="set.createur">
+                <label for="gestion">Qui gère ce SET ?</label>
+                <input name="gestion" placeholder="Organiation et/ou personne(s) gérant le SET" required [(ngModel)]="set.gestionnaire">
                 <button [disabled]="setfiltre.invalid">Enregistrer les données filtrées</button>
             </form>
         </article>

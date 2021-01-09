@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http';
 import { FiltresService } from './filtres.service';
 import { forEachChild } from 'typescript';
+import { Set, SetModel } from '../modeles/set';
+import { FiltreModel } from '../modeles/filtre.modele';
 
 @Injectable({
 	providedIn: 'root'
@@ -16,7 +18,7 @@ export class ScanService {
 	
 	metaFiltrees:Array<any>; // Le tableau des données du scan filtrées
 	filtre:any; // Filtre utilisé pour filtrer les données à enregistrer dans la base
-	set:string; // Nom du set à enregistrer dans la base de données
+	set:SetModel; // Set à enregistrer dans la base de données
 
 	constructor(private http: HttpClient) {
 		this.init();
@@ -27,7 +29,7 @@ export class ScanService {
 	 */
 	init(){
 		this.filtre = '';
-		this.set = '';
+		this.set = new Set();
 		this.metaFiltrees = [];
 	}
 	/**
@@ -79,12 +81,13 @@ export class ScanService {
 	 * Filtrer l'ensemble des données et les transmettre à la base
 	 * @param filtre Filtre de référence pour traitr les données
 	 */
-	async setMetas(filtre, set){
+	async setMetas(filtre:FiltreModel, set:SetModel){
 		this.filtre = filtre; // Récupérer le filtre sélectionné
 		this.set = set; // Paramétrer le nom du set de données
 		await this.scans.forEach( m => {
 			this.filtreAPlat(m);
 		});
+		this.set.metadonnees = this.metaFiltrees;
 		console.log(this.metaFiltrees);
 	}
 	/**
@@ -124,7 +127,7 @@ export class ScanService {
 	 * Enregistrer les données dans la base mongo dans les sets de données
 	 */
 	enregistreSet(){
-		this.http.post(environment.SERV+'notices/', this.metaFiltrees).subscribe(
+		this.http.post(environment.SERV+'sets/', this.set).subscribe(
 			retour => {
 				console.log(retour);
 			}

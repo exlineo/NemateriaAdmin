@@ -357,6 +357,10 @@ select:hover {
     border-right: 1px solid orange;
 }
 
+label {
+    font-weight: bold;
+}
+
 textarea {
     min-height: 200px;
 }
