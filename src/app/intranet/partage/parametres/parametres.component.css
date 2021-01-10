@@ -1,3 +1,15 @@
+section.triple>section {
+    width: 35vw;
+}
+
+section.triple>aside:nth-child(1) {
+    width: 30vw;
+}
+
+section.triple>aside:nth-child(3) {
+    width: 35vw;
+}
+
 section.screen section {
     padding: 10px 15px;
 }
@@ -5,14 +17,15 @@ section.screen section {
 section.screen section header>div {
     float: right;
 }
-aside:nth-child(1){
-    background-color:#f06060;
+
+aside:nth-child(1) {
+    background-color: #f06060;
     flex-grow: 1;
     min-width: 150px;
-    color:#FFF;
-}*
+    color: #FFF;
+}
 
-aside:nth-child(1) ul li {
+* aside:nth-child(1) ul li {
     cursor: pointer;
     padding: 10px;
     margin-bottom: 5px;
@@ -33,17 +46,18 @@ aside:nth-child(1)>* {
     width: 100%;
 }
 
-section.screen>section {
+section.screen>* {
     flex-grow: 1;
 }
 
 aside:nth-child(3) {
     flex-grow: 1;
     background-color: #f060607a;
-    padding:0;
+    padding: 0;
 }
 
-aside:nth-child(3) ul, aside:nth-child(3) section {
-    padding:0;
-    margin:0;
+aside:nth-child(3) ul,
+aside:nth-child(3) section {
+    padding: 0;
+    margin: 0;
 }

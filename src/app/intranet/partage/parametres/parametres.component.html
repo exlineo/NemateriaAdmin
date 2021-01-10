@@ -1,11 +1,22 @@
 <section class="screen triple">
     <aside>
-       <h2>Paramètres</h2>
+        <h2>Paramètres</h2>
+
     </aside>
     <section>
         <h2>Serveur de données</h2>
+        <p>Adresse de la base de données :</p>
+        <input name="serv" [(ngModel)]="env.SERV" #ctlServ="ngModel">
+        <button *ngIf="ctlServ.touched">Enregistrer</button>
+        <p>
+        </p>
     </section>
     <aside>
-        <h2>Votre profil</h2>>
+        <h2>Votre profil</h2>
+        <ul>
+            <li *ngFor="let u of uServ.userAuth | keyvalue">
+                {{ u.key }} : {{ u.value }} ...
+            </li>
+        </ul>
     </aside>
 </section>
