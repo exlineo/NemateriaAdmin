@@ -14,40 +14,85 @@
         </ul>
     </aside>
     <section>
-        <header>
-            <div>
-                <mat-icon matTooltip="Modifier la collection" (click)="afficheDetailSet = true">edit</mat-icon>
-                <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
-            </div>
-            <h2>Informations sur le SET sélectionné</h2>
-        </header>
-        <article *ngIf="set">
-            <ul>
-                <li *ngFor="let n of set | obj | keyvalue">
-                    <strong>{{ n.key }}</strong> : {{ n.value }}
-                </li>
-            </ul>
-        </article>
+        <div *ngIf="set">
+            <header>
+                <div>
+                    <mat-icon matTooltip="Modifier la collection" (click)="afficheDetailSet = true">edit</mat-icon>
+                    <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
+                </div>
+                <h2>Informations sur le SET sélectionné</h2>
+            </header>
+            <article *ngIf="set">
+                <ul>
+                    <span *ngFor="let n of set | keyvalue">
+                    <li *ngIf="getDocs(n.key)">
+                        <strong>{{ n.key }}</strong> : {{ n.value }}
+                    </li>
+                </span>
+                </ul>
+            </article>
+            <article>
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let s of set.documents[0] | keyvalue">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{ s.key }}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul>
+                            <span *ngFor="let m of s | keyvalue">
+                            <span *ngIf="utils.typeOf(m.value) !== 'object'; else elseObjM">
+                                 
+                            </span>
+                            <ng-template #elseObjM>
+                                <!-- Tri dans le deuxième niveau de données -->
+                                <li *ngFor="let l of m.value | keyvalue">
+                                    <strong>{{ l.key }}</strong>
+                                </li>
+                            </ng-template>
+                            </span>
+                        </ul>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </article>
+            <button (click)="afficheDocs = true">Afficher les documents du SET</button>
+        </div>
     </section>
     <!-- <aside class="right-panel " [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed' "> -->
     <aside>
-        <section class="selection">
-            <!-- <ul class="notice-liste">
-                <li *ngFor="let notice of noticesServ.noticesCollec; let i=index" class="notice">
-                    <div [style.backgroundImage]="'url('+ notice.fichier.url +')'">
-                        <div>
-                            <mat-icon (click)="noticeOnAffiche(notice._id)" matTooltip="Voir la fiche de la notice">
-                                visibility</mat-icon>
-                            <mat-icon (click)="noticeOnEnlever(notice._id)"
-                                matTooltip="Enlever cette notice de la collection">remove_circle</mat-icon>
-                        </div>
-                    </div>
-                    <div>
-                        <h3>{{notice.titre}}</h3>
-                        <p>{{notice.description}}</p>
-                    </div>
-                </li>
-            </ul> -->
+        <section class="selection" *ngIf="afficheDocs">
+            <article>
+                <mat-accordion *ngIf="set">
+                    <mat-expansion-panel *ngFor="let s of set.documents; let i=index">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{ i }} : {{ s.dublincore.title }}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul>
+                            <li *ngFor="let l of s | keyvalue">
+                                <strong>{{ l.key }}</strong>
+                                <ul>
+                                    <li *ngFor="let m of l.value | keyvalue">
+                                        <span *ngIf="utils.typeOf(m.value) !== 'object'; else elseObjM">
+                                            <strong>{{ m.key }}</strong> : {{ m.value }}
+                                        </span>
+
+                                        <ng-template #elseObjM>
+                                            <!-- <ul> -->
+                                            <!-- Tri dans le deuxième niveau de données -->
+                                            <span *ngFor="let n of m.value | keyvalue">
+                                                    <strong>{{ n.key }}</strong> : {{ n.value }}
+                                                </span>
+                                            <!-- </ul> -->
+                                        </ng-template>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </article>
         </section>
     </aside>
 </section>

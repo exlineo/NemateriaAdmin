@@ -14,7 +14,8 @@ export class SetsComponent implements OnInit {
   set:SetModel;
 
   afficheDetailSet: boolean = false;
-	afficheEnlever: boolean = false;
+  afficheEnlever: boolean = false;
+  afficheDocs:boolean = false;
 
   constructor(public setsServ:SetsService, public utils:UtilsService) { }
 
