@@ -40,6 +40,9 @@ import { FiltresService } from './systeme/services/filtres.service';
 import { MappagesService } from './systeme/services/mappages.service';
 import { NotificationService } from '../extranet/systeme/services/notification.service';
 import { ScanService } from './systeme/services/scan.service';
+import { SetsComponent } from './sets/sets.component';
+import { SetComponent } from './set/set.component';
+import { ObjPipe } from './systeme/pipes/obj.pipe';
 
 @NgModule({
 	imports: [
@@ -68,7 +71,10 @@ import { ScanService } from './systeme/services/scan.service';
 		FiltrePipe,
 		FiltreNoticesPipe,
 		ParametresComponent,
-		ClesJsonPipe
+		ClesJsonPipe,
+		SetsComponent,
+		SetComponent,
+		ObjPipe
 	],
 	entryComponents: [OptionPopInComponent]
 })

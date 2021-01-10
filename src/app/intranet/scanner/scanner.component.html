@@ -66,20 +66,22 @@
             <p>Choisissez une filtre dans la liste ci-dessous, vérifiez le résulat et cliquez sur 'enregistrer les données filtrées' pour les stocker formattées dans la base.</p>
         </header>
         <article>
-            <form (ngSubmit)="creeFiltre(setfiltre)" #setfiltre="ngForm">
+            <form (ngSubmit)="creeSet(setfiltre)" #setfiltre="ngForm">
                 <label for="fil">Choissez un filtre pour les données *</label>
                 <select name="fil" required [(ngModel)]="_idFiltre" (change)="choixFiltre()" #ctlfil="ngModel">
                     <option value="null">--------------</option>
                     <option *ngFor="let f of filtresServ.filtres" [value]="f._id">{{ f.titre }} ({{ f.createur }})</option>
                 </select>
-                <label for="titre">Donnez ou modifiez le nom du set de données à enregistrer *</label>
-                <input name="titre" placeholder="Evitez les caractères spéciaux et les espaces" required [(ngModel)]="set.titre">
+                <label for="titre">Donnez ou modifiez le nom du SET de données à enregistrer *</label>
+                <input name="titre" placeholder="Le titre qui apparaîtra dans l'adminitration" required [(ngModel)]="set.titre">
+                <label for="alias">Donnez un alias *</label>
+                <input name="alias" type="text" placeholder="Sans espaces, ni majuscules, ni caractères spéciaux" required [(ngModel)]="set.alias">
                 <label for="desc">Inidiquez des informations complémentaires sur le SET scanné</label>
-                <input name="desc" placeholder="Donnez des renseignements sur le SET" required [(ngModel)]="set.description">
+                <input name="desc" placeholder="Donnez des informations générales sur le SET" [(ngModel)]="set.description">
                 <label for="createur">Qui a créé le SET ?</label>
-                <input name="createur" placeholder="Nom de la ou des personne(s)" required [(ngModel)]="set.createur">
+                <input name="createur" placeholder="Nom de la ou des personne(s)" [(ngModel)]="set.createur">
                 <label for="gestion">Qui gère ce SET ?</label>
-                <input name="gestion" placeholder="Organiation et/ou personne(s) gérant le SET" required [(ngModel)]="set.gestionnaire">
+                <input name="gestion" placeholder="Organiation et/ou personne(s) gérant le SET" [(ngModel)]="set.gestionnaire">
                 <button [disabled]="setfiltre.invalid">Enregistrer les données filtrées</button>
             </form>
         </article>

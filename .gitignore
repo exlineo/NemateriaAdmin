@@ -1,4 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
+# Push vers gh-pages : git subtree push --prefix dist/admin origin gh-pages
 
 # compiled output
 /tmp

@@ -15,6 +15,8 @@ import { MappagesComponent } from './mappages/mappages.component';
 import { MappageComponent } from './mappage/mappage.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { ParametresComponent } from './partage/parametres/parametres.component';
+import { SetsComponent } from './sets/sets.component';
+import { SetComponent } from './set/set.component';
 
 const routes: Routes = [
 	{
@@ -28,6 +30,8 @@ const routes: Routes = [
 			{ path: 'mappage/:id', component: MappageComponent },
 			{ path: 'filtres', component:FiltresComponent },
 			{ path: 'filtre/:id', component:FiltresComponent },
+			{ path: 'sets', component:SetsComponent },
+			{ path: 'set/:id', component:SetComponent },
 			{ path: 'parametres', component:ParametresComponent},
 			{ path: 'aide', loadChildren: () => import('./aide/aide.module').then(m => m.AideModule)},
 

@@ -51,8 +51,9 @@ export class FiltresComponent implements OnInit {
 	 * Supprimer une métadonnée traitée par le filtre
 	 * @param id ID de la métadonnées à supprimer
 	 */
-	supprMeta(id: number) {
-		this.filtre.metadonnees.splice(id, 1);
+	supprMeta(cle:string) {
+		console.log("Clé à supprimer");
+		// this.filtre.metadonnees.splice(id, 1);
 	}
 	/**
 	 * Enlever toutes les fenêtres pop-up et initialiser la collection et les notices

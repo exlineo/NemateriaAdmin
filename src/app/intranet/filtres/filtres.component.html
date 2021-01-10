@@ -7,7 +7,7 @@
         </header>
         <ul>
             <li *ngFor="let filtre of this.filtresServ.filtres" (click)="filtreOnClick(filtre._id) ">
-                {{filtre.titre}}
+                {{filtre.titre}} ({{ filtre.createur }})
             </li>
         </ul>
     </aside>
@@ -32,9 +32,24 @@
             </p>
             <h5>Métadonnées traitées par le filtre</h5>
             <ul>
-                <li *ngFor="let d of filtre.metadonnees; let i=index">
-                    {{ d }}
-                    <mat-icon matTooltip="Supprimer la métadonnée" *ngIf="edition" (click)="supprMeta(i)">delete</mat-icon>
+                <li *ngFor="let meta of filtre.metadonnees | keyvalue">
+                    {{ meta.key }} :
+                    <ul *ngIf="!meta['value'].length">
+                        <li *ngFor="let m of meta.value | keyvalue">{{ m.key }}
+                            <ul *ngIf="!m['value'].length">
+                                <li *ngFor="let n of m.value | keyvalue">{{ n.key }} ({{ n.value }})
+                                    <mat-icon matTooltip="Supprimer la métadonnée" *ngIf="edition" (click)="supprMeta(n.key)">delete</mat-icon>
+                                </li>
+                            </ul>
+                            <span *ngIf="m['value'].length">({{ m.value }})</span>
+                            <mat-icon matTooltip="Supprimer la métadonnée" *ngIf="edition" (click)="supprMeta(m.key)">delete</mat-icon>
+
+
+                        </li>
+                    </ul>
+                    <span *ngIf="meta['value'].length">{{ meta.value }}</span>
+                    <mat-icon matTooltip="Supprimer la métadonnée" *ngIf="edition" (click)="supprMeta(meta.key)">delete</mat-icon>
+
                 </li>
             </ul>
         </article>

@@ -44,7 +44,7 @@ export class ScannerComponent implements OnInit {
 	 * @param s Clés du set scanné dans le dossier
 	 */
 	extraitSet() {
-		this.mapServ.set.metadonnees = this.scanServ.scans[0];
+		this.mapServ.set.documents = this.scanServ.scans[0];
 		this.router.navigateByUrl('/intranet/mappages');
 	}
 	/**
@@ -58,7 +58,7 @@ export class ScannerComponent implements OnInit {
 	 * Lancer la copie des données scannée vers un tableau de données filtrées
 	 * @param f Données du formulaire
 	 */
-	creeFiltre(f: NgForm) {
+	creeSet(f: NgForm) {
 		console.log(f.value);
 		this.scanServ.setMetas(this.filtreChoisi, this.set);
 	}

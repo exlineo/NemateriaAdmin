@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CollectionModel } from '../modeles/collection.modele';
 
 import { environment } from 'src/environments/environment';
+import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -16,8 +17,7 @@ export class CollectionService {
 	collection:CollectionModel; // Une collection sélectionnée
 	series:Array<any>; // Tableau des séries d'une collection donnée
 
-	constructor(private http: HttpClient) {
-		console.log("Service des connexions");
+	constructor(private http: HttpClient, private notifServ:NotificationService) {
 		this.getCollections();
 	}
 	/**
@@ -26,7 +26,6 @@ export class CollectionService {
 	getCollections(): void {
 		this.http.get<Array<CollectionModel>>(environment.SERV+'collections').subscribe(
 			data => {
-				console.log(data);
 				this.collections = data;
 			}
 		)
@@ -51,17 +50,23 @@ export class CollectionService {
 			retour => {
 				console.log(retour);
 			},
-			erreur => console.log(erreur)
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
+			}
 		)
 	}
 	/**
 	 * Ajouter une collection
 	 */
 	ajouteCollection(collec:CollectionModel){
-		console.log(this.collection);
 		this.http.post(environment.SERV+'collections', collec).subscribe(
 			retour => {
 				console.log(retour);
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
 	}
@@ -73,6 +78,10 @@ export class CollectionService {
 		this.http.get(environment.SERV+'collections/'+id+'/series').subscribe(
 			retour => {
 				console.log(retour);
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
 	}
@@ -84,6 +93,10 @@ export class CollectionService {
 		this.http.delete(environment.SERV+'collections/'+id).subscribe(
 			retour => {
 				console.log(retour);
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
 	}

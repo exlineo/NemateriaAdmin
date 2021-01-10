@@ -10,7 +10,6 @@ export class UtilsService {
     limite:20,
     langue:'fr_FR'
   }
-
   /**
    * Partage de méthodes dans les composants
    */
@@ -26,5 +25,13 @@ export class UtilsService {
 			// return 'array';
 		}
 		return typeof value;
+  }
+  /**
+   * Eviter de lister les documents
+   * @param c chaîne ou objet représentant une clé dans un objet listé
+   */
+  getObj(c:any){
+    if(typeof c !== 'object') return true;
+    return false;
   }
 }

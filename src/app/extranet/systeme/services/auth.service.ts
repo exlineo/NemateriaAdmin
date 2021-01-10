@@ -4,11 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
-
-// Service
 import { NotificationService } from "../../systeme/services/notification.service";
 
-// Model
 import { UserModel } from "src/app/extranet/systeme/modeles/user.modele";
 import { TokenService } from './token.service';
 

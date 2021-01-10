@@ -16,7 +16,7 @@ import { UtilsService } from '../systeme/library/utils.service';
 })
 export class CollectionsComponent implements OnInit {
 
-	collectionListe: CollectionModel[] = []; // Liste de toutes les collections
+	collectionListe: Array<CollectionModel> = []; // Liste de toutes les collections
 	idCollection:number | string;
 	idNotice:number | string;
 	

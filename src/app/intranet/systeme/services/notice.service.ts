@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { NoticeModel } from "../modeles/notice.modele";
+import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,7 +16,7 @@ export class NoticeService {
 
 	seriesCollec:Array<string>=[]; // La liste des séries présentes dans les notices de la collection
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private notifServ:NotificationService) {
 		this.getNotices();
 	}
 
@@ -27,6 +28,10 @@ export class NoticeService {
 			data => {
 				console.log(data);
 				this.noticesAll = data;
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
 	}
@@ -41,6 +46,10 @@ export class NoticeService {
 				console.log(data);
 				this.noticesCollec = data;
 				this.getSeries();
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
 	}
@@ -68,6 +77,10 @@ export class NoticeService {
 		this.http.post(environment.SERV+'notices/'+id, notice).subscribe(
 			retour => {
 				console.log(retour);
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
 	}
@@ -79,6 +92,10 @@ export class NoticeService {
 		this.http.delete(environment.SERV+'notices/'+id).subscribe(
 			retour => {
 				console.log(retour);
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
 	}
