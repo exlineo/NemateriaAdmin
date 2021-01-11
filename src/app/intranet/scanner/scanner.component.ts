@@ -21,6 +21,7 @@ export class ScannerComponent implements OnInit {
 	set: SetModel;
 	filtreChoisi: FiltreModel;
 	_idFiltre: string;
+	page: any;
 
 	panelOpenState = false;
 
@@ -28,8 +29,9 @@ export class ScannerComponent implements OnInit {
 
 	ngOnInit() {
 		this.set = new Set();
-		this.set.date =  Date.now();
+		this.set.date = Date.now();
 		this.filtreChoisi = new Filtre();
+		this.page = { min: 0, max: 20 };
 	}
 	/**
 	 * Accéder aux notices d'une scan
@@ -61,5 +63,14 @@ export class ScannerComponent implements OnInit {
 	creeSet(f: NgForm) {
 		console.log(f.value);
 		this.scanServ.setMetas(this.filtreChoisi, this.set);
+	}
+	/**
+	 * Pagination des données scannées
+	 * @param n Nombre à faire évoluer pour la pagination
+	 */
+	pagine(n: number) {
+		this.page.min += n;
+		this.page.max += n;
+		console.log(this.page);
 	}
 }

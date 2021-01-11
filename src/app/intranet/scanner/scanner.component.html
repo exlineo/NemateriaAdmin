@@ -19,8 +19,9 @@
                 <button (click)="extraitSet()">Extraire le schéma des données pour un mappage</button>
             </p>
         </header>
+        <hr>
         <mat-accordion>
-            <mat-expansion-panel *ngFor="let s of scanServ.scans">
+            <mat-expansion-panel *ngFor="let s of scanServ.scans | slice:page.min:page.max">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         {{ s['Title'] }} ({{ s['Identifiant_unique'] }})
@@ -58,6 +59,10 @@
                 </ul>
             </mat-expansion-panel>
         </mat-accordion>
+        <hr>
+        <div *ngIf="scanServ.scans" class="flex justify-center">
+            <button (click)="pagine(-20)" [disabled]="page.min < 20"><</button><button (click)="pagine(20)" [disabled]="page.max < scanServ.scans-20">></button>
+        </div>
     </section>
     <aside>
         <header>
@@ -93,15 +98,15 @@
             <ul>
                 <li *ngFor="let meta of filtreChoisi.metadonnees | keyvalue">
                     {{ meta.key }} :
-                    <ul *ngIf="!meta['value'].length">
+                    <ul *ngIf="utils.typeOf(meta.value) !== 'object'">
                         <li *ngFor="let m of meta.value | keyvalue">{{ m.key }}
-                            <ul *ngIf="!m['value'].length">
+                            <ul *ngIf="utils.typeOf(m.value) !== 'object'">
                                 <li *ngFor="let n of m.value | keyvalue">{{ n.key }} ({{ n.value }})</li>
                             </ul>
-                            <span *ngIf="m['value'].length">({{ m.value }})</span>
+                            <span *ngIf="utils.typeOf(m.value) === 'object'">({{ m.value }})</span>
                         </li>
                     </ul>
-                    <span *ngIf="meta['value'].length">{{ meta.value }}</span>
+                    <span *ngIf="utils.typeOf(meta.value) === 'object'">{{ meta.value }}</span>
                 </li>
             </ul>
         </blockquote>
@@ -109,6 +114,7 @@
 </section>
 <section class="pop-up" *ngIf="scanServ.load">
     <article>
+        <h2>Scan des données</h2>
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </article>
 </section>

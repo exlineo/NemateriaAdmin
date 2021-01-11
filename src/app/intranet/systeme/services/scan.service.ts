@@ -15,20 +15,20 @@ export class ScanService {
 
 	scans: any; // Les données reçues depuis le scan sur le serveur
 	listeDossiers: any; // La liste des dossiers disponibles
-	load:boolean = false; // Déclencher un loader sur la page de scan
-	
-	metaFiltrees:Array<any>; // Le tableau des données du scan filtrées
-	filtre:any; // Filtre utilisé pour filtrer les données à enregistrer dans la base
-	set:SetModel; // Set à enregistrer dans la base de données
+	load: boolean = false; // Déclencher un loader sur la page de scan
 
-	constructor(private http: HttpClient, private notifServ:NotificationService) {
+	metaFiltrees: Array<any>; // Le tableau des données du scan filtrées
+	filtre: any; // Filtre utilisé pour filtrer les données à enregistrer dans la base
+	set: SetModel; // Set à enregistrer dans la base de données
+
+	constructor(private http: HttpClient, private notifServ: NotificationService) {
 		this.init();
 		this.getListeDossiers();
 	}
 	/**
 	 * Initialiser les données initiales
 	 */
-	init(){
+	init() {
 		this.filtre = '';
 		this.set = new Set();
 		this.metaFiltrees = [];
@@ -41,6 +41,10 @@ export class ScanService {
 			data => {
 				console.log(data);
 				this.listeDossiers = data;
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Nous n'avons pas la liste des dossiers");
 			}
 		)
 	}
@@ -52,32 +56,39 @@ export class ScanService {
 		this.http.get(environment.SERV + 'scans/' + dir, { params: { 'f': f } }).subscribe(
 			fichier => {
 				this.scans = fichier['data'];
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Les données n'ont pu être scannées");
 			}
 		)
 	}
 	/**
 	 * Récupérer la liste des métadonnées d'un dossier en particulier
 	 */
-	getDir(dir:string) {
+	getDir(dir: string) {
 		this.scans = null;
 		this.load = true;
-		this.http.get<boolean>(environment.SERV + 'scans/'+dir).subscribe(
+		this.http.get<boolean>(environment.SERV + 'scans/' + dir).subscribe(
 			fichiers => {
 				this.scans = fichiers['data'];
 				this.load = false;
 			},
-			erreur => console.log(erreur)
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Erreur dans le scan des dossiers du serveur");
+			}
 		)
 	}
 	/**
 	 * Filtrer l'ensemble des données et les transmettre à la base
 	 * @param filtre Filtre de référence pour traitr les données
 	 */
-	async setMetas(filtre:FiltreModel, set:SetModel){
+	async setMetas(filtre: FiltreModel, set: SetModel) {
 		this.metaFiltrees = [];
 		this.filtre = filtre; // Récupérer le filtre sélectionné
 		this.set = set; // Paramétrer le nom du set de données
-		await this.scans.forEach( m => {
+		await this.scans.forEach(m => {
 			this.filtreAPlat(m);
 		});
 		this.set.documents = this.metaFiltrees;
@@ -96,19 +107,22 @@ export class ScanService {
 					if (typeof f[un][deux] == "object") {
 						for (let trois in f[un][deux] as Object) {
 							let ct = this.cap(trois);
+							f[un][deux][trois] = null;
 							// Adapter les données de troisième niveau
-							if(scanner.hasOwnProperty(ct)) f[un][deux][trois] = scanner[ct];
+							if (scanner.hasOwnProperty(ct)) f[un][deux][trois] = scanner[ct];
 						}
 					} else {
 						let cd = this.cap(deux);
 						// Adapter les données de deuxième niveau
-						if(scanner.hasOwnProperty(cd)) f[un][deux] = scanner[cd];
+						f[un][deux] = null;
+						if (scanner.hasOwnProperty(cd)) f[un][deux] = scanner[cd];
 					}
 				}
 			} else {
 				// Adapter les données de premier niveau
 				let cu = this.cap(un);
-				if(scanner.hasOwnProperty(cu)) f[un] = scanner[cu];
+				f[un] = null;
+				if (scanner.hasOwnProperty(cu)) f[un] = scanner[cu];
 			}
 		}
 		this.metaFiltrees.push(f);
@@ -116,19 +130,27 @@ export class ScanService {
 	/**
 	 * Enregistrer les données dans la base mongo dans les sets de données
 	 */
-	enregistreSet(){
-		this.http.post(environment.SERV+'sets/', this.set).subscribe(
-			retour => {
-				console.log(retour);
-			},
-			erreur => console.log(erreur)
-		)
+	enregistreSet() {
+		if (this.scans.some(e => e.alias === this.set.alias)) {
+			console.log("Le nom du SET existe déjà");
+			this.notifServ.notif("Attention, le nom du SET existe déjà");
+		} else {
+			this.http.post(environment.SERV + 'sets/', this.set).subscribe(
+				retour => {
+					console.log(retour);
+				},
+				erreur => {
+					console.log(erreur);
+					this.notifServ.notif("Erreur dans l'enregistrement du SET");
+				}
+			)
+		}
 	}
 	/**
 	 * Mettre la première lettre en capitales
 	 * @param str Châine de caractère
 	 */
-	cap(str){
+	cap(str) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
 }

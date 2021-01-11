@@ -21,9 +21,9 @@ export class UtilsService {
    * @param value Valeur dont on veut connaître le type
    */
   typeOf(value) {
-		if(typeof value === 'object' && value.length){
-			// return 'array';
-		}
+		// if(typeof value === 'object' && value.length){
+		// 	return 'array';
+		// }
 		return typeof value;
   }
   /**
