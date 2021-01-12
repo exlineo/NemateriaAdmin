@@ -14,7 +14,7 @@ export class SetsService {
   // dataStorage: string = 'assets/dataStorage/';
 
   sets: Array<SetModel>; // La liste des collections
-  set: SetModel; // Une collection sélectionnée
+  set: SetModel; // Un SET sélectionnée
   series: Array<any>; // Tableau des séries d'une collection donnée
 
   constructor(private http: HttpClient, private notifServ: NotificationService) {
@@ -50,12 +50,28 @@ export class SetsService {
     }
   }
   /**
+   * Supprimer la collection
+   * @param id ID de la collection à supprimer
+   */
+  supprSet(id:any) {
+    this.http.delete(environment.SERV + 'sets/' + id).subscribe(
+      retour => {
+        console.log(retour);
+      },
+      erreur => {
+        console.log(erreur);
+        this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
+      }
+    )
+  }
+  /**
    * Mise à jour d'un SET
    */
   majSet(s: SetModel) {
-    this.http.put(environment.SERV + 'sets/', s).subscribe(
+    this.http.put(environment.SERV + 'sets/'+s._id, s).subscribe(
       retour => {
         console.log(retour);
+        this.notifServ.notif("Le SET a été mis à jour");
       },
       erreur => {
         console.log(erreur);
@@ -71,6 +87,7 @@ export class SetsService {
     this.http.post(environment.SERV + 'sets', s).subscribe(
       retour => {
         console.log(retour);
+        this.notifServ.notif("Le SET a été ajouté");
       },
       erreur => {
         console.log(erreur);
@@ -84,21 +101,6 @@ export class SetsService {
    */
   getFonds(f: string) {
     this.http.get(environment.SERV + 'sets/' + f).subscribe(
-      retour => {
-        console.log(retour);
-      },
-      erreur => {
-        console.log(erreur);
-        this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
-      }
-    )
-  }
-  /**
-   * Supprimer la collection
-   * @param id ID de la collection à supprimer
-   */
-  supprSet(id) {
-    this.http.delete(environment.SERV + 'sets/' + id).subscribe(
       retour => {
         console.log(retour);
       },

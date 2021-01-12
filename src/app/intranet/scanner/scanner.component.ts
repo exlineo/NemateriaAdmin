@@ -23,8 +23,6 @@ export class ScannerComponent implements OnInit {
 	_idFiltre: string;
 	page: any;
 
-	panelOpenState = false;
-
 	constructor(public scanServ: ScanService, public filtresServ: FiltresService, public mapServ: MappagesService, public utils: UtilsService, private router: Router) { }
 
 	ngOnInit() {

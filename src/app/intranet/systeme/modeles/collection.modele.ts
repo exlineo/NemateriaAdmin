@@ -7,7 +7,7 @@ export interface CollectionModel {
     description: string;
     type: string;
     createur: string;
-    fond?:string;
+    fonds?:string;
     langue?: string;
     groupe?: Array<string>;
     notices?:Array<string>;
@@ -22,7 +22,7 @@ export class Collection implements CollectionModel {
     description: string;
     type: string;
     createur: string;
-    fond?:string;
+    fonds?:string;
     langue?: string;
     groupe?: Array<string>;
     notices?:Array<string>;

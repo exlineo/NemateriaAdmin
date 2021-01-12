@@ -17,8 +17,9 @@
         <div *ngIf="set">
             <header>
                 <div>
-                    <mat-icon matTooltip="Modifier le SET" (click)="afficheDetailSet = true">edit</mat-icon>
-                    <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
+                    <mat-icon matTooltip="Supprimer le SET" (click)="delete = true">delete</mat-icon>
+                    <mat-icon matTooltip="Modifier le SET" (click)="edit = true">edit</mat-icon>
+                    <!-- <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon> -->
                 </div>
                 <h2>Informations sur le SET sélectionné</h2>
             </header>
@@ -108,6 +109,15 @@
         <button (click)="masque()">Annuler</button>
     </article>
 </section>
+<section class="pop-up" *ngIf="delete">
+    <article>
+        <h2>Etes-vous sûr.e ?</h2>
+        <p>
+            <mat-icon matTooltip="Annuler la destruction" (click)="delete = false" class="grand">cancel</mat-icon>
+            <mat-icon matTooltip="Valider la destruction" (click)="setsServ.supprSet(set._id)" class="grand">check_circle</mat-icon>
+        </p>
+    </article>
+</section>
 <!-- Afficher la collection choisie -->
-<app-collection *ngIf="afficheDetailSet" [idCollection]="idSet" (fermer)="masque()" class="unique"></app-collection>
+<app-set *ngIf="edit" [set]="set" (fermer)="masque()" class="unique"></app-set>
 <!-- Afficher la notice choisie -->

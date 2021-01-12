@@ -13,9 +13,11 @@ export class SetsComponent implements OnInit {
   idSet:number | string;
   set:SetModel;
 
-  afficheDetailSet: boolean = false;
   afficheEnlever: boolean = false;
   afficheDocs:boolean = false;
+
+	delete:boolean = false;
+	edit:boolean = false;
 
   constructor(public setsServ:SetsService, public utils:UtilsService) { }
 
@@ -43,7 +45,8 @@ export class SetsComponent implements OnInit {
 	 * Enlever toutes les fenêtres pop-up et initialiser la collection et les notices
 	 */
 	masque(){
-		this.afficheDetailSet = false;
+    this.edit = false;
+    this.delete = false;
 		this.afficheEnlever = false;
 		this.idSet = null;
 	}

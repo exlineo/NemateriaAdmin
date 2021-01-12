@@ -429,10 +429,6 @@ textarea {
     display: flex;
 }
 
-.choix {
-    border: 8px solid rgba(0, 255, 0, .7)
-}
-
 .notice:hover>div:nth-child(1) {
     transform: scale(1.1);
 }
@@ -519,6 +515,29 @@ textarea {
     padding-left: calc((100% - 960px)/ 2);
     padding-right: calc((100% - 960px)/ 2);
     flex-flow: row wrap;
+}
+
+.choix {
+    border: 8px solid rgba(0, 255, 0, .7)
+}
+
+.petit {
+    font-size: 10px;
+}
+
+.moyen {
+    font-size: 18px;
+}
+
+.grand {
+    font-size: 24px;
+}
+
+mat-icon.grand {
+    font-size: 48px;
+    line-height: 60px;
+    height: 60px;
+    width: 60px;
 }
 
 
@@ -818,11 +837,7 @@ textarea {
     color: #FFF;
     text-align: center;
     display: flex;
-}
-
-.unique section header {
-    display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
 }
 
 .unique form {
