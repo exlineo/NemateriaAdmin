@@ -41,11 +41,11 @@ export class SetsService {
    * @param id _id de la notice à récupérer
    * @return CollectionModel (une collection)
    */
-  getSet(id: number | string): SetModel {
+  getSet(id: number | string): void {
     for (let s of this.sets) {
       console.log(s);
       if (s._id == id) {
-        return s;
+        this.set = s;
       }
     }
   }
@@ -57,6 +57,7 @@ export class SetsService {
     this.http.delete(environment.SERV + 'sets/' + id).subscribe(
       retour => {
         console.log(retour);
+        this.sets.splice(this.sets.findIndex(s => s._id == id), 1);
       },
       erreur => {
         console.log(erreur);

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CollectionModel } from '../modeles/collection.modele';
+import { CollectionModel, Collection } from '../modeles/collection.modele';
 
 import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
+import { SetModel } from '../modeles/set';
 
 @Injectable({
 	providedIn: 'root'
@@ -71,6 +72,24 @@ export class CollectionService {
 		)
 	}
 	/**
+	 * Supprimer la collection
+	 * @param id ID de la collection à supprimer
+	 */
+	supprCollec(id){
+		this.http.delete(environment.SERV+'collections/'+id).subscribe(
+			retour => {
+				console.log(retour);
+				this.notifServ.notif("Collection supprimée");
+				this.collections.splice(this.collections.findIndex(c => c._id == id), 1);
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans la destrucion de la collection");
+			}
+		);
+		
+	}
+	/**
 	 * Les séries d'une collection
 	 * @param id ID de la collection dont nous recherchons les séries
 	 */
@@ -85,19 +104,11 @@ export class CollectionService {
 			}
 		)
 	}
+	
 	/**
-	 * Supprimer la collection
-	 * @param id ID de la collection à supprimer
+	 * Filtrer les données dans les collections
 	 */
-	supprCollection(id){
-		this.http.delete(environment.SERV+'collections/'+id).subscribe(
-			retour => {
-				console.log(retour);
-			},
-			erreur => {
-				console.log(erreur);
-				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
-			}
-		)
+	filtreColSeries(){
+
 	}
 }

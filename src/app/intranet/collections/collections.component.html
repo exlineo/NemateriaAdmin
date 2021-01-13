@@ -3,12 +3,11 @@
     <aside class="left-panel">
         <header>
             <h1>Collections disponibles</h1>
-            <mat-icon matTooltip="Ajouter une collection" (click)="afficheDetailCollec = true; idCollection = null">playlist_add</mat-icon>
+            <mat-icon matTooltip="Ajouter une collection" (click)="detailsCollec = true; idCollection = null">playlist_add</mat-icon>
         </header>
         <ul>
 
-            <li *ngFor="let collection of colServ.collections; let i=index"
-                (click)="collectionOnClick(collection._id) ">
+            <li *ngFor="let collection of colServ.collections; let i=index" (click)="collectionOnClick(collection._id) ">
                 {{collection.titre}} ({{ collection.alias }})
                 <!-- <mat-icon matTooltip="Afficher les séries" *ngIf="collection.series" (click)="toggleSeries('series_'+collection._id)">keyboard_arrow_down</mat-icon> -->
             </li>
@@ -17,8 +16,8 @@
     <section>
         <header>
             <div>
-                <mat-icon matTooltip="Modifier la collection" (click)="afficheDetailCollec = true">edit</mat-icon>
-                <mat-icon matTooltip="Sauvegarder les changements">save</mat-icon>
+                <mat-icon matTooltip="Supprimer le SET" (click)="delete = true">delete</mat-icon>
+                <mat-icon matTooltip="Modifier la collection" (click)="detailsCollec = true">edit</mat-icon>
             </div>
             <h2>Informations sur la collection choisie</h2>
         </header>
@@ -48,8 +47,7 @@
                         <div>
                             <mat-icon (click)="noticeOnAffiche(notice._id)" matTooltip="Voir la fiche de la notice">
                                 visibility</mat-icon>
-                            <mat-icon (click)="noticeOnEnlever(notice._id)"
-                                matTooltip="Enlever cette notice de la collection">remove_circle</mat-icon>
+                            <mat-icon (click)="noticeOnEnlever(notice._id)" matTooltip="Enlever cette notice de la collection">remove_circle</mat-icon>
                         </div>
                     </div>
                     <div>
@@ -67,13 +65,23 @@
     <article>
         <h3>Supprimer une notice</h3>
         <p>En cliquant sur valider la suppression vous enleverez la notice de cette collection.</p>
-        <p>Elle restera néanmoins disponible dans les autres collections ou pourra être intégrée dans une autre
-            sélection.</p>
+        <p>Elle restera néanmoins disponible dans les autres collections ou pourra être intégrée dans une autre sélection.
+        </p>
         <button>Valider la suppression</button>
         <button (click)="masque()">Annuler</button>
     </article>
 </section>
+
+<section class="pop-up" *ngIf="delete">
+    <article>
+        <h2>Etes-vous sûr.e ?</h2>
+        <p>
+            <mat-icon matTooltip="Annuler la destruction" (click)="delete = false" class="grand">cancel</mat-icon>
+            <mat-icon matTooltip="Valider la destruction" (click)="colServ.supprCollec(collec._id);delete = false" class="grand">check_circle</mat-icon>
+        </p>
+    </article>
+</section>
 <!-- Afficher la collection choisie -->
-<app-collection *ngIf="afficheDetailCollec" [idCollection]="idCollection" (fermer)="masque()" class="unique"></app-collection>
+<app-collection *ngIf="detailsCollec" [idCollection]="idCollection" (fermer)="masque()" class="unique"></app-collection>
 <!-- Afficher la notice choisie -->
 <app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masque()" class="unique"></app-notice>

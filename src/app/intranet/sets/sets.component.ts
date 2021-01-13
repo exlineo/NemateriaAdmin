@@ -11,11 +11,9 @@ import { SetsService } from '../systeme/services/sets.service';
 export class SetsComponent implements OnInit {
 
   idSet:number | string;
-  set:SetModel;
 
-  afficheEnlever: boolean = false;
   afficheDocs:boolean = false;
-
+  creeCollec:boolean = false;
 	delete:boolean = false;
 	edit:boolean = false;
 
@@ -29,9 +27,10 @@ export class SetsComponent implements OnInit {
    * @param id _id du SET à afficher
    */
   setOnClick(id:any){
+    this.afficheDocs = false;
     this.idSet = id;
 		// Identifier la collection cliquée
-		this.set = this.setsServ.getSet(id);
+		this.setsServ.getSet(id);
   }
   /**
    * Eviter de lister les documents
@@ -47,8 +46,14 @@ export class SetsComponent implements OnInit {
 	masque(){
     this.edit = false;
     this.delete = false;
-		this.afficheEnlever = false;
-		this.idSet = null;
-	}
+    this.idSet = null;
+    this.creeCollec = false;
+  }
+  /**
+   * Créer une collection à partir du SET
+   */
+  creerCollection(){
+
+  }
 
 }

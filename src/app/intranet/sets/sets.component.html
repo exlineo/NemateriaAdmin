@@ -14,7 +14,7 @@
         </ul>
     </aside>
     <section>
-        <div *ngIf="set">
+        <div *ngIf="setsServ.set">
             <header>
                 <div>
                     <mat-icon matTooltip="Supprimer le SET" (click)="delete = true">delete</mat-icon>
@@ -23,9 +23,9 @@
                 </div>
                 <h2>Informations sur le SET sélectionné</h2>
             </header>
-            <article *ngIf="set">
+            <article *ngIf="setsServ.set">
                 <ul>
-                    <span *ngFor="let n of set | keyvalue">
+                    <span *ngFor="let n of setsServ.set | keyvalue">
                     <li *ngIf="getDocs(n.key)">
                         <strong>{{ n.key }}</strong> : {{ n.value }}
                     </li>
@@ -34,7 +34,7 @@
             </article>
             <article>
                 <mat-accordion>
-                    <mat-expansion-panel *ngFor="let s of set.documents[0] | keyvalue">
+                    <mat-expansion-panel *ngFor="let s of setsServ.set.documents[0] | keyvalue">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 {{ s.key }}
@@ -56,15 +56,19 @@
                     </mat-expansion-panel>
                 </mat-accordion>
             </article>
-            <button (click)="afficheDocs = true">Afficher les documents du SET</button>
+            <p class="flex justify-around">
+                <button (click)="afficheDocs = true">Afficher les documents du SET</button>
+                <button (click)="creeCollec = true">Créer une collection à partir de ce SET</button>
+            </p>
+
         </div>
     </section>
     <!-- <aside class="right-panel " [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed' "> -->
     <aside>
         <section class="selection" *ngIf="afficheDocs">
             <article>
-                <mat-accordion *ngIf="set">
-                    <mat-expansion-panel *ngFor="let s of set.documents; let i=index">
+                <mat-accordion *ngIf="setsServ.set">
+                    <mat-expansion-panel *ngFor="let s of setsServ.set.documents; let i=index">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 {{ i }} : {{ s.dublincore.title }}
@@ -74,21 +78,25 @@
                             <li *ngFor="let l of s | keyvalue">
                                 <strong>{{ l.key }}</strong>
                                 <ul>
-                                    <li *ngFor="let m of l.value | keyvalue">
+                                    <span *ngFor="let m of l.value | keyvalue">
+                                    <li *ngIf="m.value">
                                         <span *ngIf="utils.typeOf(m.value) !== 'object'; else elseObjM">
                                             <strong>{{ m.key }}</strong> : {{ m.value }}
                                         </span>
 
-                                        <ng-template #elseObjM>
-                                            <!-- <ul> -->
+                                    <ng-template #elseObjM>
+                                        <ul>
                                             <!-- Tri dans le deuxième niveau de données -->
                                             <span *ngFor="let n of m.value | keyvalue">
+                                                <li *ngIf="n.value">
                                                     <strong>{{ n.key }}</strong> : {{ n.value }}
-                                                </span>
-                                            <!-- </ul> -->
-                                        </ng-template>
-                                    </li>
-                                </ul>
+                                                </li>
+                                            </span>
+                                        </ul>
+                                    </ng-template>
+                            </li>
+                            </span>
+                            </ul>
                             </li>
                         </ul>
                     </mat-expansion-panel>
@@ -98,26 +106,16 @@
     </aside>
 </section>
 
-<!-- Valider une suppression de notice ou de collection -->
-<section *ngIf="afficheEnlever" class="pop-up">
-    <article>
-        <h3>Supprimer une notice</h3>
-        <p>En cliquant sur valider la suppression vous enleverez la notice de cette collection.</p>
-        <p>Elle restera néanmoins disponible dans les autres collections ou pourra être intégrée dans une autre sélection.
-        </p>
-        <button>Valider la suppression</button>
-        <button (click)="masque()">Annuler</button>
-    </article>
-</section>
 <section class="pop-up" *ngIf="delete">
     <article>
         <h2>Etes-vous sûr.e ?</h2>
         <p>
             <mat-icon matTooltip="Annuler la destruction" (click)="delete = false" class="grand">cancel</mat-icon>
-            <mat-icon matTooltip="Valider la destruction" (click)="setsServ.supprSet(set._id)" class="grand">check_circle</mat-icon>
+            <mat-icon matTooltip="Valider la destruction" (click)="setsServ.supprSet(setsServ.set._id)" class="grand">check_circle</mat-icon>
         </p>
     </article>
 </section>
 <!-- Afficher la collection choisie -->
-<app-set *ngIf="edit" [set]="set" (fermer)="masque()" class="unique"></app-set>
-<!-- Afficher la notice choisie -->
+<app-set *ngIf="edit" [set]="setsServ.set" (fermer)="masque()" class="unique"></app-set>
+<!-- Afficher la collection à créer -->
+<app-collection *ngIf="creeCollec" [idCollection]="-1" (fermer)="masque()" class="unique"></app-collection>

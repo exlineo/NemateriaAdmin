@@ -20,11 +20,12 @@ export class CollectionsComponent implements OnInit {
 	idCollection:number | string;
 	idNotice:number | string;
 	
-	collec: CollectionModel= new Collection(); // La collection sélectionnée à afficher
+	collec: CollectionModel = new Collection(); // La collection sélectionnée à afficher
 	
-	afficheDetailCollec: boolean = false;
+	detailsCollec: boolean = false;
 	afficheDetailNotice: boolean = false;
 	afficheEnlever: boolean = false;
+	delete:boolean = false;
 
 	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série
 
@@ -71,7 +72,7 @@ export class CollectionsComponent implements OnInit {
 	 * Enlever toutes les fenêtres pop-up et initialiser la collection et les notices
 	 */
 	masque(){
-		this.afficheDetailCollec = false;
+		this.detailsCollec = false;
 		this.afficheDetailNotice = false;
 		this.afficheEnlever = false;
 		this.idNotice = null;

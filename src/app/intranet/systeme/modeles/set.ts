@@ -1,3 +1,4 @@
+import { DocumentModel } from "./documents-model";
 export interface SetModel {
     _id?:string | number;
     titre:string;
@@ -7,7 +8,7 @@ export interface SetModel {
     date?:string | number;
     createur?:string;
     gestionnaire?:string;
-    documents:Array<any>
+    documents:Array<DocumentModel>
 }
 export class Set implements SetModel {
     titre:string;
