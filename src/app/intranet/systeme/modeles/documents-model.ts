@@ -34,6 +34,7 @@ export interface DocMediaModel {
     imageWidth?:number;
     slicesGroupName:string;
     sourceFile:string;
+    file:string;
 }
 export interface NemateriaModel{
     collection?:NemaCollectionModel;
@@ -90,10 +91,53 @@ export interface NemaSequencesModel{
     mots_cles_sequences:string | Array<string>;
     resume_sequence?:string;
     sequence:string;
-    time_code:string;
+    time_code:string | number;
 }
 export interface NemaSerieModel{
     serie:string;
     serie_parent?:string;
     ordre_serie:string | number;
+}
+
+export class NemaDocument implements DocumentModel{
+    dublincore = new NemaDublin();
+    gps = new NemaGPS();
+    media = new NemaMedia();
+    nemateria = new Nema();
+}
+
+export class NemaDublin implements DocDublinModel{
+    contributor: '';
+    coverage: '';
+    creator:'';
+    date: '';
+    description:'';
+    format: '';
+    identifier: '';
+    language: '';
+    publisher: '';
+    relation:'';
+    rights:'';
+    source:'';
+    subject:'';
+    title:'';
+    type:'';
+}
+
+export class NemaGPS implements DocGpsModel{
+    lattitude:0; longitude:0; altitude:0;
+}
+
+export class NemaMedia implements DocMediaModel {
+    format: ''; imageHeight:0; imageSize:''; imageWidth:0; slicesGroupName:''; sourceFile:''; file:''
+}
+
+export class Nema implements NemateriaModel{
+    collection = {nom_collection:'', proprietaire_originaux:'', qui_numerise:'', gestionnaire_collection:'', detenteur_droits:'', conservateur_originaux:'', conservateur_fichiers:''};
+    document = {identifiant_unique:'', reference_original:'', uri:'', url:'', sourceFile:'', conditions_acces:'', conservateur_fichiers:'', date_creation_original:'', date_numerisation:'', detenteur_droits:'',nature_support_original:''};
+    informateur:{alias_informateur:'',competence_informateur:'',date_naissance_informateur:'',informateur:''};
+    participants:{editeur_oeuvre_source:'',editeur_site:'',participants:'',producteurs?:''};
+    relations:{contient_elements:'',liens_docs_externes:'',liens_docs_internes:'',requiert_documents:''};
+    sequences:{duree_sequence:'', marques_evenements:'', mots_cles_sequences:'',resume_sequence:'', sequence:'', time_code:''};
+    serie = {serie:'', serie_parent:'', ordre_serie:0};
 }

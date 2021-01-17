@@ -4,6 +4,7 @@ export interface SetModel {
     titre:string;
     alias:string;
     fonds:string;
+    origine:{dir:string,url:string};
     description?:string;
     date?:string | number;
     createur?:string;
@@ -13,7 +14,8 @@ export interface SetModel {
 export class Set implements SetModel {
     titre:string;
     alias:string;
-    fonds:string;
+    fonds:string='inconnu';
+    origine:{dir:'',url:''};
     description:string;
     date:string;
     createur:string;

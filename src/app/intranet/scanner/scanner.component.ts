@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy ,EventEmitter, Output } from '@angular/core';
 
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators, NgModel } from '@angular/forms';
 
@@ -10,18 +10,20 @@ import { FiltresService } from '../systeme/services/filtres.service';
 import { FiltreModel, Filtre } from '../systeme/modeles/filtre.modele';
 import { SetModel, Set } from '../systeme/modeles/set';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
 	selector: 'app-scanner',
 	templateUrl: './scanner.component.html',
 	styleUrls: ['./scanner.component.css']
 })
-export class ScannerComponent implements OnInit {
+export class ScannerComponent implements OnInit, OnDestroy {
 
 	scanListe: Array<string>;
 	set: SetModel;
 	filtreChoisi: FiltreModel;
-	_idFiltre: string;
-	page: any;
+	_idFiltre: string; // ID d'un filtre choisi
+	page: any; // Objet pour la pagination
 
 	constructor(public scanServ: ScanService, public filtresServ: FiltresService, public mapServ: MappagesService, public utils: UtilsService, private router: Router) { }
 
@@ -36,7 +38,10 @@ export class ScannerComponent implements OnInit {
 	 * @param dossier Dossier scanné pour afficher la liste des notices
 	 */
 	scanOnClick(dossier) {
-		this.set.titre = dossier;
+		// Modification des données du SET initial
+		this.set.titre = dossier; // Attribuer un titre par défaut au Set
+		this.set.alias = dossier.toLowerCase(); // Proposer un alias par défaut
+		this.set.origine = {dir:environment.DIR+dossier, url:environment.SERV}; // Intégrer le nom du dossier scanné dans les données du SET
 		this.scanServ.getDir(dossier);
 	}
 	/**
@@ -70,5 +75,11 @@ export class ScannerComponent implements OnInit {
 		this.page.min += n;
 		this.page.max += n;
 		console.log(this.page);
+	}
+	/**
+	 * Supprimer les scans sélectionnés initialement
+	 */
+	ngOnDestroy(){
+		this.scanServ.scans = [];
 	}
 }

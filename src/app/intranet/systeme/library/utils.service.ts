@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,10 +20,18 @@ export class UtilsService {
    * @param value Valeur dont on veut connaître le type
    */
   typeOf(value) {
-		// if(typeof value === 'object' && value.length){
-		// 	return 'array';
-		// }
+    if(Array.isArray(value)){
+      return 'array';
+    }
 		return typeof value;
+  }
+  /**
+   * Tronquer un tableau pour une pagination
+   * @param ar Tableau à tronquer
+   * @param page Début et fin du slice sur le tableau
+   */
+  tronqueTab(ar:Array<any>, page:any){
+    return ar.slice(page.min, page.max);
   }
   /**
    * Eviter de lister les documents

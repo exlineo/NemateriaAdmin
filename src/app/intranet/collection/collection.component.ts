@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { UtilsService } from '../systeme/library/utils.service';
 import { CollectionModel, Collection } from '../systeme/modeles/collection.modele';
+import { DocumentModel, NemaSerieModel } from '../systeme/modeles/documents-model';
 import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { SetModel } from '../systeme/modeles/set';
 import { CollectionService } from '../systeme/services/collection.service';
@@ -65,7 +66,7 @@ export class CollectionComponent implements OnInit {
 	 * Mapper des données reçues pour faire une collection
 	 */
 	mapCollec(obj:SetModel){
-		const tmp = new Collection();
+		const tmp:Collection = new Collection();
 		// Peupler les données dans la nouvelle collection
 		for(const o in obj){
 			console.log(o);
@@ -76,15 +77,16 @@ export class CollectionComponent implements OnInit {
 			tmp.notices.push(n['_id']);
 		}
 		// Récupérer les séries dans le SET
-		tmp.series = obj.documents.map<string>( s => s.nemateria.serie)
+		tmp.series = obj.documents.map<NemaSerieModel>( s => s.nemateria.serie)
 		console.log(tmp);
 		// Générer la collection
 		return tmp;
 	}
 	/**
 	 * Filtrer les séries dans des SETS
-	 */
-	filtreSetsSeries(ar:SetModel):Array<any>{
-		return ar.documents.map<Array<SetModel>>( s => s.nemateria.serie)
-	}
+	 
+	filtreSetsSeries(ar:Array<DocumentModel>):Array<NemaSerieModel>{
+		return ar.map<NemaSerieModel>( s => s.nemateria.serie);
+		// return [];
+	}*/
 }

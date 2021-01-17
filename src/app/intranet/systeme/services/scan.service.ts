@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-
-import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http';
-import { FiltresService } from './filtres.service';
-import { forEachChild } from 'typescript';
+
+import { environment } from 'src/environments/environment';
+
 import { Set, SetModel } from '../modeles/set';
 import { FiltreModel } from '../modeles/filtre.modele';
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
+import { UtilsService } from '../library/utils.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -16,12 +16,13 @@ export class ScanService {
 	scans: any; // Les données reçues depuis le scan sur le serveur
 	listeDossiers: any; // La liste des dossiers disponibles
 	load: boolean = false; // Déclencher un loader sur la page de scan
+	docs:any;
 
-	metaFiltrees: Array<any>; // Le tableau des données du scan filtrées
+	metas: any; // Le tableau des données du scan filtrées. Any pour faire ce que l'ont veut avec
 	filtre: any; // Filtre utilisé pour filtrer les données à enregistrer dans la base
 	set: SetModel; // Set à enregistrer dans la base de données
 
-	constructor(private http: HttpClient, private notifServ: NotificationService) {
+	constructor(private http: HttpClient, private notifServ: NotificationService, private utils: UtilsService) {
 		this.init();
 		this.getListeDossiers();
 	}
@@ -29,9 +30,9 @@ export class ScanService {
 	 * Initialiser les données initiales
 	 */
 	init() {
-		this.filtre = '';
+		this.filtre = [];
 		this.set = new Set();
-		this.metaFiltrees = [];
+		this.metas = null;
 	}
 	/**
 	 * Liste les dossiers scannables
@@ -84,67 +85,81 @@ export class ScanService {
 	 * Filtrer l'ensemble des données et les transmettre à la base
 	 * @param filtre Filtre de référence pour traitr les données
 	 */
-	async setMetas(filtre: FiltreModel, set: SetModel) {
-		this.metaFiltrees = [];
-		this.filtre = filtre; // Récupérer le filtre sélectionné
+	setMetas(filtre: FiltreModel, set: SetModel) {
+		this.metas = filtre.metadonnees; // Récupérer le filtre sélectionné
+		// Création d'un SET de base
 		this.set = set; // Paramétrer le nom du set de données
-		await this.scans.forEach(m => {
-			this.filtreAPlat(m);
-		});
-		this.set.documents = this.metaFiltrees;
+		this.set.documents = []; // Initialisation des documents du SET
+		this.set.documents = this.scans.map(s => this.filtreAPlat(s));
+		
+		// Enregistrer les données dans la base
 		this.enregistreSet();
 	}
 	/**
 	 * Mettre à plat le filtre pour ne récupérer que les clés
+	 * @param fm Filtre à traduire en objet pour l'inscrire dans le tableau des métas
+	 * @param Le document à comparer
 	 */
-	filtreAPlat(scanner) {
-		let f = this.filtre.metadonnees;
+	filtreAPlat(scan) {
+		let obj = {};
 		// Boucle dans les métadonnées du filtre
-		for (let un in f) {
+		for (let un in this.metas) {
 			// Récupérer le premier niveau d'objet
-			if (typeof f[un] == "object") {
-				for (let deux in f[un] as Object) {
-					if (typeof f[un][deux] == "object") {
-						for (let trois in f[un][deux] as Object) {
-							let ct = this.cap(trois);
-							f[un][deux][trois] = null;
-							// Adapter les données de troisième niveau
-							if (scanner.hasOwnProperty(ct)) f[un][deux][trois] = scanner[ct];
+			if (typeof this.metas[un] == "object" && !Array.isArray(this.metas[un])) {
+				// Définir l'objet trouvé dans le temporaire
+				// obj[un] = Object.create({});
+				obj[un] = {};
+				for (let deux in this.metas[un] as Object) {
+					if (typeof this.metas[un][deux] == "object" && !Array.isArray(this.metas[un][deux])) {
+						//Définir l'objet trouvé dans l'objet temporaire
+						// obj[un][deux] = Object.create({});
+						obj[un][deux] = {};
+						for (let trois in this.metas[un][deux] as Object) {
+							this.setPropriete(trois, obj[un][deux], scan);
 						}
 					} else {
-						let cd = this.cap(deux);
-						// Adapter les données de deuxième niveau
-						f[un][deux] = null;
-						if (scanner.hasOwnProperty(cd)) f[un][deux] = scanner[cd];
+						this.setPropriete(deux, obj[un], scan);
 					}
 				}
 			} else {
-				// Adapter les données de premier niveau
-				let cu = this.cap(un);
-				f[un] = null;
-				if (scanner.hasOwnProperty(cu)) f[un] = scanner[cu];
+				this.setPropriete(un, obj, scan);
 			}
-		}
-		this.metaFiltrees.push(f);
+		};
+		//Petit hack pour récupérer le nom du fichier avec l'extension
+
+		// console.log(obj);
+		return obj;
+	}
+	/**
+	 * Attribuer une propriété à un objet mappé
+	 * @param prop Propriété à retouver dans les tableaux et objets
+	 * @param obj Objet à inscrire la valeur
+	 * @param scan Valeur à récupérer dans le scan
+	 */
+	setPropriete(prop, obj, scan) {
+		let tmp = this.cap(prop);
+		// Gérer les cas particuliers
+		if (prop.toLowerCase() === 'url') scan[tmp] = this.setURL(scan['SourceFile']);
+		if (prop === 'file') scan[tmp] = this.setFile(scan['SourceFile']);
+		// Attribuer une nouvelle valeur
+		// if (scan.hasOwnProperty(tmp)) Object.defineProperty(obj, prop, { value: scan[tmp] });
+		if (scan.hasOwnProperty(tmp)) obj[prop] = scan[tmp];
 	}
 	/**
 	 * Enregistrer les données dans la base mongo dans les sets de données
 	 */
 	enregistreSet() {
-		if (this.scans.some(e => e.alias === this.set.alias)) {
-			console.log("Le nom du SET existe déjà");
-			this.notifServ.notif("Attention, le nom du SET existe déjà");
-		} else {
-			this.http.post(environment.SERV + 'sets/', this.set).subscribe(
-				retour => {
-					console.log(retour);
-				},
-				erreur => {
-					console.log(erreur);
-					this.notifServ.notif("Erreur dans l'enregistrement du SET");
-				}
-			)
-		}
+		console.log(this.set);
+		this.http.post<SetModel>(environment.SERV + 'sets/', this.set).subscribe(
+			retour => {
+				console.log(retour);
+				this.notifServ.notif("SET enregistré");
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Erreur dans l'enregistrement du SET");
+			}
+		)
 	}
 	/**
 	 * Mettre la première lettre en capitales
@@ -152,5 +167,16 @@ export class ScanService {
 	 */
 	cap(str) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
+	}
+	setURL(str:string):string {
+		str = str.substr(str.indexOf(environment.DIR) + environment.DIR.length, str.length); // Récupérer la fin de l'URL du fichier
+		return environment.ADR + environment.DIR + str;
+	}
+	/**
+	 * Extraire le nom du fichier
+	 * @param str chaîne à traiter pour extraire le nom du fichier
+	 */
+	setFile(str:string):string{
+		return str.substr(str.lastIndexOf("/")+1, str.length);
 	}
 }

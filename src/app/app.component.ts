@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ParamsService } from './extranet/systeme/services/params.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Nemateria';
+
+  constructor(private paramsServ:ParamsService){
+    this.paramsServ.setEnv();
+  }
+
 }

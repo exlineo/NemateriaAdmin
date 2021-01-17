@@ -26,9 +26,6 @@
                     <mat-panel-title>
                         {{ s['Title'] }} ({{ s['Identifiant_unique'] }})
                     </mat-panel-title>
-                    <!-- <mat-panel-description>
-                        {{ s['Identifiant_unique'] }}
-                    </mat-panel-description> -->
                 </mat-expansion-panel-header>
                 <ul>
                     <li *ngFor="let m of s | keyvalue">
@@ -61,7 +58,7 @@
         </mat-accordion>
         <hr>
         <div *ngIf="scanServ.scans" class="flex justify-center">
-            <button (click)="pagine(-20)" [disabled]="page.min < 20"><</button><button (click)="pagine(20)" [disabled]="page.max < scanServ.scans-20">></button>
+            <button (click)="pagine(-20)" [disabled]="page.min < 20"><</button><button (click)="pagine(20)" [disabled]="page.max > scanServ.scans.length-20">></button>
         </div>
     </section>
     <aside>
@@ -81,6 +78,8 @@
                 <input name="titre" placeholder="Le titre qui apparaîtra dans l'adminitration" required [(ngModel)]="set.titre">
                 <label for="alias">Donnez un alias *</label>
                 <input name="alias" type="text" placeholder="Sans espaces, ni majuscules, ni caractères spéciaux" required [(ngModel)]="set.alias">
+                <label for="fonds">Fonds *</label>
+                <input name="fonds" type="text" placeholder="Saisissez le nom du fonds" required [(ngModel)]="set.fonds">
                 <label for="desc">Inidiquez des informations complémentaires sur le SET scanné</label>
                 <input name="desc" placeholder="Donnez des informations générales sur le SET" [(ngModel)]="set.description">
                 <label for="createur">Qui a créé le SET ?</label>

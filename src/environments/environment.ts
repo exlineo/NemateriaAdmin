@@ -1,17 +1,6 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export var environment = {
   production: false,
-  SERV:'http://vps550598.ovh.net:8080/'
+  SERV:'http://vps550598.ovh.net:8080/', // Adresse vers le serveur abritant le serveur NemateriaRest
+  ADR: "http://vps550598.ovh.net/", // Adresse à laquelle on accède à la ressource
+  DIR:'collections/' // Adresse vers le dossier de stockage des collections
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

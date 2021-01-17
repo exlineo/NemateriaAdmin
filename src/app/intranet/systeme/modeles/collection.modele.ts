@@ -1,3 +1,4 @@
+import { NemaSerieModel } from "./documents-model";
 import { NoticeModel } from "./notice.modele";
 
 export interface CollectionModel {
@@ -11,7 +12,7 @@ export interface CollectionModel {
     langue?: string;
     groupe?: Array<string>;
     notices?:Array<string>;
-    series?:Array<string>;
+    series?:Array<NemaSerieModel>;
     selected?:boolean;
 }
 
@@ -26,6 +27,6 @@ export class Collection implements CollectionModel {
     langue?: string;
     groupe?: Array<string>;
     notices?:Array<string>;
-    series?:Array<string>;
+    series?:Array<NemaSerieModel>;
     selected?:boolean;
 }
