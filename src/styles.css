@@ -1,13 +1,13 @@
 /* You can add global styles to this file, and also import other style files
 Design : http://quanticalabs.com/Node/Template/#!/home
-#656973 : base bleu sombre
-#41ab6b : vert
-#FFD600 : jaune
-#f06060 : rouge
-#a3c6c2 : bleu vert gris
-#eb974e : orange
-#13c7af : bleu vert vif
-#96a94b : caca d'oie
+#656973 : base bleu sombre / rgba(101, 105, 115, 1);
+#41ab6b : vert / rgba(65, 171, 107, 1);
+#FFD600 : jaune / rgba(255, 214, 0, 1);
+#f06060 : rouge / rgba(240, 96, 96, 1);
+#a3c6c2 : bleu vert gris / rgba(163, 198, 194, 1);
+#eb974e : orange / rgba(235, 151, 78, 1);
+#13c7af : bleu vert vif / rgba(19, 199, 175, 1);
+#96a94b : caca d'oie / rgba(150, 169, 75, 1);
 */
 
 
@@ -540,6 +540,10 @@ mat-icon.grand {
     width: 60px;
 }
 
+.vert {
+    background-col: #41ab6b;
+}
+
 
 /* //// Parent //// */
 
@@ -824,12 +828,19 @@ mat-icon.grand {
 }
 
 .unique section {
-    width: 75vw;
-    height: 75vh;
+    width: 90vw;
+    height: 90vh;
     background: #FFF;
     margin: auto;
     overflow-y: auto;
     flex-direction: column;
+}
+
+.unique section article {
+    display: flex;
+    flex-flow: column wrap;
+    border-top: thin black dashed;
+    padding: 15px 5px;
 }
 
 .pop-up article {

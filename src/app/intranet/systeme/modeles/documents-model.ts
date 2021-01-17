@@ -72,6 +72,7 @@ export interface NemaCollectionModel{
     detenteur_droits?:string;
     conservateur_originaux?:string;
     conservateur_fichiers?:string;
+    fonds?:string;
 }
 export interface NemaParticipantModel{
     editeur_oeuvre_source?:string;
@@ -133,7 +134,7 @@ export class NemaMedia implements DocMediaModel {
 }
 
 export class Nema implements NemateriaModel{
-    collection = {nom_collection:'', proprietaire_originaux:'', qui_numerise:'', gestionnaire_collection:'', detenteur_droits:'', conservateur_originaux:'', conservateur_fichiers:''};
+    collection = {nom_collection:'', proprietaire_originaux:'', qui_numerise:'', gestionnaire_collection:'', detenteur_droits:'', conservateur_originaux:'', conservateur_fichiers:'', fonds:''};
     document = {identifiant_unique:'', reference_original:'', uri:'', url:'', sourceFile:'', conditions_acces:'', conservateur_fichiers:'', date_creation_original:'', date_numerisation:'', detenteur_droits:'',nature_support_original:''};
     informateur:{alias_informateur:'',competence_informateur:'',date_naissance_informateur:'',informateur:''};
     participants:{editeur_oeuvre_source:'',editeur_site:'',participants:'',producteurs?:''};

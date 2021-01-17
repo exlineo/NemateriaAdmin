@@ -6,6 +6,7 @@ import { CollectionModel, Collection } from '../modeles/collection.modele';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
 import { SetModel } from '../modeles/set';
+import { NoticeModel } from '../modeles/notice.modele';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,10 +14,10 @@ import { SetModel } from '../modeles/set';
 export class CollectionService {
 
 	// dataStorage: string = 'assets/dataStorage/';
-
 	collections: Array<CollectionModel>; // La liste des collections
 	collection:CollectionModel; // Une collection sélectionnée
 	series:Array<any>; // Tableau des séries d'une collection donnée
+	notices:Array<NoticeModel>; // Tableau temporaire de notices
 
 	constructor(private http: HttpClient, private notifServ:NotificationService) {
 		this.getCollections();
@@ -36,23 +37,24 @@ export class CollectionService {
 	 * @param id _id de la notice à récupérer
 	 * @return CollectionModel (une collection)
 	 */
-	getCollection(id: number | string):CollectionModel {
+	getCollection(id: number | string) {
 		for(let c of this.collections){
 			if(c._id == id){
-				return c;
+				this.collection = c;
+				// return c;
 			}
 		}
 	}
 	/**
 	 * Mise à jour d'une collection
 	 */
-	majCollection(collec:CollectionModel){
-		this.http.put(environment.SERV+'collections/', collec).subscribe(
+	majCollection(){
+		this.http.put(environment.SERV+'collections/', this.collection).subscribe(
 			retour => {
-				console.log(retour);
+				this.notifServ.notif("La collection a été mise à jour");
+
 			},
 			erreur => {
-				console.log(erreur);
 				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
@@ -60,13 +62,12 @@ export class CollectionService {
 	/**
 	 * Ajouter une collection
 	 */
-	ajouteCollection(collec:CollectionModel){
-		this.http.post(environment.SERV+'collections', collec).subscribe(
+	ajouteCollection(){
+		this.http.post(environment.SERV+'collections', this.collection).subscribe(
 			retour => {
-				console.log(retour);
+				this.notifServ.notif("La collection a bien été ajoutée");
 			},
 			erreur => {
-				console.log(erreur);
 				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
@@ -96,19 +97,30 @@ export class CollectionService {
 	getSeries(id){
 		this.http.get(environment.SERV+'collections/'+id+'/series').subscribe(
 			retour => {
-				console.log(retour);
+				this.notifServ.notif("Les séries ont été extraites");
 			},
 			erreur => {
-				console.log(erreur);
 				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
 			}
 		)
 	}
-	
 	/**
-	 * Filtrer les données dans les collections
+	 * Paquet de notices à créer puis insertion d'une collection
+	 * @param ar Tableau de notices à envoyer au serveur pour les créer par paquetes
 	 */
-	filtreColSeries(){
-
+	ajouteNoticeAvantCollection(){
+		this.http.post(environment.SERV+'notices/true', this.notices).subscribe(
+			retour => {
+				console.log(retour);
+				this.collection.notices = Object.values(retour['insertedIds']);
+				this.ajouteCollection(); // Ajouter la collection une fois que les notices sont ajoutées
+				console.log(this.collection.notices);
+				this.notifServ.notif("Les notices ont été insérées dans la base");
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur dans l'enregistrement des notices");
+			}
+		)
 	}
 }

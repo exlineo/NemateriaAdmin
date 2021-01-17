@@ -21,9 +21,9 @@
             </div>
             <h2>Informations sur la collection choisie</h2>
         </header>
-        <article *ngIf="collec">
+        <article *ngIf="colServ.collection">
             <ul>
-                <li *ngFor="let n of collec | keyvalue">
+                <li *ngFor="let n of colServ.collection | keyvalue">
                     <strong>{{ n.key }}</strong> : {{ n.value }}
                 </li>
             </ul>
@@ -43,7 +43,7 @@
         <section class="selection ">
             <ul class="notice-liste">
                 <li *ngFor="let notice of noticesServ.noticesCollec; let i=index" class="notice">
-                    <div [style.backgroundImage]="'url('+ notice.fichier.url +')'">
+                    <div [style.backgroundImage]="'url('+ notice['fichier'].url +')'">
                         <div>
                             <mat-icon (click)="noticeOnAffiche(notice._id)" matTooltip="Voir la fiche de la notice">
                                 visibility</mat-icon>
@@ -51,8 +51,8 @@
                         </div>
                     </div>
                     <div>
-                        <h3>{{notice.titre}}</h3>
-                        <p>{{notice.description}}</p>
+                        <h3>{{notice.metadonnees['dublincore'].title}}</h3>
+                        <p>{{notice.metadonnees['dublincore'].description}}</p>
                     </div>
                 </li>
             </ul>
@@ -77,7 +77,7 @@
         <h2>Etes-vous sûr.e ?</h2>
         <p>
             <mat-icon matTooltip="Annuler la destruction" (click)="delete = false" class="grand">cancel</mat-icon>
-            <mat-icon matTooltip="Valider la destruction" (click)="colServ.supprCollec(collec._id);delete = false" class="grand">check_circle</mat-icon>
+            <mat-icon matTooltip="Valider la destruction" (click)="colServ.supprCollec(colServ.collection._id);delete = false" class="grand">check_circle</mat-icon>
         </p>
     </article>
 </section>

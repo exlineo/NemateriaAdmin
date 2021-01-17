@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { NoticeModel } from "../modeles/notice.modele";
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
+import { DocumentModel } from '../modeles/documents-model';
+import { NoticeModel } from '../modeles/notice.modele';
 
 @Injectable({
 	providedIn: 'root'
@@ -46,6 +47,7 @@ export class NoticeService {
 				console.log(data);
 				this.noticesCollec = data;
 				this.getSeries();
+				this.notifServ.notif("Les notices ont été créées");
 			},
 			erreur => {
 				console.log(erreur);
@@ -57,7 +59,7 @@ export class NoticeService {
 	 * Renvoyer une notice du tableau en fonction de son _id
 	 * @param id _id de la notice à récupérer
 	 * @param select Ajouter select à la notice pour noter qu'elle a été sélectionnée
-	 * @return NoticeModel (une notice)
+	 * @return DocumentModel (une notice)
 	 */
 	getNotice(id: number | string, select:boolean=false):NoticeModel {
 		for(let n of this.noticesAll){
@@ -74,9 +76,10 @@ export class NoticeService {
 	 * @param notice ID de la notice à enlever de la collection
 	 */
 	updateNotice(id:string, notice:NoticeModel){
-		this.http.post(environment.SERV+'notices/'+id, notice).subscribe(
+		this.http.put(environment.SERV+'notices/'+id, notice).subscribe(
 			retour => {
 				console.log(retour);
+				this.notifServ.notif("Mise à jour de la notice effectuée");
 			},
 			erreur => {
 				console.log(erreur);
@@ -92,6 +95,7 @@ export class NoticeService {
 		this.http.delete(environment.SERV+'notices/'+id).subscribe(
 			retour => {
 				console.log(retour);
+				this.notifServ.notif("La notice a été supprimée");
 			},
 			erreur => {
 				console.log(erreur);
@@ -104,11 +108,10 @@ export class NoticeService {
 	 */
 	getSeries(){
 		this.seriesCollec = [];
-		for(let s of this.noticesCollec){
-			if(s.relations.serie && this.seriesCollec.indexOf(s.relations.serie) == -1){
-				this.seriesCollec.push(s.relations.serie);
-			}
-		}
-		console.log(this.seriesCollec);
+		// for(let s of this.noticesCollec){
+		// 	if(s.relations.serie && this.seriesCollec.indexOf(s.relations.serie) == -1){
+		// 		this.seriesCollec.push(s.relations.serie);
+		// 	}
+		// }
 	}
 }

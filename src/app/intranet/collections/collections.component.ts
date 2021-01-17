@@ -1,12 +1,8 @@
-import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
-import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
 
-import { CONST } from '../systeme/const';
-import { CollectionModel, Collection } from '../systeme/modeles/collection.modele';
-import { NoticeModel } from '../systeme/modeles/notice.modele';
+import { CollectionModel } from '../systeme/modeles/collection.modele';
 import { CollectionService } from '../systeme/services/collection.service';
 import { NoticeService } from '../systeme/services/notice.service';
-import { ThrowStmt } from '@angular/compiler';
 import { UtilsService } from '../systeme/library/utils.service';
 
 @Component({
@@ -19,8 +15,6 @@ export class CollectionsComponent implements OnInit {
 	collectionListe: Array<CollectionModel> = []; // Liste de toutes les collections
 	idCollection:number | string;
 	idNotice:number | string;
-	
-	collec: CollectionModel = new Collection(); // La collection sélectionnée à afficher
 	
 	detailsCollec: boolean = false;
 	afficheDetailNotice: boolean = false;
@@ -41,10 +35,9 @@ export class CollectionsComponent implements OnInit {
 	collectionOnClick(id): void {
 		this.idCollection = id;
 		// Identifier la collection cliquée
-		this.collec = this.colServ.getCollection(id);
-		console.log(this.collec);
+		this.colServ.getCollection(id);
 		// Récupérer les notices de la collection
-		this.noticesServ.getNoticesByCollec(this.collec._id);
+		this.noticesServ.getNoticesByCollec(this.colServ.collection._id);
 		// this.colServ.getSeries(idCollection);
 	}
 	/**

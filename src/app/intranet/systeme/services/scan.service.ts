@@ -40,11 +40,9 @@ export class ScanService {
 	getListeDossiers() {
 		this.http.get(environment.SERV + 'scans').subscribe(
 			data => {
-				console.log(data);
 				this.listeDossiers = data;
 			},
 			erreur => {
-				console.log(erreur);
 				this.notifServ.notif("Nous n'avons pas la liste des dossiers");
 			}
 		)
@@ -59,7 +57,6 @@ export class ScanService {
 				this.scans = fichier['data'];
 			},
 			erreur => {
-				console.log(erreur);
 				this.notifServ.notif("Les données n'ont pu être scannées");
 			}
 		)
@@ -76,7 +73,6 @@ export class ScanService {
 				this.load = false;
 			},
 			erreur => {
-				console.log(erreur);
 				this.notifServ.notif("Erreur dans le scan des dossiers du serveur");
 			}
 		)
@@ -125,9 +121,6 @@ export class ScanService {
 				this.setPropriete(un, obj, scan);
 			}
 		};
-		//Petit hack pour récupérer le nom du fichier avec l'extension
-
-		// console.log(obj);
 		return obj;
 	}
 	/**
@@ -149,14 +142,11 @@ export class ScanService {
 	 * Enregistrer les données dans la base mongo dans les sets de données
 	 */
 	enregistreSet() {
-		console.log(this.set);
 		this.http.post<SetModel>(environment.SERV + 'sets/', this.set).subscribe(
 			retour => {
-				console.log(retour);
 				this.notifServ.notif("SET enregistré");
 			},
 			erreur => {
-				console.log(erreur);
 				this.notifServ.notif("Erreur dans l'enregistrement du SET");
 			}
 		)

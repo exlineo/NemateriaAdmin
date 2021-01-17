@@ -4,48 +4,71 @@
         <h3>Informations sur la collection
             <mat-icon (click)="fermer.emit(false)">close</mat-icon>
         </h3>
-        <h2>{{ collection.titre }}</h2>
-
+        <h2>{{ colServ.collection.titre }}</h2>
     </header>
 
     <form>
         <section>
-            <label for="titre">Titre</label>
-            <input name="titre" [(ngModel)]="collection.titre" required>
+            <article>
+                <label for="titre">Titre</label>
+                <input name="titre" [(ngModel)]="colServ.collection.titre" required>
 
-            <label for="alias">Alias</label>
-            <input name="alias" [(ngModel)]="collection.alias" required pattern="[a-z0-9-]+">
+                <label for="alias">Alias</label>
+                <input name="alias" [(ngModel)]="colServ.collection.alias" required pattern="[a-z0-9-]+">
 
-            <label for="description">Description</label>
-            <textarea mat-input name="description" [(ngModel)]="collection.description" required>
-            </textarea>
+                <label for="description">Description</label>
+                <textarea mat-input name="description" [(ngModel)]="colServ.collection.description" required>
+                </textarea>
 
-            <label for="type">Type</label>
-            <select name="type" [(ngModel)]="collection.type" required>
-                <option value="image">Images</option>
-                <option value="multimedia">Multimédia</option>
-            </select>
+                <label for="type">Type</label>
+                <select name="type" [(ngModel)]="colServ.collection.type" required>
+                    <option value="image">Images</option>
+                    <option value="multimedia">Multimédia</option>
+                </select>
 
-            <label for="createur">Créateur</label>
-            <input name="createur" [(ngModel)]="collection.createur" required>
+                <label for="createur">Créateur</label>
+                <input name="createur" [(ngModel)]="colServ.collection.createur" required>
 
-            <label for="fond">Fonds</label>
-            <input name="fond" [(ngModel)]="collection.fonds">
+                <label for="fonds">Fonds</label>
+                <input name="fonds" [(ngModel)]="colServ.collection.fonds">
 
-            <label for="langue">Langue</label>
-            <input name="langue" [(ngModel)]="collection.langue">
-        </section>
-
-        <section>
-            <h3>Séries
+                <label for="langue">Langue</label>
+                <input name="langue" [(ngModel)]="colServ.collection.langue">
+            </article>
+            <article>
+                <h3>Séries</h3>
                 <mat-icon>add</mat-icon>
-            </h3>
-            <hr>
-            <p>
-                <button class="invalid" (click)="fermer.emit(false)">Annuler</button>
-                <button class="valid" (click)="ecrire()">Valider</button>
-            </p>
-        </section>
+                <ul>
+                    <li *ngFor="let s of colServ.collection.series">
+                        {{ s }}
+                    </li>
+                </ul>
 
+                <hr>
+                <p>
+                    <button class="invalid" (click)="fermer.emit(false)">Annuler</button>
+                    <button class="valid" (click)="ecrire()">Valider</button>
+                </p>
+            </article>
+        </section>
+        <section *ngIf="colServ.notices">
+            <h3>Notices</h3>
+            <button (click)="genereNotices()">Insérer ces documents comme notices de la collection</button>
+            <ul>
+                <li *ngFor="let n of colServ.notices">
+                    {{ n.metadonnees['dublincore'].title }}
+                    <mat-icon matTooltip="Enlever cette notice">delete</mat-icon>
+                </li>
+            </ul>
+        </section>
+        <section *ngIf="!cree">
+            <h3>Notices</h3>
+            <ul>
+                <li *ngFor="let n of colServ.notices">
+                    {{ n['dublincore'].title }}
+                    <mat-icon matTooltip="Enlever cette notice">delete</mat-icon>
+                </li>
+            </ul>
+        </section>
     </form>
 </section>

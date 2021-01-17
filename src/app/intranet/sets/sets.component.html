@@ -2,9 +2,9 @@
     <aside class="left-panel">
         <header>
             <h1>SETS disponibles</h1>
+            <p>Sélectionnez un SET pour avoir ses informations.</p>
         </header>
         <ul>
-
             <li *ngFor="let s of setsServ.sets; let i=index" (click)="setOnClick(s._id) ">
                 {{s.titre}} (fonds : {{ s.fonds }})
             </li>
@@ -111,7 +111,7 @@
         <h2>Etes-vous sûr.e ?</h2>
         <p>
             <mat-icon matTooltip="Annuler la destruction" (click)="delete = false" class="grand">cancel</mat-icon>
-            <mat-icon matTooltip="Valider la destruction" (click)="setsServ.supprSet(setsServ.set._id); delete=false" class="grand">check_circle</mat-icon>
+            <mat-icon matTooltip="Valider la destruction" (click)="setsServ.supprSet(setsServ.set._id); delete=false" class="grand vert">check_circle</mat-icon>
         </p>
     </article>
 </section>

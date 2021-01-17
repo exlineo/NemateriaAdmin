@@ -2,34 +2,34 @@
     <mat-icon (click)="fermer.emit(false)">close</mat-icon>
     <header>
         <!-- Afficher une image -->
-        <p *ngIf="notice.fichier.type.indexOf('image') > -1">
-            <img [src]="notice.fichier.url">
+        <p *ngIf="notice.metadonnees['media'].type.indexOf('image') > -1">
+            <img [src]="notice.metadonnees['media'].url">
         </p>
         <!-- Afficher une vidéo MP4 -->
-        <p *ngIf="notice.fichier.type.indexOf('mpg4') > -1">
+        <p *ngIf="notice.metadonnees['media'].type.indexOf('mpg4') > -1">
             <video controls>
-                <source [src]="notice.fichier.url" type="video/mp4">
+                <source [src]="notice.metadonnees['media'].url" type="video/mp4">
             </video>
         </p>
         <!-- Afficher une vidéo WEBM -->
-        <p *ngIf="notice.fichier.type.indexOf('webm') > -1">
+        <p *ngIf="notice.metadonnees['media'].type.indexOf('webm') > -1">
             <video controls>
-                <source [src]="notice.fichier.url" type="video/webm">
+                <source [src]="notice.metadonnees['media'].url" type="video/webm">
             </video>
         </p>
         <!-- Afficher un audio MP3 -->
-        <p *ngIf="notice.fichier.type.indexOf('mp3') > -1">
+        <p *ngIf="notice.metadonnees['media'].type.indexOf('mp3') > -1">
             <audio controls>
-                <source [src]="notice.fichier.url" type="audio/mpeg">
+                <source [src]="notice.metadonnees['media'].url" type="audio/mpeg">
             </audio>
         </p>
     </header>
     <article *ngIf="!update">
-        <h3>{{ notice.titre }}</h3>
+        <h3>{{ notice.metadonnees['dublincore'].titre }}</h3>
         <ul>
             <!-- tri dans le premier niveau de données -->
             <li *ngFor="let n of notice | keyvalue">
-                
+
                 <span *ngIf="utils.typeOf(n.value) !== 'object'; else elseBlockN">
                     <strong>{{ n.key }}</strong> : {{ n.value }}
                     <!-- <strong>{{ n.key }} </strong> : <input [(ngModel)]="n.value" [name]="n.key" [disabled]="active === 1 ? false : true"> -->

@@ -5,6 +5,7 @@ import { DocumentModel, NemaSerieModel } from '../systeme/modeles/documents-mode
 import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { SetModel } from '../systeme/modeles/set';
 import { CollectionService } from '../systeme/services/collection.service';
+import { NoticeService } from '../systeme/services/notice.service';
 import { SetsService } from '../systeme/services/sets.service';
 
 @Component({
@@ -18,25 +19,28 @@ export class CollectionComponent implements OnInit {
 	collection: CollectionModel; // Collection transmise à l'affichage
 
 	@Input()
-	idCollection:any; // ID de la collection à afficher
+	idCollection: any; // ID de la collection à afficher
 
 	@Output()
 	fermer = new EventEmitter<boolean>();
 
 	affiche: boolean = false;
-	maj:boolean = false; // Mettre à jouer les données
-	
-	constructor(public colServ: CollectionService, private setsServ:SetsService) { }
+	maj: boolean = false; // Mettre à jouer les données
+	cree: boolean = false;
+
+	constructor(public colServ: CollectionService, public setsServ: SetsService, private noticesServ: NoticeService) { }
 
 	ngOnInit() {
 		console.log(this.idCollection);
-		if(typeof(this.idCollection) == 'string'){
-			this.collection = this.colServ.getCollection(this.idCollection); // Récupérer la collection à visualiser / updater
-		}else if(this.idCollection == -1 || this.idCollection){
-			this.collection = this.mapCollec(this.setsServ.set); // Créer une collection à partir des données du SET sélectionné
+		if (typeof (this.idCollection) == 'string') {
+			this.colServ.getCollection(this.idCollection); // Récupérer la collection à visualiser / updater
+		} else if (this.idCollection == -1 && this.setsServ.set) {
+			this.cree = true;
+			this.colServ.collection = this.mapSet(this.setsServ.set); // Créer une collection à partir des données du SET sélectionné
+			this.genereNotices(); // Générer les notices à partir du SET
 		}
-		else{
-			this.collection = new Collection(); // Créer une collection vide
+		else {
+			this.colServ.collection = new Collection(); // Créer une collection vide
 		}
 	}
 	/**
@@ -48,45 +52,55 @@ export class CollectionComponent implements OnInit {
 	/**
 	 * Afficher le formulaire de mise à jour
 	 */
-	afficheMaj(){
+	afficheMaj() {
 		this.maj = !this.maj;
 	}
 	/**
 	 * Méthode utilisée pour la mise à jour ou l'écriture d'une nouvelle collection
 	 */
-	ecrire(){
+	ecrire() {
 		console.log(this.collection);
-		if(this.collection._id){
-			this.colServ.majCollection(this.collection);
-		}else{
-			this.colServ.ajouteCollection(this.collection);
+		if (this.colServ.collection._id) {
+			this.colServ.majCollection();
+		} else {
+			// this.colServ.ajouteCollection();
+			this.colServ.ajouteNoticeAvantCollection()
 		}
 	}
 	/**
 	 * Mapper des données reçues pour faire une collection
 	 */
-	mapCollec(obj:SetModel){
-		const tmp:Collection = new Collection();
+	mapSet(set: SetModel) {
+		let tmp: Collection = new Collection();
 		// Peupler les données dans la nouvelle collection
-		for(const o in obj){
-			console.log(o);
-			if(tmp[o]) tmp[o] = obj[o];
+		for (let o in set) {
+			if (tmp.hasOwnProperty(o) && o != '_id') {
+				tmp[o] = set[o];
+			};
 		};
-		// Ajouter l'idée des documents dans les notices de la collection
-		for(const n in obj.documents){
-			tmp.notices.push(n['_id']);
-		}
+		tmp.series = [];
 		// Récupérer les séries dans le SET
-		tmp.series = obj.documents.map<NemaSerieModel>( s => s.nemateria.serie)
-		console.log(tmp);
+		set.documents.forEach(s => {
+			if (!tmp.series.includes(s.nemateria.serie.serie)) tmp.series.push(s.nemateria.serie.serie);
+		});
 		// Générer la collection
 		return tmp;
 	}
 	/**
-	 * Filtrer les séries dans des SETS
-	 
-	filtreSetsSeries(ar:Array<DocumentModel>):Array<NemaSerieModel>{
-		return ar.map<NemaSerieModel>( s => s.nemateria.serie);
-		// return [];
-	}*/
+	 * Générer des notices à partir des documents du SET (lorsqu'utile)
+	 */
+	genereNotices() {
+		this.colServ.notices = [];
+		this.setsServ.set.documents.map(
+			n => {
+				n.nemateria.collection.nom_collection = this.colServ.collection.titre;
+				n.nemateria.collection.fonds = this.colServ.collection.fonds;
+				this.colServ.notices.push({ 'metadonnees': n });
+			}
+		);
+		console.log(this.colServ.notices);
+	}
+	supprimeNotice(id) {
+
+	}
 }
