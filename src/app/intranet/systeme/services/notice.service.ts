@@ -12,20 +12,21 @@ import { NoticeModel } from '../modeles/notice.modele';
 })
 export class NoticeService {
 
-	noticesCollec:Array<NoticeModel>; // Des notices d'une collection donnée
-	noticesAll:Array<NoticeModel>; // Récupérer la liste de toutes les notices...
+	noticesCollec: Array<NoticeModel>; // Des notices d'une collection donnée
+	noticesAll: Array<NoticeModel>; // Récupérer la liste de toutes les notices...
 
-	seriesCollec:Array<string>=[]; // La liste des séries présentes dans les notices de la collection
+	seriesCollec: Array<string> = []; // La liste des séries présentes dans les notices de la collection
+	notice:NoticeModel; // Une notice sélectionnée et partagée
 
-	constructor(private http: HttpClient, private notifServ:NotificationService) {
-		this.getNotices();
+	constructor(private http: HttpClient, private notifServ: NotificationService) {
+		// this.getNotices();
+		this.notice = <NoticeModel>{};
 	}
-
 	/**
 	 * Récupérer l'ensemble des notices disponibles
 	 */
 	getNotices(): void {
-		this.http.get<Array<NoticeModel>>(environment.SERV+'notices').subscribe(
+		this.http.get<Array<NoticeModel>>(environment.SERV + 'notices').subscribe(
 			data => {
 				console.log(data);
 				this.noticesAll = data;
@@ -40,18 +41,26 @@ export class NoticeService {
 	 * Récupérer les notices d'une collection
 	 * @param id ID de la collection dont nous souhaitons les notices
 	 */
-	getNoticesByCollec(id){
+	getNoticesByCollec(ids: Array<any>) {
 		this.noticesCollec = [];
-		this.http.get<Array<NoticeModel>>(environment.SERV+'notices/collection/'+id, {params:{'idCollection':id}}).subscribe(
+		// this.http.get<Array<NoticeModel>>(environment.SERV+'notices/collection/'+id, {params:{'idCollection':id}}).subscribe(
+		this.http.post<Array<NoticeModel>>(environment.SERV + 'notices/collection', ids).subscribe(
 			data => {
-				console.log(data);
-				this.noticesCollec = data;
+				// Transformation des données pour transformer le tableau fourni en objet (comme ce devrait être)
+				if (Array.isArray(data[0].metadonnees)) {
+					this.noticesCollec = data.map(n => {
+						n.metadonnees = n.metadonnees[0];
+						return n;
+					});
+				} else {
+					this.noticesCollec = data;	
+				}
 				this.getSeries();
-				this.notifServ.notif("Les notices ont été créées");
+				this.notifServ.notif("Les notices ont été récupérées");
 			},
 			erreur => {
 				console.log(erreur);
-				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
+				this.notifServ.notif("Erreur dans la récupération des notices");
 			}
 		)
 	}
@@ -61,22 +70,21 @@ export class NoticeService {
 	 * @param select Ajouter select à la notice pour noter qu'elle a été sélectionnée
 	 * @return DocumentModel (une notice)
 	 */
-	getNotice(id: number | string, select:boolean=false):NoticeModel {
-		for(let n of this.noticesAll){
-			if(n._id == id){
-				if(select){
-					n.selected = true;
-				}
-				return n;
-			}
-		}
+	getNotice(id: number | string, select: boolean = false): void {
+		this.notice = <NoticeModel>{};
+		if(this.noticesCollec){
+			this.notice = this.noticesCollec.filter(n => n._id === id)[0];
+		};
+		if(this.noticesAll){
+			this.notice = this.noticesAll.filter(n => n._id === id)[0];
+		};
 	}
 	/**
 	 * Mettre à jour une notice
 	 * @param notice ID de la notice à enlever de la collection
 	 */
-	updateNotice(id:string, notice:NoticeModel){
-		this.http.put(environment.SERV+'notices/'+id, notice).subscribe(
+	updateNotice(id: string, notice: NoticeModel) {
+		this.http.put(environment.SERV + 'notices/' + id, notice).subscribe(
 			retour => {
 				console.log(retour);
 				this.notifServ.notif("Mise à jour de la notice effectuée");
@@ -91,8 +99,8 @@ export class NoticeService {
 	 * Supprimer une notice
 	 * @param id ID de la notice à supprimer
 	 */
-	supprNotice(id){
-		this.http.delete(environment.SERV+'notices/'+id).subscribe(
+	supprNotice(id) {
+		this.http.delete(environment.SERV + 'notices/' + id).subscribe(
 			retour => {
 				console.log(retour);
 				this.notifServ.notif("La notice a été supprimée");
@@ -106,7 +114,7 @@ export class NoticeService {
 	/**
 	 * Récupérer la liste des séries depuis les notices chargées
 	 */
-	getSeries(){
+	getSeries() {
 		this.seriesCollec = [];
 		// for(let s of this.noticesCollec){
 		// 	if(s.relations.serie && this.seriesCollec.indexOf(s.relations.serie) == -1){

@@ -42,17 +42,17 @@
     <aside>
         <section class="selection ">
             <ul class="notice-liste">
-                <li *ngFor="let notice of noticesServ.noticesCollec; let i=index" class="notice">
-                    <div [style.backgroundImage]="'url('+ notice['fichier'].url +')'">
+                <li *ngFor="let n of noticesServ.noticesCollec; let i=index" class="notice">
+                    <div [style.backgroundImage]="'url('+ n.metadonnees['media'].url +')'">
                         <div>
-                            <mat-icon (click)="noticeOnAffiche(notice._id)" matTooltip="Voir la fiche de la notice">
+                            <mat-icon (click)="idNotice = n._id" matTooltip="Voir la fiche de la notice">
                                 visibility</mat-icon>
-                            <mat-icon (click)="noticeOnEnlever(notice._id)" matTooltip="Enlever cette notice de la collection">remove_circle</mat-icon>
+                            <mat-icon (click)="noticeOnEnlever(n._id)" matTooltip="Enlever cette notice de la collection">remove_circle</mat-icon>
                         </div>
                     </div>
                     <div>
-                        <h3>{{notice.metadonnees['dublincore'].title}}</h3>
-                        <p>{{notice.metadonnees['dublincore'].description}}</p>
+                        <h3>{{n.metadonnees['dublincore'].title}}</h3>
+                        <p>{{n.metadonnees['dublincore'].description}}</p>
                     </div>
                 </li>
             </ul>
@@ -84,4 +84,4 @@
 <!-- Afficher la collection choisie -->
 <app-collection *ngIf="detailsCollec" [idCollection]="idCollection" (fermer)="masque()" class="unique"></app-collection>
 <!-- Afficher la notice choisie -->
-<app-notice *ngIf="afficheDetailNotice" [idNotice]="idNotice" (fermer)="masque()" class="unique"></app-notice>
+<app-notice *ngIf="idNotice" [idNotice]="idNotice" (fermer)="masque()" class="unique"></app-notice>

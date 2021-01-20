@@ -17,7 +17,6 @@ export class CollectionsComponent implements OnInit {
 	idNotice:number | string;
 	
 	detailsCollec: boolean = false;
-	afficheDetailNotice: boolean = false;
 	afficheEnlever: boolean = false;
 	delete:boolean = false;
 
@@ -37,8 +36,8 @@ export class CollectionsComponent implements OnInit {
 		// Identifier la collection cliquée
 		this.colServ.getCollection(id);
 		// Récupérer les notices de la collection
-		this.noticesServ.getNoticesByCollec(this.colServ.collection._id);
-		// this.colServ.getSeries(idCollection);
+		this.noticesServ.getNoticesByCollec(this.colServ.collection.notices);
+		// this.noticesServ.getNoticesByCollec(this.colServ.collection._id);
 	}
 	/**
 	 * 
@@ -49,24 +48,11 @@ export class CollectionsComponent implements OnInit {
 		this.idNotice = id;
 		this.afficheEnlever = true;
 	}
-	enleverNotice(){
-		
-	}
-	/**
-	 * Afficher une pop-up d'une notice
-	 * @param id ID de la notice à afficher pour consultation
-	 */
-	noticeOnAffiche(id){
-		this.idNotice = id;
-		// this.noticesServ.getNotice(id);
-		this.afficheDetailNotice = true;
-	}
 	/**
 	 * Enlever toutes les fenêtres pop-up et initialiser la collection et les notices
 	 */
 	masque(){
 		this.detailsCollec = false;
-		this.afficheDetailNotice = false;
 		this.afficheEnlever = false;
 		this.idNotice = null;
 		this.idCollection = null;

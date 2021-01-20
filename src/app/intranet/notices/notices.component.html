@@ -77,9 +77,9 @@
         <section class="demi">
             <h2>Métadonnées d’une notice sélectionnée</h2>
             <article *ngIf="this.noticeAffiche">
-                <h3>{{ noticeChoisie.titre}}</h3>
+                <h3>{{ noticeChoisie.metadonnees['dublincore'].title}}</h3>
                 <p>
-                    {{ noticeChoisie.description }}<br> {{ noticeChoisie.fichier.nom }} <br> ({{ noticeChoisie.fichier.url }})
+                    {{ noticeChoisie['dublincore'].description }}<br> {{ noticeChoisie['media'].file }} <br> ({{ noticeChoisie['media'].url }})
                 </p>
             </article>
         </section>
