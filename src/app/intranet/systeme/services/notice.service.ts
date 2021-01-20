@@ -73,10 +73,10 @@ export class NoticeService {
 	getNotice(id: number | string, select: boolean = false): void {
 		this.notice = <NoticeModel>{};
 		if(this.noticesCollec){
-			this.notice = this.noticesCollec.filter(n => n._id === id)[0];
+			this.notice = this.noticesCollec.find(n => n._id === id);
 		};
 		if(this.noticesAll){
-			this.notice = this.noticesAll.filter(n => n._id === id)[0];
+			this.notice = this.noticesAll.find(n => n._id === id);
 		};
 	}
 	/**

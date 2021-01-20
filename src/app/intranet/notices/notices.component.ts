@@ -49,22 +49,22 @@ export class NoticesComponent implements OnInit {
 	*/
 	noticeSelectionnee(idNotice): void {
 		this.idNotice = idNotice;
-		if(this.noticeSelection.indexOf(this.noticesServ.getNotice(idNotice)) == -1){
-			this.noticeSelection.push(this.noticesServ.getNotice(idNotice, true));
+		if(!this.noticesServ.noticesAll.find(n => n._id == idNotice)){
+			this.noticeSelection.push(this.noticesServ.noticesAll.find(n => n._id == idNotice))
 		}else{
 			this.noticeSelectionRemove(idNotice);
 		}
 	}
-	/**
+	/**x
 	 * Afficher les infos d'une notice
 	 * @param idNotice id de la notice dnt on veut les infos
 	*/
 	noticeOnInfo(idNotice): void {
-		if(this.noticeChoisie == this.noticesServ.getNotice(idNotice)){
+		if(this.noticeChoisie == this.noticesServ.noticesAll.find(n => n._id == idNotice)){
 			this.noticeAffiche = false;
 			this.noticeChoisie = null;
 		}else{
-			this.noticeChoisie = this.noticesServ.getNotice(idNotice);
+			this.noticeChoisie = this.noticesServ.noticesAll.find(n => n._id == idNotice);
 			this.noticeAffiche = true;
 		}
 	}

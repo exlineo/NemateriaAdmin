@@ -24,6 +24,7 @@
         <article *ngIf="colServ.collection">
             <ul>
                 <li *ngFor="let n of colServ.collection | keyvalue">
+
                     <strong>{{ n.key }}</strong> : {{ n.value }}
                 </li>
             </ul>
