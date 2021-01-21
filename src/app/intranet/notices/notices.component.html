@@ -24,26 +24,26 @@
             </form>
         </header>
         <ul class="notice-liste">
-            <li *ngFor="let notice of (this.noticesServ.noticesAll | filtreNotices:filtre)" class="notice">
+            <li *ngFor="let n of (this.noticesServ.noticesAll | filtreNotices:filtre)" class="notice">
                 <!-- <a (click)="noticeSelectionnee(notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée"></a> -->
 
-                <div [style.backgroundImage]="'url('+ notice.fichier.url +')'" [class.choix]="notice.selected">
+                <div [style.backgroundImage]="'url('+ n.metadonnees['media'].url +')'" [class.choix]="n.selected">
                     <!-- <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description"> -->
                     <div (click)="fake()">
-                        <mat-icon (click)="noticeOnAffiche(notice._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
-                        <mat-icon (click)="noticeSelectionnee(notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
-                        <mat-icon (click)="noticeOnInfo(notice._id)" matTooltip="Informations rapides sur la notice">info</mat-icon>
+                        <mat-icon (click)="noticeOnAffiche(n._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
+                        <mat-icon (click)="noticeSelectionnee(n._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
+                        <mat-icon (click)="noticeOnInfo(n._id)" matTooltip="Informations rapides sur la notice">info</mat-icon>
                         <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
                     </div>
-                    <div (click)="noticeSelectionnee(notice._id)"></div>
+                    <div (click)="noticeSelectionnee(n._id)"></div>
 
                 </div>
                 <div>
-                    <h3>{{ notice.nom }}</h3>
-                    <p>{{ notice.description }}</p>
+                    <h3>{{ n.metadonnees['dublincore'].title }}</h3>
+                    <p>{{ n.metadonnees['dublincore'].description }}</p>
                     <div>
-                        <mat-icon *ngIf="notice.selected">check_circle</mat-icon>
-                        <mat-icon *ngIf="!notice.selected">check_circle_outline</mat-icon>
+                        <mat-icon *ngIf="n.selected">check_circle</mat-icon>
+                        <mat-icon *ngIf="!n.selected">check_circle_outline</mat-icon>
                     </div>
                 </div>
             </li>
@@ -63,10 +63,10 @@
 
             <h2>Liste des notices sélectionnées</h2>
             <ul>
-                <li *ngFor="let notice of this.noticeSelection">
+                <li *ngFor="let n of this.noticeSelection">
                     <mat-chip-list>
-                        <mat-chip (removed)="noticeSelectionRemove(notice._id)">
-                            {{notice.metadonnees['dublincore'].title}}
+                        <mat-chip (removed)="noticeSelectionRemove(n._id)">
+                            {{n.metadonnees['dublincore'].title}}
                             <mat-icon matChipRemove>cancel</mat-icon>
                         </mat-chip>
                     </mat-chip-list>

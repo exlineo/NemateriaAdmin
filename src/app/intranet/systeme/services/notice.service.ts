@@ -28,12 +28,15 @@ export class NoticeService {
 	getNotices(): void {
 		this.http.get<Array<NoticeModel>>(environment.SERV + 'notices').subscribe(
 			data => {
-				console.log(data);
-				this.noticesAll = data;
+				this.noticesAll = data.map(n => {
+					n.metadonnees = n.metadonnees[0];
+					return n;
+				});
+				this.notifServ.notif("Notices chargées");
 			},
 			erreur => {
 				console.log(erreur);
-				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
+				this.notifServ.notif("Erreur, les notices n'ont pu être récupérées");
 			}
 		)
 	}

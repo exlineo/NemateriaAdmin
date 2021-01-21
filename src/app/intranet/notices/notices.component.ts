@@ -14,8 +14,8 @@ import { toggleLeft } from '../systeme/library/animation';
 })
 export class NoticesComponent implements OnInit {
 
-	noticeListe: NoticeModel[] = []; // Liste générale des notices à afficher / filter
-	noticeSelection: NoticeModel[] = []; // La liste des notices sélectionnées
+	noticeListe: Array<NoticeModel> = []; // Liste générale des notices à afficher / filter
+	noticeSelection: Array<NoticeModel> = []; // La liste des notices sélectionnées
 	noticeChoisie:NoticeModel; // Notice dont on affiche les informations lorsque sollicitée
 
 	noticeFiltre;
@@ -33,6 +33,7 @@ export class NoticesComponent implements OnInit {
 
 	ngOnInit() {
 		this.idNotice = -1;
+		this.noticesServ.getNotices();
 	}
 	/**
 	 * Afficher le composant avec le détail des infos sur la notice
@@ -49,7 +50,7 @@ export class NoticesComponent implements OnInit {
 	*/
 	noticeSelectionnee(idNotice): void {
 		this.idNotice = idNotice;
-		if(!this.noticesServ.noticesAll.find(n => n._id == idNotice)){
+		if(!this.noticeSelection.find(n => n._id == idNotice)){
 			this.noticeSelection.push(this.noticesServ.noticesAll.find(n => n._id == idNotice))
 		}else{
 			this.noticeSelectionRemove(idNotice);
