@@ -16,7 +16,7 @@ export class ScanService {
 	scans: any; // Les données reçues depuis le scan sur le serveur
 	listeDossiers: any; // La liste des dossiers disponibles
 	load: boolean = false; // Déclencher un loader sur la page de scan
-	docs:any;
+	docs: any;
 
 	metas: any; // Le tableau des données du scan filtrées. Any pour faire ce que l'ont veut avec
 	filtre: any; // Filtre utilisé pour filtrer les données à enregistrer dans la base
@@ -90,7 +90,7 @@ export class ScanService {
 		this.set = set; // Paramétrer le nom du set de données
 		this.set.documents = []; // Initialisation des documents du SET
 		this.set.documents = this.scans.map(s => this.filtreAPlat(s));
-		
+
 		// Enregistrer les données dans la base
 		this.enregistreSet();
 	}
@@ -124,7 +124,21 @@ export class ScanService {
 				this.setPropriete(un, obj, scan);
 			}
 		};
-		if(!obj['metadonnees']['dublincore'].date) obj['metadonnees']['dublincore'].date == Date.now();
+		// Régulation sur certaines métadonnées Dublincore pour assurer le moissonnage
+		if (!obj['metadonnees']['dublincore'].identifier) {
+			if (obj['metadonnees']['nemateria']['document'].identifiant_unique) {
+				obj['metadonnees']['dublincore'].identifier = "oai:nemateria.net/" + obj['metadonnees']['nemateria']['document'].identifiant_unique;
+			} else {
+				obj['metadonnees']['dublincore'].identifier = "oai:nemateria.net/" + Date.now();
+			}
+		};
+		if (!obj['metadonnees']['dublincore'].date) {
+			if (obj['metadonnees']['nemateria']['document'].date_creation_original) {
+				obj['metadonnees']['dublincore'].date = obj['metadonnees']['nemateria']['document'].date_creation_original;
+			} else {
+				obj['metadonnees']['dublincore'].date = Date.now();
+			}
+		}
 		return obj;
 	}
 	/**
@@ -162,7 +176,7 @@ export class ScanService {
 	cap(str) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
-	setURL(str:string):string {
+	setURL(str: string): string {
 		str = str.substr(str.indexOf(environment.DIR) + environment.DIR.length, str.length); // Récupérer la fin de l'URL du fichier
 		return environment.ADR + environment.DIR + str;
 	}
@@ -170,7 +184,7 @@ export class ScanService {
 	 * Extraire le nom du fichier
 	 * @param str chaîne à traiter pour extraire le nom du fichier
 	 */
-	setFile(str:string):string{
-		return str.substr(str.lastIndexOf("/")+1, str.length);
+	setFile(str: string): string {
+		return str.substr(str.lastIndexOf("/") + 1, str.length);
 	}
 }
