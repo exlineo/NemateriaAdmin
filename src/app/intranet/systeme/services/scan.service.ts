@@ -41,6 +41,7 @@ export class ScanService {
 		this.http.get(environment.SERV + 'scans').subscribe(
 			data => {
 				this.listeDossiers = data;
+				this.notifServ.notif("Liste des dossiers récupérée");
 			},
 			erreur => {
 				this.notifServ.notif("Nous n'avons pas la liste des dossiers");
@@ -55,6 +56,7 @@ export class ScanService {
 		this.http.get(environment.SERV + 'scans/' + dir, { params: { 'f': f } }).subscribe(
 			fichier => {
 				this.scans = fichier['data'];
+				this.notifServ.notif("Metadonnées scannées");
 			},
 			erreur => {
 				this.notifServ.notif("Les données n'ont pu être scannées");
@@ -71,6 +73,7 @@ export class ScanService {
 			fichiers => {
 				this.scans = fichiers['data'];
 				this.load = false;
+				this.notifServ.notif("Metadonnées scannées");
 			},
 			erreur => {
 				this.notifServ.notif("Erreur dans le scan des dossiers du serveur");
@@ -121,6 +124,7 @@ export class ScanService {
 				this.setPropriete(un, obj, scan);
 			}
 		};
+		if(!obj['metadonnees']['dublincore'].date) obj['metadonnees']['dublincore'].date == Date.now();
 		return obj;
 	}
 	/**

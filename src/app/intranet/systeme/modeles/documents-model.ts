@@ -1,5 +1,6 @@
 export interface DocumentModel{
     _id?:any;
+    date?:any;
     dublincore:DocDublinModel;
     gps?:DocGpsModel;
     media:DocMediaModel;
