@@ -1,2 +1,0 @@
-https://stackblitz.com/edit/angular-realworld
-
