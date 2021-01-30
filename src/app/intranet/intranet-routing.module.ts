@@ -34,7 +34,6 @@ const routes: Routes = [
 			{ path: 'set/:id', component:SetComponent },
 			{ path: 'parametres', component:ParametresComponent},
 			{ path: 'aide', loadChildren: () => import('./aide/aide.module').then(m => m.AideModule)},
-
 		]
 	},
 ];
