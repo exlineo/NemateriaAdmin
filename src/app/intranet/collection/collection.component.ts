@@ -59,7 +59,6 @@ export class CollectionComponent implements OnInit {
 	 * Méthode utilisée pour la mise à jour ou l'écriture d'une nouvelle collection
 	 */
 	ecrire() {
-		console.log(this.collection);
 		if (this.colServ.collection._id) {
 			this.colServ.majCollection();
 		} else {
@@ -78,9 +77,11 @@ export class CollectionComponent implements OnInit {
 				tmp[o] = set[o];
 			};
 		};
+		console.log(tmp);
 		tmp.series = [];
 		// Récupérer les séries dans le SET
 		set.documents.forEach(s => {
+			// console.log(s);
 			if (!tmp.series.includes(s.nemateria.serie.serie)) tmp.series.push(s.nemateria.serie.serie);
 		});
 		// Générer la collection
@@ -98,6 +99,7 @@ export class CollectionComponent implements OnInit {
 				this.colServ.notices.push({ 'metadonnees': n });
 			}
 		);
+		this.colServ.notifServ.notif('Les notices ont été intégrées dans la collection.');
 		console.log(this.colServ.notices);
 	}
 	supprimeNotice(id) {

@@ -19,7 +19,7 @@ export class CollectionService {
 	series:Array<any>; // Tableau des séries d'une collection donnée
 	notices:Array<NoticeModel>; // Tableau temporaire de notices
 
-	constructor(private http: HttpClient, private notifServ:NotificationService) {
+	constructor(private http: HttpClient, public notifServ:NotificationService) {
 		this.getCollections();
 	}
 	/**
@@ -112,10 +112,11 @@ export class CollectionService {
 		this.http.post(environment.SERV+'notices/true', this.notices).subscribe(
 			retour => {
 				console.log(retour);
+				// Attribution des ids des notices à la collection (retour de la base)
 				this.collection.notices = Object.values(retour['insertedIds']);
 				this.ajouteCollection(); // Ajouter la collection une fois que les notices sont ajoutées
 				console.log(this.collection.notices);
-				this.notifServ.notif("Les notices ont été insérées dans la base");
+				this.notifServ.notif("Les notices ont été insérées dans la base de données.");
 			},
 			erreur => {
 				console.log(erreur);

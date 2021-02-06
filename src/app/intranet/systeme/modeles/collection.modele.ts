@@ -10,7 +10,7 @@ export interface CollectionModel {
     createur: string;
     fonds?:string;
     langue?: string;
-    date?:string;
+    date?:string | number;
     groupe?: Array<string>;
     notices?:Array<string>;
     series?:Array<NemaSerieModel>;
@@ -23,9 +23,9 @@ export class Collection implements CollectionModel {
     description = '';
     type = '';
     createur = '';
+    date = Date.now();
     fonds = '';
     langue = '';
-    date = '';
     groupe = [];
     notices = [];
     series = [];

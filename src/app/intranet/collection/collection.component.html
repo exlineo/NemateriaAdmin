@@ -9,32 +9,35 @@
 
     <form>
         <section>
-            <article>
-                <label for="titre">Titre</label>
-                <input name="titre" [(ngModel)]="colServ.collection.titre" required>
+            <form #f="ngForm">
+                <article>
+                    <label for="titre">Titre</label>
+                    <input name="titre" [(ngModel)]="colServ.collection.titre" required>
 
-                <label for="alias">Alias</label>
-                <input name="alias" [(ngModel)]="colServ.collection.alias" required pattern="[a-z0-9-]+">
+                    <label for="alias">Alias</label>
+                    <input name="alias" [(ngModel)]="colServ.collection.alias" required pattern="[a-z0-9-]+">
 
-                <label for="description">Description</label>
-                <textarea mat-input name="description" [(ngModel)]="colServ.collection.description" required>
-                </textarea>
+                    <label for="description">Description</label>
+                    <textarea mat-input name="description" [(ngModel)]="colServ.collection.description" required>
+                    </textarea>
 
-                <label for="type">Type</label>
-                <select name="type" [(ngModel)]="colServ.collection.type" required>
-                    <option value="image">Images</option>
-                    <option value="multimedia">Multimédia</option>
-                </select>
+                    <label for="type">Type</label>
+                    <select name="type" [(ngModel)]="colServ.collection.type" required>
+                        <option value="images">Images</option>
+                        <option value="multimedia">Multimédia</option>
+                    </select>
 
-                <label for="createur">Créateur</label>
-                <input name="createur" [(ngModel)]="colServ.collection.createur" required>
+                    <label for="createur">Créateur</label>
+                    <input name="createur" [(ngModel)]="colServ.collection.createur" required>
 
-                <label for="fonds">Fonds</label>
-                <input name="fonds" [(ngModel)]="colServ.collection.fonds">
+                    <label for="fonds">Fonds</label>
+                    <input name="fonds" [(ngModel)]="colServ.collection.fonds">
 
-                <label for="langue">Langue</label>
-                <input name="langue" [(ngModel)]="colServ.collection.langue">
-            </article>
+                    <label for="langue">Langue</label>
+                    <input name="langue" [(ngModel)]="colServ.collection.langue">
+
+                </article>
+            </form>
             <article>
                 <h3>Séries</h3>
                 <mat-icon>add</mat-icon>
@@ -43,11 +46,10 @@
                         {{ s }}
                     </li>
                 </ul>
-
                 <hr>
                 <p>
                     <button class="invalid" (click)="fermer.emit(false)">Annuler</button>
-                    <button class="valid" (click)="ecrire()">Valider</button>
+                    <button class="valid" (click)="ecrire()" [disabled]="f.invalid">Enregistrer la collection</button>
                 </p>
             </article>
         </section>

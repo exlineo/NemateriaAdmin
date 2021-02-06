@@ -69,11 +69,4 @@ export class SetsComponent implements OnInit {
     console.log(this.page);
     this.setMiniDocs();
 	}
-  /**
-   * Créer une collection à partir du SET
-   */
-  creerCollection(){
-
-  }
-
 }
