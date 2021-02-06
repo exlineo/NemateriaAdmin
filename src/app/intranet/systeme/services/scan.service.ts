@@ -100,6 +100,7 @@ export class ScanService {
 	 * @param Le document à comparer
 	 */
 	filtreAPlat(scan) {
+		console.log(scan);
 		let obj = {};
 		// Boucle dans les métadonnées du filtre
 		for (let un in this.metas) {
@@ -125,18 +126,32 @@ export class ScanService {
 			}
 		};
 		// Régulation sur certaines métadonnées Dublincore pour assurer le moissonnage
-		if (!obj['metadonnees']['dublincore'].identifier) {
-			if (obj['metadonnees']['nemateria']['document'].identifiant_unique) {
-				obj['metadonnees']['dublincore'].identifier = "oai:nemateria.net/" + obj['metadonnees']['nemateria']['document'].identifiant_unique;
+		// if (!scan['metadonnees']['dublincore'].identifier) {
+		// 	if (scan['metadonnees']['nemateria']['document'].identifiant_unique) {
+		// 		obj['metadonnees']['dublincore'].identifier = "oai:nemateria.net/" + scan['metadonnees']['nemateria']['document'].identifiant_unique;
+		// 	} else {
+		// 		obj['metadonnees']['dublincore'].identifier = "oai:nemateria.net/" + Date.now();
+		// 	}
+		// };
+		// if (!scan['metadonnees']['dublincore'].date) {
+		// 	if (scan['metadonnees']['nemateria']['document'].date_creation_original) {
+		// 		obj['metadonnees']['dublincore'].date = scan['metadonnees']['nemateria']['document'].date_creation_original;
+		// 	} else {
+		// 		obj['metadonnees']['dublincore'].date = Date.now();
+		// 	}
+		// }
+		if (!scan['identifier']) {
+			if (scan['identifiant_unique']) {
+				obj['dublincore'].identifier = "oai:nemateria.net/" + scan['identifiant_unique'];
 			} else {
-				obj['metadonnees']['dublincore'].identifier = "oai:nemateria.net/" + Date.now();
+				obj['dublincore'].identifier = "oai:nemateria.net/" + Date.now();
 			}
 		};
-		if (!obj['metadonnees']['dublincore'].date) {
-			if (obj['metadonnees']['nemateria']['document'].date_creation_original) {
-				obj['metadonnees']['dublincore'].date = obj['metadonnees']['nemateria']['document'].date_creation_original;
+		if (!scan['date']) {
+			if (scan['date_creation_original']) {
+				obj['dublincore'].date = scan['date_creation_original'];
 			} else {
-				obj['metadonnees']['dublincore'].date = Date.now();
+				obj['dublincore'].date = Date.now();
 			}
 		}
 		return obj;
