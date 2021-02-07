@@ -9,7 +9,8 @@ export interface SetModel {
     date?:string | number;
     createur?:string;
     gestionnaire?:string;
-    documents:Array<DocumentModel>
+    documents:Array<DocumentModel>;
+    prefix:Array<string>;
 }
 export class Set implements SetModel {
     titre:string;
@@ -20,5 +21,6 @@ export class Set implements SetModel {
     date:string;
     createur:string;
     gestionnaire:string;
-    documents:[]
+    documents:[];
+    prefix = ['oai_dc', 'oai_nema'];
 }
