@@ -16,8 +16,9 @@ export class FiltreComponent implements OnInit {
 	fermer = new EventEmitter<boolean>();
 
 	meta:string;
+	prefix:string = 'oai_nema';
 
-	constructor(private filtreServ:FiltresService) { }
+	constructor(public filtreServ:FiltresService) { }
 
 	ngOnInit() {
 		this.meta="";
@@ -28,6 +29,7 @@ export class FiltreComponent implements OnInit {
 	 */
 	ecrire(){
 		console.log(this.filtre);
+		this.filtre.prefix = this.prefix.replace(' ', '').split(',')
 		if(this.filtre._id){
 			this.filtreServ.majFiltre(this.filtre);
 		}else{

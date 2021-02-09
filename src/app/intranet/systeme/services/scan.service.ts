@@ -125,21 +125,7 @@ export class ScanService {
 				this.setPropriete(un, obj, scan);
 			}
 		};
-		// Régulation sur certaines métadonnées Dublincore pour assurer le moissonnage
-		// if (!scan['metadonnees']['dublincore'].identifier) {
-		// 	if (scan['metadonnees']['nemateria']['document'].identifiant_unique) {
-		// 		obj['metadonnees']['dublincore'].identifier = "oai:nemateria.net/" + scan['metadonnees']['nemateria']['document'].identifiant_unique;
-		// 	} else {
-		// 		obj['metadonnees']['dublincore'].identifier = "oai:nemateria.net/" + Date.now();
-		// 	}
-		// };
-		// if (!scan['metadonnees']['dublincore'].date) {
-		// 	if (scan['metadonnees']['nemateria']['document'].date_creation_original) {
-		// 		obj['metadonnees']['dublincore'].date = scan['metadonnees']['nemateria']['document'].date_creation_original;
-		// 	} else {
-		// 		obj['metadonnees']['dublincore'].date = Date.now();
-		// 	}
-		// }
+		// Adapter certaines données
 		if (!scan['identifier']) {
 			if (scan['identifiant_unique']) {
 				obj['dublincore'].identifier = "oai:nemateria.net/" + scan['identifiant_unique'];

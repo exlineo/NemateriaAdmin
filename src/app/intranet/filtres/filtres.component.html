@@ -30,6 +30,9 @@
             <p>{{filtre.description}}
                 <mat-icon matTooltip="Modifier la description du filtre" *ngIf="edition">edit</mat-icon>
             </p>
+            <p>{{filtre.prefix.toString()}}
+                <mat-icon matTooltip="Modifier le prefix du filtre (ex. : oai_dc, oai_nema...)" *ngIf="edition">edit</mat-icon>
+            </p>
             <h5>Métadonnées traitées par le filtre</h5>
             <ul>
                 <li *ngFor="let meta of filtre.metadonnees | keyvalue">

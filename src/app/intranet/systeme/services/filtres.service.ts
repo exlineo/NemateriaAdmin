@@ -11,6 +11,7 @@ import { NotificationService } from 'src/app/intranet/systeme/services/notificat
 export class FiltresService {
 
 	filtres: Array<FiltreModel>;
+	prefix:Array<{alias:'', titre:''}>;
 
 	constructor(private http: HttpClient, private notifServ: NotificationService) {
 		this.filtres = [new Filtre()];
@@ -102,5 +103,20 @@ export class FiltresService {
 	 */
 	notif(msg:string){
 		this.notifServ.notif(msg);
+	}
+	/**
+	 * Récupérer les prefix OAI depuis la base
+	 */
+	getPrefix(){
+		this.http.get<Array<any>>(environment.SERV + 'prefix/').subscribe(
+			retour => {
+				this.notifServ.notif("Prefix chargés");
+				this.prefix = retour;
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Erreur dans le chargement des prefix");
+			}
+		)
 	}
 }

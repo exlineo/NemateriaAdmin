@@ -12,18 +12,20 @@
         <section>
             <form>
                 <label for="titre">Titre
-                <input name="titre" [(ngModel)]="filtre.titre" required></label>
+                <input name="titre" [(ngModel)]="filtre.titre" required placeholder="Titre du filtre"></label>
 
                 <label for="alias">Alias
-                <input name="alias" [(ngModel)]="filtre.alias" required pattern="[a-z0-9-]+"></label>
+                <input name="alias" [(ngModel)]="filtre.alias" required pattern="[a-z0-9-]+" placeholder="Sans espaces ou caractères spéciaux"></label>
 
                 <label for="createur">Créateur
-                    <input name="createur" [(ngModel)]="filtre.createur" required></label>
+                    <input name="createur" [(ngModel)]="filtre.createur" required placeholder="Qui a créé le filtre ?"></label>
 
                 <label for="description">Description</label>
-                <textarea mat-input name="description" [(ngModel)]="filtre.description" required>
+                <textarea mat-input name="description" [(ngModel)]="filtre.description" required placeholder="Quelques explications">
                 </textarea>
 
+                <label for="prefix">Prefix</label>
+                <mat-checkbox *ngFor="let p of filtreServ.prefix" [value]="p.alias">{{ p.titre }}</mat-checkbox>
             </form>
 
         </section>
