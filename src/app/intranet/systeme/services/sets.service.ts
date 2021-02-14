@@ -104,6 +104,7 @@ export class SetsService {
     this.http.get(environment.SERV + 'sets/' + f).subscribe(
       retour => {
         console.log(retour);
+        this.notifServ.notif("La liste des fonds a été obtenue");
       },
       erreur => {
         console.log(erreur);

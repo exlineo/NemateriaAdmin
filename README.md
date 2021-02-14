@@ -25,3 +25,7 @@ Les technologies utilisées pour les développements s'appuient sur des licences
 Tous nos développements sont mis à votre disposition sous licence GPL3. Le code est fourni gratuitement pour tous usages. Il est livré sans garanties. Les auteurs (exlineo) doivent être cités lors de leur utilisation.
 ## [Nemateria.eu](http://www.nemateria.eu)
 Le site Internet offre des informations génériques et des tutoriels pour l'utilisation, le paramétrage et la mise en oeuvre des différents composants du projet.
+
+## Partenaires
+Le projet a reçu le soutien financier de la région [Nouvelle Aquitaine](https://www.nouvelle-aquitaine.fr/) et du fonds de dotation Gérard Perrier.  
+[![La région Nouvelle Aquitaine a financé le projet dans la cadre de son appel à projets prototypes numériques](http://pmsybtb.cluster029.hosting.ovh.net/assets/images/logos/logo-naq.png)](https://les-aides.nouvelle-aquitaine.fr/economie-et-emploi/prototypes-numeriques)
