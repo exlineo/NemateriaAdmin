@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
-import { DocumentModel } from '../modeles/documents-model';
 import { NoticeModel } from '../modeles/notice.modele';
 
 @Injectable({

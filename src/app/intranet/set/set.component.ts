@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { SetModel } from '../systeme/modeles/set';
+import { FiltresService } from '../systeme/services/filtres.service';
 import { SetsService } from '../systeme/services/sets.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class SetComponent implements OnInit {
   @Output()
 	fermer = new EventEmitter<boolean>();
 
-  constructor(public setsServ:SetsService) { }
+  constructor(public setsServ:SetsService, public filtreServ:FiltresService) { }
 
   ngOnInit(): void {
     

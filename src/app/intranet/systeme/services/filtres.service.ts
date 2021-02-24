@@ -11,7 +11,7 @@ import { NotificationService } from 'src/app/intranet/systeme/services/notificat
 export class FiltresService {
 
 	filtres: Array<FiltreModel>;
-	prefix:Array<{alias:'', titre:''}>;
+	prefix:Array<{alias:'', titre:'',data:''}>;
 
 	constructor(private http: HttpClient, private notifServ: NotificationService) {
 		this.filtres = [new Filtre()];
@@ -32,7 +32,8 @@ export class FiltresService {
 				console.log(erreur);
 				this.notifServ.notif("Erreur dans le chargement du filtre");
 			}
-		)
+		);
+		this.getPrefix();
 	}
 
 	/**

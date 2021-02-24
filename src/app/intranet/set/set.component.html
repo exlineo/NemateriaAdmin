@@ -30,6 +30,9 @@
 
             <label for="gest">Gestionnaire</label>
             <input name="gest" [(ngModel)]="set.gestionnaire">
+
+            <label for="prefix">Prefix</label>
+            <mat-checkbox *ngFor="let p of filtreServ.prefix" [value]="p.alias" checked>{{ p.titre }}</mat-checkbox>
             <hr>
             <p>
                 <button class="invalid" (click)="fermer.emit(false)">Annuler</button>

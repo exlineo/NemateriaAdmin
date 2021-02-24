@@ -7,6 +7,7 @@ import { Set, SetModel } from '../modeles/set';
 import { FiltreModel } from '../modeles/filtre.modele';
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
 import { UtilsService } from '../library/utils.service';
+import { FiltresService } from './filtres.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -22,7 +23,7 @@ export class ScanService {
 	filtre: any; // Filtre utilisé pour filtrer les données à enregistrer dans la base
 	set: SetModel; // Set à enregistrer dans la base de données
 
-	constructor(private http: HttpClient, private notifServ: NotificationService, private utils: UtilsService) {
+	constructor(private http: HttpClient, private notifServ: NotificationService, private utils: UtilsService, private filtreServ:FiltresService) {
 		this.init();
 		this.getListeDossiers();
 	}
@@ -107,12 +108,10 @@ export class ScanService {
 			// Récupérer le premier niveau d'objet
 			if (typeof this.metas[un] == "object" && !Array.isArray(this.metas[un])) {
 				// Définir l'objet trouvé dans le temporaire
-				// obj[un] = Object.create({});
 				obj[un] = {};
 				for (let deux in this.metas[un] as Object) {
 					if (typeof this.metas[un][deux] == "object" && !Array.isArray(this.metas[un][deux])) {
 						//Définir l'objet trouvé dans l'objet temporaire
-						// obj[un][deux] = Object.create({});
 						obj[un][deux] = {};
 						for (let trois in this.metas[un][deux] as Object) {
 							this.setPropriete(trois, obj[un][deux], scan);
@@ -126,6 +125,7 @@ export class ScanService {
 			}
 		};
 		// Adapter certaines données
+		// L'identifier
 		if (!scan['identifier']) {
 			if (scan['identifiant_unique']) {
 				obj['dublincore'].identifier = "oai:nemateria.net/" + scan['identifiant_unique'];
@@ -133,6 +133,7 @@ export class ScanService {
 				obj['dublincore'].identifier = "oai:nemateria.net/" + Date.now();
 			}
 		};
+		// La date
 		if (!scan['date']) {
 			if (scan['date_creation_original']) {
 				obj['dublincore'].date = scan['date_creation_original'];
@@ -140,6 +141,9 @@ export class ScanService {
 				obj['dublincore'].date = Date.now();
 			}
 		}
+		// Les prefix : oai au minimum. Les données Nemateria seront traitées par des outils plus riches
+		this.set.prefix ? obj['prefix'] = this.set.prefix : ['oai_dc'];
+		
 		return obj;
 	}
 	/**

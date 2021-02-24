@@ -18,7 +18,7 @@ export class SetsComponent implements OnInit {
 	delete:boolean = false;
   edit:boolean = false;
   page: any;
-
+  
   constructor(public setsServ:SetsService, public utils:UtilsService) { }
 
   ngOnInit(): void {
