@@ -8,6 +8,7 @@ import { FiltreModel } from '../modeles/filtre.modele';
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
 import { UtilsService } from '../library/utils.service';
 import { FiltresService } from './filtres.service';
+import { SetsService } from './sets.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -16,6 +17,7 @@ export class ScanService {
 
 	scans: any; // Les données reçues depuis le scan sur le serveur
 	listeDossiers: any; // La liste des dossiers disponibles
+	dir:string = ''; // Dossier scanné en cours
 	load: boolean = false; // Déclencher un loader sur la page de scan
 	docs: any;
 
@@ -23,7 +25,7 @@ export class ScanService {
 	filtre: any; // Filtre utilisé pour filtrer les données à enregistrer dans la base
 	set: SetModel; // Set à enregistrer dans la base de données
 
-	constructor(private http: HttpClient, private notifServ: NotificationService, private utils: UtilsService, private filtreServ:FiltresService) {
+	constructor(private http: HttpClient, private notifServ: NotificationService, private utils: UtilsService, private filtreServ:FiltresService, private setServ:SetsService) {
 		this.init();
 		this.getListeDossiers();
 	}
@@ -34,6 +36,7 @@ export class ScanService {
 		this.filtre = [];
 		this.set = new Set();
 		this.metas = null;
+		this.dir = '';
 	}
 	/**
 	 * Liste les dossiers scannables
@@ -70,6 +73,7 @@ export class ScanService {
 	getDir(dir: string) {
 		this.scans = null;
 		this.load = true;
+		this.dir = dir;
 		this.http.get<boolean>(environment.SERV + 'scans/' + dir).subscribe(
 			fichiers => {
 				this.scans = fichiers['data'];
@@ -101,7 +105,6 @@ export class ScanService {
 	 * @param Le document à comparer
 	 */
 	filtreAPlat(scan) {
-		console.log(scan);
 		let obj = {};
 		// Boucle dans les métadonnées du filtre
 		for (let un in this.metas) {
@@ -127,23 +130,18 @@ export class ScanService {
 		// Adapter certaines données
 		// L'identifier
 		if (!scan['identifier']) {
-			if (scan['identifiant_unique']) {
-				obj['dublincore'].identifier = "oai:nemateria.net/" + scan['identifiant_unique'];
-			} else {
-				obj['dublincore'].identifier = "oai:nemateria.net/" + Date.now();
-			}
+			scan['identifiant_unique'] ? obj['dublincore'].identifier = "oai:nemateria.net/" + scan['identifiant_unique'] : obj['dublincore'].identifier = "oai:nemateria.net/" + Date.now();
 		};
+
 		// La date
 		if (!scan['date']) {
-			if (scan['date_creation_original']) {
-				obj['dublincore'].date = scan['date_creation_original'];
-			} else {
-				obj['dublincore'].date = Date.now();
-			}
+			scan['date_creation_original'] ? obj['dublincore'].date = scan['date_creation_original'] : obj['dublincore'].date = Date.now();
 		}
+		// Ajout du format du document pour en contrôler le type
+		obj['dublincore'].format = this.utils.setFormat(scan['SourceFile'].slice(scan['SourceFile'].lastIndexOf('.')+1, scan['SourceFile'].length));
+		
 		// Les prefix : oai au minimum. Les données Nemateria seront traitées par des outils plus riches
 		this.set.prefix ? obj['prefix'] = this.set.prefix : ['oai_dc'];
-		
 		return obj;
 	}
 	/**
@@ -156,6 +154,8 @@ export class ScanService {
 		let tmp = this.cap(prop);
 		// Gérer les cas particuliers
 		if (prop.toLowerCase() === 'url') scan[tmp] = this.setURL(scan['SourceFile']);
+		if (prop.toLowerCase() === 'coverage') scan[tmp] = this.setURL(scan[tmp]);
+
 		if (prop === 'file') scan[tmp] = this.setFile(scan['SourceFile']);
 		// Attribuer une nouvelle valeur
 		// if (scan.hasOwnProperty(tmp)) Object.defineProperty(obj, prop, { value: scan[tmp] });
@@ -167,6 +167,7 @@ export class ScanService {
 	enregistreSet() {
 		this.http.post<SetModel>(environment.SERV + 'sets/', this.set).subscribe(
 			retour => {
+				this.setServ.getSets(); // Mettre à jour les sets
 				this.notifServ.notif("SET enregistré");
 			},
 			erreur => {
@@ -181,9 +182,15 @@ export class ScanService {
 	cap(str) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
+	/**
+	 * Ajouter l'adresse au fichier pour lui donner
+	 * @param {string} str URL à convertir
+	 */
 	setURL(str: string): string {
-		str = str.substr(str.indexOf(environment.DIR) + environment.DIR.length, str.length); // Récupérer la fin de l'URL du fichier
-		return environment.ADR + environment.DIR + str;
+		if(str.indexOf(environment.DIR) != -1){
+			str = str.slice(str.lastIndexOf('/') +1, str.length); // Récupérer la fin de l'URL du fichier
+		}
+		return environment.ADR + environment.DIR + this.dir + '/' + str;
 	}
 	/**
 	 * Extraire le nom du fichier

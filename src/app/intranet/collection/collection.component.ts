@@ -82,7 +82,7 @@ export class CollectionComponent implements OnInit {
 		// Récupérer les séries dans le SET
 		set.documents.forEach(s => {
 			// console.log(s);
-			if (!tmp.series.includes(s.nemateria.serie.serie)) tmp.series.push(s.nemateria.serie.serie);
+			if (s.nemateria.serie && !tmp.series.includes(s.nemateria.serie.serie)) tmp.series.push(s.nemateria.serie.serie);
 		});
 		// Générer la collection
 		return tmp;

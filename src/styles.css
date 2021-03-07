@@ -414,6 +414,16 @@ textarea {
     min-height: 250px;
     cursor: pointer;
     box-sizing: border-box;
+    position: relative;
+}
+
+.notice video,
+.notice audio {
+    position: absolute;
+    /* width: 100%; */
+    height: 100%;
+    object-fit: cover;
+    z-index: 10;
 }
 
 
@@ -440,13 +450,21 @@ textarea {
 }
 
 .notice>div:nth-child(1)>div:nth-child(1) {
+    transition: all .4s ease;
+    opacity: 0;
+    position: absolute;
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.notice>div:nth-child(1)>div:nth-child(1)>div {
     margin: auto;
     width: auto;
     height: auto;
     background: rgba(0, 0, 0, .8);
-    transition: all .4s ease;
     padding: 10px;
-    opacity: 0;
     border-radius: 10px;
     display: flex;
     flex-flow: row nowrap;
@@ -468,6 +486,7 @@ textarea {
     width: 100%;
     margin-top: -80px;
     padding-left: 20px;
+    z-index: 20;
 }
 
 .notice div:nth-child(2) h3,

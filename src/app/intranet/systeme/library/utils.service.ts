@@ -41,4 +41,40 @@ export class UtilsService {
     if(typeof c !== 'object') return true;
     return false;
   }
+  /**
+   * Extension à étudier pour renvoyer un format
+   */
+  setFormat(ext:string):string | boolean{
+    console.log(ext);
+    switch(ext){
+      case 'mp3':
+      case 'oga':
+      case 'ogg':
+      case 'aac':
+        return 'audio/'+ext;
+        break;
+      case 'wav':
+        return 'audio/x-wav';
+        break;
+      case 'mp4':
+      case 'webm':
+      case 'ogv':
+      case 'vba':
+        return 'video/'+ext;
+        break;
+      case 'rtf':
+      case 'pdf':
+        return 'application/'+ext;
+        break;
+      case 'jpg':
+      case 'jpeg':
+      case 'gif':
+      case 'png':
+      case 'webp':
+        return 'image/'+ext;
+        break;
+      default:
+        return false;
+      }
+  }
 }

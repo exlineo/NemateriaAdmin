@@ -29,6 +29,7 @@ export class CollectionService {
 		this.http.get<Array<CollectionModel>>(environment.SERV+'collections').subscribe(
 			data => {
 				this.collections = data;
+				this.notifServ.notif('Collections récupérées');
 			}
 		)
 	}
@@ -41,6 +42,7 @@ export class CollectionService {
 		for(let c of this.collections){
 			if(c._id == id){
 				this.collection = c;
+				this.notifServ.notif('Collection récupérée');
 				// return c;
 			}
 		}
@@ -52,7 +54,6 @@ export class CollectionService {
 		this.http.put(environment.SERV+'collections/', this.collection).subscribe(
 			retour => {
 				this.notifServ.notif("La collection a été mise à jour");
-
 			},
 			erreur => {
 				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
@@ -79,7 +80,6 @@ export class CollectionService {
 	supprCollec(id){
 		this.http.delete(environment.SERV+'collections/'+id).subscribe(
 			retour => {
-				console.log(retour);
 				this.notifServ.notif("Collection supprimée");
 				this.collections.splice(this.collections.findIndex(c => c._id == id), 1);
 			},
@@ -111,11 +111,9 @@ export class CollectionService {
 	ajouteNoticeAvantCollection(){
 		this.http.post(environment.SERV+'notices/true', this.notices).subscribe(
 			retour => {
-				console.log(retour);
 				// Attribution des ids des notices à la collection (retour de la base)
 				this.collection.notices = Object.values(retour['insertedIds']);
 				this.ajouteCollection(); // Ajouter la collection une fois que les notices sont ajoutées
-				console.log(this.collection.notices);
 				this.notifServ.notif("Les notices ont été insérées dans la base de données.");
 			},
 			erreur => {

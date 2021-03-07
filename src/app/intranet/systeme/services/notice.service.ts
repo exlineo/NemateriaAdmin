@@ -56,6 +56,7 @@ export class NoticeService {
 				} else {
 					this.noticesCollec = data;	
 				}
+				console.log(this.noticesCollec);
 				this.getSeries();
 				this.notifServ.notif("Les notices ont été récupérées");
 			},

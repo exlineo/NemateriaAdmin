@@ -4,6 +4,7 @@ import { CollectionModel } from '../systeme/modeles/collection.modele';
 import { CollectionService } from '../systeme/services/collection.service';
 import { NoticeService } from '../systeme/services/notice.service';
 import { UtilsService } from '../systeme/library/utils.service';
+import { NoticeModel } from '../systeme/modeles/notice.modele';
 
 @Component({
 	selector: 'app-collections',
@@ -49,6 +50,22 @@ export class CollectionsComponent implements OnInit {
 		this.afficheEnlever = true;
 	}
 	/**
+	 * Afficher l'arrière plan d'une notice
+	 * @param n Notice dont il faut gérer l'affichage d'arrière plan
+	 */
+	setNoticeBg(n:NoticeModel){
+		const type = n.metadonnees.dublincore.format;
+		let bg = '';
+		if(type.indexOf('video') != -1 || type.indexOf('audio') != -1){
+			n.metadonnees.dublincore.coverage ? bg = n.metadonnees.dublincore.coverage : bg = 'assets/img/pictos/media.jpg';
+		}else if(type.indexOf('application') != -1){
+			bg = 'assets/img/pictos/document.jpg';
+		}else{
+			bg = n.metadonnees.media.url;
+		}
+		return `url("${bg}")`;
+	}
+	/**
 	 * Enlever toutes les fenêtres pop-up et initialiser la collection et les notices
 	 */
 	masque(){
@@ -56,5 +73,19 @@ export class CollectionsComponent implements OnInit {
 		this.afficheEnlever = false;
 		this.idNotice = null;
 		this.idCollection = null;
+	}
+	/**
+	 * Jouer une vidéo ou un audio
+	 * @param ev Evéneùent déclenché
+	 */
+	play(ev){
+		ev.currentTarget.play();
+	}
+	/**
+	 * Mettre en pause un média
+	 * @param ev Evéneùent déclenché
+	 */
+	pause(ev){
+		ev.currentTarget.pause();
 	}
 }

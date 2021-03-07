@@ -8,7 +8,7 @@
         <ul>
 
             <li *ngFor="let collection of colServ.collections; let i=index" (click)="collectionOnClick(collection._id) ">
-                {{collection.titre}} ({{ collection.alias }})
+                {{collection.titre}} ({{ collection.fonds }})
                 <!-- <mat-icon matTooltip="Afficher les séries" *ngIf="collection.series" (click)="toggleSeries('series_'+collection._id)">keyboard_arrow_down</mat-icon> -->
             </li>
         </ul>
@@ -23,10 +23,11 @@
         </header>
         <article *ngIf="colServ.collection">
             <ul>
-                <li *ngFor="let n of colServ.collection | keyvalue">
-
-                    <strong>{{ n.key }}</strong> : {{ n.value }}
-                </li>
+                <div *ngFor="let n of colServ.collection | keyvalue">
+                    <li *ngIf="n.key != 'notices'">
+                        <strong>{{ n.key }}</strong> : {{ n.value }}
+                    </li>
+                </div>
             </ul>
         </article>
         <article *ngIf="noticesServ.seriesCollec.length > 0">
@@ -44,11 +45,19 @@
         <section class="selection ">
             <ul class="notice-liste">
                 <li *ngFor="let n of noticesServ.noticesCollec; let i=index" class="notice">
-                    <div [style.backgroundImage]="'url('+ n.metadonnees['media'].url +')'">
+                    <div [style.backgroundImage]="setNoticeBg(n)">
+                        <video *ngIf="n.metadonnees['dublincore']['format'].indexOf('video')!=-1" [poster]="n.metadonnees['dublincore']['coverage']" (mouseenter)="play($event)" (mouseleave)="pause($event)">
+                            <source [src]="n.metadonnees['media'].url" [type]="n.metadonnees['dublincore']['format']">
+                        </video>
+                        <audio *ngIf="n.metadonnees['dublincore']['format'].indexOf('audio')!=-1" (mouseenter)="play(this)" (mouseleave)="pause(this)">
+                            <source [src]="n.metadonnees['media'].url" [type]="n.metadonnees['dublincore']['format']">
+                            </audio>
                         <div>
-                            <mat-icon (click)="idNotice = n._id" matTooltip="Voir la fiche de la notice">
-                                visibility</mat-icon>
-                            <mat-icon (click)="noticeOnEnlever(n._id)" matTooltip="Enlever cette notice de la collection">remove_circle</mat-icon>
+                            <div>
+                                <mat-icon (click)="idNotice = n._id" matTooltip="Voir la fiche de la notice">
+                                    visibility</mat-icon>
+                                <mat-icon (click)="noticeOnEnlever(n._id)" matTooltip="Enlever cette notice de la collection">remove_circle</mat-icon>
+                            </div>
                         </div>
                     </div>
                     <div>

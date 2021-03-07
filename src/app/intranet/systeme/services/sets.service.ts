@@ -6,6 +6,7 @@ import { CollectionModel } from '../modeles/collection.modele';
 import { environment } from 'src/environments/environment';
 import { SetModel } from '../modeles/set';
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
+import { CollectionService } from './collection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,6 @@ export class SetsService {
   getSets(): void {
     this.http.get<Array<SetModel>>(environment.SERV + 'sets').subscribe(
       data => {
-        console.log("SETS", data);
         this.sets = data;
       },
       erreur => {
@@ -43,7 +43,6 @@ export class SetsService {
    */
   getSet(id: number | string): void {
     for (let s of this.sets) {
-      console.log(s);
       if (s._id == id) {
         this.set = s;
       }
@@ -56,7 +55,6 @@ export class SetsService {
   supprSet(id:any) {
     this.http.delete(environment.SERV + 'sets/' + id).subscribe(
       retour => {
-        console.log(retour);
         this.sets.splice(this.sets.findIndex(s => s._id == id), 1);
       },
       erreur => {
@@ -71,7 +69,6 @@ export class SetsService {
   majSet(s: SetModel) {
     this.http.put(environment.SERV + 'sets/'+s._id, s).subscribe(
       retour => {
-        console.log(retour);
         this.notifServ.notif("Le SET a été mis à jour");
       },
       erreur => {
@@ -84,7 +81,6 @@ export class SetsService {
    * Ajouter une collection
    */
   ajouteSet(s: SetModel) {
-    console.log(this.set);
     this.http.post(environment.SERV + 'sets', s).subscribe(
       retour => {
         console.log(retour);
