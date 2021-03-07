@@ -17,9 +17,9 @@
                 <label for="type">Types de fichiers   
                 <select name="type" [(ngModel)]="filtre.type" placeholder="Type de fichiers">
                         <option value="image">Images</option>
-                        <option value="mpg">Vidéos</option>
-                        <option value="mp3">Audio</option>
-                        <option value="pdf">Textes</option>
+                        <option value="video">Vidéos</option>
+                        <option value="audio">Audio</option>
+                        <option value="application">Textes</option>
                     </select></label>
             </form>
         </header>
@@ -27,15 +27,22 @@
             <li *ngFor="let n of (this.noticesServ.noticesAll | filtreNotices:filtre)" class="notice">
                 <!-- <a (click)="noticeSelectionnee(notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée"></a> -->
 
-                <div [style.backgroundImage]="'url('+ n.metadonnees['media'].url +')'" [class.choix]="n.selected">
-                    <!-- <img [src]="notice.dossier+'/'+notice.fichier" [alt]="notice.description"> -->
-                    <div (click)="fake()">
-                        <mat-icon (click)="noticeOnAffiche(n._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
-                        <mat-icon (click)="noticeSelectionnee(n._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
-                        <mat-icon (click)="noticeOnInfo(n._id)" matTooltip="Informations rapides sur la notice">info</mat-icon>
-                        <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
+                <div [style.backgroundImage]="utils.setNoticeBg(n)" [class.choix]="n.selected">
+                    <video *ngIf="n.metadonnees['dublincore']['format'].indexOf('video')!=-1" [poster]="n.metadonnees['dublincore']['coverage']">
+                        <source [src]="n.metadonnees['media'].url" [type]="n.metadonnees['dublincore']['format']">
+                    </video>
+                    <audio *ngIf="n.metadonnees['dublincore']['format'].indexOf('audio')!=-1">
+                        <source [src]="n.metadonnees['media'].url" [type]="n.metadonnees['dublincore']['format']">
+                        </audio>
+                    <div (mouseenter)="utils.play($event)" (mouseleave)="utils.pause($event)" (click)="fake()">
+                        <div>
+                            <mat-icon (click)="noticeOnAffiche(n._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
+                            <mat-icon (click)="noticeSelectionnee(n._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
+                            <mat-icon (click)="noticeOnInfo(n._id)" matTooltip="Informations rapides sur la notice">info</mat-icon>
+                            <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
+                        </div>
                     </div>
-                    <div (click)="noticeSelectionnee(n._id)"></div>
+                    <!-- <div (click)="noticeSelectionnee(n._id)"></div> -->
 
                 </div>
                 <div>

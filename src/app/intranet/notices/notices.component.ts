@@ -1,11 +1,10 @@
 import { Component, OnInit,  EventEmitter, Output  } from '@angular/core';
 
-import { CONST } from '../systeme/const';
 import { NoticeService } from "../systeme/services/notice.service";
 import { NoticeModel } from "../systeme/modeles/notice.modele";
-import { FiltreNoticesPipe } from "../systeme/pipes/filtre-notices.pipe";
-import { useAnimation, transition, trigger, style, animate, state } from '@angular/animations';
-import { toggleLeft } from '../systeme/library/animation';
+import { UtilsService } from '../systeme/library/utils.service';
+import { FiltreModel } from '../systeme/modeles/filtre.modele';
+import { FiltrePipeModel, FiltreNotices } from '../systeme/modeles/pipes.modele';
 
 @Component({
 	selector: 'app-notices',
@@ -18,22 +17,23 @@ export class NoticesComponent implements OnInit {
 	noticeSelection: Array<NoticeModel> = []; // La liste des notices sélectionnées
 	noticeChoisie:NoticeModel; // Notice dont on affiche les informations lorsque sollicitée
 
-	noticeFiltre;
+	noticeFiltre; // Tableau des notices filtrées (?)
 
 	idNotice:number | string;
 	idCollection:number | string;
 
 	noticeAffiche: boolean = false; // Affichers les infos rapides d'une notice
-	filtre: any = {libre:'', dateDebut:'', dateFin:'', type:''};
+	filtre:FiltrePipeModel;
 
 	afficheDetailNotice:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
 	afficheDetailCollec:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
 
-	constructor(public noticesServ: NoticeService) { }
+	constructor(public noticesServ: NoticeService, public utils:UtilsService) { }
 
 	ngOnInit() {
 		this.idNotice = -1;
 		this.noticesServ.getNotices();
+		this.filtre = new FiltreNotices();
 	}
 	/**
 	 * Afficher le composant avec le détail des infos sur la notice
@@ -51,7 +51,12 @@ export class NoticesComponent implements OnInit {
 	noticeSelectionnee(idNotice): void {
 		this.idNotice = idNotice;
 		if(!this.noticeSelection.find(n => n._id == idNotice)){
-			this.noticeSelection.push(this.noticesServ.noticesAll.find(n => n._id == idNotice))
+			this.noticeSelection.push(this.noticesServ.noticesAll.find(n => {
+				if(n._id == idNotice){
+					n.selected = true;
+					return n;
+				}
+				}));
 		}else{
 			this.noticeSelectionRemove(idNotice);
 		}

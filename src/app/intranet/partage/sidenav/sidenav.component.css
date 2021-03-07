@@ -49,7 +49,8 @@ nav li mat-icon {
 
 header.logo {
     width: 100%;
-    margin: 15px 0 70px;
+    margin: 15px 0;
+    min-height: 10vh;
 }
 
 header.logo:hover {
@@ -59,14 +60,13 @@ header.logo:hover {
 .logo {
     display: flex;
     width: 100%;
-    min-width: 100px;
-    text-align: center;
+    /* text-align: center; */
     font-size: 8px;
-    font-family: 'Raleway', Arial, sans-serif;
+    /* font-family: 'Raleway', Arial, sans-serif; */
     color: #FFD600;
-    text-shadow: 0 0px 3px rgba(0, 0, 0, .5);
-    transition: text-shadow .3s ease;
-    height: 75px;
+    /* text-shadow: 0 0px 3px rgba(0, 0, 0, .5); */
+    /* transition: text-shadow .3s ease; */
+    /* height: 75px; */
 }
 
 .logo * {
@@ -74,8 +74,13 @@ header.logo:hover {
     box-sizing: padding-box;
 }
 
+.logo img {
+    width: 100%;
+}
+
 .logo a {
     color: #FFD600;
+    margin: auto;
 }
 
 .logo>div:nth-child(2) {

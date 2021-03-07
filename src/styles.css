@@ -437,29 +437,34 @@ textarea {
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
+    position: relative;
 }
 
 .notice:hover>div:nth-child(1) {
     transform: scale(1.1);
 }
 
-.notice>div:nth-child(1)>div:nth-child(2) {
-    position: absolute;
-    /* width: inherit;
-    height: inherit; */
-}
 
-.notice>div:nth-child(1)>div:nth-child(1) {
+/* .notice>div:nth-child(1)>div:nth-child(2) {
+    position: absolute;
+
+
+}
+*/
+
+.notice>div:nth-child(1)>div:nth-child(1),
+.notice>div:nth-child(1)>div:nth-child(2) {
     transition: all .4s ease;
     opacity: 0;
     position: absolute;
-    z-index: 15;
+    z-index: 25;
     width: 100%;
     height: 100%;
     display: flex;
 }
 
-.notice>div:nth-child(1)>div:nth-child(1)>div {
+.notice>div:nth-child(1)>div:nth-child(1)>div,
+.notice>div:nth-child(1)>div:nth-child(2)>div {
     margin: auto;
     width: auto;
     height: auto;
@@ -470,19 +475,20 @@ textarea {
     flex-flow: row nowrap;
 }
 
-.notice:hover>div:nth-child(1)>div:nth-child(1) {
+.notice:hover>div:nth-child(1)>div:nth-child(1),
+.notice:hover>div:nth-child(1)>div:nth-child(2) {
     opacity: 1;
 }
 
-.notice>div:nth-child(1)>div:nth-child(1) mat-icon {
+.notice div>mat-icon {
     color: #FFF;
 }
 
-.notice div:nth-child(1) div:nth-child(1) mat-icon:hover {
+.notice>div:nth-child(1) div:nth-child(1) mat-icon:hover {
     color: rgba(255, 255, 255, .7);
 }
 
-.notice div:nth-child(2) {
+.notice>div:nth-child(2) {
     width: 100%;
     margin-top: -80px;
     padding-left: 20px;
@@ -494,7 +500,7 @@ textarea {
     margin: 0;
 }
 
-.notice div:nth-child(2)>div {
+.notice>div:nth-child(2)>div {
     float: right;
 }
 

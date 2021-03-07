@@ -45,14 +45,14 @@
         <section class="selection ">
             <ul class="notice-liste">
                 <li *ngFor="let n of noticesServ.noticesCollec; let i=index" class="notice">
-                    <div [style.backgroundImage]="setNoticeBg(n)">
-                        <video *ngIf="n.metadonnees['dublincore']['format'].indexOf('video')!=-1" [poster]="n.metadonnees['dublincore']['coverage']" (mouseenter)="play($event)" (mouseleave)="pause($event)">
+                    <div [style.backgroundImage]="utils.setNoticeBg(n)">
+                        <video *ngIf="n.metadonnees['dublincore']['format'].indexOf('video')!=-1" [poster]="n.metadonnees['dublincore']['coverage']">
                             <source [src]="n.metadonnees['media'].url" [type]="n.metadonnees['dublincore']['format']">
                         </video>
-                        <audio *ngIf="n.metadonnees['dublincore']['format'].indexOf('audio')!=-1" (mouseenter)="play(this)" (mouseleave)="pause(this)">
+                        <audio *ngIf="n.metadonnees['dublincore']['format'].indexOf('audio')!=-1">
                             <source [src]="n.metadonnees['media'].url" [type]="n.metadonnees['dublincore']['format']">
                             </audio>
-                        <div>
+                        <div (mouseenter)="utils.play($event)" (mouseleave)="utils.pause($event)">
                             <div>
                                 <mat-icon (click)="idNotice = n._id" matTooltip="Voir la fiche de la notice">
                                     visibility</mat-icon>

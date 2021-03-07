@@ -8,7 +8,6 @@ export interface FiltreModel {
     date?: string;
     metadonnees?:Array<string>;
 }
-
 export class Filtre implements FiltreModel {
     titre = "";
     alias = "";

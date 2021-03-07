@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NoticeModel } from '../modeles/notice.modele';
 @Injectable({
   providedIn: 'root'
 })
@@ -77,4 +78,40 @@ export class UtilsService {
         return false;
       }
   }
+  /**
+	 * Afficher l'arrière plan d'une notice
+	 * @param n Notice dont il faut gérer l'affichage d'arrière plan
+	 */
+	setNoticeBg(n:NoticeModel){
+		const type = n.metadonnees.dublincore.format;
+		let bg = '';
+		if(type.indexOf('video') != -1 || type.indexOf('audio') != -1){
+			n.metadonnees.dublincore.coverage ? bg = n.metadonnees.dublincore.coverage : bg = 'assets/img/pictos/media.jpg';
+		}else if(type.indexOf('application') != -1){
+			bg = 'assets/img/pictos/document.jpg';
+		}else{
+			bg = n.metadonnees.media.url;
+		}
+		return `url("${bg}")`;
+	}
+	/**
+	 * Jouer une vidéo ou un audio
+	 * @param ev Evéneùent déclenché
+	 */
+	play(ev){
+    if(ev.currentTarget.previousElementSibling){
+      let el = ev.currentTarget.previousElementSibling;
+      if( el.tagName.indexOf('VIDEO') != -1 || el.tagName.indexOf('AUDIO') != -1 ) el.play();
+    }
+	}
+	/**
+	 * Mettre en pause un média
+	 * @param ev Evéneùent déclenché
+	 */
+	pause(ev){
+    if(ev.currentTarget.previousElementSibling){
+	  	let el = ev.currentTarget.previousElementSibling;
+		  if( el.tagName.indexOf('VIDEO') != -1 || el.tagName.indexOf('AUDIO') != -1 ) el.pause();
+    }
+	}
 }
