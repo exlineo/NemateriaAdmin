@@ -241,7 +241,8 @@ section.demi:nth-child(2) {
     overflow-y: auto;
 }
 
-video {
+
+/* video {
     position: fixed;
     right: 0;
     top: 0;
@@ -250,7 +251,7 @@ video {
     min-height: 100%;
     width: auto;
     height: auto;
-}
+} */
 
 
 /*
@@ -923,6 +924,34 @@ mat-icon {
 
 .ferme {
     display: none;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: yellow;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: yellowgreen;
 }
 
 

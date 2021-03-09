@@ -6,13 +6,13 @@
             <h2>Filtrer les notices</h2>
             <form>
                 <label for="libre">Filtre libre
-                <input name="libre" placeholder="Filtre libre" [(ngModel)]="this.filtre.libre"></label>
+                <input name="libre" placeholder="Filtre libre" [(ngModel)]="filtre.libre"></label>
 
                 <label for="dateDebut">Date de création (début)   
-                <input name="dateDebut" type="date" placeholder="A partir de..." [(ngModel)]="this.filtre.dateDebut"></label>
+                <input name="dateDebut" type="date" placeholder="A partir de..." [(ngModel)]="filtre.dateDebut"></label>
 
                 <label for="dateFin">Date de création (fin)
-                <input name="dateFin" type="date" placeholder="... jusqu'à" [(ngModel)]="this.filtre.dateFin"></label>
+                <input name="dateFin" type="date" placeholder="... jusqu'à" [(ngModel)]="filtre.dateFin"></label>
 
                 <label for="type">Types de fichiers   
                 <select name="type" [(ngModel)]="filtre.type" placeholder="Type de fichiers">
@@ -39,7 +39,7 @@
                             <mat-icon (click)="noticeOnAffiche(n._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
                             <mat-icon (click)="noticeSelectionnee(n._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
                             <mat-icon (click)="noticeOnInfo(n._id)" matTooltip="Informations rapides sur la notice">info</mat-icon>
-                            <mat-icon matTooltip="Supprimer la notice">remove_circle</mat-icon>
+                            <mat-icon matTooltip="Supprimer la notice" (click)="noticeSelectionRemove(n._id)">remove_circle</mat-icon>
                         </div>
                     </div>
                     <!-- <div (click)="noticeSelectionnee(n._id)"></div> -->
@@ -85,9 +85,11 @@
             <h2>Métadonnées d’une notice sélectionnée</h2>
             <article *ngIf="this.noticeAffiche">
                 <h3>{{ noticeChoisie.metadonnees['dublincore'].title}}</h3>
-                <p>
-                    {{ noticeChoisie['dublincore'].description }}<br> {{ noticeChoisie['media'].file }} <br> ({{ noticeChoisie['media'].url }})
-                </p>
+                <ul>
+                    <li>{{ noticeChoisie.metadonnees['dublincore'].description }}</li>
+                    <li>{{ noticeChoisie.metadonnees['media'].file }}</li>
+                    <li>{{ noticeChoisie.metadonnees['media'].url }}</li>
+                </ul>
             </article>
         </section>
     </aside>

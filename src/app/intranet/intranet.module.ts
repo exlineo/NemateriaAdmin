@@ -52,7 +52,16 @@ import { ObjPipe } from './systeme/pipes/obj.pipe';
 		FormsModule,
 		ReactiveFormsModule
 	],
-	providers: [NoticeService, CollectionService, UtilsService, FiltresService, MappagesService, NotificationService, ScanService],
+	providers: [
+		NoticeService,
+		CollectionService,
+		UtilsService,
+		FiltresService,
+		MappagesService,
+		NotificationService,
+		ScanService,
+		FiltreNoticesPipe
+	],
 	declarations: [
 		HeaderComponent,
 		SidenavComponent,

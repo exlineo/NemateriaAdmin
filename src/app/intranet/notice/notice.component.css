@@ -8,9 +8,21 @@ section article {
     width: 100%;
 }
 
-section header{
-    display:flex;
+section header {
+    display: flex;
 }
-section header > * {
-    margin:auto;
+
+section header>* {
+    margin: auto;
+}
+
+h1 {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+video,
+audio {
+    max-width: 100%;
 }

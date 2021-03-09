@@ -1,31 +1,34 @@
 <section>
     <mat-icon (click)="fermer.emit(false)">close</mat-icon>
     <header>
+        <h1>{{ noticeServ.notice.metadonnees['dublincore'].title }}</h1>
         <!-- Afficher une image -->
-        <p>
+        <p *ngIf="noticeServ.notice.metadonnees['dublincore'].format.indexOf('image') != -1">
             <img [src]="noticeServ.notice.metadonnees['media'].url">
         </p>
-        <!-- Afficher une vidéo MP4 -->
-        <p *ngIf="noticeServ.notice.metadonnees['media'].Format.indexOf('mpg4') > -1">
+        <p *ngIf="noticeServ.notice.metadonnees['dublincore'].format.indexOf('video') != -1" class="media">
             <video controls>
-                <source [src]="noticeServ.notice.metadonnees['media'].url" type="video/mp4">
+                <source [src]="noticeServ.notice.metadonnees['media'].url" [type]="noticeServ.notice.metadonnees['dublincore'].format">
             </video>
         </p>
-        <!-- Afficher une vidéo WEBM -->
-        <p *ngIf="noticeServ.notice.metadonnees['media'].Format.indexOf('webm') > -1">
-            <video controls>
-                <source [src]="noticeServ.notice.metadonnees['media'].url" type="video/webm">
-            </video>
+
+        <p *ngIf="noticeServ.notice.metadonnees['dublincore'].format.indexOf('audio') != -1" class="media">
+            <source [src]="noticeServ.notice.metadonnees['media'].url" [type]="noticeServ.notice.metadonnees['dublincore'].format">
         </p>
-        <!-- Afficher un audio MP3 -->
-        <p *ngIf="noticeServ.notice.metadonnees['media'].Format.indexOf('mp3') > -1">
-            <audio controls>
-                <source [src]="noticeServ.notice.metadonnees['media'].url" type="audio/mpeg">
-            </audio>
+        <p *ngIf="noticeServ.notice.metadonnees['dublincore'].format.indexOf('application') != -1">
+            <iframe [src]="noticeServ.notice.metadonnees['media'].url"></iframe>
+            <img [src]="noticeServ.notice.metadonnees['media'].url">
         </p>
+        <!-- <ul *ngIf="noticeServ.notice.metadonnees['nemateria'].sequences.time_code.length > 0">
+            <li *ngFor="let s of noticeServ.notice.metadonnees['nemateria'].sequences.time_code; let i=index">
+                <p><span>{{ i }}</span><span>{{ noticeServ.notice.metadonnees['nemateria'].sequences.resume_sequence[i] }}</span><span>{{ noticeServ.notice.metadonnees['nemateria'].sequences.duree_sequence[i] }}</span></p>
+                <p>{{ noticeServ.notice.metadonnees['nemateria'].sequences.mots_cles_sequences.toString() }}</p>
+            </li>
+        </ul> -->
+
     </header>
     <article *ngIf="!update">
-        <h3>{{ noticeServ.notice.metadonnees['dublincore'].titre }}</h3>
+
         <ul>
             <!-- tri dans le premier niveau de données -->
             <li *ngFor="let n of noticeServ.notice | keyvalue">

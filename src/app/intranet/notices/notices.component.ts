@@ -1,10 +1,10 @@
-import { Component, OnInit,  EventEmitter, Output  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { NoticeService } from "../systeme/services/notice.service";
 import { NoticeModel } from "../systeme/modeles/notice.modele";
 import { UtilsService } from '../systeme/library/utils.service';
-import { FiltreModel } from '../systeme/modeles/filtre.modele';
 import { FiltrePipeModel, FiltreNotices } from '../systeme/modeles/pipes.modele';
+import { FiltreNoticesPipe } from '../systeme/pipes/filtre-notices.pipe';
 
 @Component({
 	selector: 'app-notices',
@@ -28,7 +28,7 @@ export class NoticesComponent implements OnInit {
 	afficheDetailNotice:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
 	afficheDetailCollec:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
 
-	constructor(public noticesServ: NoticeService, public utils:UtilsService) { }
+	constructor(public noticesServ: NoticeService, public utils:UtilsService, private noticesPipe:FiltreNoticesPipe) { }
 
 	ngOnInit() {
 		this.idNotice = -1;
@@ -96,12 +96,13 @@ export class NoticesComponent implements OnInit {
 	 * Ajouter toutes les notices à la sélection pour constituer une collection en fonction des tris
 	 */
 	noticesToutesChoisies(): void {
-		this.noticesServ.noticesAll.forEach(
+		// this.noticeSelection = this.noticesServ.noticesAll;
+		this.noticeSelection = this.noticesPipe.transform(this.noticesServ.noticesAll, this.filtre);
+		this.noticeSelection.forEach(
 			n => {
 				n.selected = true;
 			}
 		)
-		this.noticeSelection = this.noticesServ.noticesAll;
 	}
 	/**
 	 * Ne sélectionner aucune notice
