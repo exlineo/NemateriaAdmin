@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FiltreModel, Filtre } from '../modeles/filtre.modele';
 
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../environments/environment';
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
+import { AuthService } from '../../../extranet/systeme/services/auth.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,9 +12,9 @@ import { NotificationService } from 'src/app/intranet/systeme/services/notificat
 export class FiltresService {
 
 	filtres: Array<FiltreModel>;
-	prefix:Array<{alias:'', titre:'',data:''}>;
+	prefix: Array<{ alias: '', titre: '', data: '' }>;
 
-	constructor(private http: HttpClient, private notifServ: NotificationService) {
+	constructor(private http: HttpClient, private notifServ: NotificationService, private auth: AuthService) {
 		this.filtres = [new Filtre()];
 		this.getFiltres();
 	}
@@ -52,63 +53,69 @@ export class FiltresService {
 	   * Mise à jour d'une collection
 	   */
 	majFiltre(filtre: FiltreModel) {
-		this.http.put(environment.SERV + 'filtres', filtre).subscribe(
-			retour => {
-				console.log(retour);
-				this.notifServ.notif("Filtre mis à jour");
-			},
-			erreur => {
-				console.log(erreur);
-				this.notifServ.notif("Erreur dans la mise à jour du filtre");
-			}
-		)
+		if (this.auth.userAuth.statut >= 2) {
+			this.http.put(environment.SERV + 'filtres', filtre).subscribe(
+				retour => {
+					console.log(retour);
+					this.notifServ.notif("Filtre mis à jour");
+				},
+				erreur => {
+					console.log(erreur);
+					this.notifServ.notif("Erreur dans la mise à jour du filtre");
+				}
+			)
+		}
 	}
 	/**
 	 * Ajouter un filtre
 	 */
 	ajouteFiltre(filtre: FiltreModel) {
 		console.log(filtre);
-		this.http.post(environment.SERV + 'filtres', filtre).subscribe(
-			retour => {
-				console.log(retour);
-				this.notifServ.notif("Filtre enregistré");
-				this.getFiltres();
-			},
-			erreur => {
-				console.log(erreur);
-				this.notifServ.notif("Erreur dans l'ajout du filtre");
-			}
-		)
+		if (this.auth.userAuth.statut >= 2) {
+			this.http.post(environment.SERV + 'filtres', filtre).subscribe(
+				retour => {
+					console.log(retour);
+					this.notifServ.notif("Filtre enregistré");
+					this.getFiltres();
+				},
+				erreur => {
+					console.log(erreur);
+					this.notifServ.notif("Erreur dans l'ajout du filtre");
+				}
+			)
+		}
 	}
 
 	/**
 	 * Supprimer un filtre
 	 */
 	supprimeFiltre(id: string | number) {
-		console.log(id);
-		this.http.delete(environment.SERV + 'filtres/' + id).subscribe(
-			retour => {
-				console.log(retour);
-				this.notifServ.notif("Filtre supprimé correctement");
-				this.getFiltres();
-			},
-			erreur => {
-				console.log(erreur);
-				this.notifServ.notif("Erreur dans la suppression du filtre");
-			}
-		)
+		if (this.auth.userAuth.statut >= 2) {
+			console.log(id);
+			this.http.delete(environment.SERV + 'filtres/' + id).subscribe(
+				retour => {
+					console.log(retour);
+					this.notifServ.notif("Filtre supprimé correctement");
+					this.getFiltres();
+				},
+				erreur => {
+					console.log(erreur);
+					this.notifServ.notif("Erreur dans la suppression du filtre");
+				}
+			)
+		}
 	}
 	/**
 	 * Afficher une notification
 	 * @param msg Message de notification à afficher
 	 */
-	notif(msg:string){
+	notif(msg: string) {
 		this.notifServ.notif(msg);
 	}
 	/**
 	 * Récupérer les prefix OAI depuis la base
 	 */
-	getPrefix(){
+	getPrefix() {
 		this.http.get<Array<any>>(environment.SERV + 'prefix/').subscribe(
 			retour => {
 				this.notifServ.notif("Prefix chargés");

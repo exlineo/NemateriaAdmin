@@ -31,15 +31,13 @@ export class AuthService {
 	authUser(u): void {
 		this.http.get(environment.SERV + 'comptes/' + u.id + '/' + u.pass).subscribe(
 			retour => {
-				console.log("Retour identification", retour);
 				if (retour['status'] == '401' || !retour['compte']) {
 					this.tokenServ.token = null;
 					console.log("Echec de la connexion");
 				} else {
-					console.log(this.tokenServ.token, retour['token']);
 					this.tokenServ.token = retour['token'];
+					this.userAuth = retour['compte'];
 					this.connexion(null);
-					console.log("Connexion");
 					this.router.navigateByUrl('/intranet');
 					this.notService.openSnackBar('Bienvenue ' + u.email, 'connexion');
 				}
@@ -47,9 +45,9 @@ export class AuthService {
 			},
 			erreur => {
 				console.log(erreur);
+				this.notService.openSnackBar('Erreur dans les paramètres de connexion', 'Connexion');
 			}
 		)
-
 	}
 	/**
 	 * Déconnecter l'utilisateur

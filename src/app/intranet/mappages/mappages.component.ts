@@ -8,6 +8,7 @@ import { MappagesService } from '../systeme/services/mappages.service';
 import { Filtre } from '../systeme/modeles/filtre.modele';
 import { FiltresService } from '../systeme/services/filtres.service';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../extranet/systeme/services/auth.service';
 
 @Component({
   selector: 'app-mappages',
@@ -19,7 +20,7 @@ export class MappagesComponent implements OnInit {
   maps:Array<object>=[];
   filtre:Filtre;
 
-  constructor(public mapServ:MappagesService, public utils:UtilsService, public filtreServ:FiltresService) { }
+  constructor(public mapServ:MappagesService, public utils:UtilsService, public filtreServ:FiltresService, public auth:AuthService) { }
 
   ngOnInit() {
     this.filtre = new Filtre(); // Création d'un filtre vide

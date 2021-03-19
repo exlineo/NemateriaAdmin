@@ -55,7 +55,7 @@
         </section>
         <section *ngIf="colServ.notices">
             <h3>Notices</h3>
-            <button (click)="genereNotices()">Insérer ces documents comme notices de la collection</button>
+            <!-- <button (click)="genereNotices()">Insérer ces documents comme notices de la collection</button> -->
             <ul>
                 <li *ngFor="let n of colServ.notices">
                     {{ n.metadonnees['dublincore'].title }}
@@ -67,7 +67,7 @@
             <h3>Notices</h3>
             <ul>
                 <li *ngFor="let n of colServ.notices">
-                    {{ n['dublincore'].title }}
+                    {{ n.metadonnees['dublincore'].title }}
                     <mat-icon matTooltip="Enlever cette notice">delete</mat-icon>
                 </li>
             </ul>

@@ -16,8 +16,7 @@
             <source [src]="noticeServ.notice.metadonnees['media'].url" [type]="noticeServ.notice.metadonnees['dublincore'].format">
         </p>
         <p *ngIf="noticeServ.notice.metadonnees['dublincore'].format.indexOf('application') != -1">
-            <iframe [src]="noticeServ.notice.metadonnees['media'].url"></iframe>
-            <img [src]="noticeServ.notice.metadonnees['media'].url">
+            <iframe [src]="dom.bypassSecurityTrustResourceUrl(noticeServ.notice.metadonnees['media'].url)"></iframe>
         </p>
         <!-- <ul *ngIf="noticeServ.notice.metadonnees['nemateria'].sequences.time_code.length > 0">
             <li *ngFor="let s of noticeServ.notice.metadonnees['nemateria'].sequences.time_code; let i=index">

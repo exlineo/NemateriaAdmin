@@ -10,7 +10,8 @@ import { FiltresService } from '../systeme/services/filtres.service';
 import { FiltreModel, Filtre } from '../systeme/modeles/filtre.modele';
 import { SetModel, Set } from '../systeme/modeles/set';
 
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
+import { AuthService } from '../../extranet/systeme/services/auth.service';
 
 @Component({
 	selector: 'app-scanner',
@@ -25,7 +26,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
 	_idFiltre: string; // ID d'un filtre choisi
 	page: any; // Objet pour la pagination
 
-	constructor(public scanServ: ScanService, public filtresServ: FiltresService, public mapServ: MappagesService, public utils: UtilsService, private router: Router) { }
+	constructor(public scanServ: ScanService, public filtresServ: FiltresService, public mapServ: MappagesService, public utils: UtilsService, private router: Router, public auth:AuthService) { }
 
 	ngOnInit() {
 		this.set = new Set();

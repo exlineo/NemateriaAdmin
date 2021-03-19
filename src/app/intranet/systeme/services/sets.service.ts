@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { SetModel } from '../modeles/set';
 import { NotificationService } from 'src/app/intranet/systeme/services/notification.service';
 import { CollectionService } from './collection.service';
+import { AuthService } from '../../../extranet/systeme/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class SetsService {
   set: SetModel; // Un SET sélectionnée
   series: Array<any>; // Tableau des séries d'une collection donnée
 
-  constructor(private http: HttpClient, private notifServ: NotificationService) {
+  constructor(private http: HttpClient, private notifServ: NotificationService, private auth: AuthService) {
     console.log("Service des connexions");
     this.getSets();
   }
@@ -52,45 +53,51 @@ export class SetsService {
    * Supprimer la collection
    * @param id ID de la collection à supprimer
    */
-  supprSet(id:any) {
-    this.http.delete(environment.SERV + 'sets/' + id).subscribe(
-      retour => {
-        this.sets.splice(this.sets.findIndex(s => s._id == id), 1);
-      },
-      erreur => {
-        console.log(erreur);
-        this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
-      }
-    )
+  supprSet(id: any) {
+    if (this.auth.userAuth.statut >= 2) {
+      this.http.delete(environment.SERV + 'sets/' + id).subscribe(
+        retour => {
+          this.sets.splice(this.sets.findIndex(s => s._id == id), 1);
+        },
+        erreur => {
+          console.log(erreur);
+          this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
+        }
+      )
+    }
   }
   /**
    * Mise à jour d'un SET
    */
   majSet(s: SetModel) {
-    this.http.put(environment.SERV + 'sets/'+s._id, s).subscribe(
-      retour => {
-        this.notifServ.notif("Le SET a été mis à jour");
-      },
-      erreur => {
-        console.log(erreur);
-        this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
-      }
-    )
+    if (this.auth.userAuth.statut >= 2) {
+      this.http.put(environment.SERV + 'sets/' + s._id, s).subscribe(
+        retour => {
+          this.notifServ.notif("Le SET a été mis à jour");
+        },
+        erreur => {
+          console.log(erreur);
+          this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
+        }
+      )
+    }
   }
   /**
    * Ajouter une collection
    */
   ajouteSet(s: SetModel) {
-    this.http.post(environment.SERV + 'sets', s).subscribe(
-      retour => {
-        console.log(retour);
-        this.notifServ.notif("Le SET a été ajouté");
-      },
-      erreur => {
-        console.log(erreur);
-        this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
-      }
-    )
+    if (this.auth.userAuth.statut >= 2) {
+      this.http.post(environment.SERV + 'sets', s).subscribe(
+        retour => {
+          console.log(retour);
+          this.notifServ.notif("Le SET a été ajouté");
+        },
+        erreur => {
+          console.log(erreur);
+          this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
+        }
+      )
+    }
   }
   /**
    * Les séries d'une collection

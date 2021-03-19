@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../environments/environment';
 
 import { Set, SetModel } from '../modeles/set';
 import { FiltreModel } from '../modeles/filtre.modele';
@@ -9,6 +9,7 @@ import { NotificationService } from 'src/app/intranet/systeme/services/notificat
 import { UtilsService } from '../library/utils.service';
 import { FiltresService } from './filtres.service';
 import { SetsService } from './sets.service';
+import { AuthService } from '../../../extranet/systeme/services/auth.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -25,7 +26,7 @@ export class ScanService {
 	filtre: any; // Filtre utilisé pour filtrer les données à enregistrer dans la base
 	set: SetModel; // Set à enregistrer dans la base de données
 
-	constructor(private http: HttpClient, private notifServ: NotificationService, private utils: UtilsService, private filtreServ:FiltresService, private setServ:SetsService) {
+	constructor(private http: HttpClient, private notifServ: NotificationService, private utils: UtilsService, private filtreServ:FiltresService, private setServ:SetsService, private auth:AuthService) {
 		this.init();
 		this.getListeDossiers();
 	}
@@ -90,6 +91,7 @@ export class ScanService {
 	 * @param filtre Filtre de référence pour traitr les données
 	 */
 	setMetas(filtre: FiltreModel, set: SetModel) {
+		if(this.auth.userAuth.statut >=2){
 		this.metas = filtre.metadonnees; // Récupérer le filtre sélectionné
 		// Création d'un SET de base
 		this.set = set; // Paramétrer le nom du set de données
@@ -98,6 +100,7 @@ export class ScanService {
 
 		// Enregistrer les données dans la base
 		this.enregistreSet();
+		}
 	}
 	/**
 	 * Mettre à plat le filtre pour ne récupérer que les clés
@@ -152,9 +155,10 @@ export class ScanService {
 	 */
 	setPropriete(prop, obj, scan) {
 		let tmp = this.cap(prop);
+		console.log(tmp, scan[tmp]);
 		// Gérer les cas particuliers
 		if (prop.toLowerCase() === 'url') scan[tmp] = this.setURL(scan['SourceFile']);
-		if (prop.toLowerCase() === 'coverage') scan[tmp] = this.setURL(scan[tmp]);
+		if (prop.toLowerCase() === 'coverage' && scan[tmp]) scan[tmp] = this.setURL(scan[tmp]);
 
 		if (prop === 'file') scan[tmp] = this.setFile(scan['SourceFile']);
 		// Attribuer une nouvelle valeur

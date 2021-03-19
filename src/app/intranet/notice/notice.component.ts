@@ -1,8 +1,10 @@
 import { Component, OnInit, EventEmitter, Input, Output, OnDestroy } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { NoticeService } from "../systeme/services/notice.service";
 import { NoticeModel } from "../systeme/modeles/notice.modele";
 import { UtilsService } from '../systeme/library/utils.service';
+import { AuthService } from '../../extranet/systeme/services/auth.service';
 
 @Component({
 	selector: 'app-notice',
@@ -18,7 +20,7 @@ export class NoticeComponent implements OnInit, OnDestroy {
 	fermer = new EventEmitter<boolean>();
 	update:boolean = false;
 
-	constructor(public noticeServ: NoticeService, public utils:UtilsService) {
+	constructor(public noticeServ: NoticeService, public utils:UtilsService, private dom:DomSanitizer, public auth:AuthService) {
 		this.noticeServ.getNotice(this.idNotice);
 	}
 

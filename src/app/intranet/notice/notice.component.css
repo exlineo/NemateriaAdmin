@@ -16,6 +16,10 @@ section header>* {
     margin: auto;
 }
 
+section header p {
+    width: 100%;
+}
+
 h1 {
     width: 100%;
     padding: 10px;
@@ -25,4 +29,9 @@ h1 {
 video,
 audio {
     max-width: 100%;
+}
+
+iframe {
+    width: 100%;
+    min-height: 500px;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { AuthService } from '../../extranet/systeme/services/auth.service';
 import { UtilsService } from '../systeme/library/utils.service';
 import { DocumentModel } from '../systeme/modeles/documents-model';
 import { SetModel } from '../systeme/modeles/set';
@@ -19,7 +20,7 @@ export class SetsComponent implements OnInit {
   edit:boolean = false;
   page: any;
   
-  constructor(public setsServ:SetsService, public utils:UtilsService) { }
+  constructor(public setsServ:SetsService, public utils:UtilsService, public auth:AuthService) { }
 
   ngOnInit(): void {
 		this.page = { min: 0, max: 20 };

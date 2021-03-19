@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { AuthService } from '../../extranet/systeme/services/auth.service';
 import { UtilsService } from '../systeme/library/utils.service';
 import { CollectionModel, Collection } from '../systeme/modeles/collection.modele';
 import { DocumentModel, NemaSerieModel } from '../systeme/modeles/documents-model';
@@ -28,7 +29,7 @@ export class CollectionComponent implements OnInit {
 	maj: boolean = false; // Mettre à jouer les données
 	cree: boolean = false;
 
-	constructor(public colServ: CollectionService, public setsServ: SetsService, private noticesServ: NoticeService) { }
+	constructor(public colServ: CollectionService, public setsServ: SetsService, private noticesServ: NoticeService, public auth:AuthService) { }
 
 	ngOnInit() {
 		console.log(this.idCollection);
@@ -94,13 +95,14 @@ export class CollectionComponent implements OnInit {
 		this.colServ.notices = [];
 		this.setsServ.set.documents.map(
 			n => {
-				n.nemateria.collection.nom_collection = this.colServ.collection.titre;
-				n.nemateria.collection.fonds = this.colServ.collection.fonds;
+				if(!n.nemateria.collection) n.nemateria.collection = {
+					nom_collection : this.colServ.collection.titre,
+					fonds : this.colServ.collection.fonds
+				};
 				this.colServ.notices.push({ 'metadonnees': n });
 			}
 		);
 		this.colServ.notifServ.notif('Les notices ont été intégrées dans la collection.');
-		console.log(this.colServ.notices);
 	}
 	supprimeNotice(id) {
 

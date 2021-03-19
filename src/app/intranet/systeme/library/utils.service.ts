@@ -86,9 +86,9 @@ export class UtilsService {
 		const type = n.metadonnees.dublincore.format;
 		let bg = '';
 		if(type.indexOf('video') != -1 || type.indexOf('audio') != -1){
-			n.metadonnees.dublincore.coverage ? bg = n.metadonnees.dublincore.coverage : bg = 'assets/img/pictos/media.jpg';
+			n.metadonnees.dublincore.coverage ? bg = n.metadonnees.dublincore.coverage : bg = 'assets/img/pictos/picto_media.png';
 		}else if(type.indexOf('application') != -1){
-			bg = 'assets/img/pictos/document.jpg';
+			bg = 'assets/img/pictos/picto_docs.png';
 		}else{
 			bg = n.metadonnees.media.url;
 		}
