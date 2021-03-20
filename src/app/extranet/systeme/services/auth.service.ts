@@ -37,11 +37,12 @@ export class AuthService {
 				} else {
 					this.tokenServ.token = retour['token'];
 					this.userAuth = retour['compte'];
+					if(this.userAuth.statut) this.tokenServ.statut = this.userAuth.statut;
+					console.log(this.tokenServ.statut);
 					this.connexion(null);
 					this.router.navigateByUrl('/intranet');
 					this.notService.openSnackBar('Bienvenue ' + u.email, 'connexion');
 				}
-
 			},
 			erreur => {
 				console.log(erreur);
@@ -55,6 +56,7 @@ export class AuthService {
 	deconnexion() {
 		this.auth = false;
 		this.tokenServ.token = null;
+		this.tokenServ.statut = 0;
 		this.router.navigateByUrl('/');
 		sessionStorage.setItem('auth', null);
 	}

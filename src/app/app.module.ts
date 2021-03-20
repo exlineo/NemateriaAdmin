@@ -28,6 +28,7 @@ import { ExtranetComponent } from './extranet/extranet.component';
 import { ActualitesComponent } from './extranet/actualites/actualites.component';
 import { FiltresService } from './intranet/systeme/services/filtres.service';
 import { CollectionService } from './intranet/systeme/services/collection.service';
+import { AdminIntercepteur } from './extranet/systeme/services/admin.intercepteur';
 
 @NgModule({
 	imports: [
@@ -53,6 +54,7 @@ import { CollectionService } from './intranet/systeme/services/collection.servic
 		NotificationService,
 		FiltresService,
 		CollectionService,
+		{ provide: HTTP_INTERCEPTORS, useClass: AdminIntercepteur, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthIntercepteur, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass:SecuriteIntercepteur, multi:true}],
 	bootstrap: [AppComponent]

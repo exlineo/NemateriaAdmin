@@ -37,9 +37,9 @@
                     <div (mouseenter)="utils.play($event)" (mouseleave)="utils.pause($event)" (click)="fake()">
                         <div>
                             <mat-icon (click)="noticeOnAffiche(n._id)" matTooltip="Voir la fiche de la notice">visibility</mat-icon>
-                            <mat-icon (click)="noticeSelectionnee(n._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">playlist_add</mat-icon>
-                            <mat-icon (click)="noticeOnInfo(n._id)" matTooltip="Informations rapides sur la notice">info</mat-icon>
+                            <mat-icon (click)="noticeSelectionnee(n._id)" matTooltip="Ajouter cette notice à la liste sélectionnée">add_circle</mat-icon>
                             <mat-icon matTooltip="Supprimer la notice" (click)="noticeSelectionRemove(n._id)">remove_circle</mat-icon>
+                            <mat-icon (click)="noticeOnInfo(n._id)" matTooltip="Informations rapides sur la notice">info</mat-icon>
                         </div>
                     </div>
                     <!-- <div (click)="noticeSelectionnee(n._id)"></div> -->
@@ -61,11 +61,10 @@
         <section class="demi">
             <header>
                 <h4>Actions groupées : </h4>
-                <mat-icon matTooltip="Sélectionner toutes les notices" (click)="noticesToutesChoisies()">filter
-                </mat-icon>
-                <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">filter_none
-                </mat-icon>
+                <mat-icon matTooltip="Sélectionner toutes les notices" (click)="noticesToutesChoisies()">filter</mat-icon>
+                <mat-icon matTooltip="Déselectionner toutes les notices" (click)="noticesAucuneChoisie()">filter_none</mat-icon>
                 <mat-icon matTooltip="Créer une collection à partir de la sélection" (click)="collectionOnAffiche()">collections</mat-icon>
+                <mat-icon matTooltip="Supprimer les notices sélectionnées" (click)="noticesSuppr()" *ngIf="tokenServ.statut >= 2">delete_forever</mat-icon>
             </header>
 
             <h2>Liste des notices sélectionnées</h2>

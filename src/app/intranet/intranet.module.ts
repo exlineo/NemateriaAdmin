@@ -43,6 +43,7 @@ import { ScanService } from './systeme/services/scan.service';
 import { SetsComponent } from './sets/sets.component';
 import { SetComponent } from './set/set.component';
 import { ObjPipe } from './systeme/pipes/obj.pipe';
+import { ProfilComponent } from './partage/profil/profil.component';
 
 @NgModule({
 	imports: [
@@ -83,7 +84,8 @@ import { ObjPipe } from './systeme/pipes/obj.pipe';
 		ClesJsonPipe,
 		SetsComponent,
 		SetComponent,
-		ObjPipe
+		ObjPipe,
+		ProfilComponent
 	],
 	entryComponents: [OptionPopInComponent]
 })

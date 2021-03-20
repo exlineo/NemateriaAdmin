@@ -3,7 +3,6 @@
         <header>
             <h2>Filtres disponibles</h2>
             <mat-icon matTooltip="Ajouter un filtre">playlist_add</mat-icon>
-            <!-- <mat-icon matTooltip="Ouvrir / fermer le panneau">settings_ethernet</mat-icon> -->
         </header>
         <ul>
             <li *ngFor="let filtre of this.filtresServ.filtres" (click)="filtreOnClick(filtre._id) ">
@@ -13,7 +12,7 @@
     </aside>
     <section>
         <header>
-            <div>
+            <div *ngIf="tokenServ.statut >= 2">
                 <mat-icon matTooltip="Supprimer le filtre" (click)="supprime=!supprime">delete</mat-icon>
                 <mat-icon matTooltip="Modifier le filtre" (click)="edition = !edition">edit</mat-icon>
                 <mat-icon matTooltip="Ajouter un filtre" (click)="ajouteFiltre()">add</mat-icon>

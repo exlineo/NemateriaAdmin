@@ -53,57 +53,51 @@ export class FiltresService {
 	   * Mise à jour d'une collection
 	   */
 	majFiltre(filtre: FiltreModel) {
-		if (this.auth.userAuth.statut >= 2) {
-			this.http.put(environment.SERV + 'filtres', filtre).subscribe(
-				retour => {
-					console.log(retour);
-					this.notifServ.notif("Filtre mis à jour");
-				},
-				erreur => {
-					console.log(erreur);
-					this.notifServ.notif("Erreur dans la mise à jour du filtre");
-				}
-			)
-		}
+		this.http.put(environment.SERV + 'filtres', filtre).subscribe(
+			retour => {
+				console.log(retour);
+				this.notifServ.notif("Filtre mis à jour");
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Erreur dans la mise à jour du filtre");
+			}
+		)
 	}
 	/**
 	 * Ajouter un filtre
 	 */
 	ajouteFiltre(filtre: FiltreModel) {
 		console.log(filtre);
-		if (this.auth.userAuth.statut >= 2) {
-			this.http.post(environment.SERV + 'filtres', filtre).subscribe(
-				retour => {
-					console.log(retour);
-					this.notifServ.notif("Filtre enregistré");
-					this.getFiltres();
-				},
-				erreur => {
-					console.log(erreur);
-					this.notifServ.notif("Erreur dans l'ajout du filtre");
-				}
-			)
-		}
+		this.http.post(environment.SERV + 'filtres', filtre).subscribe(
+			retour => {
+				console.log(retour);
+				this.notifServ.notif("Filtre enregistré");
+				this.getFiltres();
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Erreur dans l'ajout du filtre");
+			}
+		)
 	}
 
 	/**
 	 * Supprimer un filtre
 	 */
 	supprimeFiltre(id: string | number) {
-		if (this.auth.userAuth.statut >= 2) {
-			console.log(id);
-			this.http.delete(environment.SERV + 'filtres/' + id).subscribe(
-				retour => {
-					console.log(retour);
-					this.notifServ.notif("Filtre supprimé correctement");
-					this.getFiltres();
-				},
-				erreur => {
-					console.log(erreur);
-					this.notifServ.notif("Erreur dans la suppression du filtre");
-				}
-			)
-		}
+		console.log(id);
+		this.http.delete(environment.SERV + 'filtres/' + id).subscribe(
+			retour => {
+				console.log(retour);
+				this.notifServ.notif("Filtre supprimé correctement");
+				this.getFiltres();
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Erreur dans la suppression du filtre");
+			}
+		)
 	}
 	/**
 	 * Afficher une notification

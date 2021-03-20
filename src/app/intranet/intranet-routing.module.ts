@@ -17,6 +17,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { ParametresComponent } from './partage/parametres/parametres.component';
 import { SetsComponent } from './sets/sets.component';
 import { SetComponent } from './set/set.component';
+import { ProfilComponent } from './partage/profil/profil.component';
 
 const routes: Routes = [
 	{
@@ -33,6 +34,7 @@ const routes: Routes = [
 			{ path: 'sets', component:SetsComponent },
 			{ path: 'set/:id', component:SetComponent },
 			{ path: 'parametres', component:ParametresComponent},
+			{ path:'profil', component:ProfilComponent},
 			{ path: 'aide', loadChildren: () => import('./aide/aide.module').then(m => m.AideModule)},
 		]
 	},

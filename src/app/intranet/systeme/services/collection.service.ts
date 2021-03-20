@@ -53,51 +53,45 @@ export class CollectionService {
 	 * Mise à jour d'une collection
 	 */
 	majCollection() {
-		if (this.auth.userAuth.statut >= 2) {
-			this.http.put(environment.SERV + 'collections/', this.collection).subscribe(
-				retour => {
-					this.notifServ.notif("La collection a été mise à jour");
-				},
-				erreur => {
-					this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
-				}
-			)
-		}
+		this.http.put(environment.SERV + 'collections/', this.collection).subscribe(
+			retour => {
+				this.notifServ.notif("La collection a été mise à jour");
+			},
+			erreur => {
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
+			}
+		)
 	}
 	/**
 	 * Ajouter une collection
 	 */
 	ajouteCollection() {
-		if (this.auth.userAuth.statut >= 2) {
-			this.http.post(environment.SERV + 'collections', this.collection).subscribe(
-				retour => {
-					this.collections.push(this.collection);
-					this.router.navigateByUrl('/intranet/collections')
-					this.notifServ.notif("La collection a bien été ajoutée");
-				},
-				erreur => {
-					this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
-				}
-			)
-		}
+		this.http.post(environment.SERV + 'collections', this.collection).subscribe(
+			retour => {
+				this.collections.push(this.collection);
+				this.router.navigateByUrl('/intranet/collections')
+				this.notifServ.notif("La collection a bien été ajoutée");
+			},
+			erreur => {
+				this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
+			}
+		)
 	}
 	/**
 	 * Supprimer la collection
 	 * @param id ID de la collection à supprimer
 	 */
 	supprCollec(id) {
-		if (this.auth.userAuth.statut >= 2) {
-			this.http.delete(environment.SERV + 'collections/' + id).subscribe(
-				retour => {
-					this.notifServ.notif("Collection supprimée");
-					this.collections.splice(this.collections.findIndex(c => c._id == id), 1);
-				},
-				erreur => {
-					console.log(erreur);
-					this.notifServ.notif("Une erreur s'est produite dans la destrucion de la collection");
-				}
-			);
-		}
+		this.http.delete(environment.SERV + 'collections/' + id).subscribe(
+			retour => {
+				this.notifServ.notif("Collection supprimée");
+				this.collections.splice(this.collections.findIndex(c => c._id == id), 1);
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur s'est produite dans la destrucion de la collection");
+			}
+		);
 
 	}
 	/**
@@ -119,19 +113,17 @@ export class CollectionService {
 	 * @param ar Tableau de notices à envoyer au serveur pour les créer par paquetes
 	 */
 	ajouteNoticeAvantCollection() {
-		if (this.auth.userAuth.statut >= 2) {
-			this.http.post(environment.SERV + 'notices/true', this.notices).subscribe(
-				retour => {
-					// Attribution des ids des notices à la collection (retour de la base)
-					this.collection.notices = Object.values(retour['insertedIds']);
-					this.ajouteCollection(); // Ajouter la collection une fois que les notices sont ajoutées
-					this.notifServ.notif("Les notices ont été insérées dans la base de données.");
-				},
-				erreur => {
-					console.log(erreur);
-					this.notifServ.notif("Une erreur dans l'enregistrement des notices");
-				}
-			)
-		}
+		this.http.post(environment.SERV + 'notices/true', this.notices).subscribe(
+			retour => {
+				// Attribution des ids des notices à la collection (retour de la base)
+				this.collection.notices = Object.values(retour['insertedIds']);
+				this.ajouteCollection(); // Ajouter la collection une fois que les notices sont ajoutées
+				this.notifServ.notif("Les notices ont été insérées dans la base de données.");
+			},
+			erreur => {
+				console.log(erreur);
+				this.notifServ.notif("Une erreur dans l'enregistrement des notices");
+			}
+		)
 	}
 }

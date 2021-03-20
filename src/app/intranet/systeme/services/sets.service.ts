@@ -54,7 +54,6 @@ export class SetsService {
    * @param id ID de la collection à supprimer
    */
   supprSet(id: any) {
-    if (this.auth.userAuth.statut >= 2) {
       this.http.delete(environment.SERV + 'sets/' + id).subscribe(
         retour => {
           this.sets.splice(this.sets.findIndex(s => s._id == id), 1);
@@ -64,13 +63,11 @@ export class SetsService {
           this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
         }
       )
-    }
   }
   /**
    * Mise à jour d'un SET
    */
   majSet(s: SetModel) {
-    if (this.auth.userAuth.statut >= 2) {
       this.http.put(environment.SERV + 'sets/' + s._id, s).subscribe(
         retour => {
           this.notifServ.notif("Le SET a été mis à jour");
@@ -80,13 +77,11 @@ export class SetsService {
           this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
         }
       )
-    }
   }
   /**
    * Ajouter une collection
    */
   ajouteSet(s: SetModel) {
-    if (this.auth.userAuth.statut >= 2) {
       this.http.post(environment.SERV + 'sets', s).subscribe(
         retour => {
           console.log(retour);
@@ -97,7 +92,6 @@ export class SetsService {
           this.notifServ.notif("Une erreur s'est produite dans l'enregistrement");
         }
       )
-    }
   }
   /**
    * Les séries d'une collection

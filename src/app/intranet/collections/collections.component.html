@@ -15,7 +15,7 @@
     </aside>
     <section>
         <header>
-            <div>
+            <div *ngIf="tokenServ.statut >= 2">
                 <mat-icon matTooltip="Supprimer le SET" (click)="delete = true">delete</mat-icon>
                 <mat-icon matTooltip="Modifier la collection" (click)="detailsCollec = true">edit</mat-icon>
             </div>
@@ -40,7 +40,6 @@
             </ul>
         </article>
     </section>
-    <!-- <aside class="right-panel " [@openCloseRightPanel]="rightPanelIsOpen ? 'open' : 'closed' "> -->
     <aside>
         <section class="selection ">
             <ul class="notice-liste">
@@ -82,7 +81,7 @@
     </article>
 </section>
 
-<section class="pop-up" *ngIf="delete">
+<section class="pop-up" *ngIf="delete && tokenServ.statut >=2">
     <article>
         <h2>Etes-vous sûr.e ?</h2>
         <p>

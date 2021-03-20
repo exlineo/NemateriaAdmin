@@ -1,9 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { AuthService } from '../../extranet/systeme/services/auth.service';
-import { UtilsService } from '../systeme/library/utils.service';
+import { TokenService } from 'src/app/extranet/systeme/services/token.service';
 import { CollectionModel, Collection } from '../systeme/modeles/collection.modele';
-import { DocumentModel, NemaSerieModel } from '../systeme/modeles/documents-model';
-import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { SetModel } from '../systeme/modeles/set';
 import { CollectionService } from '../systeme/services/collection.service';
 import { NoticeService } from '../systeme/services/notice.service';
@@ -29,7 +26,7 @@ export class CollectionComponent implements OnInit {
 	maj: boolean = false; // Mettre à jouer les données
 	cree: boolean = false;
 
-	constructor(public colServ: CollectionService, public setsServ: SetsService, private noticesServ: NoticeService, public auth:AuthService) { }
+	constructor(public colServ: CollectionService, public setsServ: SetsService, private noticesServ: NoticeService, public tokenServ:TokenService) { }
 
 	ngOnInit() {
 		console.log(this.idCollection);

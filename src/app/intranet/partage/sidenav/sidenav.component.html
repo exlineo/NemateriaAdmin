@@ -49,9 +49,17 @@
         <hr>
     </ul>
 </nav>
-<a routerLinkActive="active" routerLink="/intranet/aide" matTooltip="Un peu d'aide ?" class="aide">
-    <mat-icon>help_outline</mat-icon>
-</a>
-<a routerLinkActive="active" routerLink="/intranet/parametres" matTooltip="Votre profil et vos paramètres" class="settings">
-    <mat-icon>settings</mat-icon>
-</a>
+<section class="settings">
+    <a routerLinkActive="active" (click)="authServ.deconnexion()" matTooltip="Se déconnecter">
+        <mat-icon>remove_circle_outline</mat-icon>
+    </a>
+    <a routerLinkActive="active" routerLink="/intranet/profil" matTooltip="Accéder à mon profil">
+        <mat-icon>account_circle</mat-icon>
+    </a>
+    <a routerLinkActive="active" routerLink="/intranet/aide" matTooltip="Un peu d'aide ?">
+        <mat-icon>help_outline</mat-icon>
+    </a>
+    <a routerLinkActive="active" routerLink="/intranet/parametres" matTooltip="Votre profil et vos paramètres">
+        <mat-icon>settings</mat-icon>
+    </a>
+</section>

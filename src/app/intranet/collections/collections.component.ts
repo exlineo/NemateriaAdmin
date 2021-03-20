@@ -5,6 +5,7 @@ import { CollectionService } from '../systeme/services/collection.service';
 import { NoticeService } from '../systeme/services/notice.service';
 import { UtilsService } from '../systeme/library/utils.service';
 import { AuthService } from '../../extranet/systeme/services/auth.service';
+import { TokenService } from 'src/app/extranet/systeme/services/token.service';
 
 @Component({
 	selector: 'app-collections',
@@ -23,7 +24,7 @@ export class CollectionsComponent implements OnInit {
 
 	filtreSerie:string=''; // Filtrer les notices d'une collection en fonction de sa série
 
-	constructor(public colServ: CollectionService, public noticesServ:NoticeService, public utils:UtilsService, public auth:AuthService) { }
+	constructor(public colServ: CollectionService, public noticesServ:NoticeService, public utils:UtilsService, public tokenServ:TokenService) { }
 
 	ngOnInit() {
 	}

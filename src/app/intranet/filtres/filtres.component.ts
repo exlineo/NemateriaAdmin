@@ -8,6 +8,7 @@ import { NoticeModel } from '../systeme/modeles/notice.modele';
 import { CollectionService } from '../systeme/services/collection.service';
 import { FiltresService } from '../systeme/services/filtres.service';
 import { AuthService } from '../../extranet/systeme/services/auth.service';
+import { TokenService } from 'src/app/extranet/systeme/services/token.service';
 
 @Component({
 	selector: 'app-filtres',
@@ -21,7 +22,7 @@ export class FiltresComponent implements OnInit {
 	afficheFiltre: boolean; // Afficher la fiche de modification du filtre
 	filtreSerie: string = ''; // Filtrer les notices d'une collection en fonction de sa série
 
-	constructor(public filtresServ: FiltresService, private rendu: Renderer2, public auth:AuthService) { }
+	constructor(public filtresServ: FiltresService, private rendu: Renderer2, public tokenServ:TokenService) { }
 
 	ngOnInit() {
 		this.filtre = new Filtre();

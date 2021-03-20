@@ -49,7 +49,7 @@
                 <hr>
                 <p>
                     <button class="invalid" (click)="fermer.emit(false)">Annuler</button>
-                    <button class="valid" (click)="ecrire()" [disabled]="f.invalid">Enregistrer la collection</button>
+                    <button class="valid" (click)="ecrire()" [disabled]="f.invalid || tokenServ.statut >=2">Enregistrer la collection</button>
                 </p>
             </article>
         </section>

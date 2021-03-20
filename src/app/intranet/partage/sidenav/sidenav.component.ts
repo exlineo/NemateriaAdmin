@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/extranet/systeme/services/auth.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,12 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authServ:AuthService) { }
 
   ngOnInit() {
   }
 
   toggleActif(el){
   }
-
 }

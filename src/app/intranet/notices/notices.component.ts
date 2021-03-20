@@ -6,6 +6,7 @@ import { UtilsService } from '../systeme/library/utils.service';
 import { FiltrePipeModel, FiltreNotices } from '../systeme/modeles/pipes.modele';
 import { FiltreNoticesPipe } from '../systeme/pipes/filtre-notices.pipe';
 import { AuthService } from '../../extranet/systeme/services/auth.service';
+import { TokenService } from 'src/app/extranet/systeme/services/token.service';
 
 @Component({
 	selector: 'app-notices',
@@ -29,7 +30,7 @@ export class NoticesComponent implements OnInit {
 	afficheDetailNotice:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
 	afficheDetailCollec:boolean = false; // Afficher le composant notice lors du clic sur un oeil (dans une notice)
 
-	constructor(public noticesServ: NoticeService, public utils:UtilsService, private noticesPipe:FiltreNoticesPipe, public auth:AuthService) { }
+	constructor(public noticesServ: NoticeService, public utils:UtilsService, private noticesPipe:FiltreNoticesPipe, public tokenServ:TokenService) { }
 
 	ngOnInit() {
 		this.idNotice = -1;
@@ -135,6 +136,12 @@ export class NoticesComponent implements OnInit {
 		this.afficheDetailCollec = true;
 	}
 	fake(){
+		
+	}
+	/**
+	 * Supprimer les notices sélectionnées
+	 */
+	noticesSuppr(){
 		
 	}
 }

@@ -151,16 +151,21 @@ header.logo:hover {
     right: 0;
 }
 
-a.settings {
+.settings {
     position: absolute;
-    left: 20px;
-    bottom: 20px;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
     color: #FFF;
 }
 
-a.aide {
-    position: absolute;
-    left: 20px;
-    bottom: 60px;
+.settings>* {
+    margin: auto;
+}
+
+.settings mat-icon {
     color: #FFF;
 }
