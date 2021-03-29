@@ -28,10 +28,10 @@
                 <!-- <a (click)="noticeSelectionnee(notice._id)" matTooltip="Ajouter cette notice à la liste sélectionnée"></a> -->
 
                 <div [style.backgroundImage]="utils.setNoticeBg(n)" [class.choix]="n.selected">
-                    <video *ngIf="n.metadonnees['dublincore']['format'].indexOf('video')!=-1" [poster]="n.metadonnees['dublincore']['coverage']">
+                    <video *ngIf="n.metadonnees['dublincore']['format'] && n.metadonnees['dublincore']['format'].indexOf('video')!=-1" [poster]="n.metadonnees['dublincore']['coverage']">
                         <source [src]="n.metadonnees['media'].url" [type]="n.metadonnees['dublincore']['format']">
                     </video>
-                    <audio *ngIf="n.metadonnees['dublincore']['format'].indexOf('audio')!=-1">
+                    <audio *ngIf="n.metadonnees['dublincore']['format'] && n.metadonnees['dublincore']['format'].indexOf('audio')!=-1">
                         <source [src]="n.metadonnees['media'].url" [type]="n.metadonnees['dublincore']['format']">
                         </audio>
                     <div (mouseenter)="utils.play($event)" (mouseleave)="utils.pause($event)" (click)="fake()">
