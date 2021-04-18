@@ -1,12 +1,9 @@
-/* @import url('https://fonts.googleapis.com/css?family=Raleway');
-@import url('https://fonts.googleapis.com/css?family=Lora'); */
-
-section {
+aside, section {
     flex-flow: column wrap;
     color: rgba(255, 255, 255, .7);
 }
 
-section:nth-child(1) {
+aside:nth-child(1) {
     width: 300px;
     height: 100vh;
     background-color: #304753;
@@ -14,18 +11,18 @@ section:nth-child(1) {
     margin-left: 20%;
 }
 
-section:nth-child(1) section {
+aside:nth-child(1) section {
     width: 100%;
     height: auto;
     margin: 0;
     background: none;
 }
 
-section>section {
+aside>section {
     color: #FFF !important;
 }
 
-section>section button {
+aside>section button {
     background: #FFD600;
 }
 
@@ -33,12 +30,12 @@ section>section button {
     color: #304753 !important;
 }
 
-section>section form {
+aside>section form {
     display: flex;
     flex-direction: column;
 }
 
-section>section form>* {
+aside>section form>* {
     width: 100%;
 }
 

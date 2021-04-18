@@ -1,4 +1,4 @@
-<section>
+<aside>
     <section>
         <header class="logo">
             <!-- <div class="square">
@@ -18,15 +18,15 @@
             Connectez-vous pour accéder à l'administration de Nemateria
         </p>
         <article>
-            <form [formGroup]="connexionForm">
+            <form #f="ngForm">
                 <mat-form-field>
-                    <input matInput placeholder="Votre identifiant" formControlName="id" minlength=6>
+                    <input name="id" matInput placeholder="Votre identifiant" [(ngModel)]="con.compte" minlength=6>
                     <mat-error *ngIf="true">
                         Un identifiant est <strong>obligatoire</strong>
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Votre mot de pass" formControlName="pass" type="password">
+                    <input name="passe" matInput placeholder="Votre mot de passe" [(ngModel)]="con.mdp" type="password">
                     <mat-error *ngIf="true">
                         Un mot de passe valide est <strong>obligatoire</strong>
                     </mat-error>
@@ -34,6 +34,12 @@
             </form>
             <button mat-raised-button (click)="authentifier()">Go</button>
         </article>
+        <hr>
         <a href (click)="openDialog($event)">Pas encore inscrit? Il suffit de remplir ce formulaire</a>
+        <hr>
+        <a href="https://nouvelle-aquitaine.fr" target="_blank" class="na">
+        <p>Avec la participation financière de la région Nouvelle Aquitaine || Prototype Numérique </p>
+            <img src="assets/img/logo-naq.png" alt="Logo région Nouvelle Aquitaine" title="Avec la participation financière de la région Nouvelle Aquitaine || Prototype Numérique">
+        </a>
     </section>
-</section>
+</aside>

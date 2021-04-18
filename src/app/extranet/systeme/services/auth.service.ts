@@ -28,8 +28,8 @@ export class AuthService {
 	 * @param u Objet d'identification
 	 * @method authUser() - Authentifie un user en fct. d'un email et d'un mdp
 	 */
-	authUser(u): void {
-		this.http.get(environment.SERV + 'comptes/' + u.id + '/' + u.pass).subscribe(
+	authUser(u:UserModel): void {
+		this.http.get(environment.SERV + 'comptes/' + u.compte + '/' + u.mdp).subscribe(
 			retour => {
 				if (retour['status'] == '401' || !retour['compte']) {
 					this.tokenServ.token = null;

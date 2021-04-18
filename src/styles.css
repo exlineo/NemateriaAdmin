@@ -366,11 +366,11 @@ textarea {
     min-height: 200px;
 }
 
-.ng-valid {
+input.ng-valid, textarea.ng-valid {
     border-bottom: 2px solid green;
 }
 
-.ng-invalid {
+input.ng-invalid, textarea.ng-invalid {
     border-bottom: 2px solid red;
 }
 
@@ -389,8 +389,9 @@ textarea {
 .mat-icon.select:hover {
     color: green;
 }
-
-
+mat-form-field{
+    margin-bottom:10px;
+}
 /*
 ////////////////
     AFFICHAGE MUTUALISE DES NOTICES
@@ -559,7 +560,12 @@ textarea {
 .grand {
     font-size: 24px;
 }
-
+.na p{
+    color:white;
+}
+.na img{
+    float:right;
+}
 mat-icon.grand {
     font-size: 48px;
     line-height: 60px;
@@ -568,10 +574,8 @@ mat-icon.grand {
 }
 
 .vert {
-    background-col: #41ab6b;
+    background-color: #41ab6b;
 }
-
-
 /* //// Parent //// */
 
 
@@ -580,15 +584,11 @@ mat-icon.grand {
 .flow-row {
     flex-flow: row wrap;
 }
-
-
 /* colonne qui se wrap*/
 
 .flow-col {
     flex-flow: column wrap;
 }
-
-
 /* alignement horizontal */
 
 .justify-center {
@@ -610,8 +610,6 @@ mat-icon.grand {
 .justify-between {
     justify-content: space-between;
 }
-
-
 /* alignement vertical */
 
 .items-center {
