@@ -22,7 +22,7 @@
 				</mat-error>
 			</mat-form-field>
 			<mat-form-field>
-				<input matInput placeholder="Votre mot de pass" formControlName="pass" type="password">
+				<input matInput placeholder="Votre mot de pass" formControlName="mdp" type="password">
 				<mat-error *ngIf="true">
 					Merci de saisir un mot de passe d'au <strong>minimum huit lettres</strong>
 				</mat-error>
@@ -30,7 +30,7 @@
 		</form>
 	</mat-card-content>
 	<mat-card-actions>
-		<button mat-raised-button color='primary' (click)="save()">Sauvegarder</button> 
+		<button mat-raised-button color='primary' (click)="save()">Sauvegarder</button>
 		<button mat-raised-button color='warn' (click)="reset()">Restaurer</button>
 	</mat-card-actions>
 </mat-card>

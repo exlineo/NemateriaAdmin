@@ -1,6 +1,5 @@
 // Angular Library
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 
 // Service
@@ -22,7 +21,7 @@ export class InscriptionComponent implements OnInit {
 			Validators.required,
 			Validators.email,
 		]),
-		pass: new FormControl('', [
+		mdp: new FormControl('', [
 			Validators.required,
 			Validators.minLength(8)
 		]),
@@ -51,7 +50,7 @@ export class InscriptionComponent implements OnInit {
 		} else {
 			this.notService.openSnackBar('formulaire non valide', 'inscription');
 		}
-			
+
 	}
 
 	/**
@@ -66,7 +65,7 @@ export class InscriptionComponent implements OnInit {
 				Validators.required,
 				Validators.email,
 			]),
-			pass: new FormControl('', [
+			mdp: new FormControl('', [
 				Validators.required,
 				Validators.minLength(8)
 			]),
